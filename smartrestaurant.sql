@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 17, 2008 at 03:26 PM
+-- Generation Time: Jul 22, 2008 at 07:28 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.5
 
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `account_mgmt_addressbook` (
   `email` text NOT NULL,
   `web` text NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `account_mgmt_addressbook`
@@ -1496,11 +1496,11 @@ CREATE TABLE IF NOT EXISTS `mgmt_people_types` (
 --
 
 INSERT INTO `mgmt_people_types` (`id`, `name`) VALUES
-(1, 'Bank'),
-(2, 'Supplier'),
-(3, 'POS circuit operator'),
-(4, 'Employee'),
-(5, 'Other');
+(1, 'bank'),
+(2, 'supplier'),
+(3, 'pos'),
+(4, 'employee'),
+(5, 'other');
 
 -- --------------------------------------------------------
 
@@ -1525,19 +1525,19 @@ CREATE TABLE IF NOT EXISTS `mgmt_types` (
 --
 
 INSERT INTO `mgmt_types` (`id`, `name`, `account_only`, `is_invoice`, `is_receipt`, `log_to_bank`, `is_invoice_payment`, `is_bill`) VALUES
-(1, 'Check', 0, 0, 0, 1, 1, 0),
-(2, 'Credit transfer', 0, 0, 0, 1, 1, 0),
-(3, 'Invoice', 0, 1, 0, 0, 0, 0),
-(4, 'Receipt', 0, 0, 1, 0, 1, 0),
-(5, 'Ticket', 0, 0, 0, 0, 0, 1),
-(6, 'Deposit', 0, 0, 0, 1, 0, 0),
-(7, 'POS', 0, 0, 0, 1, 0, 0),
-(8, 'Interests', 1, 0, 0, 0, 0, 0),
-(9, 'Tax', 1, 0, 0, 0, 0, 0),
-(10, 'Operation expense', 1, 0, 0, 0, 0, 0),
-(11, 'Account expense', 1, 0, 0, 0, 0, 0),
-(12, 'Other', 1, 0, 0, 0, 0, 0),
-(13, 'Withdrawal', 1, 0, 0, 0, 0, 0);
+(1, 'check', 0, 0, 0, 1, 1, 0),
+(2, 'credit_trans', 0, 0, 0, 1, 1, 0),
+(3, 'invoice', 0, 1, 0, 0, 0, 0),
+(4, 'receipt', 0, 0, 1, 0, 1, 0),
+(5, 'ticket', 0, 0, 0, 0, 0, 1),
+(6, 'deposit', 0, 0, 0, 1, 0, 0),
+(7, 'pos_type', 0, 0, 0, 1, 0, 0),
+(8, 'interests', 1, 0, 0, 0, 0, 0),
+(9, 'tax', 1, 0, 0, 0, 0, 0),
+(10, 'op_expense', 1, 0, 0, 0, 0, 0),
+(11, 'acc_expense', 1, 0, 0, 0, 0, 0),
+(12, 'other_type', 1, 0, 0, 0, 0, 0),
+(13, 'withdrawal', 1, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
