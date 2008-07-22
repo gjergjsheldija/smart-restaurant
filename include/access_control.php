@@ -65,14 +65,14 @@ function access_connect_form ($url='') {
 	</form>
 	</div>
 	';
-	
+	//TODO : traslate string
 	if($_SESSION['userid'])
-		$output = 'Ju jeni te lidhur.<br>
+		$output = 'You are connected.<br>
 		<a href="'.ROOTDIR.'/admin/connect.php?command=disconnect">Shkeputuni perpara.</a>';
 	
 	return $output;
 }
-
+//TODO : translate here
 //mizuko : mod per pass waiter
 function access_connect_form_waiter_pos ( $err, $url='') {
 	

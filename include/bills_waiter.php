@@ -194,11 +194,11 @@ other - mysql error number
 	global $output_page;
 	$output['orders']='';	
 	$output_page = '';
-	//rregullimi i printer sipas ip te client
+	//connect to printer by client IP
 	$clientip = "";
 	if(isset($clientip)) unset($clientip);
 	$clientip=getenv('REMOTE_ADDR');
-	//end:rregullimi i printer sipas ip te client
+	//end:connect to printer by client IP
 	if($_SESSION['bill_printed']) return 0;
 	$_SESSION['bill_printed']=1;
 
@@ -240,7 +240,7 @@ other - mysql error number
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
-	//rregullimi i printer sipas ip te client
+	//connect to printer by client IP
 
 	while ($row = mysql_fetch_array($res) ) {
 
@@ -301,9 +301,8 @@ other - mysql error number
 	if(bill_check_empty()) {
 		return ERR_NO_ORDER_SELECTED;
 	}
-	//mizuko : shofim a asht kjo qi i kalohet {orders} te bill.tpl...
 
-	//mizuko : kam ba swap te qty me name
+	//mizuko : swap qty with name
 	$output_page .= "<table bgcolor=\"".COLOR_TABLE_GENERAL."\">
 	<thead>
 	<tr>
@@ -500,15 +499,15 @@ function bill_print_row ($key,$value,$destid){
 
 	if(!$_SESSION['separated'][$key]['special']	&& $_SESSION['separated'][$key]['topay']){
 		
-		//mizuko : swap i qty me name
-		//mizuko : barazu ' ' me hapsine me sprintf
+		//mizuko : swap qty with name
+		//mizuko : to much spaces here
 		$msg.= sprintf("%-30s", $name );
 		$msg.=$_SESSION['separated'][$key]['topay'];
-		//cmimi per njesi 
+		//price by quantity 
 		//13.11.2006
 		$msg.="x".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice'])/$_SESSION['separated'][$key]['topay'];
 		
-		//mizuko: hjeka te shkruemen LEK per cdo Pjate
+		//mizuko: get rid og the currency name
 		//$msg.="   ".country_conf_currencies()." ".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
 		$msg.="   ".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
 		$msg.="\n";

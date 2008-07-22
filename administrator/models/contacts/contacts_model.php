@@ -52,7 +52,7 @@ class Contacts_Model extends Model {
 		$contacts = array();
 
 		foreach ($query->result_array() as $row) {
-		   $contacts[$row['id']] = $row['name'];
+		   $contacts[$row['id']] = lang($row['name']);
 		}
 
 		return $contacts;

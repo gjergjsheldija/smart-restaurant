@@ -50,7 +50,7 @@ $( function(){
 						$tmp = "";
 						foreach($query->result() as $row) {	
 							if($tmp != $row->contacttype) {
-								echo '<div class="mytitle">'.$row->contacttype.'</div>';?>
+								echo '<div class="mytitle">'.lang($row->contacttype).'</div>';?>
 							<table class="zebra">
 								<colgroup>
 									<col style='width:90%;' />

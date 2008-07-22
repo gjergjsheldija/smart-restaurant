@@ -50,9 +50,9 @@ jQuery().ready(function(){
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td align="left" title="<?=$row->hint ?>" id="ndihme<?=$row->id; ?>"><?=$row->description ?></td>
+							<td align="left" title="<?=lang('hint_' . $row->name); ?>" id="helphint<?=$row->id ?>"><?=lang('desc_' . $row->name); ?></td>
 							<script type="text/javascript">
-							   	$('#ndihme<?=$row->id; ?>').
+							   	$('#helphint<?=$row->id; ?>').
 							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?=img('../img/cross.png');?>', positionBy: 'Top'});
 							</script>
 							<td align="right">

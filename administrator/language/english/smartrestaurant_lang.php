@@ -159,7 +159,7 @@ $lang['desc_missing']		= "Description is missing.";
 $lang['amount_missing']		= "Amount is missing.";
 $lang['reason']				= "Reason";
 $lang['who']				= "Who";
-$lang['sector']				= "Secotr";
+$lang['sector']				= "Sector";
 
 //bank
 $lang['bank_account']		= "Bank Account";
@@ -179,5 +179,91 @@ $lang['supplier']			= "Supplier";
 $lang['inventory']			= "Inventory";
 $lang['article']			= "Article";
 $lang['price']				= "Price";
+
+//management people types
+$lang['bank']				= 'Bank';
+$lang['supplier']			= 'Supplier';
+$lang['pos']				= 'POS circuit operator';
+$lang['employee']			= 'Employee';
+$lang['other']				= 'Other';
+
+//management types
+$lang['check']				= 'Check';
+$lang['credit_trans']		= 'Credit transfer';
+$lang['invoice']			= 'Invoice';
+$lang['receipt']			= 'Receipt';
+$lang['ticket']				= 'Ticket';
+$lang['deposit']			= 'Deposit';
+$lang['pos_type']			= 'POS';
+$lang['interests']			= 'Interests';
+$lang['tax']				= 'Tax';
+$lang['op_expense']			= 'Operation expense';
+$lang['acc_expense']		= 'Account expense';
+$lang['other_type']			= 'Other';
+$lang['withdrawal']			= 'Withdrawal';
+
+//configuration
+$lang['hint_max_ingreds_per_page'] 				= "Sets the maximum number of ingredients showed on a single page in the modification page. Beyond this value the alphabetical list will be used.";
+$lang['desc_max_ingreds_per_page'] 				= "Ingredients per page.";
+$lang['hint_top_list_show_top']	   				= "Eg.: 3 -> the 3 most requested dishes are showed. (0 to disable top list display)";
+$lang['desc_top_list_show_top']	   				= "Number of dishes to be showed in the top list";
+$lang['hint_show_mods_in_summary']	   			= "If active, shows all the modifications associated to an order in the summary line.";
+$lang['desc_show_mods_in_summary']	   			= "Show the modifications in the last modified summary line";
+$lang['hint_day_end']	   						= "Used to decide when to close the accounting day. To be given in the following format: HHMMSS (Hours, minutes, seconds) without spaces and padded with zeros. Eg: if the place closes and 3:30 in the morning, you should write 033000. Use 24 hours format.";
+$lang['desc_day_end']	   						= "Closing time.";
+$lang['hint_printing_system']	   				= "The available printing systems are: lp or cupsys: for linux/unix systems. win: for MS-Windows sytems.";
+$lang['desc_printing_system']	   				= "Printing system.";
+$lang['hint_association_automatic']	   			= "If active, the waiter is not asked whether to associate the table or not, but the association is always done automatically.";
+$lang['desc_association_automatic']	   			= "Automatic association.";
+$lang['hint_disassociation_allow']	   			= "If active, the cashier can disassociate a table from a waiter.";
+$lang['desc_disassociation_allow']	   			= "Allow disassociation.";
+$lang['hint_autocalc_considers_removed']	   	= "If active, the automatic price calculator (based on added ingredients number) calculates a removed ingredient as a '-1', otherwise it just ignores them.";
+$lang['desc_autocalc_considers_removed']	   	= "Autocalc considers removed ingredients.";
+$lang['hint_refresh_time_management']	   		= "Sets the time in seconds before ok messages disappear automatically in any zone except the waiters one. Error messages never disappear automatically.";
+$lang['desc_refresh_time_management']	   		= "Global refresh time.";
+$lang['hint_management_table_header_repeater']	= "Sets after how many lines the header row should be repeated in the accounting zone.";
+$lang['desc_management_table_header_repeater']	= "Header repeater.";
+$lang['hint_lock_time']	   						= "Time in seconds that has to be between the operation of different waiters on the same table. If set to 0, the lock is disabled.";
+$lang['desc_lock_time']	   						= "Table locking time.";
+$lang['hint_default_language']	   				= "Language used in the whole system, where not otherwise specified (for example in the waiters zone, where the language of the individual waiter is most prioritary).";
+$lang['desc_default_language']	   				= "Default language.";
+$lang['hint_vendor_name']	   					= "Used in error messages only, to give support address.";
+$lang['desc_vendor_name']	   					= "Software vendor name.";
+$lang['hint_vendor_email']	   					= "Used in error messages only, to give support address.";
+$lang['desc_vendor_email']	   					= "Software vendor email address.";
+$lang['hint_default_quantity']	   				= "Quantity used by default when taking a new order.";
+$lang['desc_default_quantity']	   				= "Default quantity.";
+$lang['hint_print_remaining_tickets_anyway']	= "If active, prints all the not-yet-printed order tickets when closing a table.";
+$lang['desc_print_remaining_tickets_anyway']	= "Always print remaining tickets.";
+$lang['hint_print_remaining_tickets_if_takeaway']	   	= "If active, prints all the not-yet-printed order tickets when closing a takeaway table.";
+$lang['desc_print_remaining_tickets_if_takeaway']	   	= "Always print remaining tickets in takeaway.";
+$lang['hint_refresh_automatic_on_menu']	   		= "Sets how many seconds to wait before reloading the tables list page. (0 to disable).";
+$lang['desc_refresh_automatic_on_menu']	   		= "Automatic refresh on tables list page.";
+$lang['hint_refresh_automatic_to_menu']	   		= "Sets how many seconds of inactivity to wait, before loading the tables list page. (0 to disable).";
+$lang['desc_refresh_automatic_to_menu']	   		= "Automatic routing to the tables list.";
+$lang['hint_service_fee_price']	   				= "Amount of the Service fee charge per person. You can't give a percent value. (0 to charge anything per person)";
+$lang['desc_service_fee_price']	   				= "Service fee - Price";
+$lang['hint_invisible_show']	   				= "If active, also invisible ingredients and dishes will be displayed in the waiter zone.";
+$lang['desc_invisible_show']	   				= "Show invisible dishes/ingredients.";
+$lang['hint_menu_tables_per_row_waiter']	   	= "The number of tables per row displayed in the list of tables for the normal waiters.";
+$lang['desc_menu_tables_per_row_waiter']	   	= "Tables per row (Waiter).";
+$lang['hint_menu_tables_per_row_cashier']	   	= "The number of tables per row displayed in the list of tables for the cashier users.";
+$lang['desc_menu_tables_per_row_cashier']	   	= "Tables per row (Cashier).";
+$lang['hint_orders_show_deleted']	   			= "If active, shows the deleted orders in the orders list with a breaking line, instead of hiding them.";
+$lang['desc_orders_show_deleted']	   			= "Show deleted orders.";
+$lang['hint_show_summary']	   					= "If active shows in the orders list page a line with the last modified order.";
+$lang['desc_show_summary']	   					= "Show the last modified summary line.";
+$lang['hint_service_fee_use']	   				= "Sets if the number of people per table will be asked or not.";
+$lang['desc_service_fee_use']	   				= "Service fee - Use.";
+$lang['hint_takeaway_allow_unknown_customer']	= "If active, allows to type the surname of the customer in the takeaway tables.";
+$lang['desc_takeaway_allow_unknown_customer']	= "Allows unknown customers.";
+$lang['hint_country']	   						= "Select the country to be used for the currency settings.";
+$lang['desc_country']	   						= "Country.";
+$lang['hint_creation_back_to_category']	   		= "After creating a new order via the category interface, you go back to the same interface to insert other orders.";
+$lang['desc_creation_back_to_category']	   		= "Go to category after create.";
+$lang['hint_rows_per_page']	   					= "Sets the maximum number of table rows to be showed in a single page in the management zone.";
+$lang['desc_rows_per_page']	   					= "Rows per page.";
+$lang['hint_default_priority']	   				= "Priority to be used by default when no category default priority has been set or when using the alphabetical dish list.";
+$lang['desc_default_priority']	   				= "Default priority.";
 
 ?>

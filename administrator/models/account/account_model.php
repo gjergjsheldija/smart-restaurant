@@ -101,7 +101,7 @@ class Account_Model extends Model {
 		$payment_type = array();
 		
 		foreach ($query->result_array() as $row) {
-		   $payment_type[$row['id']] = $row['name'];
+		   $payment_type[$row['id']] = lang($row['name']);
 		}
 
 		return $payment_type;		
@@ -111,7 +111,7 @@ class Account_Model extends Model {
 		$query = $this->db->get('account_accounts');
 		$bank_account = array();
 
-		//shtoj nji element bosh
+		//add's an empty element
 		foreach ($query->result_array() as $row) {
 		   $bank_account[$row['id']] = $row['name'];
 		}
