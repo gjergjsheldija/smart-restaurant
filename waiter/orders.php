@@ -82,14 +82,14 @@ switch ($command){
 				
 				if(empty($start_data['quantity'])) $start_data['quantity']=get_conf(__FILE__,__LINE__,"default_quantity");
 				
-				/*if((!isset($start_data['priority']) || !$start_data['priority']) && $dishid != SERVICE_ID) {
+				if((!isset($start_data['priority']) || !$start_data['priority']) && $dishid != SERVICE_ID) {
 					$tmp = '<b><font color="Red">'.ucfirst(phr('INSERT_PRIORITY'))."</font></b><br>\n";
 					$tpl -> append ('messages',$tmp);
 
 					$tmp = navbar_empty('javascript:history.go(-1);');
 					$tpl -> assign ('navbar',$tmp);
 					break;
-				}*/
+				}
 				
 				// autosearch
 				// the user provided a text instead of a number,
@@ -474,7 +474,7 @@ switch ($command){
 	case 'closed':
 				table_closed_interface();
 				break;
-/*	case 'pay':
+	case 'pay':
 				$err = table_pay($start_data['paid']);
 				status_report ('PAYMENT',$err);
 				
@@ -488,9 +488,9 @@ switch ($command){
 				} else {
 					table_closed_interface();
 				}
-				break;*/
+				break;
 	//mizuko : begin payment changes
-	case 'pay':
+/*	case 'pay':
 				$err = table_pay($start_data['paid']);
 				status_report ('PAYMENT',$err);
 				
@@ -508,6 +508,7 @@ switch ($command){
 				}
 				break;
 	// mizuko : end
+*/
 	case 'none':
 				break;
 	default:
@@ -534,8 +535,6 @@ echo $tpl->getOutput();
 //echo 'cache:<br>'.$GLOBALS['cache_var']->show();
 
 //$tpl ->list_vars();
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
 
-echo $license;
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

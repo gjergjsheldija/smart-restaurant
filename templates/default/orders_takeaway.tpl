@@ -13,7 +13,7 @@
 		<table>
 		<tr>
 				<td rowspan="4" valign="top">
-					{toplist}
+					{takeaway}
 				</td>
 				<td>
 					<table>
@@ -25,9 +25,9 @@
 					</table>
 				</td>
 				<td align="left" valign="top" rowspan="4">
-					<table><!--<tr><td>
+					<table><tr><td>
 					{last_order}
-					</td></tr>-->
+					</td></tr>
 					<tr><td>
 					{orders_list}
 					&nbsp;
@@ -40,11 +40,11 @@
 					{fast_order_id}
 				</td>
 			</tr>
-<!--			<tr>
+			<tr>
 				<td>
 					{toplist}
 				</td>
-			</tr>-->
+			</tr>
 			<tr>
 				<td>
 					{commands}
@@ -53,6 +53,8 @@
 		</table>
 		
 		{logout}
+		{generating_time}
 		</center>
+		<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 	</body>
 </html>

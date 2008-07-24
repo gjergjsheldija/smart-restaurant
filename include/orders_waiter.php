@@ -161,8 +161,8 @@ function dish_list ($start_data) {
 		$tmp = dishes_list_cat ($start_data);
 		$tpl -> assign ('dishes_list',$tmp);
 
-		//$tmp = keys_dishlist_cat ();
-		//$tpl -> append ('scripts',$tmp);
+		$tmp = keys_dishlist_cat ();
+		$tpl -> append ('scripts',$tmp);
 	} elseif (isset($start_data['letter'])){
 		$tmp = dishlist_form_start(false);
 		$tpl -> assign ('formstart',$tmp);
@@ -175,8 +175,8 @@ function dish_list ($start_data) {
 		$tmp = dishes_list_letter ($start_data);
 		$tpl -> assign ('dishes_list',$tmp);
 
-		//$tmp = keys_dishlist_letters ();
-		//$tpl -> append ('scripts',$tmp);
+		$tmp = keys_dishlist_letters ();
+		$tpl -> append ('scripts',$tmp);
 	} elseif (isset($start_data['search'])){
 		$tmp = dishlist_form_start(false);
 		$tpl -> assign ('formstart',$tmp);
@@ -189,8 +189,8 @@ function dish_list ($start_data) {
 		$tmp = dishes_list_search ($start_data);
 		$tpl -> assign ('dishes_list',$tmp);
 
-		//$tmp = keys_dishlist_letters ();
-		//$tpl -> append ('scripts',$tmp);
+		$tmp = keys_dishlist_letters ();
+		$tpl -> append ('scripts',$tmp);
 	} elseif (isset($start_data['idsystem'])){
 		$tmp = dishlist_form_start(false);
 		$tpl -> assign ('formstart',$tmp);
@@ -298,11 +298,11 @@ function dish_list_pos ($start_data) {
 function order_fast_dishid_form () {
 	$data['nolabel']=1;
 	$data['priority']=1;
-	//$tmp = dishlist_form_start(false);
-	//$tmp .= quantity_list($data);
-	//$tmp .= priority_radio($data);
-	//$tmp .= input_dish_id ($start_data);
-	//$tmp .= dishlist_form_end();
+	$tmp = dishlist_form_start(false);
+	$tmp .= quantity_list($data);
+	$tmp .= priority_radio($data);
+	$tmp .= input_dish_id ($start_data);
+	$tmp .= dishlist_form_end();
 	return $tmp;
 }
 
@@ -835,8 +835,8 @@ function orders_delete ($start_data) {
 	$ord = new order($id);
 
 	if(!$ord -> data['deleted'] &&
-	$ord -> data['printed'] &&
-	$ord -> data['dishid'] != SERVICE_ID) {
+		$ord -> data['printed'] &&
+		$ord -> data['dishid'] != SERVICE_ID) {
 		if($err = print_ticket($id,true)) return $err;
 	}
 
@@ -1034,7 +1034,7 @@ function orders_list () {
 
 	$table = new table ($_SESSION['sourceid']);
 	$table->fetch_data(true);
-	/*if($cust_id=$table->data['customer']) {
+	if($cust_id=$table->data['customer']) {
 		$cust = new customer ($cust_id);
 		$tmp = ucphr('CUSTOMER').': '.$cust->data['surname'];
 		$tmp .= ' <a href="orders.php?command=customer_search">'.ucphr('EDIT').'</a>/';
@@ -1044,25 +1044,25 @@ function orders_list () {
 		$tmp = '<a href="orders.php?command=customer_search">'.ucfirst(phr('INSERT_CUSTOMER_DATA')).'</a><br/>';
 		}
 		$tpl -> append ('commands',$tmp);
-		*/
+		
 	if (!orders_service_fee_exists () && get_conf(__FILE__,__LINE__,'service_fee_use')) {
 		$tmp = '<a href="orders.php?command=create&amp;dishid='.SERVICE_ID.'">'.ucfirst(phr('CREATE_SERVICE_FEE')).'</a><br/>';
 		$tpl -> append ('commands',$tmp);
 	}
 
 	$associated_waiter = table_is_associated ();
-	/*if (get_conf(__FILE__,__LINE__,"disassociation_allow")
+	if (get_conf(__FILE__,__LINE__,"disassociation_allow")
 		&& $associated_waiter && ($associated_waiter == $_SESSION ['userid'] || $user->level[USER_BIT_CASHIER] )
 		) {
 		$tmp = '<a href="orders.php?command=dissociate">'.ucfirst(phr('DISSOCIATE')).'</a><br/>';
 		$tpl -> append ('commands',$tmp);
 		}
-		*/
-	/*if ($user->level[USER_BIT_CASHIER]) {
+		
+	if ($user->level[USER_BIT_CASHIER]) {
 		$tmp = '<a href="orders.php?command=ask_move">'.ucfirst(phr('MOVE_TABLE')).'</a><br/>';
 		$tpl -> append ('commands',$tmp);
 		}
-		*/
+		
 	if ($user->level[USER_BIT_CASHIER] && table_is_closed($_SESSION['sourceid'])) {
 		$tmp = '<a href="orders.php?command=reopen_confirm">'.ucfirst(phr('REOPEN_TABLE')).'</a><br/>';
 		$tpl -> append ('commands',$tmp);
@@ -1088,8 +1088,8 @@ function orders_list () {
 		$tmp = order_fast_dishid_form ();
 		$tpl -> assign ('fast_order_id',$tmp);
 	} else {
-		//$tmp = keys_orders ();
-		//$tpl -> append ('scripts',$tmp);
+		$tmp = keys_orders ();
+		$tpl -> append ('scripts',$tmp);
 	}
 
 	// use session to decide wether to show the orders list or not
@@ -1173,13 +1173,13 @@ function priority_radio ($data) {
 	for ($i=1;$i<4;$i++) $chk[$i]="";
 	if(isset($data['priority'])) $chk[$data['priority']]="checked";
 
-	/*$output = '
-	 '.ucfirst(phr('PRIORITY')).':
-	 <input type="radio" '.$chk[1].' name="data[priority]" value=1><a href="#" onClick="check_prio(\'order_form\',0);return false;">1</a>
-	 <input type="radio" '.$chk[2].' name="data[priority]" value=2><a href="#" onClick="check_prio(\'order_form\',1);return false;">2</a>
-	 <input type="radio" '.$chk[3].' name="data[priority]" value=3><a href="#" onClick="check_prio(\'order_form\',2);return false;">3</a>
-	 ';*/
-	return $output;
+	$output = '
+	'.ucfirst(phr('PRIORITY')).':
+	<input type="radio" '.$chk[1].' name="data[priority]" value=1><a href="#" onClick="check_prio(\'order_form\',0);return false;">1</a>
+	<input type="radio" '.$chk[2].' name="data[priority]" value=2><a href="#" onClick="check_prio(\'order_form\',1);return false;">2</a>
+	<input type="radio" '.$chk[3].' name="data[priority]" value=3><a href="#" onClick="check_prio(\'order_form\',2);return false;">3</a>
+	';
+	return $output;	
 }
 
 function quantity_list ($data=array()) {
@@ -1239,12 +1239,12 @@ function dishes_list_cat ($data){
 	}
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return '';
-	//mizuko komentova rreshtin e maposhtem ne html
+	
 	$output .= '<table bgcolor="'.COLOR_TABLE_GENERAL.'">
 	<tr>
-	<!--<th scope=col>'.ucfirst(phr('ID')).'</th>-->
+	<th scope=col>'.ucfirst(phr('ID')).'</th>
 	<th scope=col>'.ucfirst(phr('NAME')).'</th>
-	<th scope=col>'.country_conf_currencies (true).'</th>
+	<th scope=col>'.country_conf_currency (true).'</th>
 	</tr>
 	';
 
@@ -1277,10 +1277,10 @@ function dishes_list_cat ($data){
 				$letter = chr($i);
 				$i++;
 			} else $letter='';
-			//mizuko : kam komentue pjesen poshte
+		
 			$output .= '
 			<tr>
-				<!--<td bgcolor="'.$class.'">'.$letter.'</td>-->
+				<td bgcolor="'.$class.'">'.$letter.'</td>
 				<td bgcolor="'.$class.'" onclick="order_select('.$dishid.',\'order_form\'); return false;"><a href="#" onclick="JavaScript:order_select('.$dishid.',\'order_form\'); return false;">'.$dishname.'</a></td>
 				<td bgcolor="'.$class.'">'.$dishprice.'</td>
 			</tr>';
@@ -1416,7 +1416,7 @@ function dishes_list_letter ($data){
 	<tr>
 	<th scope=col>'.ucfirst(phr('ID')).'</th>
 	<th scope=col>'.ucfirst(phr('NAME')).'</th>
-	<th scope=col>'.country_conf_currencies (true).'</th>
+	<th scope=col>'.country_conf_currency (true).'</th>
 	</tr>
 	';
 
@@ -1436,7 +1436,7 @@ function dishes_list_letter ($data){
 
 		$dishname = $arr['name'];
 		if ($dishname == null || strlen(trim($dishname)) == 0)
-		$dishname = $arr['name'];
+			$dishname = $arr['name'];
 
 		if(strtolower($dishname{0})!=strtolower($letter)) continue;
 		$dishprice = $arr['price'];
@@ -1450,7 +1450,7 @@ function dishes_list_letter ($data){
 			} else $local_letter='';
 				
 			$output .= '<tr>
-			<td bgcolor="'.$class.'">'.$local_letter.'</td>aaaaaa';
+			<td bgcolor="'.$class.'">'.$local_letter.'</td>';
 				
 			$output .= '<td bgcolor="'.$class.'" onclick="order_select('.$dishid.',\'order_form\'); return false;"><a href="#" onclick="JavaScript:order_select('.$dishid.',\'order_form\'); return false;">'.$dishname.'</a></td>';
 			$output .= '<td bgcolor="'.$class.'">'.$dishprice.'</td>
@@ -1489,7 +1489,7 @@ function dishes_list_search ($data){
 	<tr>
 	<th scope=col>'.ucfirst(phr('ID')).'</th>
 	<th scope=col>'.ucfirst(phr('NAME')).'</th>
-	<th scope=col>'.country_conf_currencies (true).'</th>
+	<th scope=col>'.country_conf_currency (true).'</th>
 	</tr>
 	';
 
@@ -1506,7 +1506,7 @@ function dishes_list_search ($data){
 		$dishname = $dishobj -> name ($_SESSION['language']);
 
 		if ($dishname == null || strlen(trim($dishname)) == 0)
-		$dishname = $arr['name'];
+			$dishname = $arr['name'];
 
 		$dishprice = $arr['price'];
 

@@ -1,6 +1,6 @@
 <?php
 /**
-* My Handy Restaurant
+* My Handy Restaurant - Custom s'print-S thermal printer driver
 *
 * http://www.myhandyrestaurant.org
 *

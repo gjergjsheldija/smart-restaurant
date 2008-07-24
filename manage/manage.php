@@ -54,7 +54,5 @@ switch($command) {
 echo "<br><a href=\"index.php\">".ucfirst(phr('GO_MAIN_REPORT'))."</a><br>";
 
 echo generating_time($inizio);
-$license =  '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
 
-echo $license;
 ?>

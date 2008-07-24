@@ -54,10 +54,6 @@ switch($command) {
 		unset($_SESSION["delete"]);
 		break;
 }
-		
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
-
-echo $license;
 
 echo generating_time($inizio);
 

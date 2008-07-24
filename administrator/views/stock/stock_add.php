@@ -121,7 +121,7 @@ div.error { display: none; }
 							</tr>
 							<tr>
 								<td colspan="6">
-									<a href="#" onClick="addFormField(); return false;"><?=img('img/edit_add.png') ?></a>
+									<a href="#" onClick="addFormField(); return false;"><?=img('../img/edit_add.png') ?></a>
 								</td>
 							</tr>
 							<tr>

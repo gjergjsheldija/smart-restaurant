@@ -8,12 +8,13 @@
 		{scripts}
 		<center>
 		{people_number}
-		{navbar}
 		{messages}
-
+		{last_order}
+		{navbar}
 		
 		{categories}
-		{formstart}<br />
+		{formstart}
+		{priority}<br />
 		{quantity}
 		{back_to_cat}
 		
@@ -21,6 +22,8 @@
 		{formend}
 		
 		{logout}
+		{generating_time}
 		</center>
+		<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 	</body>
 </html>

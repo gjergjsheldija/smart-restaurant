@@ -43,16 +43,16 @@ define('CONF_DEBUG_DISABLE_FUNCTION_INSERT',			0);	// enables the use of functio
 define('CONF_DEBUG_PRINT_PAGE_SIZE',				0);  // if on prints the size of the generated page (images excluded)
 
 
-define('CONF_SHOW_DEFAULT_ON_MISSING',				0);	// if a lang value in the db is empty, writes the corresponding value in the default language instead of the lang code
-define('CONF_TOPLIST_HIDE_PRIORITY',				1);	// sets if priority button should be displayed in the toplist box
+define('CONF_SHOW_DEFAULT_ON_MISSING',				1);	// if a lang value in the db is empty, writes the corresponding value in the default language instead of the lang code
+define('CONF_TOPLIST_HIDE_PRIORITY',				0);	// sets if priority button should be displayed in the toplist box
 define('CONF_TOPLIST_HIDE_QUANTITY',				0);	// sets if quantity button should be displayed in the toplist box
-define('CONF_TOPLIST_SAVED_NUMBER',				10);	// quantity of orders to be saved for toplist statistics
+define('CONF_TOPLIST_SAVED_NUMBER',				1000);	// quantity of orders to be saved for toplist statistics
 define('CONF_ALLOW_EASY_DELETE',				true);	// if true shows the little trash icon when an order has quantity 1
 define('CONF_XML_TRANSLATIONS',					true);	// if true uses the xml language files instead of the database. It is recomended to leave this funciton off unless you know what you are doing
 define('CONF_PRINT_BARCODES',					false);	// if true prints the barcode with the order ID for each order
 									// it requires a barcode-ready printer to work
 														// and is as of today a useless feature
-define('CONF_COLOUR_PRINTED',					0);	// if on the user can see the elapsed time from the printing of the order ticket as a linear color
+define('CONF_COLOUR_PRINTED',					1);	// if on the user can see the elapsed time from the printing of the order ticket as a linear color
 define('CONF_COLOUR_PRINTED_COLOUR',				'yellow');	// possible values: red, green, blue, magenta, yellow, cyan, grey. default: yellow
 define('CONF_COLOUR_PRINTED_MAX_TIME',				20);	// after how much time in mins should the max colour be reached
 define('CONF_TIME_SINCE_PRINTED',				1);	// if on the elapsed time since printing will be written aside the dish name in the orders list
@@ -63,7 +63,7 @@ define('CONF_DISPLAY_MYSQL_ERRORS',				true);  // if on the mysql errors will be
 define('CONF_SQL_RESUME_ENABLED',				false);	// if on the sql upgrades and restores will be stopped and resumed to allow progress display (HIGHLY EXPERIMENTAL!!!)
 define('CONF_SHOW_SUMMARY_ON_LIST',				false);	// if on a summary of the data about the ingredients/dishes will be displayed in the tables in admin section (slows the page generation by a factor of about 4)
 define('CONF_SHOW_PERCENT_INSERTED_ON_LIST',			false);	// if on the percent of inserted ingredient quantities will be displayed in the table in admin section (slows the page generation by a factor of about 4)
-define('CONF_UNIT_MASS',					'kg');	// measure unit for weigths
+define('CONF_UNIT_MASS',					'g');	// measure unit for weigths
 define('CONF_UNIT_VOLUME',					'l');	// measure unit for volumes
 define('CONF_FORCE_UPGRADE',					false);	// if true forces upgrading, otherwise only displays suggestion with ink in messages
 define('CONF_STOCK_QUANTITY_ALARM',				10);	// treshold for low quantity in stock messages
@@ -109,7 +109,7 @@ define('REFRESH_TIME',0.2);
 
 // max displayed quanitty in quantity <select > boxes.
 // This is NOT the maximux allowed quantity, so don't use this for security matters.
-define('MAX_QUANTITY',10);
+define('MAX_QUANTITY',50);
 
 define('USER_BIT_WAITER',0);
 define('USER_BIT_CASHIER',1);
@@ -142,8 +142,8 @@ define('TABLE_VAT_RATES',7);
 define('TABLE_PRINTERS',8);
 define('TABLE_STOCK_OBJECTS',9);
 define('TABLE_STOCK_DISHES',10);
-define('TABLE_VALUTA',11);
-
+//define('TABLE_VALUTA',11);
+//mizuko
 define('LICENSE_FILE',ROOTDIR.'/docs/LICENSE');
 $halttime=2;
 
@@ -224,7 +224,7 @@ define('IMAGE_MINUS',CONF_HTTP_ROOT_DIR."images/down.png");
 define('IMAGE_PLUS',CONF_HTTP_ROOT_DIR."images/up.png");
 define('IMAGE_FIND',CONF_HTTP_ROOT_DIR."images/find.png");
 define('IMAGE_NEW',CONF_HTTP_ROOT_DIR."images/new.png");
-define('IMAGE_PROVE',CONF_HTTP_ROOT_DIR."images/prove.png");
+//define('IMAGE_PROVE',CONF_HTTP_ROOT_DIR."images/prove.png");
 define('IMAGE_LOGOUT',CONF_HTTP_ROOT_DIR."images/logout.png");
 define('IMAGE_SHOW_ORDERS',CONF_HTTP_ROOT_DIR."images/show.png");
 define('IMAGE_HIDE_ORDERS',CONF_HTTP_ROOT_DIR."images/hide.png");
@@ -234,8 +234,8 @@ define('IMAGE_LOGIN',CONF_HTTP_ROOT_DIR."images/personal.png");
 
 // all the colors used in background and tables
 
-//define('COLOR_TABLE_GENERAL','#FFCC99');
-define('COLOR_TABLE_GENERAL','#cccccc');
+define('COLOR_TABLE_GENERAL','#FFCC99');
+
 define('COLOR_TABLE_TOTAL','#FFEEBB');
 define('COLOR_HIGHLIGHT','#DDDDDD');
 define('COLOR_BACK_OK','#6FFA7D');

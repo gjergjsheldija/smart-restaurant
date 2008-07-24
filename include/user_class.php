@@ -406,7 +406,7 @@ class user extends object {
 				break;
 		}
 
-		/* begin : mizuko modifikim ci me dale vec perdoruesi i caktuem ne pda ose ne pc */
+		/* begin : mizuko selects users for POS and HandHeld */
 
 		$query="SELECT `id`,`name` FROM `#prefix#users` WHERE `disabled`='0' ";
 		if( !$admin_only ) $query.=" AND dest_type = 'palm' ";
@@ -610,7 +610,7 @@ class user extends object {
 	}
 
 	//04.07.2007
-	//mizuko e ndryshova qi me mujte me u logue vec me password...barcode scanner
+	//mizuko user can log with password only password...barcode scanner / mag reader
 	function connect_pos() {
 		if (!isset($_REQUEST['password']) || empty($_REQUEST['password']) ) return ERR_NO_PASSWORD;
 
@@ -624,7 +624,7 @@ class user extends object {
 
 		if(!$arr) return ERR_USER_NOT_FOUND;
 
-		//ktu asht tane logjika e punes...
+		//all the work logic...
 //		if(isset($_REQUEST['userid']) && !empty($_REQUEST['userid']) && $_REQUEST['userid'] == $arr['id'])
 			$user = new user ($arr['id']);
 //		else
@@ -925,7 +925,7 @@ class user extends object {
 		</td>
 	</tr>
 	<tr>
-		<td> Lloji </td>
+		<td> Type </td>
 		<td> 
 			<select name="data[dest_type]">';
 		if($arr['dest_type'] == 'pos')  {

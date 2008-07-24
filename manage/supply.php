@@ -246,9 +246,6 @@ if($command!="delete") unset($_SESSION["delete"]);
 
 echo "<br><a href=\"#\" onclick=\"javascript:history.go(-1); return false\">".ucfirst(phr('GO_BACK'))."</a><br>\n";
 echo "<br><a href=\"index.php\">".ucfirst(phr('GO_MAIN_REPORT'))."</a><br>";
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
-
-echo $license;
 echo generating_time($inizio);
 ?>
 

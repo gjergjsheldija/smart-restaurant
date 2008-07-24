@@ -563,7 +563,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		
 		$out =
 '<?xml version="1.0"?>
-<ResPlus>
+<SmartRestaurant>
 	<type> database </type>
 	<data>
 ';
@@ -637,7 +637,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		$out .= "\t\t</database>\n";
 		$out.=
 '	</data>
-</MyHandyRestaurant>';
+</SmartRestaurant>';
 		
 		return $out;
 	}
@@ -885,7 +885,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 	function tree_to_array ($orig) {
 		if(!is_array($orig)) return 1;
 		
-		$work=$orig['MyHandyRestaurant'][0]['data'][0]['database'][0];
+		$work=$orig['SmartRestaurant'][0]['data'][0]['database'][0];
 
 		for (reset ($work); list ($key, $value) = each ($work); ) {
 			if($key=='name') {

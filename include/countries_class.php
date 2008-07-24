@@ -50,12 +50,12 @@ class country extends object {
 			if($selected == $arr['id']) $sel = ' selected';
 			else $sel = '';
 			
-			$htmlcode = $arr['currencies_html'];
+			$htmlcode = $arr['currency_html'];
 			if (empty($htmlcode)) $htmlcode = '';
 			else $htmlcode = ' ('.$htmlcode.')';
 			
 			$output .= '
-		<option value="'.$arr['id'].'"'.$sel.'>'.$arr['name'].' - '.$arr['currencies_letter'].$htmlcode.'</option>';
+		<option value="'.$arr['id'].'"'.$sel.'>'.$arr['name'].' - '.$arr['currency_letter'].$htmlcode.'</option>';
 		}
 		$output .= '
 	</select>'."\n";
@@ -63,14 +63,14 @@ class country extends object {
 	}
 }
 
-function country_conf_currencies ($html=false) {
+function country_conf_currency ($html=false) {
 	$id = get_conf(__FILE__,__LINE__,'country');
 	$country = new country ($id);
 	
-	$curr_lett = $country -> data['currencies_letter'];
+	$curr_lett = $country -> data['currency_letter'];
 	if(!$html) return $curr_lett;
 	
-	$curr_html = $country -> data['currencies_html'];
+	$curr_html = $country -> data['currency_html'];
 	if (empty($curr_html)) return $curr_lett;
 	
 	return $curr_html;

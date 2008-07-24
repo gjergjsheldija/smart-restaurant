@@ -158,9 +158,6 @@ switch($command) {
 		break;
 }
 if($command!="movement_delete" && $command!="delete") unset($_SESSION["delete"]);
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
-
-echo $license;
 echo generating_time($inizio);
 ?>
 

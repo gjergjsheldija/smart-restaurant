@@ -1,3 +1,9 @@
+/************************************************************
+Coolmenus Beta 4.06 - Copyright Thomas Brattli - www.dhtmlcentral.com
+Last updated: 11.13.02
+
+v4.06 - with basic frame support
+*************************************************************/
 /*Browsercheck object*/
 function cm_bwcheck(){
 	//In theory we should use object detection, but this script needs work-arounds for almost every browser...

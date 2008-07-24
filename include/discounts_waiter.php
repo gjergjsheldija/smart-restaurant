@@ -211,7 +211,7 @@ function discount_form_javascript($sourceid){
 	<input type="radio" name="discount_type" value="percent" onclick="JavaScript:discount_switch();" '.$chk[1].'>
 	'.ucfirst(phr('PERCENTUAL')).' <INPUT TYPE="text" name="percent" size="2" maxlength="2" value="'.$percent.'" '.$dis[1].'>% <br />
 	<input type="radio" name="discount_type" value="amount" onclick="JavaScript:discount_switch();" '.$chk[2].'>'.ucfirst(phr('VALUE')).' <INPUT TYPE="text" name="amount"
-	size="4" maxlength="4" value="'.$amount.'" '.$dis[2].'>'.country_conf_currencies (true).'<br />
+	size="4" maxlength="4" value="'.$amount.'" '.$dis[2].'>'.country_conf_currency (true).'<br />
 	<INPUT TYPE="SUBMIT" value="'.ucfirst(phr('APPLY_DISCOUNT')).'"><br />
 	</FORM>
 	</FIELDSET>

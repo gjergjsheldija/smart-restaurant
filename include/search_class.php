@@ -86,34 +86,34 @@ class search extends object {
 				$query .= ' UNION ALL ';
 			}
 		}
-/*		if(access_allowed(USER_BIT_MENU)) {
+		if(access_allowed(USER_BIT_MENU)) {
 			$obj = new table ();
 			if(method_exists($obj,'list_search')) {
 				$query .= $obj->list_search ($this->search);
 				$query .= ' UNION ALL ';
 			}
-		}*/
-/*		if(access_allowed(USER_BIT_USERS)) {
+		}
+		if(access_allowed(USER_BIT_USERS)) {
 			$obj = new user ();
 			if(method_exists($obj,'list_search')) {
 				$query .= $obj->list_search ($this->search);
 				$query .= ' UNION ALL ';
 			}
-		}*/
-/*		if(access_allowed(USER_BIT_MENU)) {
+		}
+		if(access_allowed(USER_BIT_MENU)) {
 			$obj = new vat_rate ();
 			if(method_exists($obj,'list_search')){
 				$query .= $obj->list_search ($this->search);
 				$query .= ' UNION ALL ';
 			}
-		}*/
-/*		if(access_allowed(USER_BIT_CONFIG)) {
+		}
+		if(access_allowed(USER_BIT_CONFIG)) {
 			$obj = new printer ();
 			if(method_exists($obj,'list_search')) {
 				$query .= $obj->list_search ($this->search);
 				$query .= ' UNION ALL ';
 			}
-		}*/
+		}
 		/*
 		if(access_allowed(USER_BIT_STOCK)) {
 			$obj = new stock_dish ();

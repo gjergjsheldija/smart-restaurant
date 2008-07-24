@@ -58,7 +58,8 @@ if (!isset($_SESSION['userid']) || $opera_zaurus) {
 		'.ucfirst(phr('WHO_ARE_YOU')).'<br/>
 '.$user->html_select(SHOW_WAITER_ONLY).'
 		</center>
-	</td><td>
+	</td></tr>
+	<tr><td>
 		<center>
 		<INPUT TYPE="SUBMIT" value="'.ucfirst(phr('SUBMIT')).'">
 		</center>
@@ -88,8 +89,5 @@ $output = $tpl->getOutput();
 
 // prints everything to screen
 echo $output;
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
-
-echo $license;
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

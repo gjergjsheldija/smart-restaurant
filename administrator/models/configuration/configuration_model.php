@@ -31,7 +31,7 @@ class Configuration_Model extends Model {
 	}
 	
 	function configuration_list() {
-		$this->db->select('conf.id, conf.name, conf.description, conf.value, conf.bool, conf.hint')
+		$this->db->select('conf.id, conf.name, conf.value, conf.bool')
 						->from('conf')
 						->where('conf.name !=' , 'vendor_name')
 						->where('conf.name !=' , 'vendor_email')

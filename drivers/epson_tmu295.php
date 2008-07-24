@@ -1,6 +1,6 @@
 <?php
 /**
-* My Handy Restaurant
+* My Handy Restaurant - Epson TMU295 driver
 *
 * http://www.myhandyrestaurant.org
 *
@@ -26,7 +26,6 @@
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
-
 // epson dot matrix printer used for bills
 function driver_epson_tmu295($msg) {
 

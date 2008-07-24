@@ -1,4 +1,4 @@
-{init}{feed_reverse}{feed_reverse2}{no_paper_print_disabler}{tab_define}{unknown}{size_double}iRes+
+{init}{feed_reverse}{feed_reverse2}{no_paper_print_disabler}{tab_define}{unknown}{size_double}Smart Restaurant
 {table}{/size_double}
 {customer_name}
 {customer_address}
@@ -7,7 +7,7 @@
 
 {orders}
 {align_center}{dashes_row}
-{discount}{align_left}{height_double}{total}{/height_double}
+{discount}{align_left}{height_double}{total}{change}{/height_double}
 {taxes}
 {receipt_id}
 {destination}

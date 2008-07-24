@@ -581,21 +581,20 @@ class order {
 		
 		// mods cell
 		if ($deleted && $arr['dishid']!=MOD_ID) {
-/*			$output .= '
+			$output .= '
 		<td bgcolor="'.$class.'">
 			&nbsp;
-		</td>';*/
+		</td>';
 		
 		} elseif (!$deleted
 				&& $arr['printed']==NULL
 				&& $arr['dishid']!=MOD_ID
 				&& $arr['dishid']!=SERVICE_ID) {
 			$link = 'orders.php?command=listmods&amp;data[id]='.$arr['associated_id'];
-		//mizuko : hjeka + / - te porosite
-			/*			$output .= '
+			$output .= '
 		<td bgcolor="'.$class.'" onclick="redir(\''.$link.'\');">
 			<a href="'.$link.'">+ -</a>
-		</td>';*/
+		</td>';
 
 		
 		} else {
@@ -651,10 +650,10 @@ class order {
 		}
 		
 		// priority cell
-		/*$output .= '
+		$output .= '
 		<td bgcolor="'.$classpriority.'">
 			'.$arr['priority'].'
-		</td>';*/
+		</td>';
 		
 		// price cell
 		$user = new user($_SESSION['userid']);
@@ -734,18 +733,14 @@ class order {
 				$link = 'orders.php?command=update&amp;data[quantity]='.$newquantity.'&amp;data[id]='.$orderid;
 				if($arr['suspend']) $link .= '&amp;data[suspend]=1';
 				if($arr['extra_care']) $link .= '&amp;data[extra_care]=1';
-				//mizuko : hjeka ikonen ^ te orders
-				//$output .= '<a href="'.$link.'"><img src="'.IMAGE_PLUS.'" alt="'.ucfirst(phr('PLUS')).' ('.ucfirst(phr('ADD')).')" border=0></a></td>
-				$output .= '<a href="'.$link.'">+</a></td>
+				$output .= '<a href="'.$link.'"><img src="'.IMAGE_PLUS.'" alt="'.ucfirst(phr('PLUS')).' ('.ucfirst(phr('ADD')).')" border=0></a></td>
 		<td>';
 				if($arr['quantity']>1){
 					$newquantity=$arr['quantity']-1;
 					$link = 'orders.php?command=update&amp;data[quantity]='.$newquantity.'&amp;data[id]='.$orderid;
 					if($arr['suspend']) $link .= '&amp;data[suspend]=1';
-					// mizuko : hjeka  e vuna -
 					if($arr['extra_care']) $link .= '&amp;data[extra_care]=1';
-					//$output .= '<a href="'.$link.'"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
-					$output .= '<a href="'.$link.'">-</a>';
+					$output .= '<a href="'.$link.'"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
 				} elseif($arr['quantity']==1 && CONF_ALLOW_EASY_DELETE){
 					$newquantity=0;
 					$link = 'orders.php?command=ask_delete&amp;data[id]='.$orderid;

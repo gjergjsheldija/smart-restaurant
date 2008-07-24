@@ -55,7 +55,7 @@ class stock_movement extends object {
 								'dish_quantity'=>ucphr('DISH_QUANTITY'),
 								'quantity'=>ucphr('QUANTITY'),
 								'unit_type'=>'',
-								'value'=>ucphr('VALUE').' ['.country_conf_currencies (true).']',
+								'value'=>ucphr('VALUE').' ['.country_conf_currency (true).']',
 								'user'=>ucphr('USER'));
 		$this -> fetch_data();
 		
@@ -193,13 +193,12 @@ class stock_movement extends object {
 		}
 
 		$input_data['user'] = $_SESSION['userid'];
-		//mizuko : comentetd out the check on possible stock quantity 
-				if ($msg) {
-			/*echo "<script language=\"javascript\">
+		if ($msg) {
+			echo "<script language=\"javascript\">
 				window.alert(\"".$msg."\");
 				window.history.go(-1);
 			</script>\n";
-			*/return -2;
+			return -2;
 		}
 		//end : mizuko
 		return $input_data;

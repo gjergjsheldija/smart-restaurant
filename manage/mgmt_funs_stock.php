@@ -361,18 +361,19 @@ function set_stock($dishname,$diffquantity, $value){
 
 	//here we should check weather there is only one dish called dishname
 	//(easy case) or if we should ask the user which dish to use
-
+//TODO : check this one here, changed quantity to stock
+//commented le lines below
 	if(!$row['stock_is_on']) return 1;
-	$oldstock=$row['quantity'];
+	$oldstock=$row['stock'];
 	$newstock=$oldstock+$diffquantity;
-	$oldvalue = $row['value'];
-	if( $oldvalue == 0 ) { 
-		$newvalue = $value / $diffquantity;
-	} else { 
-		$newvalue =  ( $oldvalue + (  $value / $diffquantity ) ) / 2;
-	}
-	$table=$GLOBALS['table_prefix'].'stock_objects';
-	$query="UPDATE $table SET `quantity`= '".$newstock."', value = '". $newvalue ."' WHERE `id`='".$row['id']."'";
+	//$oldvalue = $row['value'];
+	//if( $oldvalue == 0 ) { 
+	//	$newvalue = $value / $diffquantity;
+	//} else { 
+	//	$newvalue =  ( $oldvalue + (  $value / $diffquantity ) ) / 2;
+	//}
+	$table=$GLOBALS['table_prefix'].'dishes';
+	$query="UPDATE $table SET `stock`= '".$newstock."', value = '". $newvalue ."' WHERE `id`='".$row['id']."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	return 0;
 }

@@ -329,7 +329,7 @@ class category extends object {
 		</tr>
 		<tr>
 			<td>
-				Zgjidh pamjen e kesaj kategorie :
+				Select Image for this category :
 			</td>
 			<td>
 				<input type="file" name="data[image]" value="'.$arr['image'].'"/>

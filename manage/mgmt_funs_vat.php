@@ -48,7 +48,7 @@ function vat_report(){
 	}
 
 	echo "
-	Per il periodo indicato si devono pagare:<br><b>".country_conf_currencies(true)." ".$vat_total."</b>
+	Per il periodo indicato si devono pagare:<br><b>".country_conf_currency(true)." ".$vat_total."</b>
 	 (escluse le fatture non pagate)<br>
 	oppure<br>
 	<b>".country_conf_currencies(true)." ".$vat_total_with_debit."</b>  (incluse le fatture non pagate) di IVA<br><br>

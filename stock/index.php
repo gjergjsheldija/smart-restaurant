@@ -72,7 +72,6 @@ switch($class) {
 				break;
 			case 'create_from_external':
 				$obj = new $class;
-				echo "fiksim kot tesh";
 				if($err=$obj -> create_from_external($start_data['ref_id'],$start_data['ref_type'])) {
 					$tmp = '<span class="error_msg">Error creating: '.$err.'</span><br>';
 					$tpl -> append("messages", $tmp);
@@ -131,8 +130,5 @@ header("Content-type: text/html; charset=".phr('CHARSET'));
 
 // prints everything to screen
 echo $output;
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
-
-echo $license;
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

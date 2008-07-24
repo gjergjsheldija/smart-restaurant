@@ -61,7 +61,5 @@ echo "<br><a href=\"index.php\">".ucfirst(phr('GO_MAIN_REPORT'))."</a><br>";
 //echo "<br><a href=\"".$_SESSION['lastpage']."\">Torna indietro</a>\n";
 
 echo generating_time($inizio);
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
 
-echo $license;
 ?>

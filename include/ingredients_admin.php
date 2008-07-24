@@ -40,7 +40,7 @@ class ingredient extends object {
 								'price'=>ucphr('PRICE'),
 								'quantity'=>ucphr('QUANTITY'),
 								'unit_type'=>'',
-								'value'=>ucphr('UNITARY_VALUE').' ['.country_conf_currencies (true).']',
+								'value'=>ucphr('UNITARY_VALUE').' ['.country_conf_currency (true).']',
 								'override_autocalc',
 								'visible'=>ucphr('VISIBLE'),
 								'sell_price'=>ucphr('SELL_PRICE'));
@@ -87,7 +87,7 @@ class ingredient extends object {
 	}
 	
 	/**
-	 * query qi me liston tane produktet te Sync Ingredients
+	 * query that lists all products in the  Sync Ingredients
 	 * @author mizuko
 	 */
 	function list_query_all () {

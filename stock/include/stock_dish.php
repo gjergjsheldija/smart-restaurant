@@ -335,7 +335,7 @@ class stock_dish extends object {
 		$cost = 0;
 		$cost=$this->ingredients_cost();
 		$cost = round($cost,2);
-		$cost_label = $cost.' '.country_conf_currencies (true);
+		$cost_label = $cost.' '.country_conf_currency (true);
 		$col=0;
 		$display->rows[$row][$col]=ucphr('DISH_COST');
 		$col++;
@@ -350,7 +350,7 @@ class stock_dish extends object {
 		$display->rows[$row][$col]=ucphr('DISH_REVENUE');
 		$col++;
 		if($revenue<0) $display->properties[$row][$col]='style="color: #FF0000; font-weight: bolder"';
-		$display->rows[$row][$col]=$revenue.' '.country_conf_currencies (true);
+		$display->rows[$row][$col]=$revenue.' '.country_conf_currency (true);
 		$col++;
 		$row++;
 		
@@ -369,7 +369,7 @@ class stock_dish extends object {
 				$stock = new stock_object;
 				$data['obj_id'] = $stock -> find_external ($ingred_id, TYPE_INGREDIENT);
 				$sample = new stock_ingredient_sample;
-				$sample->silent=false; //mizuko
+				$sample->silent=true;
 				if($err = $sample -> insert($data)) return $err;
 
 				$qty = new stock_ingredient_quantity;
@@ -385,7 +385,6 @@ class stock_dish extends object {
 		return 0;
 	}
 	
-	//mizuko : ban box per editimin e sasise se perbasave per nji artikull
 	function edit_many ($arr) {
 		if(!is_array($arr)) return '';
 		
@@ -408,7 +407,6 @@ class stock_dish extends object {
 	}
 	
 	
-	//mizuko : gjeneron form per input/modifikim te sasive te perbasave
 	function form () {
 		if(!$this->from_code && isset($_REQUEST['edit']) && is_array($_REQUEST['edit'])) return $this->edit_many($_REQUEST['edit']);
 		elseif (!$this->from_code && !isset($_REQUEST['edit'])) return $this->edit_many(array($this->id));

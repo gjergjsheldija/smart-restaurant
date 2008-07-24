@@ -129,7 +129,7 @@ function printing_commands(){
 	}
 
 	if(/* !$_SESSION['catprinted'][2] &&*/ printing_orders_printed_category (2)){
-		$output .= '<a href="orders.php?command=print_category&amp;data[category]=2"><b>'.ucfirst(phr('PRINT_GO_2')).'</a></b><br />'."\n";
+		$output .= '<a href="orders.php?command=print_category&amp;data[category]=2">'.ucfirst(phr('PRINT_GO_2')).'</a><br />'."\n";
 		$output .= '<br />';
 	}
 
@@ -138,17 +138,17 @@ function printing_commands(){
 		$output .= '<br />';
 	}
 
-	/*if(bill_orders_to_print ($_SESSION['sourceid'])) {
+	if(bill_orders_to_print ($_SESSION['sourceid'])) {
 		$output .= "<a href=\"orders.php?command=bill_select\">".ucfirst(phr('PRINT_SEPARATED_BILLS'))."</a><br />\n";
-	}*/
+	}
 	
 	$user = new user($_SESSION['userid']);
 	
 	if ($user->level[USER_BIT_CASHIER]) {
 		$output .= '
 	<br />
-	<!--<a href="orders.php?command=bill_reset">('.ucfirst(phr('RESET_SEPARATED')).')</a><br />
-	<br />-->
+	<a href="orders.php?command=bill_reset">('.ucfirst(phr('RESET_SEPARATED')).')</a><br />
+	<br />
 	';
 		if(bill_orders_to_print ($_SESSION['sourceid'])) {
 			$output .= '
@@ -159,7 +159,6 @@ function printing_commands(){
 	
 	return $output;
 }
-
 
 /**
 * Number of orders to be printed
@@ -237,10 +236,8 @@ function printer_print_row($arr,$destid){
 			$msg.="$extra\n";
 		}
 		$msg.="\n".'{size_double}';
-		//mizuko : kete rresht e shtova une me e ba njisoj si te faturat.name qty price
+		//mizuko : so i get it similar with the bill
 		$msg.= sprintf("%-30s", $dishname ) . $arr['quantity'] . "x".$arr['price']/$arr['quantity'];
-		//$msg.= sprintf("%-30s", $dishname ) . $arr['quantity'];;
-		//$msg.= $dishname. " " . $arr['quantity'];
 		$msg.='{/size_double}';
 	}
 
@@ -533,11 +530,17 @@ function print_line_lp($value,$dest) {
 }
 
 function print_line_win($value,$dest) {
-   $title='iRes+';
+	$debug = _FUNCTION_.' - Windows Printing to dest '.$dest.' - line '.$value.' '."\n"; 
+	debug_msg(__FILE__,__LINE__,$debug);
+		
+   $title='SmartRestaurant';
    $handle = printer_open(stripslashes($dest));
    
    if(!$handle) return ERR_COULD_NOT_OPEN_PRINTER;
 
+	$debug = __FUNCTION__.' - Windows Printing to dest '.$dest.' - line '.$value.' '."\n"; 
+	debug_msg(__FILE__,__LINE__,$debug);
+	
    printer_set_option($handle, PRINTER_MODE, "RAW");
    
    $value = stri_replace ("\n","\n\r",$value);
@@ -902,11 +905,7 @@ function print_barcode($code){
 function find_last_receipt($db,$type,$year){
 	if(!$type) return 0;
 
-	// mizuko : e modifikova me ba me punue id e receipt...nuk asht
-	// ala i testuem mire... :(
-	// TODO : testue kete funx si punon nen stress
-	// $timestart=date("Y")."0000000000";
-	$timestart=date("Y-m-j H:m:s");
+	$timestart=date("Y")."0000000000";
 
 	$table='#prefix#account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `type`='$type' AND `internal_id`!='' AND `date`>='$timestart'";
@@ -958,7 +957,7 @@ function receipt_insert($accountdb,$type){
 	// creates the new receipt voice in management db, to be next filled
 	// with actual amount values
 	$table='#prefix#account_mgmt_main';
-	//mizuko... kam shtue $user->data['name'] per me pase emnin e perdoruesit
+	//mizuko... added $user->data['name'] to have user name
 	$user = new user($_SESSION['userid']);
 	$query="INSERT INTO $table (`description`,`who`,`internal_id`,`type`,`waiter_income`) VALUES ('".ucfirst(phr('INCOME')).": $internal_id','".$user->data['name']."','$internal_id','$type','1')";
 	$res=common_query($query,__FILE__,__LINE__);

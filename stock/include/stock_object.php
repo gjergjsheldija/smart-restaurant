@@ -45,7 +45,7 @@ class stock_object extends object {
 								'ref_id'=>ucphr('INGREDIENT'),
 								'unit_type'=>'',
 								'quantity'=>ucphr('QUANTITY'),
-								'value'=>ucphr('VALUE').' ['.country_conf_currencies (true).']');
+								'value'=>ucphr('VALUE').' ['.country_conf_currency (true).']');
 		$this->fields_width=array(	'name'=>'75%');
 		$this->hide=array(	'ref_id');
 		$this->file=ROOTDIR.'/stock/index.php';
@@ -476,7 +476,7 @@ class stock_object extends object {
 			</td>
 			<td>
 			'.round($arr['value'],2).'
-			 '.country_conf_currencies (true);
+			 '.country_conf_currency (true);
 			if($unit) $output .= '/'.$default_unit;
 			else $output .= '/'.ucphr('PIECE');
 			

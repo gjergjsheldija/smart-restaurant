@@ -1,6 +1,6 @@
 <?php
 /**
-* My Handy Restaurant
+* My Handy Restaurant - Star printer driver
 *
 * http://www.myhandyrestaurant.org
 *

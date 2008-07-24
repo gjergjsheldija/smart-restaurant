@@ -26,6 +26,7 @@
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
+//if(function_exists('apd_set_pprof_trace')) apd_set_pprof_trace();
 
 $inizio=microtime();
 session_start();
@@ -40,7 +41,7 @@ if(isset($_REQUEST['class'])) $class=$_REQUEST['class'];
 else $class='';
 
 
-$tmp = head_line('Seksioni i Administrimit');
+$tmp = head_line('Administration section');
 $tpl -> assign("head", $tmp);
 
 $tpl -> set_admin_template_file ('menu');
@@ -58,10 +59,10 @@ switch($class) {
 		if(!access_allowed(USER_BIT_MENU)) $command='access_denied';
 		$accepted_class=true;
 		break;
-/*	case 'accounting_database':
+	case 'accounting_database':
 		if(!access_allowed(USER_BIT_CONFIG)) $command='access_denied';
 		$accepted_class=true;
-		break;*/
+		break;
 	case 'dish':
 		if(!access_allowed(USER_BIT_MENU)) $command='access_denied';
 		if($start_data['category']) {
@@ -84,7 +85,8 @@ switch($class) {
 		break;
 	case 'printer':
 		if(!access_allowed(USER_BIT_CONFIG)) $command='access_denied';
-
+		
+		
 		switch($command) {
 			case 'access_denied':
 				break;
@@ -119,10 +121,6 @@ switch($class) {
 	case 'vat_rate':
 		if(!access_allowed(USER_BIT_MENU)) $command='access_denied';
 		$accepted_class=true;
-		break;	
-	case 'currencies':
-		if(!access_allowed(USER_BIT_MENU)) $command='access_denied';
-		$accepted_class=true;
 		break;
 }
 
@@ -149,10 +147,5 @@ header("Content-type: text/html; charset=".phr('CHARSET'));
 
 // prints everything to screen
 echo $output;
-$license = <<<EOT
-	Copyright &#169; 2003-2008 Gjergj Sheldija	
-EOT;
-
-echo $license;
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

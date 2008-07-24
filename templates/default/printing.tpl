@@ -8,12 +8,14 @@
 		{scripts}
 		<center>
 		{people_number}
-		{navbar}
 		{messages}
+		{navbar}
 		
 		{commands}
 
 		{logout}
+		{generating_time}
 		</center>
+		<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 	</body>
 </html>

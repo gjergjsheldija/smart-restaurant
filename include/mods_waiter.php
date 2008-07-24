@@ -458,8 +458,8 @@ function mods_list($start_data,$letter='') {
 	$tmp =mods_letter_list ($ord);
 	$tpl -> assign ('mod_letters',$tmp);
 
-	//$tmp = mods_key_binds ($ord);
-	//$tpl -> append ('scripts',$tmp);
+	$tmp = mods_key_binds ($ord);
+	$tpl -> append ('scripts',$tmp);
 
 	$ord -> ingredients_arrays();
 	

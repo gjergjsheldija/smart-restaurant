@@ -508,7 +508,7 @@ function bill_print_row ($key,$value,$destid){
 		$msg.="x".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice'])/$_SESSION['separated'][$key]['topay'];
 		
 		//mizuko: get rid og the currency name
-		//$msg.="   ".country_conf_currencies()." ".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
+		//$msg.="   ".country_conf_currency()." ".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
 		$msg.="   ".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
 		$msg.="\n";
 
@@ -582,7 +582,7 @@ function bill_print_discount($receipt_id,$destid) {
 	$err = discount_save_to_source($discount_value);
 
 	$msg.="\t".ucfirst(lang_get($dest_language,'PRINTS_DISCOUNT'))." ".$discount_label;
-	$msg.=" \t".country_conf_currencies()." ".sprintf("%0.2f",$discount_number);
+	$msg.=" \t".country_conf_currency()." ".sprintf("%0.2f",$discount_number);
 
 	$output_page .= '
 	<tr bgcolor="'.$class.'">
@@ -738,7 +738,7 @@ function bill_print_total($receipt_id,$destid) {
 	<td>'.$total_discounted.'</td>
 	</tr>'."\n";
 
-	$msg.= sprintf("%-30s",ucfirst(lang_get($dest_language,'PRINTS_TOTAL'))).country_conf_currencies()." $total_discounted";
+	$msg.= sprintf("%-30s",ucfirst(lang_get($dest_language,'PRINTS_TOTAL'))).country_conf_currency()." $total_discounted";
 
 	return $msg;
 }
@@ -758,16 +758,16 @@ function bill_print_taxes($receipt_id,$destid) {
 	$taxable=$arr['cash_taxable_amount'];
 	$vat_total=$arr['cash_vat_amount'];
 
-	$msg.="\t\t".ucfirst(lang_get($dest_language,'PRINTS_TAXABLE'))." \t".country_conf_currencies()." $taxable";
+	$msg.="\t\t".ucfirst(lang_get($dest_language,'PRINTS_TAXABLE'))." \t".country_conf_currency()." $taxable";
 	
 	for (reset ($_SESSION['vat']); list ($key, $value) = each ($_SESSION['vat']); ) {
 		$vat_rate_name=$_SESSION['vat'][$key]['name'];
 		$vat_rate=$_SESSION['vat'][$key]['rate']*100;
 		$vat_local=$_SESSION['vat'][$key]['tax'];
 		$vat_local=sprintf("%0.2f",$vat_local);
-		$msg.="\n\t\t".ucfirst(lang_get($dest_language,'PRINTS_TAX'))." ".$vat_rate_name." (".$vat_rate."%) \t".country_conf_currencies()." $vat_local";
+		$msg.="\n\t\t".ucfirst(lang_get($dest_language,'PRINTS_TAX'))." ".$vat_rate_name." (".$vat_rate."%) \t".country_conf_currency()." $vat_local";
 	}
-	$msg.="\n\t\t".ucfirst(lang_get($dest_language,'PRINTS_TAX_TOTAL'))." \t".country_conf_currencies()." $vat_total";
+	$msg.="\n\t\t".ucfirst(lang_get($dest_language,'PRINTS_TAX_TOTAL'))." \t".country_conf_currency()." $vat_total";
 	
 	return $msg;
 }
@@ -972,35 +972,25 @@ function bill_show_list(){
 
 		$_SESSION['separated'][$key]['finalprice']=$_SESSION['separated'][$key]['price']/$_SESSION['separated'][$key]['quantity']*$_SESSION['separated'][$key]['topay'];
 
-		//hapet rreshti i tabels
+
 		$output .= '
 		<tr bgcolor="'.$class.'">
+		<td bgcolor="'.$class.'">
 		';
-		
-
-		
-		//name 	
+		if(!$_SESSION['separated'][$key]['special'])
+			$output .= $_SESSION['separated'][$key]['topay'].' / '.$_SESSION['separated'][$key]['max_quantity'];
+			
 		$output .= '
-		<td bgcolor="'.$class.'">'.$_SESSION['separated'][$key]['name'].'</td>';
-		
+		</td>
+		<td bgcolor="'.$class.'">'.$_SESSION['separated'][$key]['name'].'</td>
+		<td bgcolor="'.$classextra.'">
+		';
 		if($_SESSION['separated'][$key]['extra_care'])
 			$output .= ucfirst(phr('EXTRA_CARE_ABBR'));
-		
-		//Qty ?
-		if(!$_SESSION['separated'][$key]['special'])
-			$output .= "<td bgcolor=\"'.$class.'\">" . $_SESSION['separated'][$key]['topay'].' / '.$_SESSION['separated'][$key]['max_quantity'];
-		
 		$output .= '
 		</td>
 		<td bgcolor="'.$class.'">
-		';		
-		
-		$output .= '
-		</td>
-		<td bgcolor="'.$class.'">
-		';	
-		
-		// Price ?
+		';
 		if(!$_SESSION['separated'][$key]['special']){
 			$output .= sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
 		}
@@ -1008,7 +998,6 @@ function bill_show_list(){
 		</td>
 		<td bgcolor="'.$class.'">
 		';
-		
 		if(!$_SESSION['separated'][$key]['special'] && !$_SESSION['select_all']){
 			if($_SESSION['separated'][$key]['topay']<$_SESSION['separated'][$key]['max_quantity']){
 				$output .= '<a href="orders.php?command=bill_quantity&amp;keep_separated=1&amp;orderid='.$key.'&amp;operation=1&amp;rndm='.rand(0,100000).'">
@@ -1027,8 +1016,6 @@ function bill_show_list(){
 		</a>';
 			}
 		}
-		
-		//mbyllet rreshti i tabeles
 		$output .= '
 		</td>
 		</tr>
@@ -1175,7 +1162,7 @@ function bill_type_selection($sourceid){
 	</form>
 	';*/	
 
-/*	$table = new table ($_SESSION['sourceid']);
+	$table = new table ($_SESSION['sourceid']);
 	$table->fetch_data(true);
 	if($cust_id=$table->data['customer']) {
 		$cust = new customer ($cust_id);
@@ -1185,7 +1172,7 @@ function bill_type_selection($sourceid){
 		$tmp .= '<br/>';
 	} else {
 		$tmp = '<a href="orders.php?command=customer_search">'.ucfirst(phr('INSERT_CUSTOMER_DATA')).'</a><br/>';
-	}*/
+	}
 	$output .= $tmp;
 	
 	return $output;
@@ -1221,7 +1208,7 @@ function bill_total(){
 		';
 	  
 	if( SHOW_CHANGE == 1) {
-		//mizuko:e vuna per arsye te valutes...
+		//mizuko:needed to show exchange...
 		for($i = 0; $i < count($curr_value); $i++ ) {
 			$output .= '
 				<tr bgcolor='.$class.'>

@@ -84,7 +84,7 @@ if(!$header_printed){
 	if(isset($_REQUEST['data'])){
 		$start_data=$_REQUEST['data'];
 	} else $start_data = array();
-	
+
 	if(!$dont_display_menu) {
 		$menu = new menu();
 		$tmp = $menu -> main ();

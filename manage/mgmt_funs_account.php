@@ -58,12 +58,6 @@ function account_movement_from_manage($mgmt_id){
 	$hour=substr($arr['date'],8,2);
 	$minute=substr($arr['date'],10,2);
 	$second=substr($arr['date'],12,2);
-/*	$date['year']=substr($arr['date'],0,4);
-	$date['month']=substr($arr['date'],5,2);
-	$date['day']=substr($arr['date'],8,2);
-	$date['hour']=substr($arr['date'],11,2);
-	$date['minute']=substr($arr['date'],14,2);
-	$date['second']=substr($arr['date'],17,2);*/
 	$data['account_id']=$arr['account_id'];
 	$data['type']=$arr['type'];
 	$data['amount']=$arr['bank_amount'];
@@ -98,13 +92,13 @@ function account_select_plugin($id=0){
 <select name="data[account_id]">
 
 <?php
-while($arr=mysql_fetch_array($res)){
-	?>
-	<option value="<?php echo $arr['id']; ?>"
-	<?php if($id==$arr['id']) echo "selected"; ?>><?php echo $arr['bank']; ?>/<?php echo $arr['number']; ?>
-	<?php echo $arr['name']; ?></option>
-	<?php
-}
+	while($arr=mysql_fetch_array($res)){
+?>
+	<option value="<?php echo $arr['id']; ?>" <?php if($id==$arr['id']) echo "selected"; ?>>
+		<?php echo $arr['bank']; ?>/<?php echo $arr['number']; ?> <?php echo $arr['name']; ?>
+	</option>
+<?php
+	}
 ?>
 </select>
 <?php
@@ -285,18 +279,12 @@ function account_movement_form($id=0){
 		$res=common_query($query,__FILE__,__LINE__);
 		$arr=mysql_fetch_array($res);
 
-		/*		$year=substr($arr['timestamp'],0,4);
-		 $month=substr($arr['timestamp'],4,2);
-		 $day=substr($arr['timestamp'],6,2);
-		 $hour=substr($arr['timestamp'],8,2);
-		 $minute=substr($arr['timestamp'],10,2);
-		 $second=substr($arr['timestamp'],12,2);*/
-		$date['year']=substr($row['date'],0,4);
-		$date['month']=substr($row['date'],5,2);
-		$date['day']=substr($row['date'],8,2);
-		$date['hour']=substr($row['date'],11,2);
-		$date['minute']=substr($row['date'],14,2);
-		$date['second']=substr($row['date'],17,2);
+		$year=substr($arr['timestamp'],0,4);
+		$month=substr($arr['timestamp'],4,2);
+		$day=substr($arr['timestamp'],6,2);
+		$hour=substr($arr['timestamp'],8,2);
+		$minute=substr($arr['timestamp'],10,2);
+		$second=substr($arr['timestamp'],12,2);
 	} else {
 		$day=date("j",time());
 		$month=date("n",time());
@@ -670,8 +658,8 @@ function account_check_values($input_data){
 		$input_data['amount']=str_replace (",", ".", $input_data['amount']);
 		$input_data['amount']=round ($input_data['amount'],2);
 	}
-	if(isset($input_data['currencies'])){
-		strtoupper($input_data['currencies']);
+	if(isset($input_data['currency'])){
+		strtoupper($input_data['currency']);
 	}
 	if(isset($input_data['iban'])){
 		strtoupper($input_data['iban']);
@@ -808,108 +796,151 @@ function account_form($id=0){
 	?>
 <div align="center">
 <table>
+<tr>
+<td>
+<fieldset>
+<legend><?php echo phr('ACCOUNT_LEGEND'); ?></legend>
+
+<form action="account.php" name="account_form" method="get">
+<?php
+	if($editing){
+?>
+<input type="hidden" name="command" value="update">
+<input type="hidden" name="id" value="<?php echo $id; ?>">
+<?php
+	} else {
+?>
+<input type="hidden" name="command" value="insert">
+<?php
+	}
+?>
+<table>
 	<tr>
 		<td>
-		<fieldset><legend><?php echo phr('ACCOUNT_LEGEND'); ?></legend>
-
-		<form action="account.php" name="account_form" method="get"><?php
-		if($editing){
-			?> <input type="hidden" name="command" value="update"> <input
-			type="hidden" name="id" value="<?php echo $id; ?>"> <?php
-} else {
-	?> <input type="hidden" name="command" value="insert"> <?php
-}
+		<?php echo phr('ACCOUNT_BANK'); ?>:
+		</td>
+		<td>
+		<select name="data[bank]">
+<?php
+		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$query="SELECT * FROM $table WHERE `type`='1'";
+		$res_bank=mysql_db_query($_SESSION['mgmt_db'],$query);
+		while($arr_bank=mysql_fetch_array($res_bank)){
 ?>
-		<table>
-			<tr>
-				<td><?php echo phr('ACCOUNT_BANK'); ?>:</td>
-				<td><select name="data[bank]">
-				<?php
-				$table='#prefix#account_mgmt_addressbook';
-				$query="SELECT * FROM $table WHERE `type`='1'";
-				$res_bank=common_query($query,__FILE__,__LINE__);
-				while($arr_bank=mysql_fetch_array($res_bank)){
-					?>
-					<option
-					<?php if ($arr_bank['name']==$arr['bank']) echo ' selected="true"';?>><?php echo $arr_bank['name']; ?></option>
-					<?php
-}
+			<option<?php if ($arr_bank['name']==$arr['bank']) echo ' selected="true"';?>><?php echo $arr_bank['name']; ?></option>
+<?php
+		}
 ?>
-				</select></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_NAME'); ?>:</td>
-				<td><input type="text" name="data[name]"
-					value="<?php echo $arr['name']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_NUMBER'); ?>:</td>
-				<td><input type="text" name="data[number]" maxlength="12"
-					value="<?php echo $arr['number']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_ABI'); ?>:</td>
-				<td><input type="text" name="data[abi]" maxlength="5"
-					value="<?php echo $arr['abi']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_CAB'); ?>:</td>
-				<td><input type="text" name="data[cab]" maxlength="5"
-					value="<?php echo $arr['cab']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_CIN'); ?>:</td>
-				<td><input type="text" name="data[cin]" maxlength="1"
-					value="<?php echo $arr['cin']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_SWIFT'); ?>:</td>
-				<td><input type="text" name="data[bic1]" maxlength="11"
-					value="<?php echo $arr['bic1']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_BIC'); ?>:</td>
-				<td><input type="text" name="data[bic2]" maxlength="11"
-					value="<?php echo $arr['bic2']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_IBAN'); ?>:</td>
-				<td><input type="text" name="data[iban]" maxlength="12"
-					value="<?php echo $arr['iban']; ?>"></td>
-			</tr>
-			<tr>
-				<td><?php echo phr('ACCOUNT_CURRENCY'); ?>:</td>
-				<td><input type="text" name="data[currencies]" maxlength="3"
-					value="<?php if($editing) echo $arr['currencies']; else echo country_conf_currencies(); ?>">
-				</td>
-			</tr>
-			<?php
-			if(!$editing){
-				?>
-			<tr>
-				<td><?php echo phr('ACCOUNT_INITIAL_AMOUNT'); ?>:</td>
-				<td><input type="text" name="data[amount]" maxlength="12"
-					value="0.00"></td>
-			</tr>
-			<?php
-}
-?>
-			<tr>
-				<td colspan=2 align="center"><?php
-				if(!$editing){
-					?> <input type="submit"
-					value="<?php echo phr('ACCOUNT_INSERT'); ?>"> <?php
-} else {
-	?> <input type="submit" value="<?php echo phr('ACCOUNT_EDIT'); ?>"> <?php
-}
-?></td>
-			</tr>
-		</table>
-		</form>
-
-		</fieldset>
+		</select>
 		</td>
 	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_NAME'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[name]" value="<?php echo $arr['name']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_NUMBER'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[number]" maxlength="12" value="<?php echo $arr['number']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_ABI'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[abi]" maxlength="5" value="<?php echo $arr['abi']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_CAB'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[cab]" maxlength="5" value="<?php echo $arr['cab']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_CIN'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[cin]" maxlength="1" value="<?php echo $arr['cin']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_SWIFT'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[bic1]" maxlength="11" value="<?php echo $arr['bic1']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_BIC'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[bic2]" maxlength="11" value="<?php echo $arr['bic2']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_IBAN'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[iban]" maxlength="12" value="<?php echo $arr['iban']; ?>">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_CURRENCY'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[currency]" maxlength="3" value="<?php if($editing) echo $arr['currency']; else echo country_conf_currency(); ?>">
+		</td>
+	</tr>
+<?php
+if(!$editing){
+?>
+	<tr>
+		<td>
+		<?php echo phr('ACCOUNT_INITIAL_AMOUNT'); ?>:
+		</td>
+		<td>
+		<input type="text" name="data[amount]" maxlength="12" value="0.00">
+		</td>
+	</tr>
+<?php
+}
+?>
+	<tr>
+		<td colspan=2 align="center">
+<?php
+if(!$editing){
+?>
+		<input type="submit" value="<?php echo phr('ACCOUNT_INSERT'); ?>">
+<?php
+} else {
+?>
+		<input type="submit" value="<?php echo phr('ACCOUNT_EDIT'); ?>">
+<?php
+}
+?>
+		</td>
+	</tr>
+</table>
+</form>
+
+</fieldset>
+</td>
+</tr>
 </table>
 </div>
 <?php

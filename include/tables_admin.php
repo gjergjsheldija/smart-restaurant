@@ -130,7 +130,7 @@ class table extends object {
 		<th scope=col><font size="-1">'.ucfirst(phr('NAME')).'</font> </th>
 		<th scope=col></th>
 		<th scope=col><font size="-1">'.ucfirst(phr('PRICE')).'</font></th>
-		<!-- <th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th> -->
+		<th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th>
 		<th scope=col></th>
 		<th scope=col> </th>
 		</tr>
@@ -220,7 +220,10 @@ class table extends object {
 		<th scope=col><font size="-1">'.ucfirst(phr('NUMBER_ABBR')).'</font></th>
 		<th scope=col><font size="-1">'.ucfirst(phr('NAME')).'</font></th>
 		<th scope=col></th>
+		<th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th>
 		<th scope=col><font size="-1">'.ucfirst(phr('PRICE')).'</font></th>
+		<th scope=col> </th>
+		<th scope=col> </th>
 		<th scope=col> </th>
 		</tr>
 		</thead>
@@ -272,11 +275,14 @@ class table extends object {
 		$tmp = '
 		<tr>
 		<td bgcolor="'.$class.'">&nbsp;</td>
+		<td bgcolor="'.$class.'">&nbsp;</td>
 		<td bgcolor="'.$class.'">'.ucfirst(phr('TOTAL')).'</td>
+		<td bgcolor="'.$class.'">&nbsp;</td>
 		<td bgcolor="'.$class.'">&nbsp;</td>
 		<td bgcolor="'.$class.'">'.$this->total().'</td>
 		<td bgcolor="'.$class.'">&nbsp;</td>
-		<td bgcolor="'.$class.'">&nbsp;</td>		
+		<td bgcolor="'.$class.'">&nbsp;</td>
+		<td bgcolor="'.$class.'">&nbsp;</td>
 		</tr>
 		</tbody>
 		</table>
@@ -461,7 +467,7 @@ class table extends object {
 			$arr['visible']=1;
 		}
 		
-	//marr perdoruesat qi jane kameriera
+	//get all the waiters
 	$queryw="SELECT id, name FROM mhr_users WHERE level = 547 AND deleted = 0 AND disabled = 0 ORDER BY id";
 	$resw=common_query($queryw,__FILE__,__LINE__);
 	if(!$resw) return mysql_errno();
@@ -518,7 +524,7 @@ class table extends object {
 
 		<tr>
 			<td>
-			Kamerieri :
+			Waiter :
 			</td>
 			<td>
 			<input type="hidden" name="data[max_waiter]" value="'.$waiter_total.'">';

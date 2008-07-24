@@ -73,7 +73,7 @@ function access_connect_form ($url='') {
 	return $output;
 }
 //TODO : translate here
-//mizuko : mod per pass waiter
+//mizuko : mod for pass waiter
 function access_connect_form_waiter_pos ( $err, $url='') {
 	
 	switch ($err) {

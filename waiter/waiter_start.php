@@ -129,7 +129,7 @@
 
 			switch($res_loc) {
 				case 1: $err='error file not writeable.<br>Solution: set write permission for everybody (or at least for the user running the webserver) on file error.log'; break;
-				case 2: $err='error dir not writeable<br>Solution: set write permission for everybody (or at least for the user running the webserver) on the directory containing Alb-Rest files '; break;
+				case 2: $err='error dir not writeable<br>Solution: set write permission for everybody (or at least for the user running the webserver) on the directory containing Smart Restaurant files '; break;
 				case 3: $err='debug file not writeable.<br>Solution: set write permission for everybody (or at least for the user running the webserver) on file debug.log'; break;
 				case 4: $err='debug dir not writeable'; break;
 			}
@@ -187,7 +187,7 @@
 		We stop execution, because the waiter has to authenticate first
 		so we suggest him/her to authenticate on index.php page
 		*/
-		$error_msg = common_header('Kamerieri i palidhur');
+		$error_msg = common_header('Waiter not connected');
 		$error_msg .= redirect_waiter('index.php');
 		$error_msg .= MSG_WAITER_NOT_CONNECTED_ERROR.'<br>
 	<a href="index.php">'.ucfirst(phr('CONNECT')).'</a>';
@@ -212,10 +212,10 @@
 			$user = new user ($_SESSION['userid']);
 			
 			if($remaining_time==0) $remaining_time = 1;
-			$error_msg = common_header('Tavolina eshte ne perdorim');
+			$error_msg = common_header('Table in use');
 			$error_msg .=  navbar_lock_retry('');
 	
-			$error_msg .= ucfirst(phr('TABLE_ALREADY_IN_USE_ERROR')).' '.'.<br><br>'."\n";
+			$error_msg .= ucfirst(phr('TABLE_ALREADY_IN_USE_ERROR')).' '.$remaining_time.' '.ucfirst(phr('SECONDS')).'.<br><br>'."\n";
 			$error_msg .= ucfirst(phr('IF_YOU_ARE_NOT_DISCONNECT_0')).' <b>'.$user->data['name'].'</b> '.ucfirst(phr('IF_YOU_ARE_NOT_DISCONNECT_1')).'<br>'."\n";
 			$error_msg .= common_bottom();
 			die($error_msg);
@@ -251,7 +251,7 @@
 	header("Content-Language: ".$_SESSION['language']);
 	header("Content-type: text/html; charset=".phr('CHARSET'));
 	
-	$tmp = head_line_waiter('Seksioni i kameriereve');
+	$tmp = head_line('Waiters\' section');
 	$tpl -> assign("head", $tmp);
 
 	if(!isset($dont_redirect_to_menu)) {

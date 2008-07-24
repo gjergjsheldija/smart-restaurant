@@ -96,7 +96,7 @@ function toplist_show(){
 		$tmp .= '
 		<INPUT TYPE="HIDDEN" NAME="data[quantity]" VALUE="1">';
 	}
-	if(!CONF_TOPLIST_HIDE_PRIORITY) {
+	if(CONF_TOPLIST_HIDE_PRIORITY) {
 		$tmp .= '
 		'.ucfirst(phr('PRIORITY')).':
 		<input type="radio" '.$chk[1].' name="data[priority]" value=1>1
@@ -147,15 +147,13 @@ function toplist_show(){
 			$dishobj = new dish ($key);
 			$dishname = $dishobj -> name ($_SESSION['language']);
 			
-/*			$tmp .= '
+			$tmp .= '
 			<td>
 				'.$value.'
-			</td>';*/
-			//05.06.2007
-			//mizuko : ndryshue, shtu ikone te lista e shpejte...ba nji versione edhe per palm
+			</td>';
 			$tmp .= '
 			<td valign="middle" onclick="order_select(\''.$key.'\',\'toplist_form\');">
-			<a href="#" onclick="JavaScript:order_select(\''.$key.'\',\'toplist_form\'); return false;"><img src="'. IMAGE_OK .'">
+			<a href="#" onclick="JavaScript:order_select(\''.$key.'\',\'toplist_form\'); return false;">
 			'.$dishname.'
 			</a>
 			</td>';

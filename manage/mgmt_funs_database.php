@@ -74,23 +74,15 @@ function file_show($id){
 		$who="<a href=\"supply.php?command=show&name=".$row['who']."\">".$row['who']."</a>";
 	}
 
-// mizuko : still errors with the date...
-/*	$year=substr($row['date'],0,4);
+
+	$year=substr($row['date'],0,4);
 	$month=substr($row['date'],4,2);
 	$day=substr($row['date'],6,2);
 	$hour=substr($row['date'],8,2);
 	$minute=substr($row['date'],10,2);
-	$second=substr($row['date'],12,2);*/
+	$second=substr($row['date'],12,2);
 
-	$year=substr($row['date'],0,4);
-	$month=substr($row['date'],5,2);
-	$day=substr($row['date'],8,2);
-	$hour=substr($row['date'],11,2);
-	$minute=substr($row['date'],14,2);
-	$second=substr($row['date'],17,2);
 
-//end : mizuko	
-	
 	echo "<table bgcolor=\"".color(-1)."\">";
 	echo "<tr>
 		<td bgcolor=\"$mgmt_color_tablebg\">".ucfirst(phr('DATE'))."</td>
@@ -886,19 +878,19 @@ function display_form($id,$insert_type=0){
 	$insert_type=strtolower($row['name']);
 
 	switch($insert_type){
-		case "kasa":
+		case "pos":
 			display_form_pos($id);
 			break;
-		case "cek":
+		case "assegno":
 			display_form_check($id);
 			break;
-		case "transferte":
+		case "bonifico":
 			display_form_bonifico($id);
 			break;
-		case "kupon": display_form_scontrino($id); break;
-		case "derdhje": display_form_versamento($id); break;
-		case "deftese": display_form_ricevuta($id); break;
-		case "mandat": display_form_invoice($id); break;
+		case "scontrino": display_form_scontrino($id); break;
+		case "versamento": display_form_versamento($id); break;
+		case "ricevuta": display_form_ricevuta($id); break;
+		case "fattura": display_form_invoice($id); break;
 		default: echo "ERROR"; return 1; break;
 	}
 }
@@ -1094,7 +1086,7 @@ function insert_data($input_data,$payment_data=0) {
 
 	$input_data=format_date($input_data);
 
-	$input_data=format_currencies($input_data);
+	$input_data=format_currency($input_data);
 
 	$input_data=calculate_amount($input_data);
 
@@ -1190,10 +1182,10 @@ function insert_data($input_data,$payment_data=0) {
 		if($type=="fattura") {
 			//mizuko : changed get to post
 			//10.05.2007
-			echo "<form action=\"stock.php\" method=\"post\">\n";
+			echo "<form action=\"stock.php\" method=\"get\">\n";
 			echo "<input type=\"hidden\" name=\"command\" value=\"edit\">\n";
 			echo "<input type=\"hidden\" name=\"data[invoice_id]\" value=\"$inserted_id\">\n";
-			//$db=$_SESSION['common_db'];
+			//$db=$_SESSION['mgmt_db'];
 			$err=form_stock_edit($inserted_id);
 			echo "<input type=\"submit\" value=\"".ucphr('SEND_TO_STOCK')."\">\n";
 			echo "</form>\n";
@@ -1247,7 +1239,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 	$input_data=format_date($input_data);
 	$input_data=format_checkbox($input_data);
 
-	$input_data=format_currencies($input_data);
+	$input_data=format_currency($input_data);
 
 	$input_data=calculate_amount($input_data);
 //print_r($data);
@@ -1820,29 +1812,12 @@ function table_generator($page,$commandto,$query,$command){
 
 <?		}
 
-//mizuko : date doens't work
-/*		$date['year']=substr($row['date'],0,4);
+		$date['year']=substr($row['date'],0,4);
 		$date['month']=substr($row['date'],4,2);
 		$date['day']=substr($row['date'],6,2);
 		$date['hour']=substr($row['date'],8,2);
 		$date['minute']=substr($row['date'],10,2);
-		$date['second']=substr($row['date'],12,2);*/
-
-		$date['year']=substr($row['date'],0,4);
-		$date['month']=substr($row['date'],5,2);
-		$date['day']=substr($row['date'],8,2);
-		$date['hour']=substr($row['date'],11,2);
-		$date['minute']=substr($row['date'],14,2);
-		$date['second']=substr($row['date'],17,2);
-
-		
-/*echo $date['year'] . " + ";
-echo $date['month']. " + ";
-echo $date['day'] . " + ";
-echo $date['hour']  . " + ";
-echo $date['minute']  . " + ";
-echo $date['second']  . " + ";*/
-//end : mizuko
+		$date['second']=substr($row['date'],12,2);
 
 		$description=$row['description'];
 		$cash_amount=$row['cash_amount'];
@@ -1927,9 +1902,7 @@ echo $date['second']  . " + ";*/
 			echo "<td></td>";
 		else
 			echo "<td><input name=\"delete[$id]\" type=\"checkbox\"></td>\n";
-//mizuko : still problems with date
-		echo "<td>".$date["day"]."/".$date["month"]."/".$date["year"]." ".$date['hour'].":".$date['minute'].":".$date['second']."</td>\n";
-//end : mizuko
+		echo "<td>".$date["day"]."/".$date["month"]."/".$date["year"]."</td>\n";
 		echo "<td>".$who."</td>\n";
 		if($row['internal_id']!="" && $row['annulled']==1) {
 			echo "<td><s><a href=\"receipt.php?command=show&id=$show_id\">$description - ".ucphr('ANNULLED_ABBR')."</a></s></td>\n";

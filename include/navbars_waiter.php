@@ -32,7 +32,7 @@ function navbar_trash_pos($form='',$show_abort='',$start_data) {
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 				<a href="orders.php?command=list"><img src="'.IMAGE_SOURCE.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64"></a>
@@ -69,7 +69,7 @@ function navbar_trash($form='',$show_abort='',$start_data) {
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 				<strong><a href="orders.php?command=list">MENU</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -91,7 +91,7 @@ function navbar_trash($form='',$show_abort='',$start_data) {
 			<td width=35>
 			';
 	if(!empty($form))
-		$msg .= '<strong><a href="#" onclick="JavaScript:document.'.$form.'.submit(); return false">PO</a></strong>';
+		$msg .= '<strong><a href="#" onclick="JavaScript:document.'.$form.'.submit(); return false">'.ucfirst(phr('YES')).'</a></strong>';
 		
 	$msg .= '
 			</td>
@@ -106,7 +106,7 @@ function navbar_empty($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 				<strong><a href="orders.php?command=list">MENU</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -118,7 +118,7 @@ function navbar_empty($show_abort='') {
 			<td width=35>
 			';
 	if(!empty($show_abort))
-		$msg .= '<strong><a href="'.$show_abort.'">JO</a></strong>';
+		$msg .= '<strong><a href="'.$show_abort.'">'.ucfirst(phr('NO')).'</a></strong>';
 
 	$msg .= '
 			</td>
@@ -135,7 +135,7 @@ function navbar_empty_pos($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 				<a href="orders.php?command=list"><img src="'.IMAGE_SOURCE.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64"></a>
@@ -164,12 +164,12 @@ function navbar_with_printer($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('PRINTS_TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 				<strong><a href="orders.php?command=list">MENU</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
-			<td width=35><strong><a href="orders.php?command=print_orders">PRINTO</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+			<td width=35><strong><a href="orders.php?command=print_orders">'.ucfirst(phr('ORDERS_PRINT')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 			</td>
@@ -193,7 +193,7 @@ function navbar_with_printer_pos($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 				<a href="orders.php?command=list"><img src="'.IMAGE_SOURCE.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64"></a>
@@ -222,7 +222,7 @@ function navbar_tables_only() {
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('PRINTS_TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 			</td>
@@ -245,7 +245,7 @@ function navbar_tables_only_pos() {
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 			</td>
@@ -268,7 +268,7 @@ function navbar_lock_retry_pos($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 			</td>
@@ -284,7 +284,7 @@ function navbar_lock_retry_pos($show_abort='') {
 	$msg .= '
 			</td>
 			<td width=35>
-				<a href="orders.php"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="orders.php"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 		</tr>
 	</table>
@@ -297,7 +297,7 @@ function navbar_lock_retry($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('PRINTS_TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 			</td>
@@ -313,7 +313,7 @@ function navbar_lock_retry($show_abort='') {
 	$msg .= '
 			</td>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('PRINTS_TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 	</table>
@@ -326,7 +326,7 @@ function navbar_menu_pos($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 			</td>
@@ -342,7 +342,7 @@ function navbar_menu_pos($show_abort='') {
 	$msg .= '
 			</td>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 		</tr>
 	</table>
@@ -355,7 +355,7 @@ function navbar_menu($show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('PRINTS_TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 			</td>
@@ -366,12 +366,12 @@ function navbar_menu($show_abort='') {
 			<td width=35>
 			';
 	if(!empty($show_abort))
-		$msg .= '<a href="'.$show_abort.'">JO</a>';
+		$msg .= '<a href="'.$show_abort.'">'.ucfirst(phr('NO')).'</a>';
 
 	$msg .= '
 			</td>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('PRINTS_TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 	</table>
@@ -384,7 +384,7 @@ function navbar_form($form,$show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('PRINTS_TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 				<strong><a href="orders.php?command=list">MENU</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -396,12 +396,12 @@ function navbar_form($form,$show_abort='') {
 			<td width=35>
 			';
 	if(!empty($show_abort))
-		$msg .= '<strong><a href="'.$show_abort.'">JO</a></strong>';
+		$msg .= '<strong><a href="'.$show_abort.'">'.ucfirst(phr('NO')).'</a></strong>';
 
 	$msg .= '
 			</td>
 			<td width=35>
-				<strong><a href="#" onclick="JavaScript:document.'.$form.'.submit(); return false;">PO</a></strong>
+				<strong><a href="#" onclick="JavaScript:document.'.$form.'.submit(); return false;">'.ucfirst(phr('YES')).'</a></strong>
 			</td>
 		</tr>
 	</table>
@@ -414,7 +414,7 @@ function navbar_form_pos($form,$show_abort='') {
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 				<a href="orders.php?command=list"><img src="'.IMAGE_SOURCE.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64"></a>
@@ -444,19 +444,19 @@ function command_bar_table_horizontal(){
 	<table>
 		<tr>
 			<td width=35>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('TABLE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 			</td>
 			<td width=35>
 			</td>
 			<td width=35>
-				<strong><a href="orders.php?command=close_confirm">FATURA</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="orders.php?command=close_confirm">'.ucfirst(phr('PRINTS_BILL')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 			</td>
 			<td width=35>
-				<strong><a href="orders.php?command=printing_choose">PRINTO</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="orders.php?command=printing_choose">'.ucfirst(phr('ORDERS_PRINT')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 	</table>
@@ -469,7 +469,7 @@ function command_bar_table_horizontal_pos(){
 	<table>
 		<tr>
 			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 			<td width=35>
 			</td>
@@ -494,13 +494,13 @@ function command_bar_table_vertical(){
 	<table>
 		<tr>
 			<td>
-				<strong><a href="tables.php">TAVOLINAT</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="tables.php">'.ucfirst(phr('REMOVE')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td>
-				<strong><a href="orders.php?command=printing_choose">PRINTO</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="orders.php?command=printing_choose">'.ucfirst(phr('ORDERS_PRINT')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
-				<strong><a href="orders.php?command=close_confirm">FATURA</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="orders.php?command=close_confirm">'.ucfirst(phr('PRINTS_BILL')).'</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 	</table>
@@ -513,7 +513,7 @@ function command_bar_table_vertical_pos(){
 	<table>
 		<tr>
 			<td>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
+				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('PRINTS_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>
 		</tr>
 		<tr>

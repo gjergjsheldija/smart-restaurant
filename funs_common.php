@@ -372,9 +372,9 @@ function start_language () {
 		if(!empty($user -> data['language'])) $_SESSION['language'] = $user -> data['language'];
 	}
 	
-	$lang_file=ROOTDIR."/lang/lang_".$_SESSION['language'].".php";
-	if(is_readable($lang_file)) include($lang_file);
-	else error_msg(__FILE__,__LINE__,'file '.$lang_file.' is not readable');
+	//$lang_file=ROOTDIR."/lang/lang_".$_SESSION['language'].".php";
+	//if(is_readable($lang_file)) include($lang_file);
+	//else error_msg(__FILE__,__LINE__,'file '.$lang_file.' is not readable');
 	
 	return 0;
 }
@@ -1018,7 +1018,7 @@ function head_line ($title) {
 
 	return $output;
 }
-
+//mizuko
 function head_line_waiter ($title) {
 	global $tpl;
 	
@@ -1046,7 +1046,7 @@ function disconnect_line () {
 	}
 	return $output;
 }
-
+//mizuko
 function disconnect_line_pos () {
 	if(isset($_SESSION['userid'])) {
 		$user = new user($_SESSION['userid']);

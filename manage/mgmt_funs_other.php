@@ -303,7 +303,7 @@ function check_compulsory_fields($data){
 	$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$data['type']."'");
 	$row=mysql_fetch_array($res);
 	$type=strtolower($row['name']);
-	if(strtolower($type)=="mandat")
+	if(strtolower($type)=="fattura")
 		$invoice=1;
 	else
 		$invoice=0;
@@ -385,7 +385,7 @@ function format_date($data) {
 	return 1;
 }
 
-function format_currencies($data) {
+function format_currency($data) {
 	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
 	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table");
 

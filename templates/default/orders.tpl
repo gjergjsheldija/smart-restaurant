@@ -9,20 +9,24 @@
 		{scripts}
 		<center>
 		{people_number}
-		{vertical_navbar}
 		{messages}
-		{commands}
-		{toplist}
-		{orders_list}
+
+		{last_order}
 		<table>
 		<tr>
+			<td>{vertical_navbar}</td>
 			<td>{categories}</td>
-		</tr> 
+			<td>{letters}</td>
+		</tr>
 		</table>
-		<table>
-		</table>
+		{fast_order_id}
+		{toplist}
+		{commands}
+		{orders_list}
 		
 		{logout}
+		{generating_time}
 		</center>
+		<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 	</body>
 </html>

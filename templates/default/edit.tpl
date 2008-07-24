@@ -8,8 +8,8 @@
 		{scripts}
 		<center>
 		{people_number}
-		{navbar}
 		{messages}
+		{navbar}
 
 		{form_start}
 		{substitute}<br/>
@@ -18,6 +18,7 @@
 		<table>
 			<tr valign="top">
 				<td>{quantity}</td>
+				<td>{priority}</td>
 			</tr>
 		</table>
 		{suspend}<br/>
@@ -25,6 +26,8 @@
 		{form_end}
 		
 		{logout}
+		{generating_time}
 		</center>
+		<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 	</body>
 </html>

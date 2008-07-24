@@ -1,6 +1,6 @@
 <?php
 /**
-* My Handy Restaurant
+* My Handy Restaurant - List of available drivers commands
 *
 * http://www.myhandyrestaurant.org
 *

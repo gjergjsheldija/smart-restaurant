@@ -8,8 +8,8 @@
 		{scripts}
 		<center>
 		{people_number}
-		{navbar}
 		{messages}
+		{navbar}
 		
 		{form_start}
 		{mod_quantity}
@@ -19,6 +19,8 @@
 		{form_end}
 		
 		{logout}<br/>
+		{generating_time}
 		</center>
+		<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 	</body>
 </html>

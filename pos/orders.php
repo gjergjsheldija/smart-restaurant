@@ -515,8 +515,5 @@ echo $tpl->getOutput();
 //echo 'cache:<br>'.$GLOBALS['cache_var']->show();
 
 //$tpl ->list_vars();
-$license = '<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>';
-
-echo $license;
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

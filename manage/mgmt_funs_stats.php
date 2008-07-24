@@ -138,7 +138,7 @@ function statistics_show(){
 		if ($kamerieri != $row['waiter'] ) {
 
 			if($totalikamerier > 0) {
-				echo "</tr><tr><td><b>Totali</b></td><td></td><td><b>".sprintf("%01.2f",$totalikamerier) ."</b> ".country_conf_currencies(true)."</td></tr><tr>\n";
+				echo "</tr><tr><td><b>Totali</b></td><td></td><td><b>".sprintf("%01.2f",$totalikamerier) ."</b> ".country_conf_currency(true)."</td></tr><tr>\n";
 			}
 			
 			if(is_numeric($row['waiter'])) {
@@ -158,7 +158,7 @@ function statistics_show(){
 		} else echo "<td>&nbsp;</td>";
 		
 		//sum
-		echo "<td>" . $row['shuma']. country_conf_currencies(true)."</td>";;
+		echo "<td>" . $row['shuma']. country_conf_currency(true)."</td>";;
 
 		$totalikamerier+=$row['shuma'];
 		
@@ -168,7 +168,7 @@ function statistics_show(){
 	}
 
 	if($totalikamerier > 0) {
-		echo "</tr><tr><td><b>Totali</b></td><td></td><td><b>".sprintf("%01.2f",$totalikamerier) ."</b> ".country_conf_currencies(true)."</td></tr><tr>\n";
+		echo "</tr><tr><td><b>Totali</b></td><td></td><td><b>".sprintf("%01.2f",$totalikamerier) ."</b> ".country_conf_currency(true)."</td></tr><tr>\n";
 	}	
 
 	echo "</table>\n";
@@ -185,7 +185,7 @@ function statistics_show(){
 					$name = $dest -> name ();
 				 } else $name=ucfirst($key);
 				$value=sprintf("%01.2f",$value);
-				echo "<tr><td>$name</td><td>$value ".country_conf_currencies(true)."</td></tr>\n";
+				echo "<tr><td>$name</td><td>$value ".country_conf_currency(true)."</td></tr>\n";
 			}
 		}
 		echo "</table>\n";
@@ -199,7 +199,7 @@ function statistics_show(){
 		} else {
 			echo "<br><br>".ucfirst(GLOBALMSG_STATS_TOTAL_DEPTS).":<br>";
 		}
-		echo "<b>".$totals['revenue']."</b> ".country_conf_currencies(true);
+		echo "<b>".$totals['revenue']."</b> ".country_conf_currency(true);
 	}	
 	
 	//ingredients
@@ -241,7 +241,7 @@ function statistics_show(){
 					$ingred = new ingredient($key);
 					$ingredname = $ingred -> name ($_SESSION['language']);
 				 } else $ingredname=ucfirst($key);
-				echo "<tr><td>$value</td><td>$ingredname</td><td>".sprintf("%01.2f",$ingredsplus['revenue'][$key])." ".country_conf_currencies(true)."</td></tr>\n";
+				echo "<tr><td>$value</td><td>$ingredname</td><td>".sprintf("%01.2f",$ingredsplus['revenue'][$key])." ".country_conf_currency(true)."</td></tr>\n";
 			}
 		}
 		echo "</table>\n";
@@ -257,7 +257,7 @@ function statistics_show(){
 					$ingred = new ingredient($key);
 					$ingredname = $ingred -> name ($_SESSION['language']);
 				 } else $ingredname=ucfirst($key);
-				echo "<tr><td>$value</td><td>$ingredname</td><td>".sprintf("%01.2f",$ingredsminus['revenue'][$key])." ".country_conf_currencies(true)."</td></tr>\n";
+				echo "<tr><td>$value</td><td>$ingredname</td><td>".sprintf("%01.2f",$ingredsminus['revenue'][$key])." ".country_conf_currency(true)."</td></tr>\n";
 			}
 		}
 		echo "</table>\n";
