@@ -43,6 +43,7 @@
 			<li><a href="<?=$this->config->site_url();?>/user"><?=lang('users') ?></a></li>
 			<li><a href="<?=$this->config->site_url();?>/printer"><?=lang('printers') ?></a></li>
 			<li><a href="<?=$this->config->site_url();?>/configuration"><?=lang('configuration') ?></a></li>
+			<li><a href="<?=$this->config->site_url();?>/translator"><?=lang('translation') ?></a></li>
 		</ul>
 	</li>
 	<li><a href="#"><?=lang('contacts') ?> +</a>

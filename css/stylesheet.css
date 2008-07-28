@@ -409,3 +409,22 @@ pre.run a{
 .ui-accordion li.selected .ui-accordion-left {  }
 .ui-accordion li.selected .ui-accordion-header {  }
 .ui-accordion li.selected .ui-accordion-right {  }
+
+/* translator specific css */
+
+.translator_table_header { 
+	font-size: 1.5em; 
+	font-weight: bold; 
+	background: none; 
+	border-bottom: 1px solid  #D0D0D0; 
+}
+
+.translator_error { 
+	color: #f00; 
+	font-weight: bold; 
+}
+
+.translator_note { 
+	color: #0f0; 
+	font-weight: bold; 
+}

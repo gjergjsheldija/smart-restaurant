@@ -56,6 +56,6 @@
 <?=$this->load->view('menu');?>
 <?php if(isset($body)) echo $body; else echo '';?>
 <br /><br /><br />
-<p align="center"><strong>Copyright (c) 2008 Gjergj Sheldija</strong></p>
+<p align="center"><strong>Copyright (c) 2008 Smart Restaurant</strong></p>
 </body>
 </html>

@@ -115,6 +115,7 @@ $lang['print_receipt']		= "Prints receipts";
 //configuration
 $lang['configuration']		= "Configuration";
 $lang['value']				= "Value";
+$lang['translation']		= "Translation";
 
 //contacts
 $lang['new_contact']		= "New Contact";
