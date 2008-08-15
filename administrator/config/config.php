@@ -12,7 +12,7 @@
 |
 */
 //$config['base_url']	= "http://127.0.0.1/resplus/branches/resplus_ci/administrator/";
-$config['base_url']	= "http://localhost/smartres/trunk/administrator/";
+$config['base_url']	= "http://gjergjsheldija.dontexist.net/smartres/trunk/administrator/";
 
 /*
 |--------------------------------------------------------------------------

@@ -46,7 +46,7 @@ if(isset($_SESSION['section']) && $_SESSION['section']!="admin"){
 	$_SESSION['section']="admin";
 }
 
-if(!$link = @mysql_pconnect ($cfgserver, $cfguser,$cfgpassword)) {
+if(!$link = @mysql_pconnect ($cfgserver, $cfguser, $cfgpassword)) {
 	die ('Error connecting to the db');
 }
 

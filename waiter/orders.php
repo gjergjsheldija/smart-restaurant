@@ -400,7 +400,7 @@ switch ($command){
 				if(isset($_REQUEST['type'])) $type=$_REQUEST['type'];
 				if(isset($_REQUEST['account'])) $account=$_REQUEST['account'];
 				
-				if(!bill_type_set($type) /*&& !bill_account_set($account)*/) {
+				if(!bill_type_set($type) && !bill_account_set($account)) {
 					$err = bill_print();
 					
 					status_report ('BILL_PRINT',$err);

@@ -83,7 +83,7 @@ function timestamp_to_unix ($str) {
 }
 
 function show_logo () {
-	$ret = '<img src="'.ROOTDIR.'/images/logo2.jpg" alt="iRes+ Logo">'."\n";
+	$ret = '<img src="'.ROOTDIR.'/images/logo2.jpg" alt="Smart Restaurant Logo">'."\n";
 	return $ret;
 }
 
@@ -1046,16 +1046,7 @@ function disconnect_line () {
 	}
 	return $output;
 }
-//mizuko
-function disconnect_line_pos () {
-	if(isset($_SESSION['userid'])) {
-		$user = new user($_SESSION['userid']);
 
-		//$output = ucfirst(phr('IF_YOU_ARE_NOT_DISCONNECT_0')).' <b>'.$user->data['name'].'</b> '.ucfirst(phr('IF_YOU_ARE_NOT_DISCONNECT_1')).'<br/>'."\n";
-		$output = ucfirst(phr('IF_YOU_ARE_NOT_DISCONNECT_0')).' <b>'.$user->data['name'].'</b><br> <a href="disconnect.php"><img src='.IMAGE_LOGOUT.'></a><br/>'."\n";
-	}
-	return $output;
-}
 
 function common_bottom() {
 
