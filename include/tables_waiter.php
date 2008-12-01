@@ -202,6 +202,85 @@ function table_closed_interface() {
 	return 0;
 }
 
+function table_closed_interface_pos() {
+	global $tpl;
+
+	if(bill_orders_to_print ($_SESSION['sourceid'])) {
+		$_SESSION['select_all']=1;
+		$err=bill_select_pos();
+		if($err) error_display($err);
+		return 0;
+	}
+	
+	$tpl -> set_waiter_template_file ('closed_table');
+	
+	$paid=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'sources',"paid",$_SESSION['sourceid']);
+	$total=table_total($_SESSION['sourceid']);
+	$discount=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'sources','discount',$_SESSION['sourceid']);
+
+	if ($total == 0 && $paid==0) {
+		$err = table_pay(1);
+		status_report ('PAYMENT',$err);
+		
+		$paid=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'sources',"paid",$_SESSION['sourceid']);
+	}
+		
+	$tmp = navbar_tables_only_pos();
+	$user = new user($_SESSION['userid']);
+	if($user->level[USER_BIT_CASHIER]) $tmp = navbar_empty_pos();
+	$tpl -> assign ('navbar',$tmp);
+	
+	$tmp = '
+		'.ucfirst(phr('TABLE_TOTAL_DISCOUNTED')).': <b>'.country_conf_currency(true).' '.$total.'</b>
+	';
+	if($discount!=0) {
+		$discount=sprintf("%01.2f",abs($discount));
+		$tmp .= '
+		 ('.ucfirst(phr('DISCOUNT')).': '.country_conf_currency(true).' '.$discount.')';
+	}
+	$tmp .= '<br />'."\n";
+	$tpl -> assign ('total',$tmp);
+
+	if($paid){
+		$tmp = '
+		<FORM ACTION="orders.php" METHOD=POST>
+		<INPUT TYPE="HIDDEN" NAME="command" VALUE="clear">
+		'.ucfirst(phr('PAID_ALREADY')).'<br/>
+		'.ucfirst(phr('EMPTY_TABLE_EXPLAIN')).'
+		<INPUT TYPE="submit" value="'.ucfirst(phr('EMPTY_TABLE_BUTTON')).'">
+		</FORM>
+		';
+		$tmp .= '<br />'."\n";
+		$tpl -> assign ('clear',$tmp);
+	}
+
+	// user is not allowed to pay, so don't display the button
+	if(!access_allowed(USER_BIT_MONEY)) return 0;
+	
+	$tmp = '
+		<FORM ACTION="orders.php" METHOD=POST>
+		<INPUT TYPE="HIDDEN" NAME="command" VALUE="pay">
+		'.ucfirst(phr('PAID_ASK')).'<br/>
+		';
+	if ($paid){
+		$tmp .= '
+		<INPUT TYPE="hidden" name="data[paid]" value="0">
+		<INPUT TYPE="submit" value="'.ucfirst(phr('NOT_PAID_BUTTON')).'">
+		<br/><br/>';
+	} else {
+		$tmp .= '
+		<INPUT TYPE="hidden" name="data[paid]" value="1">
+		<INPUT TYPE="submit" value="'.ucfirst(phr('PAID_BUTTON')).'">
+		<br/><br/>';
+	}
+	$tmp .= '
+		</FORM>';
+	$tmp .= '<br />'."\n";
+	$tpl -> assign ('pay',$tmp);
+
+	return 0;
+}
+
 /**
 * Interface for cleared tables
 *
@@ -911,7 +990,7 @@ function tables_list_all($cols=1,$show=0,$quiet=true){
 		case 0:
 			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`, `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '0'";
 			$query .= " AND `visible` = '1'";
-			$query .= " AND ( `locktouser` LIKE '%" . $_SESSION['userid'] . "%' ) ";	
+			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";	
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";						
 			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
 			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
@@ -919,7 +998,7 @@ function tables_list_all($cols=1,$show=0,$quiet=true){
 		case 1:
 			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '1'";
 			$query .= " AND `visible` = '1'";			
-			$query .= " AND ( `locktouser`  LIKE '%" . $_SESSION['userid'] . "%' ) ";		
+			$query .= " AND ( `locktouser`  = '" . $_SESSION['userid'] . "' ) ";		
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";					
 			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
 			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
@@ -927,7 +1006,7 @@ function tables_list_all($cols=1,$show=0,$quiet=true){
 		case 2:
 			$query="SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `userid`='".$_SESSION['userid']."'";
 			$query .= " AND `visible` = '1'";
-			$query .= " AND ( `locktouser`  LIKE '%" . $_SESSION['userid'] . "%' ) ";	
+			$query .= " AND ( `locktouser`  = '" . $_SESSION['userid'] . "' ) ";	
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";						
 			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
 			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
@@ -1007,7 +1086,7 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 		case 0:
 			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`, `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '0'";
 			$query .= " AND `visible` = '1'";
-			$query .= " AND ( `locktouser` LIKE '%" . $_SESSION['userid'] . "%' ) ";							
+			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";							
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";							
 			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
 			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
@@ -1015,7 +1094,7 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 		case 1:
 			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '1'";			
 			$query .= " AND `visible` = '1'";
-			$query .= " AND ( `locktouser` LIKE '%" . $_SESSION['userid'] . "%' ) ";
+			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";											
 			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
 			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
@@ -1023,7 +1102,7 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 		case 2:
 			$query="SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `userid`='".$_SESSION['userid']."'";
 			$query .= " AND `visible` = '1'";
-			$query .= " AND ( `locktouser` LIKE '%" . $_SESSION['userid'] . "%' ) ";	
+			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";	
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";										
 			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
 			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
