@@ -1,0 +1,9 @@
+- sync smart restaurant with my handy restaurant - waiters view
+- use only xml in translation..no more php files
+- waiter does print bill ?
+- customers management
+- disponible ingredients in dish management
+- detailed bills in waiters report
+- rethink the dayily waiter report
+- rethink the pos interface
+- ingredient view add dishes containing ingredient
