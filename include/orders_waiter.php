@@ -953,7 +953,7 @@ function orders_list_pos () {
 		$desc=ucfirst(phr('HIDE_ORDERS'));
 	}
 	//mizuko : 31.05.2007
-	// hjeka pamjen ci me lejon me klikue te difto porosite
+	//hjeka pamjen ci me lejon me klikue te difto porosite
 	//$tmp = '<a href="orders.php?command=set_show_orders">'.$image.$desc.'</a><br/>';
 	$tpl -> append ('commands',$tmp);
 
@@ -969,11 +969,12 @@ function orders_list_pos () {
 	if(CONF_FAST_ORDER){
 		$tmp = order_fast_dishid_form ();
 		$tpl -> assign ('fast_order_id',$tmp);
-	} else {
-		//$tmp = keys_orders ();
-		//$tpl -> append ('scripts',$tmp);
+	//} else {
+	// activate scripts
+		$tmp = keys_orders ();
+		$tpl -> append ('scripts',$tmp);
 	}
-
+	
 	// use session to decide wether to show the orders list or not
 	if(!isset($_SESSION['show_toplist'])) $_SESSION['show_toplist']=get_conf(__FILE__,__LINE__,"top_list_show_top");
 	if($_SESSION['show_toplist']) {

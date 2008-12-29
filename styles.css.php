@@ -75,6 +75,7 @@ dd {
 .aligncenter {
     align: center
 }
+
 .modified {
     font-size: smaller
 }
@@ -155,14 +156,17 @@ dd {
 	font-size: 12.5px;
 }
 
+
 a:link {
     color: #0E17BF;
     text-decoration: none
 }
+
 a:visited {
     color: #0E17BF;
     text-decoration: none
 }
+
 a:hover {
     color: #CC0000;
     text-decoration: none
@@ -251,4 +255,30 @@ a:hover {
 
 }
 
+input, textarea, select, radio{
+	font:1.5em Arial,Helvetica,FreeSans,sans-serif;
+	padding:.2em
+}
+
+fieldset{
+	padding:.8em 0 .8em .6em;
+	border-top:2px solid #621D36
+}
+
+legend{
+	font-size:1.5em;
+	line-height:1.5em;
+	padding-left:.2em;
+	padding-right:.2em
+}
+
+#informational  {
+	background-color: #d4e8ff;
+	background-repeat: no-repeat;
+	font:2em Arial,Helvetica,FreeSans,sans-serif;
+	padding:.2em
+	width:40px;
+	height:40px;
+	clear:both;
+}
 /* END POS */

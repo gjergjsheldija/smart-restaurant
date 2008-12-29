@@ -350,7 +350,7 @@ function navbar_form($form,$show_abort='') {
 				<strong><a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
-				<strong><a href="orders.php?command=list">MENU</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+				<strong><a href="orders.php?command=list"><img src="'.IMAGE_SOURCE.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 			<td width=35>
 			</td>
@@ -359,12 +359,12 @@ function navbar_form($form,$show_abort='') {
 			<td width=35>
 			';
 	if(!empty($show_abort))
-		$msg .= '<strong><a href="'.$show_abort.'"><img src="'.IMAGE_NO.'" alt="'.ucfirst(phr('NO')).'" border=0 width="32" height="32"></a></strong>';
+		$msg .= '<strong><a href="'.$show_abort.'"><img src="'.IMAGE_NO.'" alt="'.ucfirst(phr('NO')).'" border=0 width="64" height="64"></a></strong>';
 
 	$msg .= '
 			</td>
 			<td width=35>
-				<strong><a href="#" onclick="JavaScript:document.'.$form.'.submit(); return false;"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="32" height="32"></a></strong>
+				<strong><a href="#" onclick="JavaScript:document.'.$form.'.submit(); return false;"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a></strong>
 			</td>
 		</tr>
 	</table>
@@ -478,13 +478,9 @@ function command_bar_table_vertical_pos(){
 			<td>
 				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
 			</td>
-		</tr>
-		<tr>
 			<td>
 				<a href="orders.php?command=printing_choose"><img src="'.IMAGE_PRINT.'" alt="'.ucfirst(phr('PRINT')).'" border=0 width="64" height="64"></a>
 			</td>
-		</tr>
-		<tr>
 			<td width=35>
 				<a href="orders.php?command=close_confirm"><img src="'.IMAGE_CLOSE.'" alt="'.ucfirst(phr('CLOSE_TABLE')).'" border=0 width="64" height="64"></a>
 			</td>

@@ -729,8 +729,8 @@ class user extends object {
 
 		$tpl -> set_waiter_template_file ('disconnect');
 
-		$tmp = ucfirst(phr('CONNECTED_AS')).": <b>".$this->data['name']."</b><br>\n";
-		$tmp .= ucfirst(phr('DISCONNECT_ASK'))."<br>\n";
+		$tmp = ucfirst(phr('CONNECTED_AS')).": <b>".$this->data['name'];
+		$tmp .= ucfirst(phr('DISCONNECT_ASK'));
 		//$tmp .= '<a href="disconnect.php"><img src='.IMAGE_LOGOUT.'></a>';
 		$tmp .= '<a href="?command=destroy&rndm='.rand(0,100000).'"><h4><div class="preferred_answer"><img src='.IMAGE_YES.' height=64 width=64></div></h4></a>';
 

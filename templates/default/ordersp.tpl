@@ -8,27 +8,26 @@
 		{scripts}
 		<center>
 		{people_number}
-		{messages}
-
+		<div id="informational">{messages}</div>
 		<table>
-		<tr>
-<!--				<td rowspan="4" valign="top">
-					{toplist}
-				</td>-->
-				<td>
+			<tr>
+				<td valign="top" align="left">{fast_order_id}</td>
+				<td>{scripts}</td>
+				<td valign="top" align="center">{vertical_navbar}</td>
+				<td valign="top" align="right">{logout}</td>
+			</tr>
+			<tr>
+				<td colspan="3">
 					<table>
-					<tr>
-						<td valign="top">{vertical_navbar}</td>
-						<td valign="top">{toplist}</td>
-						<td valign="top">{categories}</td>
-						<td valign="top">{letters}</td>
-					</tr>
+						<tr>
+							<td valign="top">{toplist}</td>
+							<td valign="top">{categories}</td>
+							<td valign="top">{letters}</td>
+						</tr>
 					</table>
 				</td>
 				<td align="left" valign="top" rowspan="4">
-					<table><!--<tr><td>
-					{last_order}
-					</td></tr>-->
+					<table>
 					<tr><td>
 					{orders_list}
 					&nbsp;
@@ -38,22 +37,11 @@
 			</tr>
 			<tr>
 				<td>
-					{fast_order_id}
-				</td>
-			</tr>
-<!--			<tr>
-				<td>
-					{toplist}
-				</td>
-			</tr>-->
-			<tr>
-				<td>
 					{commands}
 				</td>
 			</tr>
 		</table>
-		{logout}
 		</center>
-		<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
+		<center><dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd></center>
 	</body>
 </html>
