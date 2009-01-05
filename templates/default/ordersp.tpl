@@ -8,7 +8,7 @@
 		{scripts}
 		<center>
 		{people_number}
-		<div id="informational">{messages}</div>
+		<div class="informational message">{messages}</div>
 		<table>
 			<tr>
 				<td valign="top" align="left">{fast_order_id}</td>

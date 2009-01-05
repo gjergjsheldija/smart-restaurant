@@ -272,13 +272,8 @@ legend{
 	padding-right:.2em
 }
 
-#informational  {
-	background-color: #d4e8ff;
-	background-repeat: no-repeat;
-	font:2em Arial,Helvetica,FreeSans,sans-serif;
-	padding:.2em
-	width:40px;
-	height:40px;
-	clear:both;
-}
+.informational.message{
+background:#d4e8ff url(images/information.png) no-repeat top left;
+border:solid #666;border-width:1px 2px 2px 1px;color:black;margin:0 auto 10px auto;padding:0 10px 10px 20px;width:30em}  {
+
 /* END POS */
