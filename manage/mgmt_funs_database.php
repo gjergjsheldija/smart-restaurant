@@ -509,7 +509,7 @@ function display_form_invoice($id){
 		<input type=\"text\" size=\"2\" $disabled name=\"payment_data_date_month\" value=\"$month\"> /
 		<input type=\"text\" size=\"4\" $disabled name=\"payment_data_date_year\" value=\"$year\">
 	</td>
-	</tr>
+	</tr>";
 	echo "<tr><td>";
 
 	$table=$GLOBALS['table_prefix'].'mgmt_types';
