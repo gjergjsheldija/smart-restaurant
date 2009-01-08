@@ -507,7 +507,7 @@ function bill_print_row ($key,$value,$destid){
 		//13.11.2006
 		$msg.="x".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice'])/$_SESSION['separated'][$key]['topay'];
 		
-		//mizuko: get rid og the currency name
+		//mizuko: get rid of the currency name
 		//$msg.="   ".country_conf_currency()." ".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
 		$msg.="   ".sprintf("%0.2f",$_SESSION['separated'][$key]['finalprice']);
 		$msg.="\n";

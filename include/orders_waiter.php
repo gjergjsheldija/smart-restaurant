@@ -954,7 +954,7 @@ function orders_list_pos () {
 	}
 	//mizuko : 31.05.2007
 	//hjeka pamjen ci me lejon me klikue te difto porosite
-	//$tmp = '<a href="orders.php?command=set_show_orders">'.$image.$desc.'</a><br/>';
+	$tmp = '<a href="orders.php?command=set_show_orders">'.$image.$desc.'</a><br/>';
 	$tpl -> append ('commands',$tmp);
 
 
@@ -969,7 +969,7 @@ function orders_list_pos () {
 	if(CONF_FAST_ORDER){
 		$tmp = order_fast_dishid_form ();
 		$tpl -> assign ('fast_order_id',$tmp);
-	//} else {
+	} else {
 	// activate scripts
 		$tmp = keys_orders ();
 		$tpl -> append ('scripts',$tmp);

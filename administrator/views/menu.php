@@ -82,4 +82,3 @@
 	<li><a href="<?=$this->config->site_url();?>/login/doLogout"><?=lang('log_out'); ?></a></li>
 </ul>
 </div>
-<div id="header-logo"></div>
