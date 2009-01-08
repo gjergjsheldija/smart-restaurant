@@ -42,16 +42,16 @@ function bill_orders_to_print ($sourceid) {
 }
 
 function write_log_item($item_id,$quantity,$price,$receipt_id) {
-/*
-name:
-write_log_item($item_id,$quantity,$price,$receipt_id)
-returns:
-0 - no error
-1 - Order record not found
-2 - Waiter not found
-3 - log writing error
-other - mysql error number
-*/
+	/*
+	name:
+	write_log_item($item_id,$quantity,$price,$receipt_id)
+	returns:
+	0 - no error
+	1 - Order record not found
+	2 - Waiter not found
+	3 - log writing error
+	other - mysql error number
+	*/
 	// next line is not necessary, due to automatic mySQL filling when no value is provided
 	// $log["datetime"] = date("Y-m-d H:i:s",time()); 	// human format
 	// $log["datetime"] = date("YmdHis",time()); 		// timestamp format
@@ -125,17 +125,6 @@ other - mysql error number
 	// strips the last comma that has been put
 	$query = substr ($query, 0, strlen($query)-1);
 	$query.=")";
-
-/*	// CRYPTO
-	$res = mysql_db_query ($_SESSION['account'],$query);
-	if($errno=mysql_errno()) {
-		$msg="Error in ".__FUNCTION__." - ";
-		$msg.='mysql: '.mysql_errno().' '.mysql_error()."\n";
-		$msg.='query: '.$query."\n";
-		echo nl2br($msg)."\n";
-		error_msg(__FILE__,__LINE__,$msg);
-		return 3;
-	}*/
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
@@ -171,16 +160,16 @@ function bill_check_empty(){
 }
 
 function bill_print(){
-/*
-name:
-bill_print()
-returns:
-0 - no error
-1 - Printer not found for output tyoe
-2 - No order selected
-3 - Printing error
-other - mysql error number
-*/
+	/*
+	name:
+	bill_print()
+	returns:
+	0 - no error
+	1 - Printer not found for output tyoe
+	2 - No order selected
+	3 - Printing error
+	other - mysql error number
+	*/
 	// type: 	0: reserved
 	//			1: bill
 	//			2. invoice
@@ -210,12 +199,6 @@ other - mysql error number
 	if(!bill_check_empty()) {
 		$receipt_id=receipt_insert($_SESSION['account'],$type);
 	}
-
-/*	$query="SELECT * FROM `#prefix#accounting_dbs` WHERE `db` = '".$_SESSION['account']."'";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return ERR_MYSQL;
-*/
-//	$arr=mysql_fetch_array($res);
 	$printing_enabled=$arr['print_bill'];
 
 	$tpl_print = new template;
@@ -241,11 +224,7 @@ other - mysql error number
 	if(!$res) return ERR_MYSQL;
 
 	//connect to printer by client IP
-
 	while ($row = mysql_fetch_array($res) ) {
-
-		//$arr=mysql_fetch_array($res);
-	
 		if ($row['dest_ip']=='') {
 			if ($row['dest']!='') {
 				$destid=$row['id'];
@@ -256,7 +235,6 @@ other - mysql error number
 		}elseif ($row['dest']!='' && $row['dest_ip']!='') {
 				$ippart = explode("|",$row['dest_ip']);
 				if(in_array($clientip,$ippart)){
-				//if($clientip == $row['dest_ip'] ) {
 					$destid=$row['id'];
 					break;
 				}
@@ -275,10 +253,6 @@ other - mysql error number
 	$output['table'] = ucfirst(lang_get($dest_language,'PRINTS_TABLE'))." $tablenum \n";
 	$tpl_print->assign("table", $output['table']);
 	
-	//mizuko
-	//$output_page .= "\n";
-	//end mizuko
-
 	// writes the table num to video
 	$output_page .= ucfirst(phr('TABLE_NUMBER')).": $tablenum     ";
 
@@ -346,7 +320,6 @@ other - mysql error number
 	$output['waiter']=ucfirst(lang_get($dest_language,'PRINTS_WAITER')).": ".$user->data['name'];
 	$tpl_print->assign("waiter", $output['waiter']);
 	$tpl_print->assign("date", printer_print_date());	
-	//$output_page .= "<br>\n";
 	//end mizuko
 	
 	$output_page .= "
@@ -595,10 +568,10 @@ function bill_print_discount($receipt_id,$destid) {
 }
 
 function bill_calc_vat() {
-// calculates the taxes amounts for each selected order
+	// calculates the taxes amounts for each selected order
 	$_SESSION['vat']=array();
 	
-// scans all the orders that have a final price != 0
+	// scans all the orders that have a final price != 0
 	for (reset ($_SESSION['separated']); list ($key, $value) = each ($_SESSION['separated']); ) {
 		if($_SESSION['separated'][$key]['finalprice']) {
 			$dishid=$_SESSION['separated'][$key]['dishid'];
@@ -835,16 +808,16 @@ function bill_clear_prices($sourceid){
 }
 
 function bill_select(){
-/*
-name:
-bill_select()
-returns:
-0 - no error
-1 - generic dish with no price found
-2 - internal error clearing prices
-3 - 
-other - mysql error number
-*/
+	/*
+	name:
+	bill_select()
+	returns:
+	0 - no error
+	1 - generic dish with no price found
+	2 - internal error clearing prices
+	3 - 
+	other - mysql error number
+	*/
 	global $tpl;
 
 	if(!bill_orders_to_print ($_SESSION['sourceid'])) {
@@ -864,14 +837,14 @@ other - mysql error number
 
 	if($err=bill_clear_prices($_SESSION['sourceid'])) return $err;
 	if($err=bill_save_session($_SESSION['sourceid'])) return $err;
-	//$tmp = bill_method_selector();
-	//$tpl -> assign ('method',$tmp);
+	$tmp = bill_method_selector();
+	$tpl -> assign ('method',$tmp);
 	
 	$tmp = bill_type_selection($_SESSION['sourceid']);
 	$tpl -> assign ('type',$tmp);
 	
-	//$tmp = discount_form_javascript($_SESSION['sourceid']);
-	//$tpl -> assign ('discount',$tmp);
+	$tmp = discount_form_javascript($_SESSION['sourceid']);
+	$tpl -> assign ('discount',$tmp);
 	
 	$tmp = bill_show_list();
 	$tpl -> assign ('orders',$tmp);
@@ -880,16 +853,16 @@ other - mysql error number
 }
 
 function bill_select_pos(){
-/*
-name:
-bill_select_pos()
-returns:
-0 - no error
-1 - generic dish with no price found
-2 - internal error clearing prices
-3 - 
-other - mysql error number
-*/
+	/*
+	name:
+	bill_select_pos()
+	returns:
+	0 - no error
+	1 - generic dish with no price found
+	2 - internal error clearing prices
+	3 - 
+	other - mysql error number
+	*/
 	global $tpl;
 
 	if(!bill_orders_to_print ($_SESSION['sourceid'])) {
@@ -909,14 +882,14 @@ other - mysql error number
 
 	if($err=bill_clear_prices($_SESSION['sourceid'])) return $err;
 	if($err=bill_save_session($_SESSION['sourceid'])) return $err;
-	//$tmp = bill_method_selector();
-	//$tpl -> assign ('method',$tmp);
+	$tmp = bill_method_selector();
+	$tpl -> assign ('method',$tmp);
 	
 	$tmp = bill_type_selection($_SESSION['sourceid']);
 	$tpl -> assign ('type',$tmp);
 	
-	//$tmp = discount_form_javascript($_SESSION['sourceid']);
-	//$tpl -> assign ('discount',$tmp);
+	$tmp = discount_form_javascript($_SESSION['sourceid']);
+	$tpl -> assign ('discount',$tmp);
 	
 	$tmp = bill_show_list();
 	$tpl -> assign ('orders',$tmp);
@@ -1134,23 +1107,8 @@ function bill_type_selection($sourceid){
 	'.ucfirst(phr('ACCOUNT')).': 
 	';
 
-/*	$query="SELECT * FROM `#prefix#accounting_dbs`";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return '';
-	
-	while($arr=mysql_fetch_array($res)) {
-		$checked="";
-		if(mysql_list_tables($arr['db'])) {
-			if($account==$arr['db'])
-				$checked=" checked";
-			$output .= '<input type="radio" name="account" value="'.$arr['db'].'"'.$checked.'> '.$arr['name'].' '."\n";
-		}
-	}
 
-	$chk[$type] = 'checked';*/
-	
-
-/*	$output .= '
+	$output .= '
 	<table>
 	<tr>
 	<td rowspan="3">'.ucfirst(phr('TYPE')).':</td>
@@ -1160,7 +1118,7 @@ function bill_type_selection($sourceid){
 	</table>
 	</div>
 	</form>
-	';*/	
+	';	
 
 	$table = new table ($_SESSION['sourceid']);
 	$table->fetch_data(true);
