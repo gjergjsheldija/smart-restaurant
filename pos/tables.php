@@ -77,8 +77,6 @@ if($err=$tpl->parse()) return $err;
 $tpl -> clean();
 $output = $tpl->getOutput();
 
-// $tpl ->list_vars();
-
 // prints everything to screen
 echo $output;
 

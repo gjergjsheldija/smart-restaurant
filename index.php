@@ -99,7 +99,6 @@ if (floor(phpversion()) < 5) {
 <?php
 	if (CONF_DEBUG) {
 		$servrd=$_SERVER['HTTP_USER_AGENT'];
-		//display_todo($servrd);
 	}
 ?>
 </body>

@@ -29,8 +29,6 @@
 	require(ROOTDIR."/conf/config.inc.php");
 	require(ROOTDIR."/conf/config.constants.inc.php");
 
-	// session_start();
-
 	header ("Expires: " . gmdate("D, d M Y H:i:s", time()) . " GMT");
 	header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
@@ -109,17 +107,6 @@
 	}
 	
 	$GLOBALS['cache_var']=new cache();
-
-/*	if(!find_accounting_db()) {
-		$error_msg = common_header('No accounting db has been found');
-		$error_msg .=  navbar_empty();
-
-		$error_msg .= GLOBALMSG_NO_ACCOUNTING_DB_FOUND."<br><br>\n";
-		$error_msg .= GLOBALMSG_CONFIGURE_DATABASES."\n";
-		$error_msg .= common_bottom();
-		error_msg(__FILE__,__LINE__,'No accounting db has been found');
-		die($error_msg);
-	}*/
 
 	if($res_loc=check_output_files ()) {
 			$error_msg = common_header('Output files not writeable');

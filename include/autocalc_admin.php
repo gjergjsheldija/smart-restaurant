@@ -33,7 +33,6 @@ class autocalc extends object {
 		$this->id=$id;
 		$this -> title = ucphr('AUTOCALC_LEVELS');
 		$this->file=ROOTDIR.'/admin/admin.php';
-		// $this->fields_boolean=array();
 		$this -> fields_names = array(	'id'=>ucphr('ID'),
 									'name'=>ucphr('NAME'),
 									'quantity'=>ucphr('QUANTITY'),

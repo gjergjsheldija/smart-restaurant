@@ -60,18 +60,7 @@ class ingredient extends object {
 		
 		$table = $this->table;
 		$lang_table = $table."_".$_SESSION['language'];
-//mizuko : made some mods in the db ( no more languages & stuff like that )...i had to change the query generation stuff		
-/*		$query="SELECT
-				$table.`id`,
-				IF($lang_table.`table_name`='' OR $lang_table.`table_name` IS NULL,$table.`name`,$lang_table.`table_name`) as `name`,
-				RPAD('".ucphr('INGREDIENTS')."',30,' ') as `table`,
-				".TABLE_INGREDIENTS." as `table_id`
-				FROM `$table`
-				 JOIN `$lang_table` ON $lang_table.`table_id`=$table.`id`
-				WHERE $table.`deleted`='0'
-				AND ($lang_table.`table_name` LIKE '%$search%' OR $table.`name` LIKE '%$search%')
-				";*/
-		
+	
 		$query="SELECT
 				$table.`id`,
 				$lang_table.`table_name` as `name`,
@@ -82,7 +71,7 @@ class ingredient extends object {
 				WHERE $table.`deleted`='0'
 				AND ($lang_table.`table_name` LIKE '%$search%' OR $table.`name` LIKE '%$search%')
 				";
-//end : mizuko		
+
 		return $query;
 	}
 	
@@ -95,8 +84,6 @@ class ingredient extends object {
 		$lang_table = $table."_".$_SESSION['language'];
 		$cat_table = "#prefix#categories_".$_SESSION['language'];
 		$stock_table = "#prefix#stock_objects";
-		
-//				IF($table.`override_autocalc`='0','".ucphr('NO')."','".ucphr('YES')."') as `override_autocalc`,
 		
 		$query="SELECT
 				$table.`id`,
@@ -147,7 +134,6 @@ class ingredient extends object {
 				
 				$dishes=$ingred->find_connected_dishes();
 				if (!empty($dishes['included']) && is_array($dishes['included'])) {
-					//ksort($dishes['included']);
 					$value .= '<br/>'.ucphr('INCLUDED').': ';
 					foreach ($dishes['included'] as $key2 => $value2) {
 						$value.=ucfirst($value2).", ";
@@ -156,7 +142,6 @@ class ingredient extends object {
 					$value .= '';
 				}
 				if (!empty($dishes['available']) && is_array($dishes['available'])) {
-					//ksort($dishes['available']);
 					$value .= '<br/>'.ucphr('AVAILABLE').': ';
 					foreach ($dishes['available'] as $key2 => $value2) {
 						$value.=ucfirst($value2).", ";
@@ -184,7 +169,6 @@ class ingredient extends object {
 	
 	function find_connected_dishes ($show_deleted=false,$link=false) {
 		$output = array();
-		//$link=false;
 		
 		$query="SELECT #prefix#dishes.id, #prefix#dishes#lang#.table_id, #prefix#dishes#lang#.table_name FROM `#prefix#dishes`";
 		$query .= " JOIN `#prefix#dishes#lang#` WHERE #prefix#dishes#lang#.table_id=#prefix#dishes.id";
@@ -199,16 +183,11 @@ class ingredient extends object {
 		
 		while($arr=mysql_fetch_array($res)) {
 			$dish = new dish($arr['id']);
-			// $ingreds=$dish->ingredients($arr['ingreds']);
-			// if (!empty($ingreds) && is_array($ingreds)) {
-			//	if(in_array($this->id,$ingreds)) {
 					$tmp = '';
 					if($link) $tmp .= '<a href="'.$this->file.'?class=dish&command=edit&data[id]='.$dish->id.'">';
-					$tmp .= $dish->name($_SESSION['language']); //$arr['table_name'];
+					$tmp .= $dish->name($_SESSION['language']); 
 					if($link) $tmp .= '</a>';
 					$output['included'][$dish->id] = $tmp;
-			//	}
-			//}
 		}
 		
 		$query="SELECT #prefix#dishes.id, #prefix#dishes#lang#.table_id, #prefix#dishes#lang#.table_name FROM `#prefix#dishes`";
@@ -230,7 +209,7 @@ class ingredient extends object {
 				if(in_array($this->id,$ingreds)) {
 					$tmp = '';
 					if($link) $tmp .= '<a href="'.$this->file.'?class=dish&command=edit&data[id]='.$dish->id.'">';
-					$tmp .= $dish->name($_SESSION['language']); //$arr['table_name'];
+					$tmp .= $dish->name($_SESSION['language']); 
 					if($link) $tmp .= '</a>';
 					$output['available'][$dish->id] = $tmp;
 				}
@@ -310,7 +289,6 @@ class ingredient extends object {
 	
 	function pre_update($input_data) {
 		if(!$this->id) return 1;
-		//if(!$this->exists()) return 2;
 
 		if($err=$this->translations_set($input_data)) return $err;
 

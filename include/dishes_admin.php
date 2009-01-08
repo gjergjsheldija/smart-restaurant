@@ -46,7 +46,6 @@ class dish extends object {
 		$this->allow_single_update = array ('autocalc','generic','visible');
 		$this->templates['edit']='dish_edit';
 		
-		//$this->fields_boolean=array('autocalc','stock_is_on','generic','visible');
 		$this -> show_category_list = true;
 		$this->flag_delete = true;
 		$this -> multilang = true;
@@ -134,16 +133,6 @@ class dish extends object {
 		$table = $this->table;
 		$lang_table = $table."_".$_SESSION['language'];
 		
-/*		$query="SELECT
-				$table.`id`,
-				IF($lang_table.`table_name`='' OR $lang_table.`table_name` IS NULL,$table.`name`,$lang_table.`table_name`) as `name`,
-				RPAD('".ucphr('DISHES')."',30,' ') as `table`,
-				".TABLE_DISHES." as `table_id`
-				FROM `$table`
-				LEFT JOIN `$lang_table` ON $lang_table.`table_id`=$table.`id`
-				WHERE $table.`deleted`='0'
-				AND ($lang_table.`table_name` LIKE '%$search%' OR $table.`name` LIKE '%$search%')
-				";*/
 		$query="SELECT
 				$table.`id`,
 				$lang_table.`table_name` as `name`,
@@ -412,13 +401,6 @@ class dish extends object {
 	}
 
 	function post_edit_page ($class) {
-		/*
-		if(class_exists('stock_movement')) {
-			$mov = new stock_movement();
-			$mov -> only_dish = $this->id;
-			$mov -> admin_list_page('stock_movement');
-		}
-		*/
 		return 0;
 	}
 	

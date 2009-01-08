@@ -24,7 +24,6 @@
  *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-// if(function_exists('apd_set_pprof_trace')) apd_set_pprof_trace();
 
 // has to be before start.php to be precise timer
 $inizio=microtime();
@@ -398,9 +397,8 @@ switch ($command){
 				break;
 	case 'bill_print':
 				if(isset($_REQUEST['type'])) $type=$_REQUEST['type'];
-				//if(isset($_REQUEST['account'])) $account=$_REQUEST['account'];
 				
-				if(!bill_type_set($type) /*&& !bill_account_set($account) */) {
+				if(!bill_type_set($type)) {
 					$err = bill_print();
 					
 					status_report ('BILL_PRINT',$err);
@@ -474,22 +472,6 @@ switch ($command){
 	case 'closed':
 				table_closed_interface();
 				break;
-/*	case 'pay':
-				$err = table_pay($start_data['paid']);
-				status_report ('PAYMENT',$err);
-				
-				table_closed_interface();
-				break;
-	case 'clear':
-				$err = table_clear();
-				status_report ('CLEARING',$err);
-				if (!$err) {
-					table_cleared_interface();
-				} else {
-					table_closed_interface();
-				}
-				break;*/
-	//mizuko : begin modifikimi pageses
 	case 'pay':
 				$err = table_pay($start_data['paid']);
 				status_report ('PAYMENT',$err);
@@ -507,7 +489,6 @@ switch ($command){
 					table_closed_interface();
 				}
 				break;
-	// mizuko : end modifikimi i pageses
 	case 'none':
 				break;
 	default:
@@ -530,10 +511,6 @@ if($err=$tpl->parse()) return $err;
 
 $tpl -> clean();
 echo $tpl->getOutput();
-
-//echo 'cache:<br>'.$GLOBALS['cache_var']->show();
-
-//$tpl ->list_vars();
 
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

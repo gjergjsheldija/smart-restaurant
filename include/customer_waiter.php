@@ -44,7 +44,6 @@ function customer_search_page($data=array()) {
 	
 	$tpl -> set_waiter_template_file ('standard');
 	
-	// $tmp = navbar_form('form1','orders.php');
 	$tmp = navbar_empty('orders.php');
 	$tpl -> assign ('navbar',$tmp);
 	

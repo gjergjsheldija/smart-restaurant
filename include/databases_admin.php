@@ -91,7 +91,6 @@ class accounting_database extends object {
 
 	function post_insert($input_data) {
 		if(!$this->id) return 1;
-		//if(!$this->exists()) return 2;
 
 		$query="SELECT * FROM `".$this->table."` WHERE `id`='".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
@@ -135,12 +134,8 @@ class accounting_database extends object {
 			if (strstr ($line,';')) {						// If this is the end of a query,
 				$query = str_replace (';', ' ', $query);	// remove the semicolon,
 
-	//echo $query."<br ><br>\n";
 
 				$res=mysql_db_query ($value,$query);			// pass the query sting to MySQL,
-				//$res=mysql_query ($query);			// pass the query sting to MySQL,
-
-	//echo mysql_errno();
 
 				if($errno=mysql_errno()){
 					$msg= 'Error filling database '.$value."\n";
@@ -180,7 +175,6 @@ class accounting_database extends object {
 			}
 
 			$query='DROP DATABASE `'.$this->db_name.'`';
-	//echo $query;
 			mysql_query ($query);
 			if($errno=mysql_errno()){
 				$errdesc=mysql_error();

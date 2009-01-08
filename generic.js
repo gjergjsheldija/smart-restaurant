@@ -1,34 +1,31 @@
-function doit(tID, isOver)
-{
+function doit(tID, isOver) {
   var theRow = document.getElementById(tID)
-
- theRow.style.backgroundColor = (isOver) ? '#0000ff' : '#ffffff';
+  theRow.style.backgroundColor = (isOver) ? '#0000ff' : '#ffffff';
 }
 
 
 function changeto(highlightcolor){
-source=event.srcElement
-if (source.tagName=="TD"||source.tagName=="TABLE")
-return
-while(source.tagName!="TR")
-source=source.parentElement
-if (source.style.backgroundColor!=highlightcolor&&source.id!="ignore")
-source.style.backgroundColor=highlightcolor
+	source=event.srcElement
+	if (source.tagName=="TD"||source.tagName=="TABLE")
+		return
+	while(source.tagName!="TR")
+		source=source.parentElement
+	if (source.style.backgroundColor!=highlightcolor&&source.id!="ignore")
+		source.style.backgroundColor=highlightcolor
 }
 
 function changeback(originalcolor){
-if (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="ignore")
-return
-if (event.toElement!=source)
-source.style.backgroundColor=originalcolor
+	if (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="ignore")
+		return
+	if (event.toElement!=source)
+		source.style.backgroundColor=originalcolor
 }
 
-function setPointer(theRow, theRowNum, theAction, theDefaultColor, thePointerColor, theMarkColor)
-{
+function setPointer(theRow, theRowNum, theAction, theDefaultColor, thePointerColor, theMarkColor) {
     var theCells = null;
 
     // 1. Pointer and mark feature are disabled or the browser can't get the
-    //    row -> exits
+    // row -> exits
     if ((thePointerColor == '' && theMarkColor == '')
         || typeof(theRow.style) == 'undefined') {
         return false;
@@ -51,7 +48,7 @@ function setPointer(theRow, theRowNum, theAction, theDefaultColor, thePointerCol
     var currentColor = null;
     var newColor     = null;
     // 3.1 ... with DOM compatible browsers except Opera that does not return
-    //         valid values with "getAttribute"
+    // valid values with "getAttribute"
     if (typeof(window.opera) == 'undefined'
         && typeof(theCells[0].getAttribute) != 'undefined') {
         currentColor = theCells[0].getAttribute('bgcolor');
@@ -88,11 +85,15 @@ function setPointer(theRow, theRowNum, theAction, theDefaultColor, thePointerCol
         else if (theAction == 'click' && theMarkColor != '') {
             newColor              = theMarkColor;
             marked_row[theRowNum] = true;
-            // Garvin: deactivated onclick marking of the checkbox because it's also executed
-            // when an action (like edit/delete) on a single item is performed. Then the checkbox
-            // would get deactived, even though we need it activated. Maybe there is a way
+            // Garvin: deactivated onclick marking of the checkbox because it's
+			// also executed
+            // when an action (like edit/delete) on a single item is performed.
+			// Then the checkbox
+            // would get deactived, even though we need it activated. Maybe
+			// there is a way
             // to detect if the row was clicked, and not an item therein...
-            // document.getElementById('id_rows_to_delete' + theRowNum).checked = true;
+            // document.getElementById('id_rows_to_delete' + theRowNum).checked
+			// = true;
         }
     }
     // 4.1.2 Current color is the pointer one
@@ -104,7 +105,8 @@ function setPointer(theRow, theRowNum, theAction, theDefaultColor, thePointerCol
         else if (theAction == 'click' && theMarkColor != '') {
             newColor              = theMarkColor;
             marked_row[theRowNum] = true;
-            // document.getElementById('id_rows_to_delete' + theRowNum).checked = true;
+            // document.getElementById('id_rows_to_delete' + theRowNum).checked
+			// = true;
         }
     }
     // 4.1.3 Current color is the marker one
@@ -116,7 +118,8 @@ function setPointer(theRow, theRowNum, theAction, theDefaultColor, thePointerCol
             marked_row[theRowNum] = (typeof(marked_row[theRowNum]) == 'undefined' || !marked_row[theRowNum])
                                   ? true
                                   : null;
-            // document.getElementById('id_rows_to_delete' + theRowNum).checked = false;
+            // document.getElementById('id_rows_to_delete' + theRowNum).checked
+			// = false;
         }
     } // end 4
 
@@ -148,23 +151,23 @@ function redir(url) {
  function click(e) {
  if (document.all) {
  if (event.button == 2) {
- //var messagel="PC's Rule ha! :)\n"
- //alert(navigator.appName+" \nver: "+navigator.appVersion);
-  return false;
+	 // var messagel="PC's Rule ha! :)\n"
+	 // alert(navigator.appName+" \nver: "+navigator.appVersion);
+	  return false;
    }
  }
  if (document.layers) {
  if (e.which == 3) {
- //var messagel="PC's Rule ha! :)\n"
- //alert(navigator.appName+" \nver: "+navigator.appVersion);
- return false;
+	 // var messagel="PC's Rule ha! :)\n"
+	 // alert(navigator.appName+" \nver: "+navigator.appVersion);
+	 return false;
     }
    }
  }
 
 if (navigator.appName!="Microsoft Pocket Internet Explorer") {
  if (document.layers) {
- document.captureEvents(Event.MOUSEDOWN);
+	 document.captureEvents(Event.MOUSEDOWN);
  }
  document.onmousedown=click;
 }
@@ -184,7 +187,7 @@ function order_select($dishid,form_name){
 function color_select(color){
 	document.edit_form_category.htmlcolor.value=color;
 	tabcolor.tbodies[0].trows[0].cells[0].innerText=color;
-	//tabcolor.tbodies[0].trows[0].cells[0].style.backgroundColor=color;
+	// tabcolor.tbodies[0].trows[0].cells[0].style.backgroundColor=color;
 	tdcolor.style.backgroundColor=color;
 	return(false);
 }
@@ -197,7 +200,6 @@ function mod_set($letter){
 }
 
 function discount_switch(){
-
 	if(document.form_discount.discount_type[0].checked==true){
 		document.form_discount.percent.disabled=true;
 		document.form_discount.amount.disabled=true;
@@ -213,8 +215,8 @@ function discount_switch(){
 }
 
 function payment_activation(){
-	//alert("Funzione BEGIN");
-	//list1=eval("document.form1.payment_data_date_day")
+	// alert("Funzione BEGIN");
+	// list1=eval("document.form1.payment_data_date_day")
 
 	document.form1.payment_data_date_day.disabled=!document.form1.payment_data_date_day.disabled
 	document.form1.payment_data_date_month.disabled=!document.form1.payment_data_date_month.disabled
@@ -249,24 +251,24 @@ function invia(aformtosend,alist1,alist2){
 	for(i=0;i<list2length;i++){
 		list2[i].selected=true;
 	}
-	//alert(list2.length);
+	// alert(list2.length);
 	formtosend.submit();
 }
 
 function quantity(form,elem,operation,massimo){
 	elemento=eval("document."+form+"."+elem);
-	//(int) elemento.value=(int) elemento.value + 1;
-	//(int) elemento.text=(int) elemento.text + 1;
-//	document.form1.elements[1].value="22";
+	// (int) elemento.value=(int) elemento.value + 1;
+	// (int) elemento.text=(int) elemento.text + 1;
+// document.form1.elements[1].value="22";
 
-	//alert(elemento.value + " " + massimo);
+	// alert(elemento.value + " " + massimo);
 
 	if(operation=="1" && elemento.value < massimo){
 			elemento.value++;
 	} else if (operation=="-1" && elemento.value > 0) {
 			elemento.value--;
 	}
-			//	elemento.value++;
+			// elemento.value++;
 
 }
 
@@ -349,7 +351,7 @@ function move(form,from,to){
 }
 
 <!--
-//TODO : rishkrue help screen
+// TODO : rishkrue help screen
 var tl=new Array(
 "My Handy Restaurant is a free software created to help restaurant workers in their job",
 "",
@@ -392,7 +394,7 @@ function type_text()
 {
   contents='';
   row=Math.max(0,index-20);
-  //row=0;
+  // row=0;
   while(row<index)
     contents += tl[row++] + '\r\n';
   document.forms[0].elements[0].value = contents + tl[index].substring(0,text_pos) + "_";
@@ -451,7 +453,7 @@ function password_form(){
 	p2.disabled=p0.checked;
 }
 
-//mizuko : Printoj faqen aktuale
+// mizuko : Printoj faqen aktuale
 
 function printPage() { 
 	print(document); 

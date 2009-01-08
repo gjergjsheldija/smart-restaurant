@@ -1,4 +1,4 @@
-<?php
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
  * Smart Restaurant
  *
@@ -25,32 +25,11 @@
  * 
  */
 
-$inizio=microtime();			//has to be before start.php requirement!!!
-session_start();
+function anchor_image($href, $src, $extra = NULL){
+    if(is_string($extra) && strpos($extra,' ') !== 0){ $extra = ' '.$extra; }
+    $img = '<img src="' . base_url() . $src . '"' . $extra . '>';
 
-define('ROOTDIR','..');
-require_once(ROOTDIR."/includes.php");
-require_once(ROOTDIR."/pos/waiter_start.php");
+    return anchor($href, $img);
+} 
 
-switch ($command){
-	//case 'destroy':
-	default:
-		$user = new user ($_SESSION['userid']);
-		$user->disconnect_waiter();
-		break;
-}
-
-// prints page generation time
-$tmp = generating_time($inizio);
-$tpl -> assign ('generating_time',$tmp);
-
-if($err=$tpl->parse()) return $err; 
-
-$tpl -> clean();
-$output = $tpl->getOutput();
-
-// prints everything to screen
-echo $output;
-
-if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

@@ -145,7 +145,6 @@ switch($command) {
 
 		echo "<table width=\"100%\"><tr><td align=\"left\">\n";
 		// Next is the form to decide the type of data to insert
-		//form_insert_receipt_type();
 
 		echo "</td><td align=\"right\">\n";
 
@@ -154,7 +153,6 @@ switch($command) {
 		table_receipt($orderby);
 		break;
 }
-//echo "<a href=\"#\" onclick=\"javascript:history.go(-1); return false\">go back</a><br>\n";
 echo "
 	<br>
 	<form action=\"index.php\" method=\"GET\">

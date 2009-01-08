@@ -29,9 +29,6 @@
 
 function delete_receipt_rows($delete){
 	require("./mgmt_start.php");
-
-// next is only a ref line. to be deleted.
-//DELETE FROM `account_mgmt_main` WHERE `id`='25' OR `id`='26';
 	$firstline=1;
 	$counter=0;
 
@@ -54,7 +51,6 @@ function delete_receipt_rows($delete){
 		$description[$key]=$row['internal_id'];
 		$counter++;
 	}
-	// echo "<br>Query SQL:<br>".$query."<br>\n";
 
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	$num_affected=mysql_affected_rows();
@@ -92,9 +88,6 @@ function delete_receipt_rows($delete){
 
 function annul_receipt_rows($delete){
 	require("./mgmt_start.php");
-
-// next is only a ref line. to be deleted.
-//DELETE FROM `account_mgmt_main` WHERE `id`='25' OR `id`='26';
 	$firstline=1;
 	$counter=0;
 
@@ -118,7 +111,6 @@ function annul_receipt_rows($delete){
 		$description[$key]=$row['internal_id'];
 		$counter++;
 	}
-// echo "<br>Query SQL:<br>".$query."<br>\n";
 
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	$num_affected=mysql_affected_rows();
@@ -157,8 +149,6 @@ function annul_receipt_rows($delete){
 function delete_log_rows($delete){
 	require("./mgmt_start.php");
 
-// next is only a ref line. to be deleted.
-//DELETE FROM `account_mgmt_main` WHERE `id`='25' OR `id`='26';
 	$firstline=1;
 	$counter=0;
 
@@ -178,7 +168,6 @@ function delete_log_rows($delete){
 		$description[$key]=$key;
 		$counter++;
 	}
-	// echo "<br>Query SQL:<br>".$query."<br>\n";
 
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	$num_affected=mysql_affected_rows();

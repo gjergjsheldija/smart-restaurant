@@ -89,26 +89,22 @@ function printing_commands_pos(){
 		$output .= '<br />';
 	}
 
-	if(/* !$_SESSION['catprinted'][2] &&*/ printing_orders_printed_category (2)){
+	if( printing_orders_printed_category (2)){
 		$output .= '<a href="orders.php?command=print_category&amp;data[category]=2"><b>'.ucfirst(phr('PRINT_GO_2')).'</a></b><br />'."\n";
 		$output .= '<br />';
 	}
 
-	if(/* !$_SESSION['catprinted'][3] && */ printing_orders_printed_category (3)){
+	if(printing_orders_printed_category (3)){
 		$output .= '<a href="orders.php?command=print_category&amp;data[category]=3">'.ucfirst(phr('PRINT_GO_3')).'</a><br />'."\n";
 		$output .= '<br />';
 	}
 
-	/*if(bill_orders_to_print ($_SESSION['sourceid'])) {
-		$output .= "<a href=\"orders.php?command=bill_select\">".ucfirst(phr('PRINT_SEPARATED_BILLS'))."</a><br />\n";
-	}*/
-	
 	$user = new user($_SESSION['userid']);
 	
 	if ($user->level[USER_BIT_CASHIER]) {
 		$output .= '<br />
-	<!--<a href="orders.php?command=bill_reset">('.ucfirst(phr('RESET_SEPARATED')).')</a><br />
-	<br />-->';
+	<a href="orders.php?command=bill_reset">('.ucfirst(phr('RESET_SEPARATED')).')</a><br />
+	<br />';
 		if(bill_orders_to_print ($_SESSION['sourceid'])) {
 			$output .= '
 	<a href="orders.php?command=bill_select_all"><img src="'.IMAGE_PRINT.'"><br>'.ucfirst(phr('PRINT_BILL')).'</a><br />';
@@ -128,12 +124,12 @@ function printing_commands(){
 		$output .= '<br />';
 	}
 
-	if(/* !$_SESSION['catprinted'][2] &&*/ printing_orders_printed_category (2)){
+	if( printing_orders_printed_category (2)){
 		$output .= '<a href="orders.php?command=print_category&amp;data[category]=2">'.ucfirst(phr('PRINT_GO_2')).'</a><br />'."\n";
 		$output .= '<br />';
 	}
 
-	if(/* !$_SESSION['catprinted'][3] && */ printing_orders_printed_category (3)){
+	if( printing_orders_printed_category (3)){
 		$output .= '<a href="orders.php?command=print_category&amp;data[category]=3">'.ucfirst(phr('PRINT_GO_3')).'</a><br />'."\n";
 		$output .= '<br />';
 	}
@@ -236,7 +232,6 @@ function printer_print_row($arr,$destid){
 			$msg.="$extra\n";
 		}
 		$msg.="\n".'{size_double}';
-		//mizuko : so i get it similar with the bill
 		$msg.= sprintf("%-30s", $dishname ) . $arr['quantity'] . "x".$arr['price']/$arr['quantity'];
 		$msg.='{/size_double}';
 	}
@@ -260,20 +255,19 @@ function printing_orders_printed_category ($category) {
 }
 
 function print_category($category){
-/*
-name:
-print_category($category)
-returns:
-0 - no error
-1 - no orders in this category printed
-2 - category already printed
-3 - template parsing error
-other - mysql error number
-*/
+	/*
+	name:
+	print_category($category)
+	returns:
+	0 - no error
+	1 - no orders in this category printed
+	2 - category already printed
+	3 - template parsing error
+	other - mysql error number
+	*/
 	$sourceid = $_SESSION['sourceid'];
 
 	// decided to give back the possibility to print again even if already printed
-	//if(categories_printed ($sourceid,$category)) return 2;
 	
 	if(!printing_orders_printed_category($category)) return ERR_NO_ORDERS_PRINTED_CATEGORY;
 
@@ -322,7 +316,6 @@ other - mysql error number
 		$query.=" AND #prefix#dishes.destid ='$destid'";
 		$query.=" ORDER BY #prefix#orders.associated_id";
 
-//echo "query: ".$query."<br><br>";
 		$res_ord=common_query($query,__FILE__,__LINE__);
 		if(!$res_ord) return ERR_MYSQL;
 
@@ -352,7 +345,6 @@ other - mysql error number
 			} else {
 				$extra_care = "";
 			}
-			//$msg.="\n{size_double}$arr['quantity'] $dishname $extra_care{/size_double}";
 			$output['orders'].=$arr['quantity'].' '.$dishname.' '.$extra_care."\n";
 		}
 		// strips the last newline that has been put
@@ -372,8 +364,6 @@ other - mysql error number
 		}
 		$tpl_print -> restore_curly ();
 		$msg = $tpl_print->getOutput();
-		//unset($tpl_print);
-		//$tpl_print = new template;
 		$tpl_print->reset_vars();
 		$output['orders']='';
 		
@@ -407,17 +397,17 @@ function print_test_page(){
 		$print_tpl -> reset_vars();
 		
 		$print_tpl -> string = '
-******************
-'.ucphr('PRINTER_TEST_PAGE').'
-******************
-'.ucphr('PRINTER_INTERNAL_NAME').': {tpl_print_name}
-'.ucphr('PRINTING_QUEUE').': {tpl_print_queue}
-'.ucphr('PRINTING_DRIVER').': {tpl_print_driver}
-'.ucphr('PRINTING_TEMPLATE').': {tpl_print_template}
-'.ucphr('DATE').': '.date('d F Y H:i').'
-******************
-'.ucphr('PRINTER_TEST_PAGE_END').'
-******************{end}';
+		******************
+		'.ucphr('PRINTER_TEST_PAGE').'
+		******************
+		'.ucphr('PRINTER_INTERNAL_NAME').': {tpl_print_name}
+		'.ucphr('PRINTING_QUEUE').': {tpl_print_queue}
+		'.ucphr('PRINTING_DRIVER').': {tpl_print_driver}
+		'.ucphr('PRINTING_TEMPLATE').': {tpl_print_template}
+		'.ucphr('DATE').': '.date('d F Y H:i').'
+		******************
+		'.ucphr('PRINTER_TEST_PAGE_END').'
+		******************{end}';
 
 		// next line is needed to make the template parser leave the line without deleting it, so that it gets to the driver level
 		$print_tpl -> assign("end", '{page_cut}');
@@ -481,14 +471,6 @@ function print_line($destid,$msg){
 		echo "<br>".nl2br(htmlentities($msg))."<br>\n";
 	}
 	
-	// Next commented code is born to drive an external beeper.
-	// we should still work on the hardware.
-
-	//$msg=chr(27).chr(7).chr(50).chr(1);
-	//for($i=0;$i<10;$i++){
-	//	$msg.=chr(28);
-	//}
-
 	if(CONF_DEBUG_DONT_PRINT){
 		return 0;
 	}
@@ -665,16 +647,16 @@ function print_ticket($orderid,$deleted=false) {
 }
 
 function print_orders($sourceid){
-/*
-name:
-print_orders($sourceid)
-returns:
-0 - no error
-1 - no orders to be printed
-2 - template parsing error
-3 - error setting orders printed
-other - mysql error number
-*/
+	/*
+	name:
+	print_orders($sourceid)
+	returns:
+	0 - no error
+	1 - no orders to be printed
+	2 - template parsing error
+	3 - error setting orders printed
+	other - mysql error number
+	*/
 	$sourceid = $_SESSION['sourceid'];
 	debug_msg(__FILE__,__LINE__,"BEGIN PRINTING");
 
@@ -740,8 +722,6 @@ other - mysql error number
 				}
 				$tpl_print -> restore_curly ();
 				$msg = $tpl_print->getOutput();
-				//unset($tpl_print);
-				//$tpl_print = new template;
 				$tpl_print->reset_vars();
 				$output['orders']='';
 				
@@ -824,7 +804,7 @@ other - mysql error number
 		}
 		
 		if(CONF_PRINT_BARCODES && $arr['dishid']!=MOD_ID){
-			//$output['orders'].= print_barcode($newassociated_id);
+			$output['orders'].= print_barcode($newassociated_id);
 		}
 		$tpl_print->assign("orders", $output['orders']);
 	}
@@ -837,7 +817,7 @@ other - mysql error number
 	$dest_language=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'dests',"language",$destid);
 	
 	if(CONF_PRINT_BARCODES){
-		//$tpl_print->assign("barcode", print_barcode($newassociated_id));
+		$tpl_print->assign("barcode", print_barcode($newassociated_id));
 	}
 	
 	$tpl_print->assign("date", printer_print_date());
@@ -873,13 +853,6 @@ other - mysql error number
 	if($err) return ERR_ORDER_NOT_SET_AS_PRINTED;
 	
 	return 0;
-}
-
-function printer_print_gonow($priority,$dest_language) {
-	// function disabled
-	return '';
-	if($_SESSION['catprinted'][$priority]) return ucfirst(lang_get($dest_language,'PRINTS_GO_NOW'));
-	return '';
 }
 
 function printer_print_date() {

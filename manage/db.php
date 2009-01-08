@@ -88,9 +88,6 @@ switch($command) {
 		";
 		break;
 	case "insert":
-		//caching disabler
-//		echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache\" />\n";
-//		echo "<meta http-equiv=\"Expires\" content=\"0\" />\n";
 		insert_data($start_data,$payment_data);
 		break;
 	case "edit":
@@ -117,9 +114,6 @@ switch($command) {
 		";
 		break;
 	case "show":
-		//caching disabler
-//		echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache\" />\n";
-//		echo "<meta http-equiv=\"Expires\" content=\"0\" />\n";
 
 		$start_id=invoice_payment_access_lock($start_id);
 
@@ -136,15 +130,9 @@ switch($command) {
 		";
 		break;
 	case "update":
-		//caching disabler
-//		echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache\" />\n";
-//		echo "<meta http-equiv=\"Expires\" content=\"0\" />\n";
 		update_data($start_id,$start_data,$payment_data);
 		break;
 	case "delete":
-		//caching disabler
-//		echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache\" />\n";
-//		echo "<meta http-equiv=\"Expires\" content=\"0\" />\n";
 		if(isset($_GET['deleteconfirm'])){
 			$deleteconfirm=$_GET['deleteconfirm'];
 		} elseif(isset($_POST['deleteconfirm'])){
@@ -193,7 +181,6 @@ switch($command) {
 if($command!="delete") unset($_SESSION["delete"]);
 
 echo "<br><a href=\"#\" onclick=\"javascript:history.go(-1); return false\">".ucfirst(phr('GO_BACK'))."</a><br>\n";
-//echo "<br><a href=\"".$_SESSION['lastpage']."\">Torna indietro</a>\n";
 echo "<br><a href=\"index.php\">".ucfirst(phr('GO_MAIN_REPORT'))."</a><br>";
 echo generating_time($inizio);
 ?>

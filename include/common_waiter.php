@@ -27,22 +27,6 @@
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
 
-/*function find_accounting_db() {
-	$query="SELECT * FROM `#prefix#accounting_dbs`";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return 0;
-	
-	while($arr=mysql_fetch_array($res)) {
-		if(mysql_list_tables($arr['db'])) {
-			$found_accounting_db=true;
-		}
-	}
-	unset($res);
-	unset($arr);
-	
-	return $found_accounting_db;
-}*/
-
 function common_allowed_ip($host) {
 	// next is an IP-based access control
 	// reads IPs from the allowed_clients table

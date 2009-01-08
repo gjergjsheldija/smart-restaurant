@@ -1061,16 +1061,6 @@ function bill_save_session($sourceid){
 	return 0;
 }
 
-/*function bill_account_set($account){
-	if(empty($account)) {
-		$account='';
-	}
-
-	$account=common_find_first_db($account);
-
-	$_SESSION['account']=$account;
-	return 0;
-}*/
 
 function bill_type_selection($sourceid){
 	/*
@@ -1091,12 +1081,6 @@ function bill_type_selection($sourceid){
 		}
 		$_SESSION['type']=$type;
 	}
-/*	if(isset($_SESSION['account'])){
-		$account=$_SESSION['account'];
-	} else {
-		$account=common_find_first_db();
-		$_SESSION['account']=$account;
-	}*/
 
 	// Next is a micro-form to set a discount in percent value
 	$output = '

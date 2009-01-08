@@ -114,15 +114,6 @@ class search extends object {
 				$query .= ' UNION ALL ';
 			}
 		}
-		/*
-		if(access_allowed(USER_BIT_STOCK)) {
-			$obj = new stock_dish ();
-			if(method_exists($obj,'list_search')) {
-				$query .= $obj->list_search ($this->search);
-				$query .= ' UNION ALL ';
-			}
-		}
-		*/
 		if(!empty($query)) $query=substr($query,0,-11);			// strips out last UNION ALL
 
 		return $query;

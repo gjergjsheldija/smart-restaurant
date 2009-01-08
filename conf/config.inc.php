@@ -32,7 +32,6 @@ $cfguser='root';
 $cfgpassword='';
 
 $db_common='smartrestaurant';
-//$table_account='resplus2_acc';
 $table_prefix='';
 
 ?>

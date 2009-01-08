@@ -61,7 +61,6 @@ function account_movement_from_manage($mgmt_id){
 	$data['account_id']=$arr['account_id'];
 	$data['type']=$arr['type'];
 	$data['amount']=$arr['bank_amount'];
-	//$data['timestamp']=$arr['date'];
 	$data['description']=$arr['description'];
 	$data['mgmt_id']=$mgmt_id;
 	//end : mizuko
@@ -116,7 +115,6 @@ function account_movement_list($account_id=0,$orderby){
 	$query.=" AND `timestamp` >= ".$_SESSION['timestamp']['start']." AND `timestamp` <= ".$_SESSION['timestamp']['end'];
 	$query.= " ORDER BY `$orderby`";
 
-	//echo $query;
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	if($errno=mysql_errno()) {
 		$msg="Error in accounts list - ";
@@ -212,7 +210,6 @@ function account_movement_check_values($input_data){
 			case 3: $msg = ucfirst(phr('CHECK_YEAR')); break;
 			case 4: $msg = ucfirst(phr('CHECK_DATE')); break;
 		}
-		//echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=javascript:window.close();\">");
 		echo "<script language=\"javascript\">
 			window.alert(\"".$msg."\");
 			history.go(-1);
@@ -436,10 +433,6 @@ function account_movement_delete($input_id) {
 	$num_affected=mysql_affected_rows();
 
 	if ($num_affected==1) {
-
-		/*
-		 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=movement_list&id=<?php echo $account_id; ?>">
-		 */
 		?>
 		<?php echo phr('ACCOUNT_MOVEMENT'); ?>
 <b><?php echo $description; ?></b>
@@ -464,9 +457,6 @@ function account_movement_delete($input_id) {
 	return 0;
 } else {
 
-	/*
-	 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=movement_list&id=<?php echo $account_id; ?>">
-	 */
 	?>
 	<?php echo phr('ACCOUNT_MOVEMENT_NOTHING_DONE'); ?>
 .
@@ -512,10 +502,6 @@ function account_movement_update($input_id,$input_data) {
 	$num_affected=mysql_affected_rows();
 
 	if ($num_affected==1) {
-
-		/*
-		 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management");?>; URL=account.php?command=movement_list&id=<?php echo $input_data['account_id']; ?>">
-		 */
 		?>
 		<?php echo phr('ACCOUNT_MOVEMENT'); ?>
 <b><?php echo $input_data['name']; ?></b>
@@ -551,10 +537,6 @@ function account_movement_update($input_id,$input_data) {
 	error_msg(__FILE__,__LINE__,$msg);
 	return 0;
 } else {
-
-	/*
-	 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=movement_list&id=<?php echo $input_data['account_id']; ?>">
-	 */
 	?>
 	<?php echo phr('ACCOUNT_MOVEMENT_NOTHING_DONE'); ?>
 .
@@ -599,9 +581,6 @@ function account_movement_insert($input_data) {
 	$inserted_id = mysql_insert_id();
 
 	if ($num_affected==1) {
-		/*
-		 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=movement_list&id=<?php echo $input_data['account_id']; ?>">
-		 */
 		?>
 		<?php echo phr('ACCOUNT_MOVEMENT'); ?>
 <b><?php echo $input_data['name']; ?></b>
@@ -624,9 +603,6 @@ function account_movement_insert($input_data) {
 	error_msg(__FILE__,__LINE__,$msg);
 	return 0;
 } else {
-	/*
-	 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=movement_list&id=<?php echo $input_data['account_id']; ?>">
-	 */
 	?>
 	<?php echo phr('ACCOUNT_MOVEMENT_NOTHING_DONE'); ?>
 .
@@ -635,12 +611,6 @@ function account_movement_insert($input_data) {
 	return 0;
 }
 }
-
-
-
-
-
-
 
 function account_check_values($input_data){
 
@@ -697,10 +667,6 @@ function account_update($input_id,$input_data) {
 	$inserted_id = mysql_insert_id();
 
 	if ($num_affected==1) {
-
-		/*
-		 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=list">
-		 */
 		?>
 		<?php echo phr('ACCOUNT_THE'); ?>
 <b><?php echo $input_data['name']; ?></b>
@@ -715,10 +681,6 @@ function account_update($input_id,$input_data) {
 	error_msg(__FILE__,__LINE__,$msg);
 	return 1;
 } else {
-
-	/*
-	 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=list">
-	 */
 	?>
 	<?php echo phr('ACCOUNT_MOVEMENT_NOTHING_DONE'); ?>
 .
@@ -753,9 +715,6 @@ function account_insert($input_data) {
 	$inserted_id = mysql_insert_id();
 
 	if ($num_affected==1) {
-		/*
-		 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=list">
-		 */
 		?>
 		<?php echo phr('ACCOUNT_THE'); ?>
 <b><?php echo $input_data['name']; ?></b>
@@ -770,10 +729,6 @@ function account_insert($input_data) {
 	error_msg(__FILE__,__LINE__,$msg);
 	return 1;
 } else {
-
-	/*
-	 <META HTTP-EQUIV="Refresh" CONTENT="<?php echo get_conf(__FILE__,__LINE__,"refresh_time_management"); ?>; URL=account.php?command=list">
-	 */
 	?>
 	<?php echo phr('ACCOUNT_MOVEMENT_NOTHING_DONE'); ?>
 .

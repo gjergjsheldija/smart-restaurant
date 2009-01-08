@@ -90,22 +90,6 @@ class conf {
 	function name($lang='') {
 		if(!$this->exists()) return 0;
 
-/*		if($lang) {
-			$lang_table=$this->table."_".$lang;
-			$query="SELECT `table_name` FROM `".$lang_table."` WHERE `table_id`='".$this->id."'";
-			$res=common_query($query,__FILE__,__LINE__);
-			if(!$res) return '';
-			
-			$arr = mysql_fetch_array ($res);
-			$name=stripslashes($arr['table_name']);
-			
-			$charset = lang_get($lang,'CHARSET');
-			if($charset=='CHARSET' || empty($charset)) $charset='iso-8859-1';
-			$name = html_entity_decode ($name,ENT_QUOTES,$charset);
-			
-			return $name;
-		}*/
-
 		$query="SELECT `name` FROM `".$this->table."` WHERE `id`='".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return '';

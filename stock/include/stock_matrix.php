@@ -89,7 +89,6 @@ class stock_matrix extends object {
 			$col = $this->dishes[$arr['dish_id']];
 			
 			$matrix [$row][$col] = $matrix [$row][$col] + $arr['dish_quantity'];
-			// echo '$matrix['.$row.']['.$col.']: '.$matrix [$row][$col].'<br>';
 		}
 		return $matrix;
 	}

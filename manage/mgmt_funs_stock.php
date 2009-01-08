@@ -158,9 +158,7 @@ function form_stock_edit($invoice_id=0){
 
 
 function form_stock_new(){
-	//$table=$GLOBALS['table_prefix'].'dishes';
 	$table=$GLOBALS['table_prefix'].'stock_objects';	
-	//$query="SELECT * FROM $table WHERE `stock_is_on`='1' order by `name`";
 	$query="SELECT * FROM $table WHERE `stock_is_on`='1' AND name NOT LIKE '' AND deleted = 0 order by `name`";	
 
 	// CRYPTO
@@ -359,19 +357,9 @@ function set_stock($dishname,$diffquantity, $value){
 	$row=mysql_fetch_array($res);
 	mysql_free_result($res);
 
-	//here we should check weather there is only one dish called dishname
-	//(easy case) or if we should ask the user which dish to use
-//TODO : check this one here, changed quantity to stock
-//commented le lines below
 	if(!$row['stock_is_on']) return 1;
 	$oldstock=$row['stock'];
 	$newstock=$oldstock+$diffquantity;
-	//$oldvalue = $row['value'];
-	//if( $oldvalue == 0 ) { 
-	//	$newvalue = $value / $diffquantity;
-	//} else { 
-	//	$newvalue =  ( $oldvalue + (  $value / $diffquantity ) ) / 2;
-	//}
 	$table=$GLOBALS['table_prefix'].'dishes';
 	$query="UPDATE $table SET `stock`= '".$newstock."', value = '". $newvalue ."' WHERE `id`='".$row['id']."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);

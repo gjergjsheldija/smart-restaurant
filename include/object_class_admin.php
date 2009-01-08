@@ -114,8 +114,6 @@ class object {
 	
 		if(isset($this->no_name) && $this->no_name) return '';
 		
-		// if(!$this->exists()) return 0;
-		
 		if(isset($this->referring_name) && $this->referring_name) {
 			$this->fetch_data();
 			$obj_type=$this->data['ref_type'];
@@ -139,7 +137,6 @@ class object {
 		
 		if($lang_table_found) {
 			$cache = new cache ();
-			//if($this->db=='common' && $cache_out=$cache -> get ($lang_table,$this->id,'table_name')) return $cache_out;
 			
 			$query="SELECT `name` FROM `".$this->table."` WHERE `id`='".$this->id."'";
 			if($this->db=='common') $res = common_query($query,__FILE__,__LINE__);
@@ -209,7 +206,6 @@ class object {
 	}
 
 	function get($what=''){
-		// if(!$this->exists()) return '';
 
 		if(empty($what)) return '';
 		
@@ -698,7 +694,6 @@ class object {
 				$output .= '&nbsp;&nbsp;';
 				$link = $this->link_base.'&amp;data[limit_start]='.$last;
 				$output .= '<a href="'.$link.'"><img border=0 src="'.ROOTDIR.'/images/finish.png" alt="&gt;&gt;"></a>';
-				// $output .= '</td>';
 				$tpl -> assign("navbar_next", $output);
 			}
 		}
@@ -790,7 +785,6 @@ class object {
 	<br/>
 	</form>';
 		$tpl -> assign("search", $tmp);
-//	<input type="submit" value="'.ucfirst(phr('SEARCH')).'">
 
 		return 0;
 	}

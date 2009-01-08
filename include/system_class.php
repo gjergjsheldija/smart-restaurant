@@ -75,11 +75,9 @@ class system {
 	function info () {
 		$output = '<body onLoad="javascript:type_text();">';
 	
-		//var_dump_table($_ENV);
 		$output .= $this->print_version();
 		$output .= "<hr>\n";
 		$output .= $this->thanks ();
-		// $output .= $this->print_last_upgrade();
 		$output .= $this->short_license();
 		$output .= "<hr>\n";
 		$output .= $this->license(true);
@@ -163,7 +161,6 @@ EOT;
 		$output = '';
 		
 		$fp = fopen ($file, 'r');								// Open the dump file.
-		//if(!$textarea) $output .= '<a href="?devel">Code</a><br/><br/>'."\n";
 		if($textarea) $output .= '<a href="?">Preview</a><br/><br/>'."\n";
 		if($textarea) {
 			$output .= '
@@ -177,11 +174,7 @@ EOT;
 		//$output.='<ul>';
 		while (! feof ($fp)){									// While the file lasts,
 			$line = fgets ($fp, 1024*1024);					// read it line by line.
-			//$msg = eregi_replace ("{[^}]*destination[^}]*}", "$dest_msg", $msg);
 			$line = trim($line);
-			//$line=htmlentities($line);
-			//$line=addslashes($line);
-			
 			if($line!='' && $open && !ereg("^-(.*)", $line)) {
 				$output.='</ul>'."\n".'<b>'."\n";
 				$open=false;
@@ -210,8 +203,6 @@ EOT;
 		if($textarea)
 			$output .= '</textarea>
 	</form>'."\n";
-		//$output=nl2br($output);
-		//$output=htmlentities($output);
 		return $output;
 	}
 }

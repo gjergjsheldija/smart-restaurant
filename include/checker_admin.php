@@ -217,19 +217,6 @@ function checker_table($lang_table) {
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 	
-/*	while($arr=mysql_fetch_array($res)) {
-		$id=$arr['id'];
-		$query="SELECT `name` FROM `".$lang_table."` WHERE `table_id`='".$id."'";
-		$res2=common_query($query,__FILE__,__LINE__);
-		if(!$res2) return mysql_errno();
-		
-		if(!mysql_num_rows($res2)) {
-			// echo "Expected table_id ".$id." not found in table ".$lang_table." - This record is present in $table but not in $lang_table<br />";
-			$corrections['create']['id'][]=$id;
-			$corrections['create']['name'][$id]=$arr['name'];
-		}
-	}*/
-
 	$query="SELECT * FROM `".$lang_table."`";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
@@ -240,7 +227,6 @@ function checker_table($lang_table) {
 		if(!$res2) return mysql_errno();
 		
 		if(!mysql_num_rows($res2)) {
-			//echo "Expected id ".$id." not found in table ".$table." - This record is present in $lang_table but not in $table<br />";
 			$corrections['delete']['id'][]=$arr['id'];
 			$corrections['delete']['name'][$arr['id']]=$arr['table_name'];
 		}

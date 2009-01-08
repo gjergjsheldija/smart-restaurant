@@ -38,7 +38,6 @@ class user extends object {
 		$this->file=ROOTDIR.'/admin/admin.php';
 
 		$this->flag_delete = true;
-		//$this->fields_boolean=array('disabled');
 		$this->fields_show=array('id','name','template','password','disabled','level','dest_type');
 		$this->fields_names=array(	'id'=>ucphr('ID'),
 								'name'=>ucphr('NAME'),
@@ -331,17 +330,8 @@ class user extends object {
 		elseif(CRYPT_EXT_DES) $salt =substr($salt,0,9);
 		elseif(CRYPT_STD_DES) $salt =substr($salt,0,2);
 
-		/*
-		 echo 'CRYPT_BLOWFISH: '.CRYPT_BLOWFISH.'<br>';
-		 echo 'CRYPT_MD5: '.CRYPT_MD5.'<br>';
-		 echo 'CRYPT_EXT_DES: '.CRYPT_EXT_DES.'<br>';
-		 echo 'CRYPT_STD_DES: '.CRYPT_STD_DES.'<br>';
-		 */
-
 		$crypted= crypt($password, $salt);
 
-		// $datalen=strlen ($crypted)-strlen ($salt);
-		// echo $datalen.' - '.$salt.' '.$crypted.'<br>';
 		return $crypted;
 	}
 
@@ -514,7 +504,7 @@ class user extends object {
 				break;
 		}
 
-		/* begin : mizuko modifikim ci me dale vec perdoruesi i caktuem ne pda ose ne pc */
+		/* begin : mizuko selects users for POS and HandHeld */
 
 		$query="SELECT `id`,`name` FROM `#prefix#users` WHERE `disabled`='0'
 				AND `deleted`='0' AND dest_type = 'pos' AND level!= '1022' ORDER BY name ASC";
@@ -624,11 +614,7 @@ class user extends object {
 
 		if(!$arr) return ERR_USER_NOT_FOUND;
 
-		//all the work logic...
-//		if(isset($_REQUEST['userid']) && !empty($_REQUEST['userid']) && $_REQUEST['userid'] == $arr['id'])
-			$user = new user ($arr['id']);
-//		else
-//			return ERR_WRONG_PASSWORD;
+		$user = new user ($arr['id']);
 
 		if(isset($_REQUEST['password']) && !empty($_REQUEST['password'])) {
 			if(!$user->password_check($_REQUEST['password'])) return ERR_WRONG_PASSWORD;
@@ -652,12 +638,8 @@ class user extends object {
 		$msg='INFO destroy.php - '.$this->data['name'].' ('.$this->id.') disconnected';
 		debug_msg(__FILE__,__LINE__,$msg);
 
-		// has to be before session_unset, because of common_db session var need
-		//$redirect = redirect_waiter('index.php');
-
 		$_SESSION=array();
 
-		//setcookie( session_name() ,"",0,"/");
 		unset($_COOKIE[session_name()]);
 
 		session_unset();
@@ -731,7 +713,6 @@ class user extends object {
 
 		$tmp = ucfirst(phr('CONNECTED_AS')).": <b>".$this->data['name'];
 		$tmp .= ucfirst(phr('DISCONNECT_ASK'));
-		//$tmp .= '<a href="disconnect.php"><img src='.IMAGE_LOGOUT.'></a>';
 		$tmp .= '<a href="?command=destroy&rndm='.rand(0,100000).'"><h4><div class="preferred_answer"><img src='.IMAGE_YES.' height=64 width=64></div></h4></a>';
 
 		// don't know if this works correctly with any browser.

@@ -95,13 +95,6 @@ function categories_list($data=''){
 			$output .= '
 	</tr>';
 		}
-		
-		/*
-		$output .= '
-		<td>
-		&nbsp;
-		</td>';
-		*/
 	}
 	$output .= '
 	</tbody>

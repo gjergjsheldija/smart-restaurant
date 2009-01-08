@@ -60,7 +60,6 @@ switch($command) {
 				echo access_denied_admin();
 				break;
 	default:
-		//table_generator_printable($query);
 		if($data=pdf_generator($query))
 			printable_write_pdf($data,$title);
 		else {

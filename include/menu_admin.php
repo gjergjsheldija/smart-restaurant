@@ -40,7 +40,6 @@ class menu {
 		
 		$this -> links = array();
 		
-		/* <link rel="stylesheet" type="text/css" href="'.ROOTDIR.'/coolmenu.css"> */
 		$this -> output = '
 		<script type="text/javascript" language="JavaScript1.2" src="'.ROOTDIR.'/coolmenus4.js">
 		</script>
@@ -72,7 +71,6 @@ class menu {
 		$index = $this -> menu_menu($index+1,'');
 		$index = $this -> system($index+1,'');
 		$index = $this -> accounting($index+1,'');
-		// $index = $this -> accounts($index+1,'');
 		$index = $this -> contacts($index+1,'');
 		$index = $this -> reports($index+1,'');
 		$index = $this -> stock($index+1,'');
@@ -86,7 +84,6 @@ class menu {
 				$sum=0;
 				$i=1;
 				ksort($this->letters);
-				//echo '<br>'.var_dump_table($this->letters);
 				foreach($this->letters as $value) {
 					$sum=$sum+$value*$coeff+20;
 					$absx[$i]=$sum;
@@ -122,18 +119,6 @@ class menu {
 		<table>
 		<tr><td height="20">&nbsp;</td></tr>
 		</table>';
-		// line to avoid lines to be covered by the menu
-		/*
-		$this -> output .= '
-		<table>
-		<tr><td height="20" class="invisible">';
-		$this -> output .= implode(' - ',$tmp);
-		$this -> output .= '
-		</td></tr>
-		</table>';
-		*/
-		// oM.menuPlacement=new Array(avail,avail+"*2",avail+"*3",avail+"*4",avail+"*5",avail+"*6",avail+"*7",avail+"*8");
-		//oM.menuPlacement=0;
 		
 		$cache -> lang_set ($_SESSION['language'],'menumenumenu',$this -> output);
 		return $this -> output;
@@ -160,54 +145,10 @@ class menu {
 		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('PRINTERS');
 		$this -> links[$i]['link']=ROOTDIR.'/admin/admin.php?class=printer&command=none';
 		$i++;
-/*		$this -> output.="\t\toM.makeMenu('m".$i."','m".$start_idx."','".ucphr('ACCOUNTING_DATABASES')."','".ROOTDIR."/admin/admin.php?class=accounting_database&command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('ACCOUNTING_DATABASES');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/admin.php?class=accounting_database&command=none';
-*/		$i++;
 		$this -> output.="\t\toM.makeMenu('m".$i."','m".$start_idx."','".ucphr('UPGRADE')."','".ROOTDIR."/admin/upgrade.php?command=none');\n";
 		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('UPGRADE');
 		$this -> links[$i]['link']=ROOTDIR.'/admin/upgrade.php?command=none';
 		$i++;
-		/*$this -> output.="\t\toM.makeMenu('m".$i."','m".$start_idx."','".ucphr('DATABASE')."','".ROOTDIR."/admin/export_db.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('DATABASE');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/export_db.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".($i-1)."','".ucphr('DATABASE_BACKUP')."','".ROOTDIR."/admin/export_db.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('DATABASE_BACKUP');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/export_db.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".($i-2)."','".ucphr('DATABASE_RESTORE')."','".ROOTDIR."/admin/restore.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('DATABASE_RESTORE');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/restore.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".($i-3)."','".ucphr('DATABASE_COMPARE')."','".ROOTDIR."/admin/compare_db.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('DATABASE_COMPARE');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/compare_db.php?command=none';
-		$i++;
-		/*$this -> output.="\t\toM.makeMenu('m".$i."','m".$start_idx."','".ucphr('TRANSLATIONS')."','".ROOTDIR."/admin/translator.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('TRANSLATIONS');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/translator.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".($i-1)."','".ucphr('TRANSLATIONS')."','".ROOTDIR."/admin/translator.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('TRANSLATIONS');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/translator.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".($i-2)."','".ucphr('TRANSLATIONS_CHECKER')."','".ROOTDIR."/admin/checker.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('TRANSLATIONS_CHECKER');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/checker.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".($i-3)."','".ucphr('TRANSLATIONS_EXPORT')."','".ROOTDIR."/admin/export_lang.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('TRANSLATIONS_EXPORT');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/export_lang.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".$start_idx."','".ucphr('CHANGELOG')."','".ROOTDIR."/admin/changelog.php?command=none');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('CHANGELOG');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/changelog.php?command=none';
-		$i++;
-		$this -> output.="\t\toM.makeMenu('m".$i."','m".$start_idx."','".ucphr('ABOUT_MHR')."','".ROOTDIR."/admin/changelog.php?command=info');\n";
-		$this -> links[$i]['name']=ucphr('SYSTEM').': '.ucphr('ABOUT_MHR');
-		$this -> links[$i]['link']=ROOTDIR.'/admin/changelog.php?command=info';
-		$i++;*/
 		
 		return $i;
 	}
@@ -468,31 +409,22 @@ class menu {
 	}
 	
 	function accounts_movements($start_idx,$parent) {
-
 		
-		$i=$start_idx;
+		$i = $start_idx;
 		
-/*		$query="SELECT * FROM `#prefix#accounting_dbs`";
-		$res_dbs=common_query($query,__FILE__,__LINE__);
-		if(!$res_dbs) return mysql_errno();*/
-	
-/*		while($arr_dbs=mysql_fetch_array($res_dbs)) {
-			if(mysql_list_tables($arr_dbs['db'])) {*/
-				
-				$table='#prefix#account_accounts';
-				$query="SELECT * FROM `$table`";
-				$res2=common_query($query,__FILE__,__LINE__);
-				if(!$res2) return 0;
-			
-				while($arr=mysql_fetch_array($res2)){
-					$this -> output.="\t\toM.makeMenu('m$i','$parent','".ucfirst($arr['name'])."','".ROOTDIR."/manage/account.php?command=movement_list&id=".$arr['id']."');\n";
-					$this -> links[$i]['name']=ucphr('ACCOUNT_MAIN_LEGEND').': '.ucphr('ACCOUNT_MOVEMENT_LIST').':'.ucfirst($arr['name']);
-					$this -> links[$i]['link']=ROOTDIR.'/manage/account.php?command=movement_list&id='.$arr['id'];
-					$i++;
-				}
-/*			}
-		}*/
-	
+		$table = '#prefix#account_accounts';
+		$query = "SELECT * FROM `$table`";
+		$res2 = common_query ( $query, __FILE__, __LINE__ );
+		if (! $res2)
+			return 0;
+		
+		while ( $arr = mysql_fetch_array ( $res2 ) ) {
+			$this->output .= "\t\toM.makeMenu('m$i','$parent','" . ucfirst ( $arr ['name'] ) . "','" . ROOTDIR . "/manage/account.php?command=movement_list&id=" . $arr ['id'] . "');\n";
+			$this->links [$i] ['name'] = ucphr ( 'ACCOUNT_MAIN_LEGEND' ) . ': ' . ucphr ( 'ACCOUNT_MOVEMENT_LIST' ) . ':' . ucfirst ( $arr ['name'] );
+			$this->links [$i] ['link'] = ROOTDIR . '/manage/account.php?command=movement_list&id=' . $arr ['id'];
+			$i ++;
+		}
+		
 		return $i;
 	}
 	

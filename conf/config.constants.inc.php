@@ -50,15 +50,15 @@ define('CONF_TOPLIST_SAVED_NUMBER',				1000);	// quantity of orders to be saved 
 define('CONF_ALLOW_EASY_DELETE',				true);	// if true shows the little trash icon when an order has quantity 1
 define('CONF_XML_TRANSLATIONS',					true);	// if true uses the xml language files instead of the database. It is recomended to leave this funciton off unless you know what you are doing
 define('CONF_PRINT_BARCODES',					false);	// if true prints the barcode with the order ID for each order
-									// it requires a barcode-ready printer to work
+														// it requires a barcode-ready printer to work
 														// and is as of today a useless feature
 define('CONF_COLOUR_PRINTED',					1);	// if on the user can see the elapsed time from the printing of the order ticket as a linear color
 define('CONF_COLOUR_PRINTED_COLOUR',				'yellow');	// possible values: red, green, blue, magenta, yellow, cyan, grey. default: yellow
 define('CONF_COLOUR_PRINTED_MAX_TIME',				20);	// after how much time in mins should the max colour be reached
 define('CONF_TIME_SINCE_PRINTED',				1);	// if on the elapsed time since printing will be written aside the dish name in the orders list
 define('CONF_ENCRYPT_PASSWORD',					false);	// if true the passwords will be encrypted with the best available method, otherwise a MD5 checksum will be prepared
-									// the checksum is a bit less secure, but ensures that the password will be the same on every machine,
-									// otherwise changing the OS or upgrading it could cause all the passwords to be unusable (recreate the users is the only solution)
+														// the checksum is a bit less secure, but ensures that the password will be the same on every machine,
+														// otherwise changing the OS or upgrading it could cause all the passwords to be unusable (recreate the users is the only solution)
 define('CONF_DISPLAY_MYSQL_ERRORS',				true);  // if on the mysql errors will be displayed to the users and logged to file, otherwise they will be only logged to errors file
 define('CONF_SQL_RESUME_ENABLED',				false);	// if on the sql upgrades and restores will be stopped and resumed to allow progress display (HIGHLY EXPERIMENTAL!!!)
 define('CONF_SHOW_SUMMARY_ON_LIST',				false);	// if on a summary of the data about the ingredients/dishes will be displayed in the tables in admin section (slows the page generation by a factor of about 4)
@@ -142,17 +142,8 @@ define('TABLE_VAT_RATES',7);
 define('TABLE_PRINTERS',8);
 define('TABLE_STOCK_OBJECTS',9);
 define('TABLE_STOCK_DISHES',10);
-//define('TABLE_VALUTA',11);
-//mizuko
-define('LICENSE_FILE',ROOTDIR.'/docs/LICENSE');
+
 $halttime=2;
-
-// installer: mysql dump files locations
-//$location['common']['complete']='myhandyrestaurant_common_complete.sql';
-//$location['account']['complete']='myhandyrestaurant_account_complete.sql';
-//$location['common']['struct']='myhandyrestaurant_common_struct.sql';
-//$location['account']['struct']='myhandyrestaurant_account_struct.sql';
-
 
 define('TYPE_NONE',0);
 define('TYPE_DISH',1);
@@ -196,7 +187,6 @@ $unit_types_volume = array ('gal','floz','ml','cl','dl','l','hl');
 global $unit_types_mass;
 $unit_types_mass = array ('oz','lb','mg','cg','dg','g','dag','hg','kg');
 
-//define('CONF_HTTP_ROOT_DIR','http://192.168.0.50/handyrestaurant/demo/');
 define('CONF_HTTP_ROOT_DIR',ROOTDIR.'/');
 
 define('CONF_JS_URL',CONF_HTTP_ROOT_DIR."generic.js");
@@ -206,7 +196,6 @@ define('CONF_CSS_URL',CONF_HTTP_ROOT_DIR."styles.css.php");
 define('CONF_JS_URL_CONFIG',"./generic.js");
 define('CONF_CSS_URL_CONFIG',"./styles.css.php");
 
-//CONF_HTTP_ROOT_DIR='http://'.$_SERVER['SERVER_NAME'].'/handyrestaurant/';
 // images used
 
 define('IMAGE_CUSTOMER_KNOWN',CONF_HTTP_ROOT_DIR."images/personal.png");
@@ -224,7 +213,6 @@ define('IMAGE_MINUS',CONF_HTTP_ROOT_DIR."images/down.png");
 define('IMAGE_PLUS',CONF_HTTP_ROOT_DIR."images/up.png");
 define('IMAGE_FIND',CONF_HTTP_ROOT_DIR."images/find.png");
 define('IMAGE_NEW',CONF_HTTP_ROOT_DIR."images/new.png");
-//define('IMAGE_PROVE',CONF_HTTP_ROOT_DIR."images/prove.png");
 define('IMAGE_LOGOUT',CONF_HTTP_ROOT_DIR."images/logout.png");
 define('IMAGE_SHOW_ORDERS',CONF_HTTP_ROOT_DIR."images/show.png");
 define('IMAGE_HIDE_ORDERS',CONF_HTTP_ROOT_DIR."images/hide.png");

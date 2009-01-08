@@ -40,9 +40,6 @@ require_once(ROOTDIR."/includes.php");
 
 common_set_error_reporting ();
 
-//echo common_header('Administration',' class="mgmt_body"');
-
-
 $link = mysql_pconnect ($cfgserver, $cfguser,$cfgpassword) or die (GLOBALMSG_DB_CONNECTION_ERROR);
 
 $_SESSION['common_db']=$db_common;

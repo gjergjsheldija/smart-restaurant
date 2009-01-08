@@ -41,11 +41,6 @@ function get_text_start_date() {
 	$second=substr($conf_day_end,4,2);
 
 	$time_start=mktime($hour,$minute,$second,$month,$day,$year);
-	/*
-	// if we're in the just past working day, subtract 24 hours to start day
-	if((date("His",time())<=$conf_day_end) && (date("His",time())>='000000'))
-		$time_start=$time_start+24*3600;
-	*/
 
 	$time_start_arr[2]=date("j",$time_start);
 	$time_start_arr[1]=date("n",$time_start);
@@ -91,7 +86,6 @@ function get_text_end_minute () {
 }
 
 function get_text_end_date() {
-	// explode data string from DD/MM/YYYY to array
 	list($date[2],$date[1],$date[0])=explode("/",$_SESSION['date']['end']);
 	ksort($date);
 
@@ -104,12 +98,6 @@ function get_text_end_date() {
 	$second=substr($conf_day_end,4,2);
 
 	$time_end=mktime($hour,$minute,$second,$month,$day,$year);
-	/*
-	// if we're not in the just past working day, add 24 hours to end day
-	if((date("His",time())<=$conf_day_end) && (date("His",time())>='000000')) {
-	} else
-		$time_end=$time_end-(3600*24);
-	*/
 
 	$time_end_arr[2]=date("j",$time_end);
 	$time_end_arr[1]=date("n",$time_end);
@@ -137,23 +125,6 @@ function get_text_end_date() {
 function main_header($to_page="index.php"){
 	require("./mgmt_start.php");
 
-/*	$table=$GLOBALS['table_prefix'].'accounting_dbs';
-	$query="SELECT * FROM `$table`";
-	$res = mysql_db_query ($_SESSION['common_db'],$query);
-	if($errno=mysql_errno()) {
-		$msg="Error in ".__FUNCTION__." array - ";
-		$msg.='mysql: '.mysql_errno().' '.mysql_error();
-		echo $msg,"<br>\n";
-		error_msg(__FILE__,__LINE__,$msg);
-		return 1;
-	}*/
-/*	while($arr=mysql_fetch_array($res)) {
-		$found[$arr['db']]=0;
-		if(mysql_list_tables($arr['db'])) {
-			$found[$arr['db']]=1;
-		}
-	}*/
-	
 	$start_date_local=get_text_start_date();
 	$end_date_local=get_text_end_date();
 	$start_hour_local=get_text_start_hour();
@@ -219,18 +190,6 @@ function main_header($to_page="index.php"){
 	<td><?php echo GLOBALMSG_REPORT_ACCOUNT; ?></td>
 	<td align="left">
 <?php
-
-/*	$table=$GLOBALS['table_prefix'].'accounting_dbs';
-	$query="SELECT * FROM `$table`";
-	$res = mysql_db_query ($_SESSION['common_db'],$query);
-	if($errno=mysql_errno()) {
-		$msg="Error in ".__FUNCTION__." array - ";
-		$msg.='mysql: '.mysql_errno().' '.mysql_error();
-		echo $msg,"<br>\n";
-		error_msg(__FILE__,__LINE__,$msg);
-		return 1;
-	}*/
-	//while($arr=mysql_fetch_array($res)) {
 		$checked="";
 		if(mysql_list_tables($arr['db']) && $_SESSION['common_db']==$arr['db']) {
 			$checked=" checked";
@@ -240,8 +199,6 @@ function main_header($to_page="index.php"){
 				$checked=" checked";
 			echo '<input type="radio" onClick="JavaScript:document.time_range.submit();" name="mgmt_db_number" value="'.$arr['db'].'"'.$checked.'>'.$arr['name'].' '."\n";
 		}
-	//}
-
 ?>
 	</td>
 <td ><input type="submit" value="<?php echo ucfirst(phr('REPORT_GENERATE')); ?>"></td>
@@ -319,29 +276,6 @@ function check_compulsory_fields($data){
 	} elseif(isset($data["type"]) && $data["type"]=="") {
 		return 4;
 	}
-	/*
-	 elseif ((!isset($data["cash_amount"]) && (!isset($data["cash_vat_amount"]) || !isset($data["cash_taxable_amount"]))) && (!isset($data["bank_amount"]) && (!isset($data["bank_vat_amount"]) || !isset($data["bank_taxable_amount"])))&& (!isset($data["debit_amount"]) && (!isset($data["debit_vat_amount"]) || !isset($data["debit_taxable_amount"])))){
-		return 2;
-	} elseif (!$invoice && isset($data["cash_amount"]) && $data["cash_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["cash_vat_amount"]) && $data["cash_vat_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["cash_taxable_amount"]) && $data["cash_taxable_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["bank_amount"]) && $data["bank_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["bank_vat_amount"]) && $data["bank_vat_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["bank_taxable_amount"]) && $data["bank_taxable_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["debit_amount"]) && $data["debit_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["debit_vat_amount"]) && $data["debit_vat_amount"]==""){
-		return 2;
-	} elseif (!$invoice && isset($data["debit_taxable_amount"]) && $data["debit_taxable_amount"]==""){
-		return 2;
-	}
-	*/
 	return 0;
 
 }
@@ -495,7 +429,6 @@ function date_is_later($date_read,$date_refer){
 			return 1;
 		} elseif($date['read']['month']==$date['refer']['month']){
 			// change next row to have same day included or not
-			// >= same day included - > same day not included
 			if($date['read']['day']>=$date['refer']['day']){
 				return 1;
 			}

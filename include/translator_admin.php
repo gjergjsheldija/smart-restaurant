@@ -89,7 +89,6 @@ class lang extends object {
 		
 		if(!empty($orderby)) $query.=" ORDER BY ".$this->table.".".$orderby;
 		
-//  echo nl2br($query);
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 1;
 
@@ -106,7 +105,6 @@ class lang extends object {
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 1;
 
- // echo nl2br($query);
 		
 		$last_shown=$limit_start+$number_per_page;
 		if($last_shown>$num_total) $last_shown=$num_total;
@@ -138,7 +136,6 @@ class lang extends object {
 			if($remaining>0) $tmp .= '<a href="'.$link.'">&gt;&gt;</a>';
 			$tmp .= "<br/>\n";
 		}
-//var_dump_table($this -> translations);
 		$tmp .= "\n".'<table class="'.css_line_admin(-1).'">'."\n";
 
 		$tmp .= '<thead>'."\n";
@@ -171,7 +168,6 @@ class lang extends object {
 			$tmp .= '		<td>'.$arr['name'].'</td>'."\n";
 			$cols++;
 			
-			//var_dump_table($arr);
 			foreach($this->show_lang as $key => $lang_now) {
 				$cols++;
 				
@@ -505,9 +501,6 @@ function translator_translate ($input_data) {
 				
 				$new_value = htmlentities ($new_value,ENT_QUOTES,$charset);
 				
-				//$compare_value = mysql_real_escape_string($compare_value);
-				//$new_value = mysql_real_escape_string($new_value);
-				
 				$compare_value = addslashes($compare_value);
 				$new_value = addslashes($new_value);
 
@@ -527,7 +520,6 @@ function translator_translate ($input_data) {
 		}
 		}
 	if(is_array($not_found)) {
-		//var_dump_table($not_found);
 		return -1;
 	}
 

@@ -140,9 +140,6 @@ class template {
 		unset ($fd);
 		$template = stripslashes($template);
 		for (reset ($this->vars); list ($key, $value) = each ($this->vars); ) {
-			//$pattern="{[^}]*".$key."[^}]*}";
-			//$template = eregi_replace("$pattern", "$value", $template);
-			
 			$template=preg_replace("/\{.*?".$key.".*?\}/",$value,$template);
 		}
 		
@@ -159,9 +156,6 @@ class template {
 		
 		$template = stripslashes($string);
 		for (reset ($this->vars); list ($key, $value) = each ($this->vars); ) {
-			//$pattern="{[^}]*".$key."[^}]*}";
-			//$template = eregi_replace("$pattern", "$value", $template);
-			
 			$template=preg_replace("/\{.*?".$key.".*?\}/",$value,$template);
 		}
 

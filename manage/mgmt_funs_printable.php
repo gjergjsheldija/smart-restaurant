@@ -27,7 +27,6 @@
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
 function pdf_generator($query){
-	//require("./mgmt_start.php");
 
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	if($errno=mysql_errno()) {
@@ -267,13 +266,6 @@ function table_generator_printable($query){
 		$mgmt_type = new mgmt_type($row['type']);
 		$type=$mgmt_type -> name($_SESSION['language']);
 		unset($mgmt_type);
-		/*
-		$table=$GLOBALS['table_prefix'].'mgmt_types';
-		$res_local = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$row['type']."'");
-		$row_local = mysql_fetch_array($res_local);
-		$type=$row_local['name'];
-		mysql_free_result($res_local);
-		*/
 
 		$cash_total_amount+=$cash_amount;
 		$cash_total_vat_amount+=$cash_vat_amount;

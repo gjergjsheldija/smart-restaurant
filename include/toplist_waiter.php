@@ -66,14 +66,6 @@ function toplist_show(){
 	while($arr=mysql_fetch_array($res)){
 		$dishid=$arr['dishid'];
 		if($dishid==MOD_ID || $dishid==SERVICE_ID) continue;
-		
-		/*
-		$query = "SELECT * FROM `#prefix#dishes` WHERE `id`='$dishid'";
-		$res2=common_query($query,__FILE__,__LINE__);
-		if(!$res2) return ERR_MYSQL;
-		if(!mysql_num_rows($res2)) continue;
-		*/
-		
 		if(!isset($toplist[$dishid])) $toplist[$dishid]=0;
 		$toplist[$dishid]++;
 	}

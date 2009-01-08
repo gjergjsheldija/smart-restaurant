@@ -46,10 +46,6 @@ function statistics_show(){
 	while($row = mysql_fetch_array ($res)) {
 		$fine=microtime();
 		$timer+=elapsed_time($inizio,$fine);
-
-/*		print_r($row);
-		echo "<br>";*/
-		
 		$price=$row['price'];
 		$totals['revenue']+=$price;
 		$totals['number']++;
@@ -69,11 +65,6 @@ function statistics_show(){
 		$destination=strtolower($row['destination']);
 		$destinations['revenue'][$destination]+=$price;
 		
-		
-/*		print_r($destinations['revenue']);
-		echo" - ";
-		print_r($destinations['revenue'][$destination]);
-		echo "<br>";*/
 		
 		//money by dishes
 		$dish=strtolower($row['dish']);
@@ -101,23 +92,6 @@ function statistics_show(){
 	echo "<b><a href=\"#\" onClick='printPage();'>Printo Faqen</a></b>";
 	//end mizuko
 	
-/*	//waiters
-	if(is_array($waiters['revenue'])) {
-		echo "<br><br>".ucfirst(phr('STATS_TOTAL_WAITERS')).":<br>";
-		ksort($destinations['revenue']);
-		echo "<table>\n";
-		for (reset ($waiters['revenue']); list ($key, $value) = each ($waiters['revenue']); ) {
-			if($key) {
-				if(is_numeric($key)) {
-					$user = new user($key);
-					$name = $user -> name ();
-				 } else $name=ucfirst($key);
-				$value=sprintf("%01.2f",$value);
-				echo "<tr><td>$name</td><td>$value ".country_conf_currencies(true)."</td></tr>\n";
-			}
-		}
-		echo "</table>\n\n\n";
-	}*/
 	
 	echo "<br><br>".ucfirst(phr('STATS_TOTAL_WAITERS')).":<br><br>";
 	
@@ -206,9 +180,6 @@ function statistics_show(){
 	if(is_array($dishes['number'])) {
 		echo "<br><br>".ucfirst(GLOBALMSG_STATS_DISHES_ORDERED).":<br>";
 		ksort($dishes['number']);
-		//krsort($dishes_global);
-		//asort($dishes_global);
-		//arsort($dishes_global);
 		echo "<table>\n";
 		for (reset ($dishes['number']); list ($key, $value) = each ($dishes['number']); ) {
 			if($key) {
@@ -262,12 +233,6 @@ function statistics_show(){
 		}
 		echo "</table>\n";
 	}
-	
-
-/*	echo "<hr><b>".$totals['number']."</b> ".GLOBALMSG_STATS_RECORDS_SCANNED.".<br>
-	<b>".round($timer,5)."</b> ".GLOBALMSG_STATS_MYSQL_TIME.".<br>
-	<hr>";
-	echo "<br><br>";*/
 }
 
 ?>

@@ -126,8 +126,6 @@ $output = $tpl->getOutput();
 header("Content-Language: ".$_SESSION['language']);
 header("Content-type: text/html; charset=".phr('CHARSET'));
 
- //$tpl ->list_vars();
-
 // prints everything to screen
 echo $output;
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();

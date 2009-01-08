@@ -136,10 +136,9 @@ function dish_list ($start_data) {
 	$tpl -> assign ('navbar',$tmp);
 
 
-	if(/* get_conf(__FILE__,__LINE__,'creation_back_to_category') && */
-	get_conf(__FILE__,__LINE__,"show_summary") &&
-	isset($_SESSION['go_back_to_cat']) &&
-	$_SESSION['go_back_to_cat']) {
+	if(	get_conf(__FILE__,__LINE__,"show_summary") &&
+		isset($_SESSION['go_back_to_cat']) &&
+		$_SESSION['go_back_to_cat']) {
 		$tbl = new table ($_SESSION['sourceid']);
 		if($last_mod = order_get_last_modified()) {
 			$mods=get_conf(__FILE__,__LINE__,"show_mods_in_summary");
@@ -325,7 +324,6 @@ function order_price_modify($id) {
 	$generic=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'dishes',"generic",$dishid);
 	$pricetot=$arr['price'];
 	$quantity=$arr['quantity'];
-	//$price=$pricetot/$quantity;
 	$price=$pricetot;
 	$price=sprintf("%01.2f",$price);
 
@@ -414,7 +412,6 @@ function order_found_generic_not_priced($sourceid){
 function price_calc ($num,$correction=0) {
 	if ($num<1) return 0;
 
-	// echo '$correction: '.$correction.'<br>';
 	$autocalc = new autocalc ();
 	$maxquantity = $autocalc -> max_quantity();
 	// no value is set
@@ -433,9 +430,7 @@ function price_calc ($num,$correction=0) {
 	ksort($autocalc);
 
 	$maxquantity = $maxquantity - $correction;
-	// echo '$maxquantity: '.$maxquantity.'<br>';
 
-	//echo 'pre: '.var_dump_table($autocalc);
 	foreach($autocalc as $key => $value) {
 		$newindex=$key-$correction;
 		if($newindex<1 && $key!=0)
@@ -446,9 +441,6 @@ function price_calc ($num,$correction=0) {
 			unset($autocalc[$key]);
 		}
 	}
-	// echo '$num: '.$num.'<br>';
-	// echo 'array_key_exists($num,$autocalc): '.array_key_exists($num,$autocalc).'<br>';
-	// echo '$autocalc: '.var_dump_table($autocalc);
 	// quantity found, it is in the array
 	if(array_key_exists($num,$autocalc)) {
 		ksort($autocalc);
@@ -817,7 +809,6 @@ function orders_update ($start_data) {
 		$stock -> silent = true;
 		$stock -> remove_from_waiter($id,$start_data['quantity']);
 	}
-	// set_stock_from_id($id,$start_data['quantity']);
 	// end interfaces
 
 	// real update
@@ -843,7 +834,6 @@ function orders_delete ($start_data) {
 	if (CONF_DEBUG_DONT_DELETE) return 0;
 
 	// was as follows, but it's better to never delete an order if the table is still open
-	// if (get_conf(__FILE__,__LINE__,"orders_show_deleted") && $ord -> data['dishid'] != SERVICE_ID) {
 	if ($ord -> data['dishid'] != SERVICE_ID) {
 		$start_data['deleted']=1;
 		$start_data['paid']=1;
@@ -859,8 +849,6 @@ function orders_delete ($start_data) {
 			$stock -> silent = true;
 			$stock -> remove_from_waiter($id,0);
 		}
-		// set_stock_from_id($id,0);
-		// end interfaces
 
 		$err = $ord -> delete();
 	}
@@ -903,7 +891,6 @@ function orders_service_fee_questions () {
 	}
 
 	$start_data['id']=$id;
-	//orders_update ($start_data);
 	orders_edit ($start_data,$created);
 }
 
@@ -913,7 +900,6 @@ function orders_list_pos () {
 	// use session to decide wether to show the orders list or not
 	// TODO: add get_conf here
 	if(!isset($_SESSION['show_orders_list_pos'])) $_SESSION['show_orders_list_pos']=false;
-	//$show_orders=$_SESSION['show_orders_list_pos'];
 	$show_orders = true;
 	unset($_SESSION['select_all']);
 	$_SESSION['go_back_to_cat']=0;
@@ -952,8 +938,6 @@ function orders_list_pos () {
 		$image = '<img src="'.IMAGE_HIDE_ORDERS.'" height=48 width=48><br>';
 		$desc=ucfirst(phr('HIDE_ORDERS'));
 	}
-	//mizuko : 31.05.2007
-	//hjeka pamjen ci me lejon me klikue te difto porosite
 	$tmp = '<a href="orders.php?command=set_show_orders">'.$image.$desc.'</a><br/>';
 	$tpl -> append ('commands',$tmp);
 
@@ -961,10 +945,10 @@ function orders_list_pos () {
 	$tmp = categories_list_pos();
 	$tpl -> assign ('categories',$tmp);
 
-	/*
+	
 	 $tmp = letters_list();
 	 $tpl -> assign ('letters',$tmp);
-	 */
+	 
 
 	if(CONF_FAST_ORDER){
 		$tmp = order_fast_dishid_form ();
@@ -983,11 +967,7 @@ function orders_list_pos () {
 		$tmp = '<a href="orders.php?command=set_show_toplist">'.ucphr('SHOW_TOPLIST').'</a><br/>';
 		$tpl -> assign ('toplist',$tmp);
 	}
-
-	/*
-	 $tmp = command_bar_table_horizontal();
-	 $tpl -> assign ('horizontal_navbar',$tmp);
-	 */
+	
 	$tmp = command_bar_table_vertical_pos();
 	$tpl -> assign ('vertical_navbar',$tmp);
 
@@ -1080,10 +1060,10 @@ function orders_list () {
 	$tmp = categories_list();
 	$tpl -> assign ('categories',$tmp);
 
-	/*
+	
 	 $tmp = letters_list();
 	 $tpl -> assign ('letters',$tmp);
-	 */
+	 
 
 	if(CONF_FAST_ORDER){
 		$tmp = order_fast_dishid_form ();
@@ -1102,10 +1082,6 @@ function orders_list () {
 		$tpl -> assign ('toplist',$tmp);
 	}
 
-	/*
-	 $tmp = command_bar_table_horizontal();
-	 $tpl -> assign ('horizontal_navbar',$tmp);
-	 */
 	$tmp = command_bar_table_vertical();
 	$tpl -> assign ('vertical_navbar',$tmp);
 
@@ -1162,9 +1138,6 @@ function priority_radio ($data) {
 		return $output;
 	}
 
-	// if((!isset($data['priority']) || !$data['priority']) && table_is_takeaway($_SESSION['sourceid'])) $data['priority']=1;
-
-
 	if((!isset($data['priority']) || !$data['priority']) && $data['category']) {
 		$cat = new category ($data['category']);
 		if ($cat->data['priority']) $data['priority']=$cat->data['priority'];
@@ -1211,8 +1184,6 @@ function dishes_list_cat ($data){
 	$output = '';
 
 	$cat = new category($data['category']);
-	//RTG: always exists???
-	//if(!$cat->exists()) $data['category']=-1;
 
 	if ($data['category']<=0) {
 		if(get_conf(__FILE__,__LINE__,"invisible_show"))
@@ -1255,9 +1226,6 @@ function dishes_list_cat ($data){
 
 	while ($arr = mysql_fetch_array ($res)) {
 		$dishid = $arr['id'];
-		//RTG: no more queries, we have the data
-		//$dishobj = new dish ($arr['id']);
-		//$dishname = $dishobj -> name ($_SESSION['language']);
 		$dishname = $arr['name'];
 		if ($dishname == null || strlen(trim($dishname)) == 0)
 		$dishname = $arr['name'];
@@ -1364,9 +1332,7 @@ function dishes_list_cat_pos ($data){
 				$i++;
 			} else $letter='';
 				
-			//<!--<td bgcolor="'.$class.'"><img src='.$image.' height=48 width=48></td>-->
 			$output .= '<td bgcolor="'.$class.'" onclick="order_select('.$dishid.',\'order_form\'); return false;"><b><a href="#" onclick="JavaScript:order_select('.$dishid.',\'order_form\'); return false;"><img src="..'.$image.'" height=48 width=48><br>'.strtoupper($dishname).'</a></b></td>';
-			//<!--<td bgcolor="'.$class.'">'.$dishprice.'</td>-->';
 				
 			if(!(($cikel+1)%4)) {
 				$output .= '</tr>';

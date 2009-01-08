@@ -58,12 +58,6 @@ function file_show($id){
 	$row_type=mysql_fetch_array($res_type);
 	$type=strtolower($row_type['name']);
 
-	/*
-	$mgmt_type = new mgmt_type($row['type']);
-	$type=$mgmt_type -> name($_SESSION['language']);
-	unset($mgmt_type);
-	*/
-
 	$table='#prefix#account_mgmt_addressbook';
 	$res_supplier = common_query ("SELECT * FROM $table WHERE `name`='".$row['who']."'",__FILE__,__LINE__);
 	if(mysql_num_rows($res_supplier)==1){
@@ -355,15 +349,6 @@ function input_standard($id,$editing){
 		$oper['in']="";
 		$oper['out']="checked";
 
-/*		if(isset($_SESSION['who'])) {
-			$table='#prefix#account_mgmt_addressbook';
-			print_r($_SESSION);
-			$query = "SELECT * FROM $table WHERE `id`='".$_SESSION['who']."'";
-			$res_local=common_query($query,__FILE__,__LINE__);
-			$arr=mysql_fetch_array($res_local);
-			$row['who']=$arr['name'];
-		}*/
-
 	}
 	echo "
 	<tr>
@@ -427,7 +412,6 @@ function display_form_invoice($id){
 
 	echo "<table>\n";
 	echo "<tr><td>\n";
-	//echo "<h4>Scheda Fattura</h4><br>\n";
 
 	if($id) {
 		$editing=1;
@@ -442,10 +426,6 @@ function display_form_invoice($id){
 		$editing=0;
 	}
 	echo "</td><td></td></tr>\n";
-
-	//$row['debit_taxable_amount']=$row['debit_taxable_amount']*(-1);
-	//$row['debit_vat_amount']=$row['debit_vat_amount']*(-1);
-
 
 	input_standard($id,$editing);
 
@@ -530,17 +510,6 @@ function display_form_invoice($id){
 		<input type=\"text\" size=\"4\" $disabled name=\"payment_data_date_year\" value=\"$year\">
 	</td>
 	</tr>
-	";
-	/* echo "<tr>
-	<td>Ora Pagamento</td>
-	<td>
-		<input type=\"text\" size=\"2\" name=\"payment_data[date][hour]\" value=\"$hour\"> :
-		<input type=\"text\" size=\"2\" name=\"payment_data[date][minute]\" value=\"$minute\"> :
-		<input type=\"text\" size=\"2\" name=\"payment_data[date][second]\" value=\"$second\">
-	</td>
-	</tr>
-	";
-	*/
 	echo "<tr><td>";
 
 	$table=$GLOBALS['table_prefix'].'mgmt_types';
@@ -898,8 +867,6 @@ function display_form($id,$insert_type=0){
 function delete_rows($delete){
 	require("./mgmt_start.php");
 
-// next is only a ref line. to be deleted.
-//DELETE FROM `account_mgmt_main` WHERE `id`='25' OR `id`='26';
 	$firstline=1;
 	$counter=0;
 
@@ -935,7 +902,6 @@ function delete_rows($delete){
 			$movement_id=account_movement_delete($arr_local['account_movement']);
 		}
 	}
-//echo "<br>Query SQL:<br>".$query."<br>\n";
 
 	$res = common_query ($query,__FILE__,__LINE__);
 
@@ -981,7 +947,6 @@ function invoice_payment_delete($invoice_id){
 	$arr=mysql_fetch_array($res);
 	if(get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'mgmt_types','log_to_bank',$arr['type'])){
 
-//echo "deleting account movement<br>\n";
 
 		$movement_id=account_movement_delete($arr['account_movement']);
 	}
@@ -1001,8 +966,7 @@ function type_specific_variation($data){
 	mysql_free_result($res);
 	$insert_type=strtolower($row['name']);
 	switch($insert_type){
-		case "fattura":	//$data['debit_taxable_amount']=($data['debit_taxable_amount'])*(-1);
-						//$data['debit_vat_amount']=($data['debit_vat_amount'])*(-1);
+		case "fattura":	
 						$data['debit']='1';
 						$data['debit_taxable_amount']=$data['operation']*abs($data['debit_taxable_amount']);
 						$data['debit_vat_amount']=$data['operation']*abs($data['debit_vat_amount']);
@@ -1039,10 +1003,6 @@ function type_specific_variation($data){
 function insert_data($input_data,$payment_data=0) {
 	require("./mgmt_start.php");
 
-	//mizuko
-	//echo "Input_data:<br>/n";var_dump($input_data);echo "<br><br>/n";
-	//echo "Payment_data:<br>/n";var_dump($payment_data);echo "<br><br>/n";
-	//end:mizuko
 
 	if($err=check_compulsory_fields($input_data)){
 		switch($err){
@@ -1051,7 +1011,6 @@ function insert_data($input_data,$payment_data=0) {
 			case 3: $msg = ucfirst(phr('CHECK_DESCRIPTION')); break;
 			case 4: $msg = ucfirst(phr('CHECK_NO_TYPE_ERROR'))." ".get_conf(__FILE__,__LINE__,"vendor_name"); break;
 		}
-		//echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=javascript:window.close();\">");
 		echo "<script language=\"javascript\">
 			window.alert(\"".$msg."\");
 			history.go(-1);
@@ -1065,9 +1024,6 @@ function insert_data($input_data,$payment_data=0) {
 	$res_local=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$input_data['type']."'");
 	$row_local=mysql_fetch_array($res_local);
 	$type=strtolower($row_local['name']);
-
-	//$stock=$data['stock_quantity'];
-	//unset($data['stock_quantity']);
 
 	if($err=check_date($input_data)) {
 		switch($err){
@@ -1185,7 +1141,6 @@ function insert_data($input_data,$payment_data=0) {
 			echo "<form action=\"stock.php\" method=\"get\">\n";
 			echo "<input type=\"hidden\" name=\"command\" value=\"edit\">\n";
 			echo "<input type=\"hidden\" name=\"data[invoice_id]\" value=\"$inserted_id\">\n";
-			//$db=$_SESSION['mgmt_db'];
 			$err=form_stock_edit($inserted_id);
 			echo "<input type=\"submit\" value=\"".ucphr('SEND_TO_STOCK')."\">\n";
 			echo "</form>\n";
@@ -1208,7 +1163,6 @@ function update_data($input_id,$input_data,$payment_data=0) {
 			case 3: $msg = ucfirst(phr('CHECK_DESCRIPTION')); break;
 			case 4: $msg = ucfirst(phr('CHECK_NO_TYPE_ERROR'))." ".get_conf(__FILE__,__LINE__,"vendor_name"); break;
 		}
-		//echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=javascript:window.close();\">");
 		echo "<script language=\"javascript\">
 			window.alert(\"".$msg."\");
 			history.go(-1);
@@ -1228,7 +1182,6 @@ function update_data($input_id,$input_data,$payment_data=0) {
 			case 3: $msg = ucfirst(phr('CHECK_YEAR')); break;
 			case 4: $msg = ucfirst(phr('CHECK_DATE')); break;
 		}
-		//echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"0; URL=javascript:window.close();\">");
 		echo "<script language=\"javascript\">
 			window.alert(\"".$msg."\");
 			history.go(-1);
@@ -1242,7 +1195,6 @@ function update_data($input_id,$input_data,$payment_data=0) {
 	$input_data=format_currency($input_data);
 
 	$input_data=calculate_amount($input_data);
-//print_r($data);
 
 	$old_type=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'account_mgmt_main','type',$input_id);
 	$old_log_to_bank=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'mgmt_types','log_to_bank',$old_type);
@@ -1405,7 +1357,6 @@ function update_data($input_id,$input_data,$payment_data=0) {
 		echo "<form action=\"stock.php\" method=\"get\">\n";
 		echo "<input type=\"hidden\" name=\"command\" value=\"edit\">\n";
 		echo "<input type=\"hidden\" name=\"data['invoice_id']\" value=\"$input_id\">\n";
-		//$db=$_SESSION['common_db'];
 		$err=form_stock_edit($input_id);
 		if (!$err)
 			echo "<input type=\"submit\" value=\"".ucphr('SEND_TO_STOCK')."\">\n";
@@ -1468,11 +1419,9 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 		$type_name=$people_type -> name($_SESSION['language']);
 		unset($people_type);
 
-//$type_name=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'mgmt_people_types','name',$query_value);
 		$page="supply.php?supplier_type=$query_value&";
 		// the following syntax would be good, but mysql doesn't support it yet
 		// so we use the following one
-		// $query.= " WHERE `who` IN (SELECT `name` FROM `account_mgmt_addressbook` WHERE `type`='".$query_value."')";
 		$table2=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
 		$query.= " JOIN $table2 WHERE $table.who=$table2.name AND $table2.type='".$query_value."'";
 		$query.=" AND";
@@ -1504,15 +1453,12 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 		$mgmt_type = new mgmt_type($query_value);
 		$type_name=$mgmt_type -> name($_SESSION['language']);
 		unset($mgmt_type);
-		//$type_name=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'mgmt_types','name',$query_value);
 		$page="db.php?";
 		// the following syntax would be good, but mysql doesn't support it yet
 		// so we use the following one
-		// $query.= " WHERE `who` IN (SELECT `name` FROM `account_mgmt_addressbook` WHERE `type`='".$query_value."')";
 		$query.= " WHERE (`type`<>'3' AND `waiter_income` <> '1' AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")
 		OR (`type`<>'4' AND `waiter_income` <> '1' AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")
 		OR (`type`<>'5' AND `waiter_income` <> '1' AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")";
-		//$query.=" AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end']."";
 		$query.= " ORDER BY `$orderby`";
 
 		$table_title=GLOBALMSG_RECORD_TITLE_INCOME;
@@ -1532,11 +1478,9 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 		$mgmt_type = new mgmt_type($query_value);
 		$type_name=$mgmt_type -> name($_SESSION['language']);
 		unset($mgmt_type);
-		//$type_name=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'mgmt_types','name',$query_value);
 		$page="db.php?";
 		// the following syntax would be good, but mysql doesn't support it yet
 		// so we use the following one
-		// $query.= " WHERE `who` IN (SELECT `name` FROM `account_mgmt_addressbook` WHERE `type`='".$query_value."')";
 		$query.= " WHERE (`type`<>'3' AND `waiter_income` <> '1' AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")
 		OR (`type`<>'4' AND `waiter_income` <> '1' AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")
 		OR (`type`<>'5' AND `waiter_income` <> '1' AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")";
@@ -1548,7 +1492,6 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 		break;
 	}
 
-//echo $query,"<br>\n";
 
 	$_SESSION['printable']['table_title']=$table_title;
 	$_SESSION['printable']['query']=$query;
@@ -1646,7 +1589,6 @@ function table_income($page,$commandto,$type){
 	$query="SELECT $table.* FROM $table";
 	$query.= " WHERE (`type`='$type' AND `waiter_income` = '1'  AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")";
 
-//echo "<br>".$query."<br>\n\n";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	if(!mysql_num_rows($res)) return 1;
 
@@ -1700,7 +1642,6 @@ function table_income($page,$commandto,$type){
 		$mgmt_type = new mgmt_type($type);
 		$type_name=$mgmt_type -> name($_SESSION['language']);
 		unset($mgmt_type);
-		//$type_name=$row_local['name'];
 		mysql_free_result($res_local);
 
 		$description=ucfirst(phr('INCOME'))." $type_name ".ucphr('PERIOD');
@@ -1838,13 +1779,6 @@ function table_generator($page,$commandto,$query,$command){
 			$is_payment=false;
 		}
 
-		/*
-		$table=$GLOBALS['table_prefix'].'mgmt_types';
-		$res_local = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$row['type']."'");
-		$row_local = mysql_fetch_array($res_local);
-		$type=$row_local['name'];
-		mysql_free_result($res_local);
-		*/
 		$mgmt_type = new mgmt_type($row['type']);
 		$type=$mgmt_type -> name($_SESSION['language']);
 		unset($mgmt_type);

@@ -62,22 +62,6 @@ if(!$header_printed){
 
 	$found_accounting_db=true;
 
-/*	$table=$GLOBALS['table_prefix'].'accounting_dbs';
-	$query="SELECT * FROM `$table`";
-	$res = mysql_db_query ($_SESSION['common_db'],$query);
-	if($errno=mysql_errno()) {
-		$msg="Error in ".__FUNCTION__." array - ";
-		$msg.='mysql: '.mysql_errno().' '.mysql_error();
-		echo $msg,"<br>\n";
-		error_msg(__FILE__,__LINE__,$msg);
-		return 1;
-	}
-	while($arr=mysql_fetch_array($res)) {
-		if(mysql_list_tables($arr['db'])) {
-			$found_accounting_db=true;
-		}
-	}*/
-
 	if(!$found_accounting_db) {
 		$error_msg = common_header('No accounting db has been found');
 
@@ -89,8 +73,6 @@ if(!$header_printed){
 	}
 
 	$_SESSION['common_db']=common_find_first_db($_SESSION['common_db']);
-
-//echo "first_db found:".$_SESSION['common_db'];
 
 	// unsets all the waiters' _SESSION vars
 	unset($_SESSION['catprinted']);
@@ -108,10 +90,6 @@ if(!$header_printed){
 	} elseif(isset($_POST['mgmt_db_number'])){
 		$_SESSION['common_db']=$_POST['mgmt_db_number'];
 	}
-
-
-
-//echo "mgmt_db: ".$_SESSION['mgmt_db']."<br>\n";
 
 	if(!isset($_SESSION['common_db'])) {
 		$_SESSION['common_db']=common_find_first_db();
@@ -153,13 +131,6 @@ if(!$header_printed){
 	$second=$date[5];
 
 	$time_start=mktime($hour,$minute,$second,$month,$day,$year);
-	/*
-	// if we're in the just past working day, subtract 24 hours to start day
-	if($_REQUEST['formdata']==true) {
-		if((date("His",time())<=$conf_day_end) && (date("His",time())>='000000'))
-			$time_start=$time_start-24*3600;
-	}
-	*/
 
 	$time_start_arr[2]=date("j",$time_start);
 	$time_start_arr[1]=date("n",$time_start);
@@ -177,7 +148,6 @@ if(!$header_printed){
 			$timestamp_start.=sprintf("%02d",$time_start_arr[$i]);
 		}
 	}
-	//$timestamp_start.=get_conf(__FILE__,__LINE__,"day_end");
 
 	$_SESSION['timestamp']['start']=$timestamp_start;
 
@@ -194,15 +164,6 @@ if(!$header_printed){
 	$second=$date[5];
 
 	$time_end=mktime($hour,$minute,$second,$month,$day,$year);
-	
-	// if we're not in the just past working day, add 24 hours to end day
-	/*
-	if($_REQUEST['formdata']==true) {
-		if((date("His",time())<=$conf_day_end) && (date("His",time())>='000000')) {
-		} else $time_end=$time_end+(3600*24);
-	}
-	*/
-	//$time_end=$time_end+(3600*24);
 	
 	$time_end_arr[2]=date("j",$time_end);
 	$time_end_arr[1]=date("n",$time_end);
@@ -222,7 +183,6 @@ if(!$header_printed){
 
 	$_SESSION['timestamp']['end']=$timestamp_end;
 
-	//debug_msg(__FILE__,__LINE__,"$timestamp_start -> $timestamp_end");
 
 	$_SESSION['date']['start']=substr($timestamp_start,6,2)."/";
 	$_SESSION['date']['start'].=substr($timestamp_start,4,2)."/";
@@ -230,8 +190,6 @@ if(!$header_printed){
 
 	$_SESSION['time']['start']=substr($timestamp_start,8,2);
 	$_SESSION['time']['start'].=":".substr($timestamp_start,10,2);
-	//$_SESSION['time']['start'].=":".substr($timestamp_start,12,2);
-
 
 	$_SESSION['date']['end']=substr($timestamp_end,6,2)."/";
 	$_SESSION['date']['end'].=substr($timestamp_end,4,2)."/";
@@ -239,19 +197,12 @@ if(!$header_printed){
 
 	$_SESSION['time']['end']=substr($timestamp_end,8,2);
 	$_SESSION['time']['end'].=":".substr($timestamp_end,10,2);
-	//$_SESSION['time']['end'].=":".substr($timestamp_end,12,2);
-
 
 	if(isset($_REQUEST['command'])){
 		$command=$_REQUEST['command'];
 		$_SESSION['command']=$command;
 	}
 
-	/*
-	elseif(isset($_SESSION['command'])){
-		$command=$_SESSION['command'];
-	}
-	*/
 	if(isset($_GET['id'])){
 		$start_id=$_GET['id'];
 		$_SESSION['id']=$start_id;
@@ -353,9 +304,6 @@ if(!$header_printed){
 
 <?php
 	}
-//	<body bgcolor="$mgmt_color_background">
-
-
 	$header_printed=2;
 }
 

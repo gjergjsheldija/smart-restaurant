@@ -74,15 +74,6 @@ class db_manager {
 	}
 	
 	function upgrade_available () {
-/*		$upgrades=list_upgrades(ROOTDIR.'/upgrade');
-		
-		// sort in reverse to find upgrade to be done asap
-		rsort($upgrades);
-		for (reset ($upgrades); list ($key, $value) = each ($upgrades); ) {
-			$filename=$value;
-			if($this->upgrade_upgrade_to_do ($filename)) return true;
-		}
-		*/
 		return false;
 	}
 	
@@ -208,10 +199,8 @@ class db_manager {
 			
 			if(eregi("#[^:]*database_type[^:]*:",$line)) {
 				$line = eregi_replace ("#[^:]*database_type[^:]*:", "", $line);
-				//$line = fgets ($fp, 1024*1024);						// read it line by line.
 				$db_type=trim($line);
 				$db_type=strtolower($db_type);
-//echo 'found db: '.$db_type."<br />\n";
 				continue;
 			} elseif (($trimmedline[0] == '#')
 				or ($trimmedline[0] == '-')						// If the line is a comment
@@ -223,7 +212,6 @@ class db_manager {
 
 			if (eregi (';$',$trimmedline)) {						// If this is the end of a query,
 				$query = eregi_replace (";$", "", $query); // remove the semicolon,
-				//$query = str_replace (';', '', $query);	// remove the semicolon,
 
 				$tmp_arr=explode(' ',trim($query));
 				$tmp=trim($query);
@@ -290,7 +278,6 @@ class db_manager {
 				
 				
 				if (!empty($this -> db_destination)) {
-//echo "sent to ".$_SESSION['common_db'].":<br/ >\n$query<br />\n";
 					$db=$this -> db_destination;
 					if(!$simulate_only) {
 						if(!empty($db))
@@ -314,11 +301,8 @@ class db_manager {
 					
 					unset($tmp);
 				} elseif($db_type=='account') {
-/*					$table = $GLOBALS['table_prefix'].'accounting_dbs';
-					$query_local = "SELECT * FROM `$table`";*/
 					$res_local = mysql_db_query($_SESSION['common_db'],$query_local);
 					while($arr_db = mysql_fetch_array($res_local)) {
-//echo "sent to ".$arr_db['db'].":<br/ >\n$query<br />\n";
 						
 						// db not found, skip it
 						if(!mysql_list_tables($arr['db'])) continue;
@@ -345,7 +329,6 @@ class db_manager {
 						unset($tmp);
 					}
 				} elseif ($db_type=='common') {
-//echo "sent to ".$_SESSION['common_db'].":<br/ >\n$query<br />\n";
 					$db=$_SESSION['common_db'];
 					if(!$simulate_only) {
 						if(!empty($db))
@@ -385,7 +368,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 				return ERR_SQL_CONTINUING;
 			}
 		}
-		//if($verbose) echo $output;
 		unset($_SESSION['restore_sql']);
 		
 		return 0;
@@ -478,7 +460,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		$tree2 = $parse -> xml_to_tree($target_db,0);
 		$target_arr=$this -> tree_to_array ($tree2);
 		
-		// var_dump_table($target_arr);
 		for (reset ($base_arr['tables']); list ($bkey, $bvalue) = each ($base_arr['tables']); ) {
 			$this -> table = $bkey;
 			if(array_key_exists($bkey, $target_arr['tables'])) {
@@ -515,7 +496,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 			if(array_key_exists($tkey, $base_arr['fields'])) {
 			} else {
 				$out['remove']['tables'][$this -> table]['fields'][$tkey]['remove']='1';
-				//echo '$out['add']['tables']['.$this -> table.']['fields']['.$bkey.']['add']=1'."\n";
 			}
 		}
 		return $out;
@@ -587,7 +567,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 				break;
 			}
 		}
-	//	$out .= "\t\t\t<name> $db </name>\n";
 		
 		while($arr_tables=mysql_fetch_array($res_tables)) {
 			$table=$arr_tables[0];
@@ -679,7 +658,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		if($numtables==0) return 0;
 		
 		$out = "#\n";
-		$out .="# My Handy Restaurant database dump\n";
+		$out .="# Smart Restaurant database dump\n";
 		$out .= "#\n";
 		$out .= "\n";
 		$out .= "#\n";
@@ -751,10 +730,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		$out = '';
 		if(!$this -> is_mhr_table($table)) return '';
 	
-		/*
-		$out .= "\n# ------------------------------------------------------\n";
-		$out .= "\n#\n# Table: $table\n#\n";
-		*/
 		$out .= "\n";
 		$out .= "#\n";
 		$out .= "# Structure dump for table $table \n";
@@ -838,8 +813,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 						$data_val = str_replace ("\n", '\r\n', $data_val);
 						$data_val = str_replace ("\r", '\r\n', $data_val);
 						
-						//$data_val=mysql_real_escape_string($data_val);
-						//$data_val=addslashes($data_val);
 						$out .= "'".$data_val."', ";
 					}
 					// strips the last comma that has been put
@@ -862,8 +835,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 						$data_val = str_replace ("\n", '\r\n', $data_val);
 						$data_val = str_replace ("\r", '\r\n', $data_val);
 						
-						//$data_val=mysql_real_escape_string($data_val);
-						//$data_val=addslashes($data_val);
 						$out .= "'".$data_val."', ";
 					}
 					// strips the last comma that has been put
@@ -936,7 +907,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		else $string .= ' NULL';
 		if($default!="") $string .= ' default \''.$default.'\'';
 		if($extra) $string .= ' '.$extra;
-		//if($key) $string .= ', PRIMARY KEY (`'.$name.'`)';
 	
 		$out[$name]['name']=$name;
 		$out[$name]['type']=$type;

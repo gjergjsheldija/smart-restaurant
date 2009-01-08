@@ -33,14 +33,6 @@ define('ROOTDIR','..');
 require(ROOTDIR."/manage/mgmt_funs.php");
 require(ROOTDIR."/manage/mgmt_start.php");
 
-/*
-	for (reset ($db); list ($key, $value) = each ($db); ) {
-		$found[$value]=0;
-		if(mysql_list_tables($value))
-			$found[$value]=1;
-	}
-*/
-
 if(!access_allowed(USER_BIT_STOCK)) $command='access_denied';
 
 switch($command) {
@@ -123,16 +115,6 @@ main_header("movement.php");
 		}
 	}
 
-/*
-	for (reset ($db); list ($key, $value) = each ($db); ) {
-		$checked="";
-		if($_SESSION['mgmt_db']==$db[$key]){
-			$checked=" checked";
-		}
-		if($found[$db[$key]] && $key!=0)
-			echo '<input type="radio" onClick="JavaScript:document.time_range.submit();" name="mgmt_db_number" value="'.$key.'"'.$checked.'>'.$key.' '."\n";
-	}
-*/
 ?>
 	</td>
 <td ><input type="submit" value="<?php echo ucfirst(GLOBALMSG_REPORT_GENERATE); ?>"></td>

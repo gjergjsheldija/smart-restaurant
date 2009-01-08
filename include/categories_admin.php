@@ -513,7 +513,6 @@ function categories_html_color_row ($bit) {
 				break;
 		}
 		$link = 'color_select(\''.$color.'\');';
-		// $link = 'category_form.htmlcolor.value=\''.$color.'\';';
 		$output .= '<td class="color_table_cell" onclick="'.$link.'" bgcolor="'.$color.'">&nbsp;</td>'."\n";
 	}
 	return $output;

@@ -68,7 +68,6 @@ function table_supplier($orderby){
 	<tbody>\n";
 
 	$i=0;
-	//$query="SELECT * FROM `account_mgmt_addressbook` WHERE `type`='1' ORDER BY `$orderby`";
 	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
 	$query="SELECT * FROM $table ORDER BY `$orderby`";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
@@ -84,7 +83,6 @@ function table_supplier($orderby){
 			$people_type = new mgmt_people_type($row['type']);
 			$type=ucfirst(strtolower($people_type -> name($_SESSION['language'])));
 			unset($people_type);
-			//$type=ucfirst(strtolower($row_type['name']));
 
 			$color=color($i);
 ?>
@@ -228,23 +226,6 @@ function form_bank($id,$type_id){
 	echo "<table>\n";
 
 	form_supplier_standard($id,$editing);
-
-/*
-	echo "<tr><td>Numero di conto</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"12\" type=\"text\" name=\"data[bank_account]\" value=\"".$row['bank_account']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>ABI</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[abi]\" value=\"".$row['abi']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>CAB</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[cab]\" value=\"".$row['cab']."\">";
-	echo "</td></tr>\n";
-*/
 	echo "</table>\n";
 
 
@@ -266,13 +247,6 @@ function form_supplier($id,$type_id){
 	echo "<table>\n";
 
 	form_supplier_standard($id,$editing);
-
-/*
-	echo "<tr><td>Partita IVA</td>\n";
-	echo "<td>\n";
-	echo "<input type=\"text\" name=\"data[vat]\" value=\"".$row['vat']."\">";
-	echo "</td></tr>\n";
-*/
 	echo "</table>\n";
 }
 
@@ -292,23 +266,6 @@ function form_employee($id,$type_id){
 	echo "<table>\n";
 
 	form_supplier_standard($id,$editing);
-
-/*
-	echo "<tr><td>Numero di conto</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"12\" type=\"text\" name=\"data[bank_account]\" value=\"".$row['bank_account']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>ABI</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[abi]\" value=\"".$row['abi']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>CAB</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[cab]\" value=\"".$row['cab']."\">";
-	echo "</td></tr>\n";
-*/
 	echo "</table>\n";
 }
 
@@ -328,22 +285,6 @@ function form_pos($id,$type_id){
 	echo "<table>\n";
 
 	form_supplier_standard($id,$editing);
-/*
-	echo "<tr><td>Numero di conto</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"12\" type=\"text\" name=\"data[bank_account]\" value=\"".$row['bank_account']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>ABI</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[abi]\" value=\"".$row['abi']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>CAB</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[cab]\" value=\"".$row['cab']."\">";
-	echo "</td></tr>\n";
-*/
 	echo "</table>\n";
 
 }
@@ -365,27 +306,6 @@ function form_other($id,$type_id){
 	echo "<table>\n";
 
 	form_supplier_standard($id,$editing);
-/*
-	echo "<tr><td>Partita IVA</td>\n";
-	echo "<td>\n";
-	echo "<input type=\"text\" name=\"data[vat]\" value=\"".$row['vat']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>Numero di conto</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"12\" type=\"text\" name=\"data[bank_account]\" value=\"".$row['bank_account']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>ABI</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[abi]\" value=\"".$row['abi']."\">";
-	echo "</td></tr>\n";
-
-	echo "<tr><td>CAB</td>\n";
-	echo "<td>\n";
-	echo "<input maxlength=\"5\" type=\"text\" name=\"data[cab]\" value=\"".$row['cab']."\">";
-	echo "</td></tr>\n";
-*/
 	echo "</table>\n";
 }
 
@@ -429,13 +349,6 @@ function display_supplier_show($id){
 	$type=strtolower($people_type -> name($_SESSION['language']));
 	unset($people_type);
 
-	/*
-	$table=$GLOBALS['table_prefix'].'mgmt_people_types';
-	$res_type=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$type'");
-	$row_type=mysql_fetch_array($res_type);
-	$type=strtolower($row_type['name']);
-	*/
-
 
 	echo "<table bgcolor=\"".color(-1)."\">";
 	echo "<tr>
@@ -464,13 +377,10 @@ function display_supplier_show($id){
 		<td bgcolor="<?php echo $mgmt_color_background; ?>"><a href="http://<?php echo $row['web']; ?>" target="_blank"><?php echo $row['web']; ?></a></td>
 	</tr>
 <?php
-	//if($type=="altro" || $type=="fornitore"){
 		echo "<tr>
 			<td bgcolor=\"$mgmt_color_tablebg\">".ucfirst(phr('VAT_ACCOUNT'))."<br>".ucfirst(phr('SOCIAL_SECURITY_NUMBER'))."</td>
 			<td bgcolor=\"$mgmt_color_background\">".$row['vat']."</td>
 		</tr>\n";
-	//}
-	//if($type!="fornitore"){
 		echo "<tr>
 			<td bgcolor=\"$mgmt_color_tablebg\">".phr('ACCOUNT_NUMBER')."</td>
 			<td bgcolor=\"$mgmt_color_background\">".$row['bank_account']."</td>
@@ -483,7 +393,6 @@ function display_supplier_show($id){
 			<td bgcolor=\"$mgmt_color_tablebg\">".phr('ACCOUNT_CAB')."</td>
 			<td bgcolor=\"$mgmt_color_background\">".$row['cab']."</td>
 		</tr>\n";
-	//}
 	echo "</table>\n";
 }
 
@@ -588,17 +497,12 @@ function update_supplier_data($id,$data) {
 	$query = substr ($query, 0, strlen($query)-1);
 	$query.=" WHERE `id`='$id'";
 
-	//echo "<br>Query SQL:<br>".$query."<br>\n";
-
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	$num_affected=mysql_affected_rows();
 
 	if ($num_affected==1) {
-		//echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"".get_conf(__FILE__,__LINE__,"refresh_time_management")."; URL=javascript:window.close();\">");
-		//echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"".get_conf(__FILE__,__LINE__,"refresh_time_management")."; URL=index.php\">");
 		echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"".get_conf(__FILE__,__LINE__,"refresh_time_management")."; URL=supply.php?command=showknownsupplier&id=$id\">");
 		echo GLOBALMSG_RECORD_THE." <b>".$data['name']."</b> ".GLOBALMSG_RECORD_EDIT_OK.". <br>\n";
-//echo "ID: $id.<br>\n";
 	}elseif(mysql_errno()) {
 		echo ucfirst(phr('ERROR')).".<br>\n";
 	} else {
@@ -619,15 +523,12 @@ function update_supplier_note($id,$data) {
 	$query = substr ($query, 0, strlen($query)-1);
 	$query.=" WHERE `id`='$id'";
 
-//echo "<br>Query SQL:<br>".$query."<br>\n";
-
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	$num_affected=mysql_affected_rows();
 
 	if ($num_affected==1) {
 		echo("<META HTTP-EQUIV=\"Refresh\" CONTENT=\"".get_conf(__FILE__,__LINE__,"refresh_time_management")."; URL=javascript:window.close();\">");
 		echo GLOBALMSG_RECORD_THE." <b>".$data['name']."</b> ".GLOBALMSG_RECORD_EDIT_OK.". <br>\n";
-//echo "ID: $id.<br>\n";
 	}elseif(mysql_errno()) {
 		echo ucfirst(phr('ERROR')).".<br>\n";
 	} else {
@@ -660,7 +561,6 @@ function delete_supplier($delete){
 		$description=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],"account_mgmt_addressbook","name",$delete);
 		$counter++;
 	}
-	// echo "<br>Query SQL:<br>".$query."<br>\n";
 
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	$num_affected=mysql_affected_rows();

@@ -301,7 +301,6 @@ class stock_dish extends object {
 		$col=0;
 		if(is_numeric($qty) && $qty<CONF_STOCK_QUANTITY_ALARM) $display->properties[$row][$col]='style="color: #FF0000; font-weight: bolder"';
 		$display->rows[$row][$col]=ucphr('POSSIBLE_QUANTITY');
-		//$display->widths[$row][$col]='100%';
 		$col++;
 		if(is_numeric($qty) && $qty<CONF_STOCK_QUANTITY_ALARM) $display->properties[$row][$col]='style="color: #FF0000; font-weight: bolder"';
 		$display->rows[$row][$col]=$qty;
@@ -471,11 +470,6 @@ class stock_dish extends object {
 				$col++;
 				$display->rows[$row][$col]='<input type="text" size=7 name="data['.$this->id.']['.$ingred->id.']" value="'.$prev_quantity.'">';
 				$col++;
-				/*
-				$display->rows[$row][$col]=ucphr('NOW').': '.$prev_quantity;
-				$display->widths[$row][$col]="19%";
-				$col++;
-				*/
 				$row++;
 			}
 		}

@@ -37,7 +37,6 @@ if(isset($start_id)){
 	$_SESSION['who']=$start_id;
 }
 
-//echo "http://".$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI']."<br>";
 ?>
 <meta http-equiv="Cache-Control" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
@@ -122,8 +121,6 @@ switch($command) {
 			echo "
 			<input type=\"submit\" value=\"".GLOBALMSG_RECORD_EDIT."\">
 			</form>\n";
-
-			//form_insert_type();
 
 			echo "</td><td valign=\"top\" align=\"center\">\n";
 			form_supplier_note($start_id);
@@ -237,7 +234,6 @@ switch($command) {
 		} elseif(isset($_POST['orderby'])){
 			$orderby=$_POST['orderby'];
 		}
-		//main_header();
 		table_supplier($orderby);
 		break;
 

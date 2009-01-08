@@ -94,7 +94,6 @@ function eq_to_number ($eq) {
 	
 	if ($eq==='') return 0;
 	
-// echo 'equation: '.$eq.'<br/>';
 	$eq=ereg_replace(',','.',$eq);
 	$eq=ereg_replace('[^-|(|)|0-9|+|*|/|.]','',$eq);
 	
@@ -103,7 +102,6 @@ function eq_to_number ($eq) {
 	
 	$eq='$num = '.$eq.';';
 	
-// echo 'equation: '.$eq.'<br/>';
 	@eval($eq);
 	
 	if(!is_numeric($num)) return 0;
@@ -224,7 +222,6 @@ function database_query_translator ($query) {
 }
 
 function database_query($query,$file,$line,$db,$silent=false) {
-	//echo $query;
 	if(!isset($GLOBALS['mysql_timer'])) $GLOBALS['mysql_timer']=0;
 	$query = database_query_translator ($query);
 
@@ -316,7 +313,7 @@ function lang_db_to_string($lang) {
 	$output=
 '<?xml version="1.0"?>
 <!DOCTYPE SmartRestaurant [
-	<!ELEMENT MyHandyRestaurant (type,data+)>
+	<!ELEMENT SmartRestaurant (type,data+)>
 	<!ELEMENT type (#PCDATA)>
 	<!ELEMENT language (#PCDATA)>
 	<!ELEMENT data (item*)>
@@ -348,9 +345,7 @@ function lang_db_to_string($lang) {
 		$arrlocal = mysql_fetch_array ($reslocal);
 		$value=htmlentities($arrlocal['table_name']);
 
-		//$output.="\t\t".'<item name="'.$name.'" value="'.$arrlocal['table_name'].'" />'."\n" ;
 		$output.="\t\t".'<item name="'.$name.'">'.$value.'</item>'."\n" ;
-		//$output.="\t\t<$name> ".$arrlocal['table_name']." </$name>\n" ;
 	}
 	$output.=
 '	</data>
@@ -372,9 +367,6 @@ function start_language () {
 		if(!empty($user -> data['language'])) $_SESSION['language'] = $user -> data['language'];
 	}
 	
-	//$lang_file=ROOTDIR."/lang/lang_".$_SESSION['language'].".php";
-	//if(is_readable($lang_file)) include($lang_file);
-	//else error_msg(__FILE__,__LINE__,'file '.$lang_file.' is not readable');
 	
 	return 0;
 }
@@ -400,11 +392,6 @@ function lang_file_reader($filename) {
 	debug_msg(__FILE__,__LINE__,'reading lang faile: '.$filename);
 
 	$xml_parser = xml_parser_create();
-	/*
-	xml_set_element_handler($xml_parser, "startElement", "endElement");
-	xml_set_character_data_handler($xml_parser, "characterData");
-	//xml_set_default_handler($xml_parser, "defaultHandler");
-	*/
 	
 	$simple = '';
 	
@@ -508,10 +495,6 @@ function ucphr($name) {
 	if(isset($_SESSION['language'])) $lang = $_SESSION['language'];
 	else $lang= get_conf(__FILE__,__LINE__,"default_language");
 	
-	//if(!isset($GLOBALS['cache_var'])) $GLOBALS['cache_var']=new cache();
-	
-	//if($cache_out=$GLOBALS['cache_var'] -> lang_get ($lang,$name)) $ret = $cache_out;
-	//else 
 	$ret = lang_get($lang,$name);
 	// optimisation
 	//if(ord($ret)>97 && ord($ret)<122)
@@ -609,20 +592,12 @@ function lang_get_xml($language,$name,$charset='iso-8859-1') {
 }
 
 function lang_get_db($lang,$name,$charset='iso-8859-1'){
-	// debug_msg(__FILE__,__LINE__,'in lang_get_db for code: '.$name);
 
 	if(empty($lang)) $lang="en";
 
-	// debug_msg(__FILE__,__LINE__,'using db lang: lang '.$lang.' name: '.$name);
 	$table="#prefix#lang";
 	$lang_table="#prefix#lang_".$lang;
 
-/*	$query="SELECT id FROM `".$table."` WHERE `name`='".$name."'";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return ERR_MYSQL;
-
-	$arr = mysql_fetch_array ($res);
-	$id = $arr['id'];*/
 
 	$query="SELECT `table_name` FROM `".$table."` WHERE `name`='".$name."'";
 	$res=common_query($query,__FILE__,__LINE__);
@@ -630,19 +605,6 @@ function lang_get_db($lang,$name,$charset='iso-8859-1'){
 
 	$arr = mysql_fetch_array ($res);
 	
-/*	if(empty($arr["table_name"]) && CONF_SHOW_DEFAULT_ON_MISSING) {
-		$msg='Language data '.$name.' for language '.$lang.' not found';
-		debug_msg(__FILE__,__LINE__,$msg);
-		
-		$default_lang=trim(get_conf(__FILE__,__LINE__,'default_language'));
-		if(empty($default_lang)) $default_lang='en';
-		if($lang!=$default_lang) return lang_get($default_lang,$name);
-		else $arr["table_name"]=$name;
-	} elseif(empty($arr["table_name"]) && !CONF_SHOW_DEFAULT_ON_MISSING) {
-		$arr["table_name"]=$name;
-		$msg='Language data '.$name.' for language '.$lang.' not found';
-		debug_msg(__FILE__,__LINE__,$msg);
-	}*/
 
 	$ret=$arr['table_name'];
 	$ret=stripslashes($ret);
@@ -714,34 +676,33 @@ return $output;
 }
 
 function list_drivers($dir) {
-clearstatcache();
-if ($handle = opendir($dir)) {
-	while (false !== ($file = readdir($handle))) {
-		if (is_file($dir.'/'.$file) && is_readable($dir.'/'.$file) && $file != "." && $file != "..") {
-			$file = str_replace ('.php',"",$file);
-			//echo $file."<br>\n";
-			$drivers[]=$file;
+clearstatcache ();
+	if ($handle = opendir ( $dir )) {
+		while ( false !== ($file = readdir ( $handle )) ) {
+			if (is_file ( $dir . '/' . $file ) && is_readable ( $dir . '/' . $file ) && $file != "." && $file != "..") {
+				$file = str_replace ( '.php', "", $file );
+				$drivers [] = $file;
+			}
 		}
+		closedir ( $handle );
 	}
-	closedir($handle);
-}
-return $drivers;
+	return $drivers;
 }
 
 function list_templates($dir) {
-clearstatcache();
-$templates=array();
-if ($handle = opendir($dir)) {
-	while (false !== ($file = readdir($handle))) {
-		if (is_dir($dir.'/'.$file) && is_readable($dir.'/'.$file) && $file != "." && $file != ".." && is_dir($dir.'/'.$file.'/prints')) {
-			
-			if(!in_array($file,$templates))
-				$templates[]=$file;
+clearstatcache ();
+	$templates = array ();
+	if ($handle = opendir ( $dir )) {
+		while ( false !== ($file = readdir ( $handle )) ) {
+			if (is_dir ( $dir . '/' . $file ) && is_readable ( $dir . '/' . $file ) && $file != "." && $file != ".." && is_dir ( $dir . '/' . $file . '/prints' )) {
+				
+				if (! in_array ( $file, $templates ))
+					$templates [] = $file;
+			}
 		}
+		closedir ( $handle );
 	}
-	closedir($handle);
-}
-return $templates;
+	return $templates;
 }
 
 function list_languages($dir) {
@@ -778,25 +739,26 @@ return $langs;
 }
 
 function list_db_languages() {
-	$points=array();
+	$points = array ();
 	
-	$res_lang=mysql_list_tables($_SESSION['common_db']);
-	while($arr_lang=mysql_fetch_array($res_lang)) {
-		if(eregi($GLOBALS['table_prefix'].'[^_]*_*.*[^_]*_.?.?$',$arr_lang[0])) {
-			$lang_now=eregi_replace($GLOBALS['table_prefix']."[^_]*_*.*[^_]*_(.?.?)$","\\1",$arr_lang[0]);
-//echo 'lang: '.$lang_now."<br>";
-			$lang_now= substr($lang_now,-2);		// this is useless if eregi works correctly, but a check it's better, isn't it?
+	$res_lang = mysql_list_tables ( $_SESSION ['common_db'] );
+	while ( $arr_lang = mysql_fetch_array ( $res_lang ) ) {
+		if (eregi ( $GLOBALS ['table_prefix'] . '[^_]*_*.*[^_]*_.?.?$', $arr_lang [0] )) {
+			$lang_now = eregi_replace ( $GLOBALS ['table_prefix'] . "[^_]*_*.*[^_]*_(.?.?)$", "\\1", $arr_lang [0] );
+			$lang_now = substr ( $lang_now, - 2 ); // this is useless if eregi works correctly, but a check it's better, isn't it?
 			
-			if(!isset($points[$lang_now])) $points[$lang_now]=0;
+
+			if (! isset ( $points [$lang_now] ))
+				$points [$lang_now] = 0;
 			
-			$points[$lang_now]++;
+			$points [$lang_now] ++;
 			
-			if($points[$lang_now]==LANG_TABLES_NUMBER)		// all the lang tables have been found
-				$lang_array[]=$lang_now;
+			if ($points [$lang_now] == LANG_TABLES_NUMBER) // all the lang tables have been found
+				$lang_array [] = $lang_now;
 		}
 	}
-	$langs=$lang_array;
-return $langs;
+	$langs = $lang_array;
+	return $langs;
 }
 
 function css_line_admin($i){
@@ -826,7 +788,6 @@ function color($i){
 function check_output_files() {
 	clearstatcache();
 
-	// $name=get_conf(__FILE__,__LINE__,'files_error_dest');
 	$name = ERROR_FILE;
 	if(!file_exists($name)) {
 		$dirname=dirname($name);
@@ -836,7 +797,6 @@ function check_output_files() {
 		return 1;
 
 	if(CONF_DEBUG) {
-		//$name=get_conf(__FILE__,__LINE__,'files_debug_dest');
 		$name = DEBUG_FILE;
 		if(!file_exists($name)) {
 			$dirname=dirname($name);
@@ -893,24 +853,6 @@ function get_conf($file,$line,$name){
 }
 
 function common_find_first_db($db_wanted='') {
-/*	if(!empty($db_wanted)) {
-		$query="SELECT * FROM `#prefix#accounting_dbs` WHERE `db`='$db_wanted'";
-		$res=common_query($query,__FILE__,__LINE__);
-		if(!$res) return 0;
-		
-		$arr=mysql_fetch_array($res);
-		if(mysql_list_tables($arr['db']))
-			return $arr['db'];
-	}
-
-	$query="SELECT * FROM `#prefix#accounting_dbs`";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return 0;
-	
-	while($arr=mysql_fetch_array($res)) {
-		if(mysql_list_tables($arr['db']))
-			return $arr['db'];
-	}*/
 	
 	$arr['db'] = $GLOBALS['db_common'];
 	return $arr['db'];
@@ -992,11 +934,9 @@ function help_sticky ($msg_code) {
 	
 	$overlib_code="return overlib('".$help."', AUTOSTATUS, CAPICON,'".ROOTDIR."/images/docs_small.png', CAPTION,'".$title."',FGCLASS, 'help_fg',BGCLASS, 'help_bg',CLOSECLICK, TEXTFONTCLASS, 'help_text',CAPTIONFONTCLASS,'help_caption', CLOSEFONTCLASS, 'help_close', WIDTH, 400, DELAY, 300);";
 	
-	//$tmp = '<a href="javascript:void(0);" onclick="'.$overlib_code.'">';
 	$tmp .= '<img src="'.ROOTDIR.'/images/help_small.png" border="0" alt="'.ucphr('MHR_ONLINE_HELP').'" width="16" height="16" style="vertical-align: text-bottom"';
 	$tmp .= ' onmouseover="'.$overlib_code.'" onmouseout="nd();"';
 	$tmp .= '>';
-	//$tmp .= '</a>';
 	return $tmp;
 }
 
@@ -1032,7 +972,6 @@ function head_line_waiter ($title) {
 	<meta http-equiv="Expires" content="0">';
 	$tpl -> assign("head", $output);
 
-	//$tmp = '<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>';
 	$tpl -> append("scripts", $tmp);
 
 	return $output;
@@ -1051,7 +990,6 @@ function disconnect_line_pos () {
 	if(isset($_SESSION['userid'])) {
 		$user = new user($_SESSION['userid']);
 
-		//$output = ucfirst(phr('IF_YOU_ARE_NOT_DISCONNECT_0')).' <b>'.$user->data['name'].'</b> '.ucfirst(phr('IF_YOU_ARE_NOT_DISCONNECT_1')).'<br/>'."\n";
 		$output = '<a href="disconnect.php"><img src='.IMAGE_LOGOUT.'></a>';
 	}
 	return $output;
@@ -1119,15 +1057,11 @@ function redirect_timed($url,$millitime) {
 }
 
 function unset_session_vars(){
-	/*
-	unset($_SESSION['userid']);
-	*/
 	unset($_SESSION['command']);
 	unset($_SESSION['id']);
 	unset($_SESSION['orderby']);
 	unset($_SESSION['ordersort']);
 	unset($_SESSION['data']);
-	//unset($_SESSION['sourceid']);
 	unset($_SESSION['separated']);
 	unset($_SESSION['extra_care']);
 	unset($_SESSION['type']);
@@ -1147,25 +1081,20 @@ function unset_source_vars(){
 }
 
 function debug_msg($file,$line,$msg){
-	//require("./conf/config.inc.php");
 
 	if(!CONF_DEBUG) return 0;
 	
-	// $filename=get_conf(__FILE__,__LINE__,"files_debug_dest");
 	$filename = DEBUG_FILE;
 	
 	$tmp=date("j/n/Y G:i:s",time());
 	
-	//$user = new user($_SESSION['userid']);
 	$tmp.=" Table: ".$_SESSION['tablenum'];
-	//$tmp .= " User: ".$user->data['name'];
 	$tmp .= " User: ".$_SESSION['userid'];
 	$tmp .= " - $file line: $line - ";
 	
 	$tmp.=$msg;
 
 	$msg=$tmp."\n";
-	//$out=system("echo '$msg' >> ".get_conf(__FILE__,__LINE__,"files_debug_dest"),$outerr);
 
 	if (!is_writable($filename)) {
 		print "Cannot write to file ($filename)";
@@ -1192,21 +1121,17 @@ function debug_msg($file,$line,$msg){
 function error_msg($file,$line,$msg){
 	debug_msg($file,$line,'ERROR - '.$msg);
 	
-	// $filename=get_conf(__FILE__,__LINE__,"files_error_dest");
 	$filename = ERROR_FILE;
 	
 	$tmp=date("j/n/Y G:i:s",time());
 	
-	//$user = new user($_SESSION['userid']);
 	$tmp.=" Table: ".$_SESSION['tablenum'];
-	//$tmp .= " User: ".$user->data['name'];
 	$tmp .= " User: ".$_SESSION['userid'];
 	$tmp .= " - $file line: $line - ";
 	
 	$tmp.=$msg."\n";
 	
 	$msg=$tmp;
-	//$out=system("echo '$msg' >> ".get_conf(__FILE__,__LINE__,"files_error_dest"),$outerr);
 	
 	if (!is_writable($filename)) {
 		echo "Cannot write to file ($filename).<br/>";

@@ -204,7 +204,6 @@ switch ($_REQUEST['command']){
 
 				$table=$GLOBALS['table_prefix'].'dishes';
 				$query="UPDATE $table SET `stock` = '0'";
-				//$res = mysql_db_query($db_common,$query);
 
 				$table=$GLOBALS['table_prefix'].'sources';
 				$query="UPDATE $table SET
@@ -279,12 +278,6 @@ switch ($_REQUEST['command']){
 				echo "$msg_reset_access_times_ok<br><br>";
 			}
 			break;
-
-
-/*
-			UPDATE `sources` SET `userid` = '0',
- `last_access_time` = NOW( '20031107004150' ) WHERE `id` = '2' LIMIT 1 ;
-*/
 
 	default:
 ?>

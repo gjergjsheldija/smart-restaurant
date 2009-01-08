@@ -60,7 +60,6 @@ class order {
 	}
 	
 	function prepare_default_array ($dishid) {
-		//$quantity=get_conf(__FILE__,__LINE__,"default_quantity");
 		$quantity=0;
 		
 		$query ="SELECT * FROM `#prefix#dishes` WHERE `id` = '$dishid'";
@@ -315,7 +314,6 @@ class order {
 	}
 	
 	function price_mods_normal ($only_notfree=false) {
-		// $query ="SELECT * FROM `#prefix#orders` WHERE `associated_id` = '".$this->id."' AND `id` != '".$this->id."' AND `deleted`='0'";
 		
 		$query ="SELECT #prefix#orders.* FROM `#prefix#orders` JOIN `#prefix#ingreds`
 		WHERE #prefix#orders.ingredid = #prefix#ingreds.id
@@ -535,7 +533,6 @@ class order {
 			// then it means that the ingred has passed through the autocalc system
 			// and we let the waiter know this, so he could check the prices.
 			$modingredprice = $ingr -> get ('price');
-			//$modingredprice=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],"ingreds","price",$modingred);
 			if($modingredprice==0 && $arr['price']!=0) {
 				$dishname.=" (auto)";
 			}
@@ -860,32 +857,13 @@ class order {
 		// mods cell
 		if ($deleted && $arr['dishid']!=MOD_ID) {
 			$output .= '';
-/*		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>';*/
 		
 		} elseif (!$deleted
 				&& $arr['printed']==NULL
 				&& $arr['dishid']!=MOD_ID
 				&& $arr['dishid']!=SERVICE_ID) {
 			$link = 'orders.php?command=listmods&amp;data[id]='.$arr['associated_id'];
-		//mizuko : hjeka + / - te porosite
-			/*			$output .= '
-		<td bgcolor="'.$class.'" onclick="redir(\''.$link.'\');">
-			<a href="'.$link.'">+ -</a>
-		</td>';*/
-
-		
 		} 
-		//04.06.2007
-		//mizuko rregullova tabelen ci u renderizote keq
-		/*else {
-			$output .= '
-		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>';
-		
-		}*/
 		
 		// Name of the dish
 		if($deleted) {
@@ -932,10 +910,10 @@ class order {
 		}
 		
 		// priority cell
-		/*$output .= '
+		$output .= '
 		<td bgcolor="'.$classpriority.'">
 			'.$arr['priority'].'
-		</td>';*/
+		</td>';
 		
 		// price cell
 		$user = new user($_SESSION['userid']);
@@ -958,7 +936,7 @@ class order {
 		</td>';
 		}
 	
-/*		// edit button
+		// edit button
 		if($toclose){
 			// the table has been closed, can't modify rows
 			$output .= '
@@ -994,7 +972,7 @@ class order {
 		<td bgcolor="'.$class.'" onclick="redir(\''.$link.'\');">
 			<a href="'.$link.'">Edit</a>
 		</td>';
-		}*/
+		}
 
 		// quantity arrows
 		if ($toclose) {
@@ -1015,18 +993,14 @@ class order {
 				$link = 'orders.php?command=update&amp;data[quantity]='.$newquantity.'&amp;data[id]='.$orderid;
 				if($arr['suspend']) $link .= '&amp;data[suspend]=1';
 				if($arr['extra_care']) $link .= '&amp;data[extra_care]=1';
-				//mizuko : hjeka ikonen ^ te orders
-				//$output .= '<a href="'.$link.'">+</a></td>
 				$output .= '<a href="'.$link.'"><img src="'.IMAGE_PLUS.'" alt="'.ucfirst(phr('PLUS')).' ('.ucfirst(phr('ADD')).')" border=0></a></td>
 		<td>';
 				if($arr['quantity']>1){
 					$newquantity=$arr['quantity']-1;
 					$link = 'orders.php?command=update&amp;data[quantity]='.$newquantity.'&amp;data[id]='.$orderid;
 					if($arr['suspend']) $link .= '&amp;data[suspend]=1';
-					// mizuko : hjeka  e vuna -
 					if($arr['extra_care']) $link .= '&amp;data[extra_care]=1';
 					$output .= '<a href="'.$link.'"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
-					//$output .= '<a href="'.$link.'">-</a>';
 				} elseif($arr['quantity']==1 && CONF_ALLOW_EASY_DELETE){
 					$newquantity=0;
 					$link = 'orders.php?command=ask_delete&amp;data[id]='.$orderid;

@@ -85,8 +85,6 @@ if($err=$tpl->parse()) return $err;
 $tpl -> clean();
 $output = $tpl->getOutput();
 
-//$tpl ->list_vars();
-
 // prints everything to screen
 echo $output;
 if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();

@@ -140,7 +140,6 @@ class stock_movement extends object {
 			
 			if($field=='dish_name') {
 				if(!empty($value)) {
-					//$value = $dish->name($_SESSION['language']);
 					$link = $dish->file.'?class=dish&amp;command=edit&amp;data[id]='.$arr['dish_id'];
 					$display->links[$row][$col]=$link;
 				} else $value = '';

@@ -156,7 +156,6 @@ function discount_calculate_from_percent($sourceid,$percent){
 
 	$total_no_disc=source_total_without_discount($sourceid);
 	$amount=round(-1*$total_no_disc/100*$percent,2);
-	//$amount=sprintf("%01.2f",$amount);
 
 	return $amount;
 }

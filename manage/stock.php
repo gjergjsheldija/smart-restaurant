@@ -66,7 +66,6 @@ switch($command) {
 		}
 		if(is_array($start_data['quantity']['edit'])){
 			for (reset ($start_data['quantity']['edit']); list ($key, $value) = each ($start_data['quantity']['edit']); ) {
-				//$db['id']=$key;
 				$data['quantity']=$value;
 				$data['invoice_id']=$start_data['invoice_id'];
 				if($data['quantity']!=0) {

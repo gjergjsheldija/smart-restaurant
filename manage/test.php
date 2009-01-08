@@ -49,7 +49,6 @@ if($numtables==0) die(GLOBALMSG_DB_NO_TABLES_ERROR);
 
 $_SESSION['common_db']=$db_common;
 
-//if($err=lang_read_all()) die('error reading lang files: '.$err);
 lang_read_all();
 
 if(get_conf(__FILE__,__LINE__,"default_language")=="") $conf_language="en";
@@ -67,14 +66,5 @@ if(!$lang) $lang='en';
 $string=lang_db_to_string($lang);
 
 echo $string;
-
-/*
-$filename=ROOTDIR.'/lang/language.xml';
-
-$err=lang_to_file($string,$filename);
-if($err) echo '<br>error issued: '.$err;
-else echo '<br>file '.$filename.' writed successfully.';
-*/
-
 
 ?>
