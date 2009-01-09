@@ -523,11 +523,12 @@ class user extends object {
 			elseif (!$admin_only && !$waiter_only) $write_line=true;
 
 			if($write_line) $output .='
-			<td bgcolor="'.COLOR_TABLE_GENERAL.'">
-					<center>
-					<input type="image" name="loginimage" value="'.$arr['id'].'" src="'.IMAGE_LOGIN.'" width=64 height=64 hspace="20" vspace="20" onClick="(document.getElementById(\'userid\')).value = this.value;" />
+			<td>
+				<center>
+					<input type="image" name="loginimage" id="loginimage" value="'.$arr['id'].'" src="'.IMAGE_LOGIN.'" width=64 height=64 hspace="20" vspace="20" onClick="(document.getElementById(\'userid\')).value = this.value;" />
 					<br>
-				<strong>'.strtoupper($arr['name']).'</strong></center>
+					<strong>'.strtoupper($arr['name']).'</strong>
+				</center>
 			</td>';
 		}
 		$output .= '

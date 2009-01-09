@@ -75,16 +75,43 @@ function access_connect_form ($url='') {
 //TODO : translate here
 //mizuko : mod for pass waiter
 function access_connect_form_waiter_pos ( $err, $url='') {
-	
 	switch ($err) {
+		case '600':
 		case '601':
-			$loginerror = '<br><br><font color=red><b>'.ucfirst(phr('GIVE_PASSWORD')).'</b></font>';
+			$loginerror = '
+			  <div id="negative">
+			    <table width="450" cellpadding="0" cellspacing="12">
+			      <tr>
+			        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="388" >'.ucfirst(phr('GIVE_PASSWORD')).'</td> 
+			      </tr>
+			    </table>
+			  </div>
+			';
 			break;
 		case '602':
-			$loginerror = '<br><br><font color=red><b>'.ucfirst(phr('SELECT_USER')).'</b></font>';
+			$loginerror = '
+			  <div id="negative">
+			    <table width="450" cellpadding="0" cellspacing="12">
+			      <tr>
+			        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="388">'.ucfirst(phr('SELECT_USER')).'</td> 
+			      </tr>
+			    </table>
+			  </div>
+			';			
 			break;			
 		case '603':	
-			$loginerror = '<br><br><font color=red><b>'.ucfirst(phr('NO_PASSWORD_GIVEN')).'</b></font>';
+			$loginerror = '
+			  <div id="negative">
+			    <table width="450" cellpadding="0" cellspacing="12">
+			      <tr>
+			        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="388">'.ucfirst(phr('NO_PASSWORD_GIVEN')).'</td> 
+			      </tr>
+			    </table>
+			  </div>
+			';				
 			break;		
 	}
 	$output = '';
@@ -99,25 +126,23 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 	';
 	if(!empty($url))
 		$output .= '<input type="hidden" name="url" value="'.$url.'">'."\n";
-	$output .= '<table>
+		$output .= '<table>
 		<tr><td>
 			<center>
-			<h4>
-			'.date("j/n/Y",time()).' - 
-			<b>'.date("G:i",time()).'</b>
-			</h4>'
+			<h2>
+			'.date("j/n/Y",time()).' -  <strong>'.date("G:i",time()).'</strong>
+			</h2>'
 			. $loginerror .'<br><br>'.$user->html_button_login_pos(SHOW_WAITER_ONLY).'
 			</center>
 		</td></tr>
 		<tr><td>
 			<center>
-			'.ucfirst(phr('PASSWORD')).':<br/>
-			<input type="password" name="password" id="password">
+			<input type="password" name="password" id="password"> <INPUT TYPE="SUBMIT" id="loginbutton" value="'.ucfirst(phr('SUBMIT')).'">
 			</center>
 		</td></tr>
 		<tr><td>
 			<center>
-			<INPUT TYPE="SUBMIT" value="'.ucfirst(phr('SUBMIT')).'">
+			
 			</center>
 		</td></tr>
 	</table>
@@ -133,8 +158,16 @@ function access_denied_waiter () {
 	global $tpl;
 	$tpl -> set_waiter_template_file ('question');
 
-	$tmp = '<b>'.ucfirst(phr('ACCESS_DENIED'))."</b><br>\n";
-	$tmp='<font color="Red">'.$tmp.'</font>';
+	$tmp = '
+	  <div id="negative">
+	    <table width="450" cellpadding="0" cellspacing="12">
+	      <tr>
+	        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+	        <td width="388">'.ucfirst(phr('ACCESS_DENIED')).'</td> 
+	      </tr>
+	    </table>
+	  </div>
+	';		
 	$tpl -> append ('messages',$tmp);
 
 	$tmp = navbar_empty('javascript:history.go(-1);');
@@ -147,8 +180,15 @@ function access_denied_waiter_pos () {
 	global $tpl;
 	$tpl -> set_waiter_template_file ('question');
 
-	$tmp = '<b>'.ucfirst(phr('ACCESS_DENIED'))."</b><br>\n";
-	$tmp='<font color="Red">'.$tmp.'</font>';
+	$tmp='<div id="tip">
+		    <table width="450" cellpadding="0" cellspacing="12">
+		      <tr>
+		        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'</td> 
+		      </tr>
+		    </table>
+		  </div>
+		';
 	$tpl -> append ('messages',$tmp);
 
 	$tmp = navbar_empty_pos('javascript:history.go(-1);');
@@ -161,17 +201,30 @@ function access_denied_admin () {
 	$url = $_SERVER['REQUEST_URI'];
 	$link = ROOTDIR.'/admin/connect.php?command=disconnect';
 	$link .= '&url='.urlencode($url);
-	
-	$tmp = '<b>'.ucfirst(phr('ACCESS_DENIED')).'</b><br/>
-	'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'<br/>';
-	
+	$tmp='<div id="tip">
+		    <table width="450" cellpadding="0" cellspacing="12">
+		      <tr>
+		        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'<br/>'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'</td> 
+		      </tr>
+		    </table>
+		  </div>
+		';	
+
 	if(!isset($_SESSION['userid']) || !$_SESSION['userid']) {
 		$user = new user ($_SESSION['userid']);
 		$user->disconnect();
 		$tmp .= access_connect_form($url);
 	} else {
-		$tmp .= '
-	<a href="'.$link.'">'.ucfirst(phr('CONNECT')).'</a>';
+		$tmp='<div id="tip">
+			    <table width="450" cellpadding="0" cellspacing="12">
+			      <tr>
+			        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'<br/>'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'<br/><a href="'.$link.'">'.ucfirst(phr('CONNECT')).'</a></td> 
+			      </tr>
+			    </table>
+			  </div>
+			';	
 	}
 	return $tmp;
 }
@@ -182,11 +235,15 @@ function access_denied_template () {
 	$link = ''.ROOTDIR.'/admin/connect.php?command=disconnect';
 	$link .= '&url='.urlencode($_SERVER['REQUEST_URI']);
 	
-	$tmp = '<b>'.ucfirst(phr('ACCESS_DENIED')).'</b><br/>
-	'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'<br/>
-	<a href="'.$link.'">'.ucfirst(phr('CONNECT')).'</a>';
-	
-	$tmp='<font color="Red">'.$tmp.'</font>';
+	$tmp='<div id="tip">
+		    <table width="450" cellpadding="0" cellspacing="12">
+		      <tr>
+		        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'<br/>'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'<br/><a href="'.$link.'">'.ucfirst(phr('CONNECT')).'</a></td> 
+		      </tr>
+		    </table>
+		  </div>
+		';	
 	$tpl -> append ('messages',$tmp);
 	
 	return 0;

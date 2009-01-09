@@ -191,7 +191,7 @@ define('CONF_HTTP_ROOT_DIR',ROOTDIR.'/');
 
 define('CONF_JS_URL',CONF_HTTP_ROOT_DIR."generic.js");
 define('CONF_JS_URL_WAITER',CONF_HTTP_ROOT_DIR."waiter.js");
-define('CONF_CSS_URL',CONF_HTTP_ROOT_DIR."styles.css.php");
+define('CONF_CSS_URL',CONF_HTTP_ROOT_DIR."styles.css");
 
 define('CONF_JS_URL_CONFIG',"./generic.js");
 define('CONF_CSS_URL_CONFIG',"./styles.css.php");

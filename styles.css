@@ -1,0 +1,342 @@
+
+/**
+ * Smart Restaurant
+ *
+ * An open source application to manage restaurants
+ *
+ * @package		SmartRestaurant
+ * @author		Gjergj Sheldija
+ * @copyright	Copyright (c) 2008, Gjergj Sheldija
+ * @license		http://www.gnu.org/licenses/gpl.txt
+ * @since		Version 1.0
+ * @filesource
+ * 
+ *  Smart Restaurant is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, version 3 of the License.
+ *
+ *	Smart Restaurant is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *	GNU General Public License for more details.
+
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+
+
+<meta http-equiv="content-type" content="text/css">
+
+*{
+	font-family: sans-serif, arial, verdana;
+}
+
+body {
+	background-color: #ffffff;
+	font-family: sans-serif, arial, verdana;
+	color: #333;
+	margin: 0 auto;
+	padding: 0;
+	font-size: 12,5px;
+}
+
+h2 {	
+	font-size: 21px;	
+	color: #2b7c98;	
+	padding: 10px 10px 10px 25px;	
+	letter-spacing: -0.5px;
+}
+
+#password {
+    padding-left: 20px;
+    background: url(images/pencil.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-color: #ffffff;
+}
+
+#loginimage {
+	padding : 10px;
+}
+
+#loginbutton {
+	color: #FFFFFF;	
+	font-family: Arial, Helvetica, sans-serif;	
+	font-size: 12px;	
+	padding: 7px;	
+	background-color: #2b7c98;	
+	border: 1px solid #888888; 
+}
+
+#loginbutton:hover {
+	background-color: #ff6600;
+	cursor: pointer;
+}
+.login div.Container {
+	margin: 60px auto 20px;
+	min-width: inherit;
+	width: 500px;
+}
+
+.login a {
+	color: #666;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.login p {
+	color: #666;
+	font-size: 16px;
+	line-height: 24px;
+}
+
+dd {
+	color: #666;
+	font-size: 11px;
+	line-height: 24px;
+	margin: 0 0 5px 80px;
+}
+
+.aligncenter {
+	align: center;
+}
+
+.modified {
+	font-size: smaller;
+}
+
+.color_table_cell {
+	height: 15px;
+	width: 15px;
+}
+
+.mgmt_main_table {
+	background: #FFCA68;
+	border: 0px;
+}
+
+.mgmt_main_table tbody {
+	height: 350px;
+	overflow: auto;
+}
+
+.mgmt_main_table tbody tr {
+	height: 1em;
+}
+
+.mgmt_printable_table {
+	background: #AAAAAA;
+	border: 0px #000 solid background: #eee;
+	font-size: 10 pt;
+}
+
+.break {
+	page-break-before: always;
+}
+
+.mgmt_printable_tablebg {
+	border: 0px;
+}
+
+.mgmt_printable_cellbg0 {
+	background: #CCCCCC;
+	border: 0px #000 solid;
+	height: 1em;
+}
+
+.mgmt_printable_cellbg1 {
+	background: #FFFFFF;
+	border: 0px #000 solid;
+	height: 1em;
+}
+
+.admin_table {
+	background-color: #FFFFFF;
+	border-width: 0px;
+}
+
+.admin_th {
+	border-width: 0px;
+	text-align: left;
+}
+
+.admin_tr_0 {
+	background-color: #EDF1ED;
+	border-width: 0px;
+}
+
+.admin_tr_1 {
+	background-color: #FDFFD5;
+	border-width: 0px;
+}
+
+.admin_tr_highlight {
+	background-color: #DDDDDD;
+}
+
+.admin_td_0 {
+	border-width: 0px;
+	vertical-align: text-bottom;
+}
+
+.admin_td_1 {
+	border-width: 0px;
+	vertical-align: text-bottom;
+}
+
+.admin_ingreds_list {
+	font-size: 85%;
+}
+
+a:link {
+	color: #0E17BF;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #0E17BF;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #CC0000;
+	text-decoration: none;
+}
+
+.invisible {
+	color: #FFFFFF;
+	font-size: 0pt;
+	text-decoration: none;
+}
+
+.preferred_answer {
+	font-size: 150%;
+}
+
+.error_msg {
+	align: center;
+	color: red;
+}
+
+.page_title {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 150%;
+	font-weight: bold;
+}
+
+.form {
+	background-color: #FFCC99;
+	border: 1px #CC0000 solid;
+	color: #333333;
+	font-family: "Lucida Console", "Courier New", "Courier", "mono";
+}
+
+.mgmt_body_index {
+	background: #FEEFAC;
+}
+
+.mgmt_color_tablebg {
+	background: #FFCA68;
+	border: 0px;
+}
+
+.mgmt_color_cellbg0 {
+	background: #FFE9B7;
+	height: 1em;
+}
+
+.mgmt_color_cellbg1 {
+	background: #FAFF97;
+	height: 1em;
+}
+
+.help_text {
+	font-size: 100%;
+}
+
+.help_text * {
+	font-size: 100%;
+}
+
+.help_bg {
+	background-color: #333399;
+}
+
+.help_fg {
+	background-color: #FFFFCC;
+}
+
+.help_caption {
+	color: #FFFFFF;
+	font-size: 100%;
+	vertical-align: middle;
+}
+
+.help_close A {
+	color: #FFFFFF;
+	font-size: 100%;
+}
+
+.pos {
+	font-size: 30px;
+	font-weight: bold;
+	height: 40px;
+	width: 40px;
+}
+
+.poscheck {
+	font-size: 30px;
+	font-weight: bold;
+	height: 30px;
+	width: 30px;
+}
+
+input, textarea, select, radio {
+	font: 1.5em Arial,Helvetica,FreeSans,sans-serif;
+	border : 1px solid #cccccc;
+}
+
+fieldset {
+	border-top: 2px solid #621D36;
+	padding: .8em 0 .8em .6em;
+}
+
+legend {
+	font-size: 1.5em;
+	line-height: 1.5em;
+	padding-left: .2em;
+	padding-right: .2em;
+}
+
+#negative {	  
+	width:491px;
+	height:45px;
+	z-index:16;
+	left: 25px;
+	top: 400px;
+	background-color: #ffa4aa;
+	border: 1px solid #800000;
+}
+
+#positive {	
+	width:489px;
+	height:45px;
+	z-index:16;
+	left: 25px;
+	background-color: #c8ffa4;
+	top: 340px;
+	border: 1px solid #348300;
+}
+
+#tip {	
+	width:491px;
+	height:45px;
+	z-index:16;
+	left: 25px;
+	top: 457px;
+	background-color: #FFFF66;
+	border: 1px solid #c18800;
+}
+

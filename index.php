@@ -65,7 +65,7 @@ if (floor(phpversion()) < 5) {
 <html>
 <head>
 <script type="text/javascript" language="JavaScript" src="./generic.js"></script>
-<link rel="stylesheet" href="./styles.css.php" type="text/css">
+<link rel="stylesheet" href="./styles.css" type="text/css">
 <title>SmartRes - (c) 2006 - 2008 Smart Restaurant</title>
 <META name="HandheldFriendly" content="True">
 </head>
