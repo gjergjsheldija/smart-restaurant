@@ -61,6 +61,12 @@ h2 {
 	padding : 10px;
 }
 
+#loginimage:hover {
+	padding : 10px;
+	background-color: #ff6600;	
+}
+
+
 #loginbutton {
 	color: #FFFFFF;	
 	font-family: Arial, Helvetica, sans-serif;	
