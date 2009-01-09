@@ -76,7 +76,6 @@ function access_connect_form ($url='') {
 //mizuko : mod for pass waiter
 function access_connect_form_waiter_pos ( $err, $url='') {
 	switch ($err) {
-		case '600':
 		case '601':
 			$loginerror = '
 			  <div id="negative">
@@ -103,10 +102,10 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 			break;			
 		case '603':	
 			$loginerror = '
-			  <div id="negative">
+			  <div id="tip">
 			    <table width="450" cellpadding="0" cellspacing="12">
 			      <tr>
-			        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
 			        <td width="388">'.ucfirst(phr('NO_PASSWORD_GIVEN')).'</td> 
 			      </tr>
 			    </table>
