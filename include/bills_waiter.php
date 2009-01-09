@@ -870,7 +870,7 @@ function bill_select_pos(){
 		return 0;
 	}
 	
-	$tpl -> set_waiter_template_file ('bill_select');
+	$tpl -> set_waiter_template_file ('bill_select_pos');
 
 	$tmp = navbar_form_pos('form_type','orders.php?command=printing_choose');
 	$tpl -> assign ('navbar',$tmp);

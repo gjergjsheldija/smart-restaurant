@@ -855,6 +855,13 @@ function print_orders($sourceid){
 	return 0;
 }
 
+function printer_print_gonow($priority,$dest_language) {
+	// function disabled
+	return '';
+	if($_SESSION['catprinted'][$priority]) return ucfirst(lang_get($dest_language,'PRINTS_GO_NOW'));
+	return '';
+}
+
 function printer_print_date() {
 	$msg = date("j/n/Y G:i",time());
 	return $msg;
