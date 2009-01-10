@@ -39,7 +39,7 @@ unset_source_vars();
 
 $tpl -> set_waiter_template_file ('authentication');
 $user = new user ($_SESSION['userid']);
-$err = $user -> connect_pos ();
+$err = $user->connect_pos();
 $script = '	<script language="javascript" type="text/javascript">
 	function setFocus() {
 		document.waiterpos.password.select();
@@ -59,7 +59,17 @@ switch ($err) {
 		$tmp = redirect_waiter('tables.php');
 		$tpl -> append ('scripts',$tmp);
 		
-		$tmp = '<font color="green">'.ucfirst(phr('ALREADY_CONNECTED')).'<br/><a href="tables.php">'.ucfirst(phr('GO_ON')).'</a></font>'."\n";
+		$tmp = '
+		  <div id="positive">
+		    <table width="450" cellpadding="0" cellspacing="12">
+		      <tr>
+		        <td width="52"><div align="center"><img src="../images/positive.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="388">'.ucfirst(phr('ALREADY_CONNECTED')).'</td> 
+		        <td width="388"><a href="tables.php">'.ucfirst(phr('GO_ON')).'</a></td> 
+		      </tr>
+		    </table>
+		  </div>
+		';			
 		$tpl -> append ('messages',$tmp);
 		break;
 }

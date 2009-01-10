@@ -76,7 +76,8 @@ function access_connect_form ($url='') {
 //mizuko : mod for pass waiter
 function access_connect_form_waiter_pos ( $err, $url='') {
 	switch ($err) {
-		case '601':
+		case ERR_USER_NOT_FOUND:
+		case ERR_WRONG_PASSWORD:
 			$loginerror = '
 			  <div id="negative">
 			    <table width="450" cellpadding="0" cellspacing="12">
@@ -88,7 +89,7 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 			  </div>
 			';
 			break;
-		case '602':
+		case ERR_NO_USER_PROVIDED:
 			$loginerror = '
 			  <div id="negative">
 			    <table width="450" cellpadding="0" cellspacing="12">
@@ -100,7 +101,7 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 			  </div>
 			';			
 			break;			
-		case '603':	
+		case ERR_NO_PASSWORD:	
 			$loginerror = '
 			  <div id="tip">
 			    <table width="450" cellpadding="0" cellspacing="12">
