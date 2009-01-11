@@ -194,7 +194,6 @@ define('CONF_JS_URL_WAITER',CONF_HTTP_ROOT_DIR."waiter.js");
 define('CONF_CSS_URL',CONF_HTTP_ROOT_DIR."styles.css");
 
 define('CONF_JS_URL_CONFIG',"./generic.js");
-define('CONF_CSS_URL_CONFIG',"./styles.css.php");
 
 // images used
 
@@ -207,7 +206,7 @@ define('IMAGE_SOURCE',CONF_HTTP_ROOT_DIR."images/source.png");
 define('IMAGE_TRASH',CONF_HTTP_ROOT_DIR."images/trash.png");
 define('IMAGE_LITTLE_TRASH',CONF_HTTP_ROOT_DIR."images/little_trash.png");
 define('IMAGE_YES',CONF_HTTP_ROOT_DIR."images/agt_action_success.png");
-define('IMAGE_BACK',"./images/back.jpg");
+define('IMAGE_BACK',CONF_HTTP_ROOT_DIR."./images/back.jpg");
 define('IMAGE_CLOSE',CONF_HTTP_ROOT_DIR."images/newclose.png");
 define('IMAGE_MINUS',CONF_HTTP_ROOT_DIR."images/down.png");
 define('IMAGE_PLUS',CONF_HTTP_ROOT_DIR."images/up.png");

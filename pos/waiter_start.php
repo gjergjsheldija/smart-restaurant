@@ -243,7 +243,7 @@
 		$time_refresh=1000*get_conf(__FILE__,__LINE__,'refresh_automatic_to_menu');
 		if($time_refresh) {
 			$tmp = redirect_timed('tables.php',$time_refresh);
-			$tpl -> append("scripts", $tmp);
+			$tpl->append("scripts", $tmp);
 		}
 	}
 	

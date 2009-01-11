@@ -702,7 +702,7 @@ class user extends object {
 			
 			$output .= '</table>
 			<br><br>
-			Totali i lekve per '. $userName .' eshte <b>'. $totali.'  LEK</b>';
+			'.ucfirst(phr('CONNECTED_AS')) . ' ' . $userName .'<strong>'. $totali.'  LEK</strong>';
 		}
 		return $output;
 	}

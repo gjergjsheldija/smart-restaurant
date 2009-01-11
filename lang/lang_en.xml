@@ -531,5 +531,7 @@ You are &amp;lt;b&amp;gt;strongly&amp;lt;/b&amp;gt; suggested to &amp;lt;a href=
 		<item name="NO_PASSWORD_GIVEN">No password given for the following account!!</item>
 		<item name="SELECT_USER">Select a user to login</item>
 		<item name="GIVE_PASSWORD">Please write a password to login</item>
+		<item name="TOTAL_WAITER_INCOME">Total income for</item>
+		<item name="INCOME">Income</item>
 	</data>
 </SmartRestaurant>

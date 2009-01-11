@@ -129,15 +129,13 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 		$output .= '<table>
 		<tr><td>
 			<center>
-			<h2>
-			'.date("j/n/Y",time()).' -  <strong>'.date("G:i",time()).'</strong>
-			</h2>'
-			. $loginerror .'<br><br>'.$user->html_button_login_pos(SHOW_WAITER_ONLY).'
+				<h2>'.date("j/n/Y",time()).' -  <strong>'.date("G:i",time()).'</strong></h2>'
+				. $loginerror .'<br><br>'.$user->html_button_login_pos(SHOW_WAITER_ONLY).'
 			</center>
 		</td></tr>
 		<tr><td>
 			<center>
-			<input type="password" name="password" id="password"> <INPUT TYPE="SUBMIT" id="loginbutton" value="'.ucfirst(phr('SUBMIT')).'">
+				<input type="password" name="password" id="password"> <INPUT TYPE="SUBMIT" id="loginbutton" value="'.ucfirst(phr('SUBMIT')).'">
 			</center>
 		</td></tr>
 		<tr><td>

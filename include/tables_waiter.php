@@ -1117,26 +1117,19 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 	
 	switch($show) {
 	case 0:
-		$output .= ucfirst(phr('ALL_TABLES'));
+		$output .= '<div class="tabbertab">';
+		$output .= '<h4>'. ucfirst(phr('ALL_TABLES')) . '</h4>';
 		break;
 	case 1:
-		$output .= ucfirst(phr('TAKEAWAY_TABLES'));
+		$output .= '<div class="tabbertab">';		
+		$output .= '<h4>'. ucfirst(phr('TAKEAWAY_TABLES')) . '</h4>';
 		break;
 	case 2:
-		$output .= ucfirst(phr('MY_TABLES'));
+		$output .= '<div class="tabbertab tabbertabdefault">';			
+		$output .= '<h4>'. ucfirst(phr('MY_TABLES')) . '</h4>';
 		break;
 	}
 
-	$queryUser = "SELECT `#prefix#users`.name FROM `#prefix#users` ";
-	$queryUser .="WHERE `#prefix#users`.id NOT IN ";
-	$queryUser .="( SELECT `#prefix#sources`.userid FROM `#prefix#sources` ) ";
-	$queryUser .="AND level = '515' AND deleted = '0' AND `#prefix#users`.id = ". $_SESSION['userid'];
-	
-	$resUser=common_query($queryUser,__FILE__,__LINE__);
-	if(!$resUser) return '';
-	
-	$therearerecordsUser=mysql_num_rows ($resUser);
-	
 	$output .= ':
 	<table cellspacing="2" bgcolor="'.COLOR_TABLE_GENERAL.'" width="100%">
 	<tbody>'."\n";
@@ -1152,15 +1145,83 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 		$output .= '	</tr>'."\n";
 	}
 	$output .= '	</tbody>
-	</table>'."\n";
-	
-	if($therearerecordsUser) {
-		$output .='<p align="left"><a href="../pos/dailyincome.php"><img src="../images/newclose.png"></a></p>';	
-	}
+	</table>
+	</div>'."\n";
 	
 	return $output;
 }
-   
+
+function waiter_income_pos() {
+	
+
+		
+	$queryUser = "SELECT `#prefix#users`.name FROM `#prefix#users` ";
+	$queryUser .="WHERE `#prefix#users`.id NOT IN ";
+	$queryUser .="( SELECT `#prefix#sources`.userid FROM `#prefix#sources` ) ";
+	$queryUser .="AND level = '515' AND deleted = '0' AND `#prefix#users`.id = ". $_SESSION['userid'];
+	
+	$resUser=common_query($queryUser,__FILE__,__LINE__);
+	if(!$resUser) return '';
+	
+	$therearerecordsUser=mysql_num_rows ($resUser);	
+	
+	if($therearerecordsUser) {
+		$user = new user($_SESSION['userid']);
+		$dateStart = date('Y-m-d') . " 00:00:01";
+		$dateEnd = date('Y-m-d') . " 23:59:00";
+
+		$userName = $user->data['name'];
+		
+		$table='#prefix#account_mgmt_main';
+		$queryMoney = "SELECT date, who, description, cash_amount ";
+		$queryMoney .= "FROM `#prefix#account_mgmt_main`";
+		$queryMoney .= "WHERE who = '" . $userName . "' AND ";
+		$queryMoney .= "date > '" . $dateStart . "' AND date < '" . $dateEnd . "'";
+
+		$resMoney=common_query($queryMoney,__FILE__,__LINE__);
+		if(!$resMoney) return '';
+
+		$therearerecordsMoney=mysql_num_rows ($resMoney); 
+
+		if($therearerecordsMoney) {		
+			$output = '<div class="tabbertab">';		
+			$output .= '<h2>'. ucfirst(phr('INCOME')) . '</h2>';			
+			$output .= '<h2>' . ucfirst(phr('TOTAL_WAITER_INCOME')) . ' ' . $userName .'<br>'
+					. ucfirst(phr('FROM')) . ' ' . $dateStart .' '
+					. ucfirst(phr('TO')) . ' ' . $dateEnd .'</h2>
+				<table id="table_income">
+				<thead>
+					<tr>
+						<th height="31" width="100"><strong>'. ucfirst(phr('TIME')) .'</strong></th>
+						<th width="145"><div align="right"><strong>'. ucfirst(phr('BILL')) .'</strong></div></th>
+						<th width="80"><div align="right"><strong>'. ucfirst(phr('AMOUNT')) .'</strong></div></th>
+					</tr>
+				</thead>
+				<tbody>';
+				while ($arr = mysql_fetch_array ($resMoney)) { 
+					$output .= '	
+					 <tr>
+					  	<td width="200"><div align="left">'.$arr['date'] .'</div></td>
+					    <td width="145"><div align="right">'. $arr['description'].'</div></td>
+					    <td width="80"><div align="right">'. $arr['cash_amount'] .'</div></td>
+					  </tr>';
+					$amounTotal+=$arr['cash_amount'];
+				} 
+				$output .= '
+					<thead>
+						<tr>
+							<th><div align="left">'.ucfirst(phr('TOTAL_WAITER_INCOME')) . ' ' . $userName . '</div></th>
+							<th></th>
+							<th><div align="right"><strong>'. $amounTotal.'</strong></div></th>
+						</tr>
+					</thead>';
+				$output .= '</tbody></table></div>';
+		}
+	}
+	return $output;	
+	
+}
+
 function tables_list_cell($row){
 	$output = '';
 

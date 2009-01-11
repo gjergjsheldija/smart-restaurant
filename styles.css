@@ -25,10 +25,6 @@
  * 
  */
 
-
-
-<meta http-equiv="content-type" content="text/css">
-
 *{
 	font-family: sans-serif, arial, verdana;
 }
@@ -316,6 +312,112 @@ legend {
 	padding-right: .2em;
 }
 
+/*--------------------------------------------------
+	income table
+  --------------------------------------------------*/
+#table_income  {
+	border-collapse: collapse; 
+	margin: 0;
+	border: 1px solid #CCCCCC; 
+	border-right: none; 
+
+}
+
+#table_income thead th{
+	color:#333333;
+	text-align:left; 
+	font-weight:normal;
+	text-transform:uppercase; 
+	padding:15px 10px 15px 20px; 
+	border-right: 1px solid #CCCCCC
+}
+
+#table_income  td { 
+	padding: 0 10px 0 20px;
+	line-height: 120%; 
+	vertical-align: middle; 
+	background: #f7f7f7; 
+	border-right: 1px solid #CCCCCC;
+}
+
+/*--------------------------------------------------
+  REQUIRED to hide the non-active tab content.
+  But do not hide them in the print stylesheet!
+  --------------------------------------------------*/
+.tabberlive .tabbertabhide {
+ display:none;
+}
+
+/*--------------------------------------------------
+  .tabber = before the tabber interface is set up
+  .tabberlive = after the tabber interface is set up
+  --------------------------------------------------*/
+.tabber {
+}
+.tabberlive {
+	margin-top:1em;
+	font-size:90%;
+}
+
+/*--------------------------------------------------
+  ul.tabbernav = the tab navigation list
+  li.tabberactive = the active tab
+  --------------------------------------------------*/
+ul.tabbernav {
+	margin:0;
+	padding: 3px 0;
+	border-bottom: 1px groove #778;
+	font: bold 12px Verdana, sans-serif;
+}
+
+ul.tabbernav li {
+	list-style: none;
+	width:100%;
+	margin:2em 0 0 0;	
+	padding:0 .5em 0 0;
+	display: inline;
+}
+
+ul.tabbernav li a {
+	width:8em;
+	padding:.2em 1em;
+	background:#ccc;
+	color:#ccc;
+	height:3em;
+	font-size:1.8em;
+	font-weight:bold;
+}
+
+ul.tabbernav li a:link { color: #f80; }
+ul.tabbernav li a:visited { color: #667; }
+
+ul.tabbernav li a:hover {
+	color: #000;
+	min-height:3em;
+	background:#696;
+}
+
+ul.tabbernav li.tabberactive a {
+ 	border-bottom: 1px solid #f80;
+ 	color: #f80;
+	background:#696;
+}
+
+ul.tabbernav li.tabberactive a:hover {
+ 	border-bottom: 1px solid #f80;
+ 	color: #f80;
+	background:#696;
+}
+
+/* If desired, hide the heading since a heading is provided by the tab */
+.tabberlive .tabbertab h4 {
+	display:none;
+}
+
+
+/*--------------------------------------------------
+	notification classes
+  --------------------------------------------------*/
 #negative {	  
 	width:491px;
 	height:45px;

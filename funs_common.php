@@ -945,7 +945,7 @@ function head_line ($title) {
 	
 	$output='
 	<meta http-equiv="content-type" content="text/html; charset='.phr('CHARSET').'">
-	<title>Smart Restauant - '.$title.'</title>
+	<title>Smart Restaurant - '.$title.'</title>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/overlib/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
 	<script type="text/javascript" language="JavaScript" src="'.CONF_JS_URL.'"></script>
 	<link rel="stylesheet" href="'.CONF_CSS_URL.'" type="text/css">
@@ -988,9 +988,10 @@ function disconnect_line () {
 
 function disconnect_line_pos () {
 	if(isset($_SESSION['userid'])) {
+		$output = '<div class="tabbertab">';		
+		$output .= '<h4>'. ucfirst(phr('DISCONNECTION')) . '</h4>';
 		$user = new user($_SESSION['userid']);
-
-		$output = '<a href="disconnect.php"><img src='.IMAGE_LOGOUT.'></a>';
+		$output .= '<a href="disconnect.php"><img src='.IMAGE_LOGOUT.'></a></div>';
 	}
 	return $output;
 }
