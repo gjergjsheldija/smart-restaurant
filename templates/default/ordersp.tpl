@@ -14,15 +14,15 @@
 				<td valign="top" align="left">{fast_order_id}</td>
 				<td>{scripts}</td>
 				<td valign="top" align="center">{vertical_navbar}</td>
-				<td valign="top" align="right">{logout}</td>
+				<!-- <td valign="top" align="right">{logout}</td> -->
 			</tr>
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					<table>
 						<tr>
 							<td valign="top">{toplist}</td>
 							<td valign="top">{categories}</td>
-							<td valign="top">{letters}</td>
+							<!-- <td valign="top">{letters}</td> -->
 						</tr>
 					</table>
 				</td>
@@ -35,11 +35,11 @@
 					</table>
 				</td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td>
 					{commands}
 				</td>
-			</tr>
+			</tr> -->
 		</table>
 		</center>
 		<center><dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd></center>
