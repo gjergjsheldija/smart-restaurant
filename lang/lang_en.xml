@@ -1,13 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE SmartRestaurant [
-	<!ELEMENT SmartRestaurant (type,data+)>
-	<!ELEMENT type (#PCDATA)>
-	<!ELEMENT language (#PCDATA)>
-	<!ELEMENT data (item*)>
-	<!ELEMENT item (#PCDATA)>
-	<!ATTLIST item
-		name (CDATA) #REQUIRED
-	>
+	<!ELEMENT SmartRestaurant ( type, language, data ) >
+	<!ELEMENT data ( item+ ) >
+	<!ELEMENT item ( #PCDATA ) >
+	<!ATTLIST item name NMTOKEN #REQUIRED >
+	<!ELEMENT language ( #PCDATA ) >
+	<!ELEMENT type ( #PCDATA ) >
 ]>
 <SmartRestaurant>
 	<type> translation </type>
