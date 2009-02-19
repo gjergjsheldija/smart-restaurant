@@ -59,7 +59,7 @@ define('CONF_TIME_SINCE_PRINTED',				1);	// if on the elapsed time since printin
 define('CONF_ENCRYPT_PASSWORD',					false);	// if true the passwords will be encrypted with the best available method, otherwise a MD5 checksum will be prepared
 														// the checksum is a bit less secure, but ensures that the password will be the same on every machine,
 														// otherwise changing the OS or upgrading it could cause all the passwords to be unusable (recreate the users is the only solution)
-define('CONF_DISPLAY_MYSQL_ERRORS',				true);  // if on the mysql errors will be displayed to the users and logged to file, otherwise they will be only logged to errors file
+define('CONF_DISPLAY_MYSQL_ERRORS',				false);  // if on the mysql errors will be displayed to the users and logged to file, otherwise they will be only logged to errors file
 define('CONF_SQL_RESUME_ENABLED',				false);	// if on the sql upgrades and restores will be stopped and resumed to allow progress display (HIGHLY EXPERIMENTAL!!!)
 define('CONF_SHOW_SUMMARY_ON_LIST',				false);	// if on a summary of the data about the ingredients/dishes will be displayed in the tables in admin section (slows the page generation by a factor of about 4)
 define('CONF_SHOW_PERCENT_INSERTED_ON_LIST',			false);	// if on the percent of inserted ingredient quantities will be displayed in the table in admin section (slows the page generation by a factor of about 4)
