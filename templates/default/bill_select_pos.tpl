@@ -19,7 +19,6 @@
       <td>{discount} </td>
       <td> {orders} </td>
     </tr>
-    <tr><td><div align="right">{logout}</div></td></tr>
   </table>
   <dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 </center>
