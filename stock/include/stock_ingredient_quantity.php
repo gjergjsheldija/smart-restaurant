@@ -30,7 +30,7 @@
 class stock_ingredient_quantity extends object {
 	function stock_ingredient_quantity ($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'stock_ingredient_quantities';
+		$this->table='stock_ingredient_quantities';
 		$this->id=$id;
 		$this->fields_names=array(	'id'=>ucphr('ID'));
 		$this -> title = ucphr('INGREDIENTS');
@@ -57,7 +57,7 @@ class stock_ingredient_quantity extends object {
 	function get_all () {
 		$this->fetch_data();
 		
-		$query = "SELECT `quantity` FROM `#prefix#stock_ingredient_samples`
+		$query = "SELECT `quantity` FROM `stock_ingredient_samples`
 				WHERE `obj_id`='".$this->data['obj_id']."'
 				AND `dish_id`='".$this->data['dish_id']."'";
 		

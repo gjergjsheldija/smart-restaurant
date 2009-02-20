@@ -34,7 +34,7 @@ class conf {
 	var $value;
 
 	function conf($name='') {
-	$this->table='#prefix#conf';
+	$this->table='conf';
 		if($name) $this->name=$name;
 		$this->get();
 	}

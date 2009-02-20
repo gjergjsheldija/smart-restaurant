@@ -28,7 +28,7 @@
 */
 
 function invoice_payment_access_lock($id){
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `id`='".$id."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	$row=mysql_fetch_array($res);
@@ -44,7 +44,7 @@ function invoice_payment_access_lock($id){
 function file_show($id){
 	require("./mgmt_start.php");
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `id`='".$id."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(mysql_num_rows($res)!=1) return 1;
@@ -53,12 +53,12 @@ function file_show($id){
 
 	$type=$row['type'];
 
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res_type=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$type'");
 	$row_type=mysql_fetch_array($res_type);
 	$type=strtolower($row_type['name']);
 
-	$table='#prefix#account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$res_supplier = common_query ("SELECT * FROM $table WHERE `name`='".$row['who']."'",__FILE__,__LINE__);
 	if(mysql_num_rows($res_supplier)==1){
 		$row_supplier = mysql_fetch_array ($res_supplier);
@@ -135,7 +135,7 @@ function file_show($id){
 			break;
 		case "fattura":
 			if($row['paid']) {
-				$table='#prefix#account_mgmt_main';
+				$table='account_mgmt_main';
 				$query="SELECT * FROM $table WHERE `associated_invoice`='$id'";
 				$res=common_query($query,__FILE__,__LINE__);
 				$arr_local=mysql_fetch_array($res);
@@ -200,14 +200,14 @@ function file_show($id){
 function display_show($id){
 	require("./mgmt_start.php");
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `id`='".$id."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(mysql_num_rows($res)!=1) return 1;
 	$row=mysql_fetch_array($res);
 
 	$type=$row['type'];
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res_type=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$type'");
 	$row_type=mysql_fetch_array($res_type);
 	$type=strtolower($row_type['name']);
@@ -226,7 +226,7 @@ function display_show($id){
 }
 
 function form_insert_type() {
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table WHERE `account_only`=0 ORDER BY `name`");
 
 ?>
@@ -290,7 +290,7 @@ function form_insert_type() {
 
 function input_standard($id,$editing){
 	if ($editing) {
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 
 		$row=mysql_fetch_array($res);
@@ -308,7 +308,7 @@ function input_standard($id,$editing){
 			case 1: $amount=$row['bank_amount']; break;
 			case 2: $amount=$row['bank_amount']; break;
 			case 3:	if($row['paid']) {
-						$table='#prefix#account_mgmt_main';
+						$table='account_mgmt_main';
 						$query="SELECT * FROM $table WHERE `associated_invoice`='$id'";
 						$res=common_query($query,__FILE__,__LINE__);
 						$arr_local=mysql_fetch_array($res);
@@ -371,7 +371,7 @@ function input_standard($id,$editing){
 		<td>".ucfirst(phr('WHO'))."</td>
 		<td>
 		<select name=\"data[who]\">\n";
-	$table='#prefix#account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$res_supplier = common_query ("SELECT * FROM $table ORDER BY `name`",__FILE__,__LINE__);
 
 	if(!$editing){
@@ -415,7 +415,7 @@ function display_form_invoice($id){
 
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 		$row=mysql_fetch_array($res);
 
@@ -430,7 +430,7 @@ function display_form_invoice($id){
 	input_standard($id,$editing);
 
 	if($paid) {
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res_payment=common_query("SELECT * FROM $table WHERE `associated_invoice`='$id'",__FILE__,__LINE__);
 
 		$row_payment=mysql_fetch_array($res_payment);
@@ -482,7 +482,7 @@ function display_form_invoice($id){
 
 
 	if($editing==1 && $paid==1){
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `associated_invoice`='$id'",__FILE__,__LINE__);
 
 		$row=mysql_fetch_array($res);
@@ -512,7 +512,7 @@ function display_form_invoice($id){
 	</tr>";
 	echo "<tr><td>";
 
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table ORDER BY `name`");
 	$i=0;
 	while($row=mysql_fetch_array ($res)) {
@@ -536,7 +536,7 @@ function display_form_invoice($id){
 	?>
 <select name="payment_data_account_id" <?php echo $disabled; ?>>
 	<?php
-	$table='#prefix#account_accounts';
+	$table='account_accounts';
 	$res = common_query ("SELECT * FROM $table ORDER BY `name`",__FILE__,__LINE__);
 
 	$i=0;
@@ -565,7 +565,7 @@ function display_form_invoice($id){
 function display_form_pos($id){
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 		$row=mysql_fetch_array($res);
 
@@ -612,7 +612,7 @@ function display_form_pos($id){
 function display_form_check($id){
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 
 		$row=mysql_fetch_array($res);
@@ -667,7 +667,7 @@ function display_form_check($id){
 function display_form_bonifico($id){
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 
 		$row=mysql_fetch_array($res);
@@ -716,7 +716,7 @@ function display_form_bonifico($id){
 function display_form_scontrino($id){
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 		$row=mysql_fetch_array($res);
 
@@ -752,7 +752,7 @@ function display_form_scontrino($id){
 function display_form_versamento($id){
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 
 		$row=mysql_fetch_array($res);
@@ -799,7 +799,7 @@ function display_form_versamento($id){
 function display_form_ricevuta($id){
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 
 		$row=mysql_fetch_array($res);
@@ -835,13 +835,13 @@ function display_form_ricevuta($id){
 
 function display_form($id,$insert_type=0){
 	if($id){
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$id'",__FILE__,__LINE__);
 		$row=mysql_fetch_array($res);
 		$insert_type=$row['type'];
 	}
 
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$insert_type'");
 	$row=mysql_fetch_array($res);
 	$insert_type=strtolower($row['name']);
@@ -874,7 +874,7 @@ function delete_rows($delete){
 		echo GLOBALMSG_RECORD_DELETE_NONE.".<br>\n";
 		return 1;
 	}
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="DELETE FROM $table WHERE ";
 	for (reset ($delete); list ($key, $value) = each ($delete); ) {
 		if($firstline) {
@@ -883,7 +883,7 @@ function delete_rows($delete){
 		} else {
 			$query.=" OR `id`='".$key."'";
 		}
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=common_query("SELECT * FROM $table WHERE `id`='$key'",__FILE__,__LINE__);
 
 		$row=mysql_fetch_array($res);
@@ -893,7 +893,7 @@ function delete_rows($delete){
 		movement_invoice_delete($key);
 		invoice_payment_delete($key);
 
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$query_local="SELECT * FROM $table WHERE `id`='$key'";
 		$res_local = common_query ($query_local,__FILE__,__LINE__);
 
@@ -940,7 +940,7 @@ function delete_rows($delete){
 
 function invoice_payment_delete($invoice_id){
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `associated_invoice`='$invoice_id'";
 	$res = common_query ($query,__FILE__,__LINE__);
 
@@ -951,7 +951,7 @@ function invoice_payment_delete($invoice_id){
 		$movement_id=account_movement_delete($arr['account_movement']);
 	}
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="DELETE FROM $table WHERE `associated_invoice`='$invoice_id'";
 	$res = common_query ($query,__FILE__,__LINE__);
 
@@ -960,7 +960,7 @@ function invoice_payment_delete($invoice_id){
 
 
 function type_specific_variation($data){
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$data['type']."'");
 	$row=mysql_fetch_array($res);
 	mysql_free_result($res);
@@ -1020,7 +1020,7 @@ function insert_data($input_data,$payment_data=0) {
 
 	$input_data=type_specific_variation($input_data);
 
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res_local=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$input_data['type']."'");
 	$row_local=mysql_fetch_array($res_local);
 	$type=strtolower($row_local['name']);
@@ -1048,7 +1048,7 @@ function insert_data($input_data,$payment_data=0) {
 
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="INSERT INTO $table (";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`,";
@@ -1077,7 +1077,7 @@ function insert_data($input_data,$payment_data=0) {
 	if(get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'mgmt_types','log_to_bank',$input_data['type'])){
 		$movement_id=account_movement_from_manage($inserted_id);
 		if($movement_id) {
-			$table='#prefix#account_mgmt_main';
+			$table='account_mgmt_main';
 			$query2="UPDATE $table SET `account_movement`='$movement_id'";
 			$query2.=" WHERE `id`='$inserted_id'";
 			$res2 = common_query ($query2,__FILE__,__LINE__);
@@ -1105,7 +1105,7 @@ function insert_data($input_data,$payment_data=0) {
 			$input_data['debit_taxable_amount']=0;
 			$input_data['debit_vat_amount']=0;
 
-			$table='#prefix#account_mgmt_main';
+			$table='account_mgmt_main';
 			$query="UPDATE $table SET ";
 			for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 				$query.="`".$key."`='".$value."',";
@@ -1200,13 +1200,13 @@ function update_data($input_id,$input_data,$payment_data=0) {
 	$old_log_to_bank=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'mgmt_types','log_to_bank',$old_type);
 	$old_account_movement=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'account_mgmt_main','account_movement',$input_id);
 
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res_local=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$input_data['type']."'");
 	$row_local=mysql_fetch_array($res_local);
 	$type=strtolower($row_local['name']);
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="UPDATE $table SET ";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`='".$value."',";
@@ -1226,7 +1226,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 	} elseif($new_log_to_bank){
 		$movement_id=account_movement_from_manage($input_id);
 		if($movement_id) {
-			$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+			$table='account_mgmt_main';
 			$query2="UPDATE $table SET `account_movement`='$movement_id'";
 			$query2.=" WHERE `id`='$input_id'";
 			$res2 = mysql_db_query ($_SESSION['common_db'],$query2);
@@ -1260,7 +1260,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 		$data['debit_taxable_amount']=0;
 		$data['debit_vat_amount']=0;
 
-		$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+		$table='account_mgmt_main';
 		$query="UPDATE $table SET ";
 		for (reset ($data); list ($key, $value) = each ($data); ) {
 			$query.="`".$key."`='".$value."',";
@@ -1294,7 +1294,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 		$payment_data['associated_invoice']=$input_id;
 
 
-		$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+		$table='account_mgmt_main';
 		$query="SELECT * FROM $table WHERE `associated_invoice`='$input_id'";
 		$res = mysql_db_query ($_SESSION['common_db'],$query);
 		if(mysql_num_rows($res)==1){
@@ -1307,7 +1307,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 		}
 	} elseif($type=="fattura" && !$input_data['paid']) {
 
-		$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+		$table='account_mgmt_main';
 		$query="SELECT * FROM $table WHERE `associated_invoice`='$input_id'";
 		$res = mysql_db_query ($_SESSION['common_db'],$query);
 		if(mysql_num_rows($res)==1){
@@ -1326,7 +1326,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 				$data['debit_vat_amount']=$row_payment['cash_vat_amount'];
 			}
 
-			$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+			$table='account_mgmt_main';
 			$query="UPDATE $table SET ";
 			for (reset ($data); list ($key, $value) = each ($data); ) {
 				$query.="`".$key."`='".$value."',";
@@ -1338,7 +1338,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 
 			$payment_id=$row_payment['id'];
 
-			$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+			$table='account_mgmt_main';
 			$query="SELECT * FROM $table WHERE `associated_invoice`='$input_id'";
 			$res = mysql_db_query ($_SESSION['common_db'],$query);
 			$arr=mysql_fetch_array($res);
@@ -1346,7 +1346,7 @@ function update_data($input_id,$input_data,$payment_data=0) {
 				$movement_id=account_movement_delete($arr['account_movement']);
 			}
 
-			$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+			$table='account_mgmt_main';
 			$query="DELETE FROM $table WHERE `id`='$payment_id'";
 			$res = mysql_db_query ($_SESSION['common_db'],$query);
 		}
@@ -1387,11 +1387,11 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 	if($orderby=="") $orderby="date";
 
 	$append_income_totals=false;
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT $table.* FROM $table";
 	switch($query_type){
 	case 1:
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$query_value'");
 		$row=mysql_fetch_array($res);
 		$supplier_name=$row['name'];
@@ -1422,7 +1422,7 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 		$page="supply.php?supplier_type=$query_value&";
 		// the following syntax would be good, but mysql doesn't support it yet
 		// so we use the following one
-		$table2=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table2='account_mgmt_addressbook';
 		$query.= " JOIN $table2 WHERE $table.who=$table2.name AND $table2.type='".$query_value."'";
 		$query.=" AND";
 		$query.= " `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end']."";
@@ -1518,11 +1518,11 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 	}
 
 
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$query_type_all="SELECT * FROM $table WHERE `is_invoice`='1' OR `is_receipt`='1' OR `is_bill`='1'";
 	$res_types=mysql_db_query ($_SESSION['common_db'],$query_type_all);
 	while($row_type = mysql_fetch_array ($res_types)) {
-		$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+		$table='account_mgmt_main';
 		$query_type="SELECT $table.* FROM $table";
 		$query_type.= " WHERE (`type`='".$row_type['id']."' AND `waiter_income` = '1'  AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")";
 		$res = mysql_db_query ($_SESSION['common_db'],$query_type);
@@ -1547,7 +1547,7 @@ function table_general($orderby="date",$commandto,$query_type=0,$query_value=0) 
 	$i=0;
 
 	if($append_income_totals){
-		$table=$GLOBALS['table_prefix'].'mgmt_types';
+		$table='mgmt_types';
 		$query_type_all="SELECT * FROM $table WHERE `is_invoice`='1' OR `is_receipt`='1' OR `is_bill`='1'";
 		$res_type=mysql_db_query ($_SESSION['common_db'],$query_type_all);
 		while($row_type = mysql_fetch_array ($res_type)) {
@@ -1585,7 +1585,7 @@ function table_income($page,$commandto,$type){
 
 	global $i;
 
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT $table.* FROM $table";
 	$query.= " WHERE (`type`='$type' AND `waiter_income` = '1'  AND `date` >= ".$_SESSION['timestamp']['start']." AND `date` <= ".$_SESSION['timestamp']['end'].")";
 
@@ -1636,7 +1636,7 @@ function table_income($page,$commandto,$type){
 <?		}
 
 
-		$table=$GLOBALS['table_prefix'].'mgmt_types';
+		$table='mgmt_types';
 		$res_local = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$type."'");
 		$row_local = mysql_fetch_array($res_local);
 		$mgmt_type = new mgmt_type($type);
@@ -1783,7 +1783,7 @@ function table_generator($page,$commandto,$query,$command){
 		$type=$mgmt_type -> name($_SESSION['language']);
 		unset($mgmt_type);
 
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res_supplier = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table WHERE `name`='".$row['who']."'");
 		if(mysql_num_rows($res_supplier)==1){
 			$row_supplier = mysql_fetch_array ($res_supplier);

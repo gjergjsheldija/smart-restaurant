@@ -29,8 +29,7 @@
 
 class dish extends object {
 	function dish($id=0) {
-		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'dishes';
+		$this->table='dishes';
 		$this->id=$id;
 		$this->fields_names=array(	'id'=>ucphr('ID'),
 								'name'=>ucphr('NAME'),
@@ -53,7 +52,7 @@ class dish extends object {
 	}
 	
 	function sync_all_dishes_ingredients () {
-		$query = "SELECT `id` FROM `#prefix#dishes`";
+		$query = "SELECT `id` FROM `dishes`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		
@@ -72,10 +71,10 @@ class dish extends object {
 	*/
 	function search_name_rows ($search) {
 	
-		$query="SELECT #prefix#dishes.id, 
-		#prefix#dishes#lang#.table_name
-		FROM `#prefix#dishes`
-		JOIN `#prefix#dishes#lang#` ON #prefix#dishes.id=#prefix#dishes#lang#.table_id
+		$query="SELECTdishes.id, 
+		dishes.table_name
+		FROM `dishes`
+		JOIN `dishes` ON dishes.id=dishes.table_id
 		WHERE (LCASE(`table_name`) LIKE '".$search."%'
 			OR LCASE(`name`) LIKE '".$search."%'
 			OR LCASE(`table_name`) LIKE '% ".$search."%'
@@ -85,7 +84,7 @@ class dish extends object {
 			$query .= "AND `visible`='1'";
 		}
 		$query .= "
-		AND #prefix#dishes.deleted='0'
+		AND dishes.deleted='0'
 		ORDER BY table_name ASC";
 	
 		$res=common_query($query,__FILE__,__LINE__);
@@ -150,9 +149,9 @@ class dish extends object {
 	function list_query_all () {
 		$table = $this->table;
 		$lang_table = $table."_".$_SESSION['language'];
-		$cat_table = "#prefix#categories";
-		$cat_lang_table = "#prefix#categories_".$_SESSION['language'];
-		$printer_table = "#prefix#dests";
+		$cat_table = "categories";
+		$cat_lang_table = "categories_".$_SESSION['language'];
+		$printer_table = "dests";
 		
 		$query="SELECT
 				$table.`id`,
@@ -234,7 +233,7 @@ class dish extends object {
 	function pre_insert($input_data) {
 		if(!is_array($input_data)) return $input_data;
 		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
-			if(stristr($key,'dishes_')) {
+			if(stristr($key,'dishes')) {
 				$this->temp_lang[$key]=$value;
 				unset ($input_data[$key]);
 			}
@@ -280,7 +279,7 @@ class dish extends object {
 		if($err=$this->translations_set($input_data)) return $err;
 
 		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
-			if(stristr($key,'dishes_')) {
+			if(stristr($key,'dishes')) {
 				unset ($input_data[$key]);
 			}
 		}
@@ -385,7 +384,7 @@ class dish extends object {
 		
 		$not_poss = array_merge($ingreds,$dispingreds);
 		
-		$query = "SELECT * FROM `#prefix#ingreds`";
+		$query = "SELECT * FROM `ingreds`";
 		$query .= " WHERE `category` = '".$this->data['category']."' OR `category` = '0'";
 		$query .= " AND `deleted` = '0'";
 		$res=common_query($query,__FILE__,__LINE__);
@@ -410,7 +409,7 @@ class dish extends object {
 		
 		$name_found=false;
 		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
-			if(stristr($key,'dishes_') && trim($value)!='') {
+			if(stristr($key,'dishes') && trim($value)!='') {
 				$name_found=$key;
 			}
 		}
@@ -528,7 +527,7 @@ class dish extends object {
 			
 			$res_lang=mysql_list_tables($_SESSION['common_db']);
 			while($arr_lang=mysql_fetch_array($res_lang)) {
-				if($lang_now=stristr($arr_lang[0],$GLOBALS['table_prefix'].'dishes_')) {
+				if($lang_now=stristr($arr_lang[0],'dishes')) {
 					$lang_now= substr($lang_now,-2);
 		
 					if($editing) {
@@ -538,7 +537,7 @@ class dish extends object {
 		
 					$display->rows[$row][$col]=ucphr('NAME').' ('.$lang_now.')';
 					$col++;
-					$display->rows[$row][$col]='<input type="text" name="data[dishes_'.$lang_now.']" value="'.$lang_name.'">';
+					$display->rows[$row][$col]='<input type="text" name="data[dishes'.$lang_now.']" value="'.$lang_name.'">';
 					$col++;
 					$row++;
 					$col=0;
@@ -563,7 +562,7 @@ class dish extends object {
 		*************************************************/
 		$select = '
 		<select name="data[category]">';
-		$query_local="SELECT * FROM `#prefix#categories` WHERE `deleted`='0' ORDER BY `name`";
+		$query_local="SELECT * FROM `categories` WHERE `deleted`='0' ORDER BY `name`";
 		$res_local=common_query($query_local,__FILE__,__LINE__);
 		if(!$res_local) return ERR_MYSQL;
 		while($arr_local=mysql_fetch_array($res_local)){
@@ -592,7 +591,7 @@ class dish extends object {
 		*************************************************/
 		$select = '
 		<select name="data[destid]">';
-		$table='#prefix#dests';
+		$table='dests';
 		$query_local="SELECT * FROM `$table`";
 		$query_local.=" WHERE `deleted`='0'";
 		$query_local.=" ORDER BY `name`";
@@ -632,7 +631,7 @@ class dish extends object {
 		*************************************************/
 		$select = '
 		<select name="data[autocalc_skip]">';
-		$query_local="SELECT * FROM `#prefix#autocalc` ORDER BY `quantity`";
+		$query_local="SELECT * FROM `autocalc` ORDER BY `quantity`";
 		$res_local=common_query($query_local,__FILE__,__LINE__);
 		if(!$res_local) return ERR_MYSQL;
 		while($arr_local=mysql_fetch_array($res_local)){
@@ -794,12 +793,12 @@ class dish extends object {
 	<input type="hidden" name="data[name]" value="'.htmlentities($arr['name']).'">';
 				$res_lang=mysql_list_tables($_SESSION['common_db']);
 				while($arr_lang=mysql_fetch_array($res_lang)) {
-					if($lang_now=stristr($arr_lang[0],$GLOBALS['table_prefix'].'dishes_')) {
+					if($lang_now=stristr($arr_lang[0],'dishes')) {
 						$lang_now= substr($lang_now,-2);
 						$ingred = new dish ($this->id);
 						$lang_name = $ingred -> name ($lang_now);
 						$output .= '
-	<input type="hidden" name="data[dishes_'.$lang_now.']" value="'.$lang_name.'">';
+	<input type="hidden" name="data[dishes'.$lang_now.']" value="'.$lang_name.'">';
 					}
 				}
 		}

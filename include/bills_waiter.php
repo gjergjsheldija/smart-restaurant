@@ -28,7 +28,7 @@
 */
 
 function bill_orders_to_print ($sourceid) {
-	$query="SELECT * FROM `#prefix#orders` WHERE `sourceid`='$sourceid' AND `deleted`=0 AND `printed` IS NOT NULL ORDER BY `associated_id` ASC";
+	$query="SELECT * FROM `orders` WHERE `sourceid`='$sourceid' AND `deleted`=0 AND `printed` IS NOT NULL ORDER BY `associated_id` ASC";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
@@ -56,7 +56,7 @@ function write_log_item($item_id,$quantity,$price,$receipt_id) {
 	// $log["datetime"] = date("Y-m-d H:i:s",time()); 	// human format
 	// $log["datetime"] = date("YmdHis",time()); 		// timestamp format
 
-	$query="SELECT * FROM `#prefix#orders` WHERE `id`='$item_id'";
+	$query="SELECT * FROM `orders` WHERE `id`='$item_id'";
 	$res_item=common_query($query,__FILE__,__LINE__);
 	if(!$res_item) return mysql_errno();
 
@@ -108,7 +108,7 @@ function write_log_item($item_id,$quantity,$price,$receipt_id) {
 		$log["destination"]=0;
 	}
 
-	$log_table="#prefix#account_log";
+	$log_table="account_log";
 
 	$query="INSERT INTO `$log_table` (";
 	for (reset ($log); list ($key, $value) = each ($log); ) {
@@ -205,19 +205,19 @@ function bill_print(){
 
 	switch ($_SESSION['type']) {
 		case 1:
-			$query="SELECT * FROM `#prefix#dests` WHERE `bill`='1' AND `deleted`='0'";
+			$query="SELECT * FROM `dests` WHERE `bill`='1' AND `deleted`='0'";
 			$template_type='bill';
 			break;
 		case 2:
-			$query="SELECT * FROM `#prefix#dests` WHERE `invoice`='1' AND `deleted`='0'";
+			$query="SELECT * FROM `dests` WHERE `invoice`='1' AND `deleted`='0'";
 			$template_type='invoice';
 			break;
 		case 3:
-			$query="SELECT * FROM `#prefix#dests` WHERE `receipt`='1' AND `deleted`='0'";
+			$query="SELECT * FROM `dests` WHERE `receipt`='1' AND `deleted`='0'";
 			$template_type='receipt';
 			break;
 		default:
-			$query="SELECT * FROM `#prefix#dests` WHERE `bill`='1' AND `deleted`='0'";
+			$query="SELECT * FROM `dests` WHERE `bill`='1' AND `deleted`='0'";
 			$template_type='bill';
 	}
 	$res=common_query($query,__FILE__,__LINE__);
@@ -373,7 +373,7 @@ function bill_logger($item_id,$receipt_id){
 
 	$orderid=$item_id;
 	
-	$query="SELECT * FROM `#prefix#orders` WHERE `id`='$orderid'";
+	$query="SELECT * FROM `orders` WHERE `id`='$orderid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 	
@@ -384,7 +384,7 @@ function bill_logger($item_id,$receipt_id){
 
 	if($newpaid<0) $newpaid=0;
 
-	$query = "UPDATE `#prefix#orders` SET `paid` = '$newpaid' WHERE `id` = '$orderid'";
+	$query = "UPDATE `orders` SET `paid` = '$newpaid' WHERE `id` = '$orderid'";
 	$resupd=common_query($query,__FILE__,__LINE__);
 	if(!$resupd) return mysql_errno();
 	
@@ -396,14 +396,14 @@ function bill_logger($item_id,$receipt_id){
 		return 2;
 	}
 
-	$query="SELECT * FROM `#prefix#orders` WHERE `associated_id`='$orderid' AND  `id`!='$orderid'";
+	$query="SELECT * FROM `orders` WHERE `associated_id`='$orderid' AND  `id`!='$orderid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 	
 	while($arr=mysql_fetch_array($res)) {
 		$price=$arr["price"]/$arr["quantity"]*$topay;
 		
-		$query = "UPDATE `#prefix#orders` SET `paid` = '$newpaid' WHERE `id` = '".$arr['id']."'";
+		$query = "UPDATE `orders` SET `paid` = '$newpaid' WHERE `id` = '".$arr['id']."'";
 		$resupd=common_query($query,__FILE__,__LINE__);
 		if(!$resupd) return mysql_errno();
 		
@@ -426,7 +426,7 @@ function bill_order_get_modifications($orderid,$lang='') {
 	if(empty($lang)) $lang=$_SESSION['language'];
 
 	// selects all the mods that have operation != 0, so that actually could have a price
-	$query="SELECT * FROM `#prefix#orders` WHERE `associated_id`='$orderid' AND `id`!='$orderid' AND `operation`!='0'";
+	$query="SELECT * FROM `orders` WHERE `associated_id`='$orderid' AND `id`!='$orderid' AND `operation`!='0'";
 	if($show_priced_only) $query .= " AND `price`!='0'";
 	
 	$res=common_query($query,__FILE__,__LINE__);
@@ -721,7 +721,7 @@ function bill_print_taxes($receipt_id,$destid) {
 	
 	$dest_language=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'dests',"language",$destid);
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `id`='$receipt_id'";
 	
 	$res=common_query($query,__FILE__,__LINE__);
@@ -750,7 +750,7 @@ function bill_print_receipt_id($receipt_id,$destid) {
 	
 	$dest_language=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'dests',"language",$destid);
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `id`='$receipt_id'";
 
 	$res=common_query($query,__FILE__,__LINE__);
@@ -773,7 +773,7 @@ function bill_print_receipt_id($receipt_id,$destid) {
 }
 
 function bill_quantity($id,$operation){
-	$query="SELECT * FROM `#prefix#orders` WHERE `id`=$id";
+	$query="SELECT * FROM `orders` WHERE `id`=$id";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	
@@ -795,7 +795,7 @@ function bill_quantity($id,$operation){
 function bill_clear_prices($sourceid){
 	// clears the price of every product,
 	// so that adding the mod prices starts from zero instead of the precedent price
-	$query="SELECT * FROM `#prefix#orders` WHERE `sourceid`='".$sourceid."' AND `deleted`=0 AND `printed` IS NOT NULL ORDER BY `associated_id` ASC";
+	$query="SELECT * FROM `orders` WHERE `sourceid`='".$sourceid."' AND `deleted`=0 AND `printed` IS NOT NULL ORDER BY `associated_id` ASC";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	
@@ -1018,7 +1018,7 @@ function bill_save_session($sourceid){
 			it is set to max_quantity if the customer pays the full bill)
 	*/
 
-	$query="SELECT * FROM `#prefix#orders` WHERE `sourceid`='$sourceid' AND `deleted`=0 AND `printed` IS NOT NULL ORDER BY `associated_id` ASC";
+	$query="SELECT * FROM `orders` WHERE `sourceid`='$sourceid' AND `deleted`=0 AND `printed` IS NOT NULL ORDER BY `associated_id` ASC";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -1242,7 +1242,7 @@ function bill_reset_confirm_pos() {
 }
 
 function bill_reset($sourceid) {
-	$query= "UPDATE `#prefix#orders` SET `paid` = '0' WHERE `sourceid` = '$sourceid'";
+	$query= "UPDATE `orders` SET `paid` = '0' WHERE `sourceid` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 

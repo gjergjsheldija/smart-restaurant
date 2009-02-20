@@ -32,7 +32,7 @@ class category extends object {
 
 	function category($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'categories';
+		$this->table='categories';
 		$this->id=$id;
 		$this->flag_delete = true;
 		$this->fields_names=array(	'id'=>ucphr('ID'),
@@ -66,9 +66,9 @@ class category extends object {
 	}
 	
 	function list_query_all () {
-		$table = "#prefix#categories";
-		$lang_table = "#prefix#categories_".$_SESSION['language'];
-		$table_vat = "#prefix#vat_rates";
+		$table = "categories";
+		$lang_table = "categories_".$_SESSION['language'];
+		$table_vat = "vat_rates";
 		
 		$query="SELECT
 				$table.`id`,
@@ -86,7 +86,7 @@ class category extends object {
 	
 	function remove_connected_dishes () {
 		$query="SELECT id
-		FROM `#prefix#dishes`
+		FROM `dishes`
 		WHERE category='".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
@@ -99,7 +99,7 @@ class category extends object {
 	
 	function remove_connected_ingreds () {
 		$query="SELECT id
-		FROM `#prefix#ingreds`
+		FROM `ingreds`
 		WHERE category='".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
@@ -532,7 +532,7 @@ function categories_html_color_table () {
 }
 
 function admin_categories_names_array(){
-	$query="SELECT * FROM `#prefix#categories`
+	$query="SELECT * FROM `categories`
 	WHERE `deleted`='0'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();

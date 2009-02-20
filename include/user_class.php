@@ -32,7 +32,7 @@ class user extends object {
 
 	function user($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'users';
+		$this->table='users';
 		$this->id=$id;
 		$this -> title = ucphr('USERS');
 		$this->file=ROOTDIR.'/admin/admin.php';
@@ -398,7 +398,7 @@ class user extends object {
 
 		/* begin : mizuko selects users for POS and HandHeld */
 
-		$query="SELECT `id`,`name` FROM `#prefix#users` WHERE `disabled`='0' ";
+		$query="SELECT `id`,`name` FROM `users` WHERE `disabled`='0' ";
 		if( !$admin_only ) $query.=" AND dest_type = 'palm' ";
 
 		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
@@ -453,7 +453,7 @@ class user extends object {
 		}
 
 
-		$query="SELECT `id`,`name` FROM `#prefix#users` WHERE `disabled`='0'";
+		$query="SELECT `id`,`name` FROM `users` WHERE `disabled`='0'";
 		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
 		$query.=" ORDER BY name ASC";
 
@@ -506,7 +506,7 @@ class user extends object {
 
 		/* begin : mizuko selects users for POS and HandHeld */
 
-		$query="SELECT `id`,`name` FROM `#prefix#users` WHERE `disabled`='0'
+		$query="SELECT `id`,`name` FROM `users` WHERE `disabled`='0'
 				AND `deleted`='0' AND dest_type = 'pos' AND level!= '1022' ORDER BY name ASC";
 
 		$res=common_query($query,__FILE__,__LINE__);
@@ -537,7 +537,7 @@ class user extends object {
 	}
 
 	function count_users () {
-		$query="SELECT * FROM `#prefix#users`";
+		$query="SELECT * FROM `users`";
 		if (system::upgradeCompleted(6)) $query .= " WHERE `deleted`='0'";
 
 		$res=common_query($query,__FILE__,__LINE__);
@@ -570,7 +570,7 @@ class user extends object {
 	function connect() {
 		if (!isset($_REQUEST['userid'])) return ERR_NO_USER_PROVIDED;
 
-		$query="SELECT * FROM `#prefix#users` WHERE `id`='".$_REQUEST['userid']."'";
+		$query="SELECT * FROM `users` WHERE `id`='".$_REQUEST['userid']."'";
 		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
 
 		$res=common_query($query,__FILE__,__LINE__);
@@ -605,7 +605,7 @@ class user extends object {
 	function connect_pos() {
 		if (!isset($_REQUEST['password']) || empty($_REQUEST['password']) ) return ERR_NO_PASSWORD;
 
-		$query="SELECT * FROM `#prefix#users` WHERE dest_type = 'pos' AND `password` = '".md5($_REQUEST['password'])."'";
+		$query="SELECT * FROM `users` WHERE dest_type = 'pos' AND `password` = '".md5($_REQUEST['password'])."'";
 		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
 
 		$res=common_query($query,__FILE__,__LINE__);
@@ -671,9 +671,9 @@ class user extends object {
 		$fundi = date('Y-m-d') . " 23:59:00";
 		
 		$userName = $user->data['name'];
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$queryMoney = "SELECT date, who, description, cash_amount ";
-		$queryMoney .= "FROM `#prefix#account_mgmt_main`";
+		$queryMoney .= "FROM `account_mgmt_main`";
 		$queryMoney .= "WHERE who = '" . $userName . "' AND ";
 		$queryMoney .= "date > '" . $fillimi . "' AND date < '" . $fundi . "'";
 
@@ -749,7 +749,7 @@ class user extends object {
 			$msg=ucfirst(phr('CHECK_NAME'));
 		}
 
-		$query="SELECT * FROM `#prefix#users` WHERE `name`='".$input_data['name']."' AND `deleted`='0'";
+		$query="SELECT * FROM `users` WHERE `name`='".$input_data['name']."' AND `deleted`='0'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		while($arr=mysql_fetch_array($res)) {

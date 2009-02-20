@@ -29,22 +29,22 @@
 
 function toplist_delete_firsts (){
 	// cut out all the possible error inserted (dishid=0)
-	$query = "DELETE FROM `#prefix#last_orders` WHERE `dishid`='0'";
+	$query = "DELETE FROM `last_orders` WHERE `dishid`='0'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	
-	$query = "SELECT * FROM `#prefix#last_orders` ORDER BY `id`";
+	$query = "SELECT * FROM `last_orders` ORDER BY `id`";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
 	$num=mysql_num_rows($res);
 	while($num>=CONF_TOPLIST_SAVED_NUMBER){
 		$arr=mysql_fetch_array($res);
-		$query = "DELETE FROM `#prefix#last_orders` WHERE `id`=".$arr['id']." LIMIT 1";
+		$query = "DELETE FROM `last_orders` WHERE `id`=".$arr['id']." LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 
-		$query = "SELECT * FROM `#prefix#last_orders` ORDER BY `id`";
+		$query = "SELECT * FROM `last_orders` ORDER BY `id`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		$num=mysql_num_rows($res);
@@ -57,7 +57,7 @@ function toplist_show(){
 
 	$_SESSION['order_added']=0;
 
-	$query = "SELECT * FROM `#prefix#last_orders`";
+	$query = "SELECT * FROM `last_orders`";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -168,7 +168,7 @@ function toplist_insert ($dishid,$quantity){
 	
 	for($i=0; $i<$quantity;$i++) {
 		toplist_delete_firsts ();
-		$query = "INSERT INTO `#prefix#last_orders` (`dishid`) VALUES ('".$dishid."')";
+		$query = "INSERT INTO `last_orders` (`dishid`) VALUES ('".$dishid."')";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 	}
@@ -179,7 +179,7 @@ function toplist_insert ($dishid,$quantity){
 function toplist_delete ($dishid,$quantity=1){
 	if(!$dishid) return 0;
 
-	$query = "DELETE FROM `#prefix#last_orders` WHERE `dishid`='".$dishid."' LIMIT $quantity";
+	$query = "DELETE FROM `last_orders` WHERE `dishid`='".$dishid."' LIMIT $quantity";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 

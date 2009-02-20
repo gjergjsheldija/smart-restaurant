@@ -29,8 +29,7 @@
 
 class dish_ingredient extends object {
 	function dish_ingredient ($id=0) {
-		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'dishes_ingredients';
+		$this->table='dishes_ingredients';
 		$this->id=$id;
 		$this -> fetch_data();
 	}

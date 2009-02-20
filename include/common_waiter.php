@@ -33,7 +33,7 @@ function common_allowed_ip($host) {
 	// and only allows IPs present in that table to go on
 	// if the table is empty, any host is allowed
 	
-	$query="SELECT * FROM `#prefix#allowed_clients`";
+	$query="SELECT * FROM `allowed_clients`";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	// table is empty, everyone is allowed
@@ -41,7 +41,7 @@ function common_allowed_ip($host) {
 	
 	$host=sprintf("%u",ip2long($host));
 	
-	$query="SELECT * FROM `#prefix#allowed_clients` WHERE `host`='".$host."'";
+	$query="SELECT * FROM `allowed_clients` WHERE `host`='".$host."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	

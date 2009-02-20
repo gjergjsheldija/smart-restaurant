@@ -30,7 +30,7 @@
 class vat_rate extends object {
 	function vat_rate($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'vat_rates';
+		$this->table='vat_rates';
 		$this->id=$id;
 		$this -> title = ucphr('VAT_RATES');
 		$this->file=ROOTDIR.'/admin/admin.php';

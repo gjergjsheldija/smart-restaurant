@@ -10,7 +10,7 @@
   {people_number}
   {messages}
   <table>
-  	<tr><td><div align="left">{navbar}</div></td><td><div align="right">{logout}</div></td></tr>
+  	<tr colspan="2"><td><div align="left">{navbar}</div></td></tr>
     <tr>
       <td><div align="left"> {method} </div></td>
       <td><div align="left"> {type} </div></td>
@@ -19,6 +19,7 @@
       <td>{discount} </td>
       <td> {orders} </td>
     </tr>
+    <tr><td><div align="right">{logout}</div></td></tr>
   </table>
   <dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
 </center>

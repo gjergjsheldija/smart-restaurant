@@ -65,7 +65,7 @@ switch($command) {
 				echo GLOBALMSG_RECEIPT_ANNULL_CONFIRM."<br>\n";
 				$_SESSION["delete"]=$delete;
 				for (reset ($delete); list ($key, $value) = each ($delete); ) {
-					$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+					$table='account_mgmt_main';
 					$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$key'");
 					$row=mysql_fetch_array($res);
 					mysql_free_result($res);
@@ -112,7 +112,7 @@ switch($command) {
 				echo GLOBALMSG_RECEIPT_ANNULL_CONFIRM."<br>\n";
 				$_SESSION["annul"]=$annul;
 				for (reset ($annul); list ($key, $value) = each ($annul); ) {
-					$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+					$table='account_mgmt_main';
 					$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$key'");
 					$row=mysql_fetch_array($res);
 					mysql_free_result($res);

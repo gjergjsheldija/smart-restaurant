@@ -30,7 +30,7 @@ function vat_report(){
 	require("./mgmt_start.php");
 
 	$i=0;
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table";
 	$query.=" WHERE `date`>=$timestamp_start AND `date`<=$timestamp_end";
 	$query.=" order by `id`";

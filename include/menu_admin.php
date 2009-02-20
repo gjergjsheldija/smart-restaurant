@@ -240,7 +240,7 @@ class menu {
 
 		$language = common_get_language();
 		
-		$main_table = '#prefix#categories';
+		$main_table = 'categories';
 		$lang_table = $main_table.'_'.$language;
 		$query = "SELECT $main_table.id FROM `$main_table`";
 		$query .= " WHERE `deleted`='0'";
@@ -268,7 +268,7 @@ class menu {
 		
 		$language = common_get_language();
 		
-		$main_table = '#prefix#categories';
+		$main_table = 'categories';
 
 		$query = "SELECT $main_table.id FROM `$main_table`";
 		$query .= " WHERE  `deleted`='0'";
@@ -335,7 +335,7 @@ class menu {
 
 		$language = common_get_language();
 		
-		$query="SELECT * FROM `#prefix#mgmt_people_types` ORDER BY `name`";
+		$query="SELECT * FROM `mgmt_people_types` ORDER BY `name`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		
@@ -360,7 +360,7 @@ class menu {
 
 		$language = common_get_language();
 		
-		$query = "SELECT * FROM `#prefix#mgmt_types` WHERE `account_only`=0 ORDER BY `name`";
+		$query = "SELECT * FROM `mgmt_types` WHERE `account_only`=0 ORDER BY `name`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 	
@@ -412,7 +412,7 @@ class menu {
 		
 		$i = $start_idx;
 		
-		$table = '#prefix#account_accounts';
+		$table = 'account_accounts';
 		$query = "SELECT * FROM `$table`";
 		$res2 = common_query ( $query, __FILE__, __LINE__ );
 		if (! $res2)

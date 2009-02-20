@@ -43,7 +43,7 @@ function categories_printed ($sourceid,$category) {
 
 function categories_orders_present ($sourceid,$category) {
 	$query = "	SELECT id
-				FROM #prefix#orders
+				FROM orders
 				WHERE sourceid ='".$sourceid."'
 				AND priority =$category
 				AND deleted = 0
@@ -62,7 +62,7 @@ function categories_list($data=''){
 <table bgcolor="'.COLOR_TABLE_GENERAL.'">
 ';
 
-	$query="SELECT * FROM `#prefix#categories` WHERE `deleted`='0' ORDER BY id ASC";
+	$query="SELECT * FROM `categories` WHERE `deleted`='0' ORDER BY id ASC";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return '';
 	
@@ -108,7 +108,7 @@ function categories_list_pos($data=''){
 <table bgcolor="'.COLOR_TABLE_GENERAL.'">
 ';
 
-	$query="SELECT * FROM `#prefix#categories` WHERE `deleted`='0' ORDER BY id ASC";
+	$query="SELECT * FROM `categories` WHERE `deleted`='0' ORDER BY id ASC";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return '';
 	
@@ -154,12 +154,12 @@ function categories_list_pos($data=''){
 function letters_list_creator (){
 	$invisible_show = get_conf(__FILE__,__LINE__,"invisible_show");
 	if($invisible_show) {
-		$query="SELECT `name` FROM `#prefix#dishes`
-			WHERE #prefix#dishes.deleted='0'";
+		$query="SELECT `name` FROM `dishes`
+			WHERE dishes.deleted='0'";
 	} else {
-		$query="SELECT `name` FROM `#prefix#dishes`
+		$query="SELECT `name` FROM `dishes`
 			WHERE `visible`='1'
-			AND #prefix#dishes.deleted='0'";
+			AND dishes.deleted='0'";
 	}
 
 	$res=common_query($query,__FILE__,__LINE__);

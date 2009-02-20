@@ -29,29 +29,29 @@
 
 class system {
 	function reset_all_menu_data () {
-		$query = "TRUNCATE TABLE `#prefix#categories`";
+		$query = "TRUNCATE TABLE `categories`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
 		if($err=$this->reset_associated_langs ('categories')) return $err;
 		
-		$query = "TRUNCATE TABLE `#prefix#dishes`";
+		$query = "TRUNCATE TABLE `dishes`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
 		if($err=$this->reset_associated_langs ('dishes')) return $err;
 		
-		$query = "TRUNCATE TABLE `#prefix#ingreds`";
+		$query = "TRUNCATE TABLE `ingreds`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
 		if($err=$this->reset_associated_langs ('ingreds')) return $err;
 		
-		$query = "TRUNCATE TABLE `#prefix#orders`";
+		$query = "TRUNCATE TABLE `orders`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
-		$query = "TRUNCATE TABLE `#prefix#sources`";
+		$query = "TRUNCATE TABLE `sources`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -65,7 +65,7 @@ class system {
 	function reset_associated_langs ($table) {
 		$langs=list_db_languages();
 		foreach ($langs as $key => $value) {
-			$query = "TRUNCATE TABLE `#prefix#".$table."_".$value."`";
+			$query = "TRUNCATE TABLE `".$table."_".$value."`";
 			$res=common_query($query,__FILE__,__LINE__);
 			if(!$res) return ERR_MYSQL;
 		}
@@ -93,7 +93,7 @@ EOT;
 	}
 
 	function getVersion () {
-		$query="SELECT * FROM `#prefix#system` WHERE `name`='version'";
+		$query="SELECT * FROM `system` WHERE `name`='version'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		if(mysql_num_rows($res)) {

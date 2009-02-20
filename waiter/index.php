@@ -42,7 +42,7 @@ $tpl -> set_waiter_template_file ('authentication');
 
 // code to allow zaurus opera to reconnect (it doesn't disconnect users properly)
 $opera_zaurus=false;
-if(stristr($HTTP_SERVER_VARS['HTTP_USER_AGENT'],'opera') && stristr($HTTP_SERVER_VARS['HTTP_USER_AGENT'],'embedix')) $opera_zaurus=true;
+if(stristr($_SERVER['HTTP_USER_AGENT'],'opera') && stristr($_SERVER['HTTP_USER_AGENT'],'embedix')) $opera_zaurus=true;
 
 if (!isset($_SESSION['userid']) || $opera_zaurus) {
 	$user = new user();

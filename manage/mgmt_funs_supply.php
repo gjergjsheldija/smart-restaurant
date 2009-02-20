@@ -68,7 +68,7 @@ function table_supplier($orderby){
 	<tbody>\n";
 
 	$i=0;
-	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$query="SELECT * FROM $table ORDER BY `$orderby`";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	if(mysql_num_rows($res)){
@@ -77,7 +77,7 @@ function table_supplier($orderby){
 			$name=$row['name'];
 			$VAT=$row['vat'];
 
-			$table=$GLOBALS['table_prefix'].'mgmt_people_types';
+			$table='mgmt_people_types';
 			$res_type=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$row['type']."'");
 			$row_type=mysql_fetch_array($res_type);
 			$people_type = new mgmt_people_type($row['type']);
@@ -124,7 +124,7 @@ function insert_supplier_data($data) {
 	}
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$query="INSERT INTO $table (";
 	for (reset ($data); list ($key, $value) = each ($data); ) {
 		$query.="`".$key."`,";
@@ -154,7 +154,7 @@ function insert_supplier_data($data) {
 }
 function form_supplier_standard($id,$editing){
 	if ($editing) {
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 		$row=mysql_fetch_array($res);
 	}
@@ -213,7 +213,7 @@ function form_supplier_standard($id,$editing){
 function form_bank($id,$type_id){
 	if($id) {
 		$editing=1;
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 		$row=mysql_fetch_array($res);
 
@@ -234,7 +234,7 @@ function form_bank($id,$type_id){
 function form_supplier($id,$type_id){
 	if($id) {
 		$editing=1;
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 		$row=mysql_fetch_array($res);
 
@@ -253,7 +253,7 @@ function form_supplier($id,$type_id){
 function form_employee($id,$type_id){
 	if($id) {
 		$editing=1;
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 		$row=mysql_fetch_array($res);
 
@@ -272,7 +272,7 @@ function form_employee($id,$type_id){
 function form_pos($id,$type_id){
 	if($id) {
 		$editing=1;
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 		$row=mysql_fetch_array($res);
 
@@ -292,7 +292,7 @@ function form_pos($id,$type_id){
 function form_other($id,$type_id){
 	if($id) {
 		$editing=1;
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 		$row=mysql_fetch_array($res);
 
@@ -312,14 +312,14 @@ function form_other($id,$type_id){
 
 function display_supplier_form($id,$insert_type=0){
 	if($id){
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 		$row=mysql_fetch_array($res);
 		$insert_type=$row['type'];
 	}
 
 	$type_id=$insert_type;
-	$table=$GLOBALS['table_prefix'].'mgmt_people_types';
+	$table='mgmt_people_types';
 	$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$insert_type'");
 	$row=mysql_fetch_array($res);
 	$insert_type=strtolower($row['name']);
@@ -337,7 +337,7 @@ function display_supplier_form($id,$insert_type=0){
 function display_supplier_show($id){
 	require("./mgmt_start.php");
 
-	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$query="SELECT * FROM $table WHERE `id`='".$id."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	if(mysql_num_rows($res)!=1) return 1;
@@ -397,7 +397,7 @@ function display_supplier_show($id){
 }
 
 function form_insert_supplier() {
-	$table=$GLOBALS['table_prefix'].'mgmt_people_types';
+	$table='mgmt_people_types';
 	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table ORDER BY `name`");
 ?>
 	<form action="supply.php" method="GET" name="supplier_form">
@@ -461,7 +461,7 @@ function form_insert_supplier() {
 }
 
 function form_supplier_note($id){
-	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$id'");
 	if(!mysql_num_rows($res)) return 1;
 	$row=mysql_fetch_array($res);
@@ -488,7 +488,7 @@ function update_supplier_data($id,$data) {
 	}
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$query="UPDATE $table SET ";
 	for (reset ($data); list ($key, $value) = each ($data); ) {
 		$query.="`".$key."`='".$value."',";
@@ -514,7 +514,7 @@ function update_supplier_note($id,$data) {
 	if($data['note']=="") return 1;
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$query="UPDATE $table SET ";
 	for (reset ($data); list ($key, $value) = each ($data); ) {
 		$query.="`".$key."`='".$value."',";
@@ -543,7 +543,7 @@ function delete_supplier($delete){
 	$firstline=1;
 	$counter=0;
 
-	$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+	$table='account_mgmt_addressbook';
 	$query="DELETE FROM $table WHERE ";
 	if(is_array($delete)){
 		for (reset ($delete); list ($key, $value) = each ($delete); ) {

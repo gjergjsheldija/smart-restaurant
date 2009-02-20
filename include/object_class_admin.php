@@ -404,12 +404,12 @@ class object {
 	}
 	
 	function translations_set ($input_data) {
-		$root_table=str_replace($GLOBALS['table_prefix'],'',$this->table);
+		$root_table=$this->table;
 		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 	
 			if($lang_now=stristr($key,$root_table.'_')) {
 				$lang_now= substr($lang_now,-2);
-				$table='#prefix#'.$key;
+				$table=''.$key;
 	
 				$cache = new cache (); $cache -> flush ($table,$this->id);
 				
@@ -430,7 +430,7 @@ class object {
 				else $res = accounting_query($query,__FILE__,__LINE__);
 				if(!$res) return ERR_MYSQL;
 				
-				$table=str_replace('#prefix#','',$table);
+				$table=str_replace('','',$table);
 			}
 		}
 	
@@ -1082,7 +1082,7 @@ class object {
 class mgmt_people_type extends object {
 	function mgmt_people_type($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'mgmt_people_types';
+		$this->table='mgmt_people_types';
 		$this->id=$id;
 		$this -> fetch_data();
 	}
@@ -1091,7 +1091,7 @@ class mgmt_people_type extends object {
 class mgmt_type extends object {
 	function mgmt_type($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'mgmt_types';
+		$this->table='mgmt_types';
 		$this->id=$id;
 		$this -> fetch_data();
 	}

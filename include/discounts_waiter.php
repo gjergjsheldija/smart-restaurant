@@ -32,7 +32,7 @@ function discount_save_to_source($discount_value){
 
 	$newdiscount=$olddiscount-abs($discount_value);
 
-	$query = "UPDATE `#prefix#sources` SET `discount` = '$newdiscount'
+	$query = "UPDATE `sources` SET `discount` = '$newdiscount'
 		WHERE `id` = '".$_SESSION['sourceid']."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
@@ -41,7 +41,7 @@ function discount_save_to_source($discount_value){
 }
 
 function write_log_discount($discount_value,$receipt_id){
-	$log_table="#prefix#account_log";
+	$log_table="account_log";
 
 	$log["waiter"]=$_SESSION['userid'];
 	$log["destination"]=0;

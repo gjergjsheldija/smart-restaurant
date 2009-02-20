@@ -219,7 +219,7 @@ class lang extends object {
 class lang_type extends lang {
 	function lang_type($table) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].$table;
+		$this->table= $table;
 
 		$this -> find_translations();
 	}
@@ -371,7 +371,7 @@ function translator_new_language ($input_data,$silent=true) {
 
 	// Now we'll build the correct UPDATE query, based on the fields provided
 	for (reset ($to_check_admin); list ($key, $local_table) = each ($to_check_admin); ) {
-		$table='#prefix#'.$local_table.'_'.$lang;
+		$table=''.$local_table.'_'.$lang;
 		$query="CREATE TABLE `".$_SESSION['common_db']."`.`".$table."` (
 					`id` int( 11 ) NOT NULL AUTO_INCREMENT ,
 					`table_id` int( 11 ) NOT NULL default '0',
@@ -421,7 +421,7 @@ function translator_remove_language ($input_data) {
 	global $to_check_admin;
 
 	for (reset ($to_check_admin); list ($key, $local_table) = each ($to_check_admin); ) {
-		$table='#prefix#'.$local_table.'_'.$lang;
+		$table=''.$local_table.'_'.$lang;
 		$query="DROP TABLE `".$_SESSION['common_db']."`.`".$table."`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
@@ -433,7 +433,7 @@ function translator_remove_language ($input_data) {
 
 function translator_new_lang_value($new_value) {
 	$new_value = trim ($new_value);
-	$table_now=$GLOBALS['table_prefix'].'lang';
+	$table_now='lang';
 	$query="SELECT * FROM `".$table_now."` WHERE `name`='".$new_value."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
@@ -466,7 +466,7 @@ function translator_new_lang_value($new_value) {
 }
 
 function translator_delete_lang_value ($id) {
-	$query="DELETE FROM `#prefix#lang` WHERE `id`='".$id."'";
+	$query="DELETE FROM `lang` WHERE `id`='".$id."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 	

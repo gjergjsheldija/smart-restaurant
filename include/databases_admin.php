@@ -32,8 +32,7 @@ class accounting_database extends object {
 	var $create_db;
 	
 	function accounting_database($id=0) {
-		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'accounting_dbs';
+		$this->table='accounting_dbs';
 		$this->id=$id;
 		$this -> title = ucphr('ACCOUNTING_DATABASES');
 		$this->file=ROOTDIR.'/admin/admin.php';
@@ -193,7 +192,7 @@ class accounting_database extends object {
 	function delete_tables() {
 		if(empty($this->db_name)) return 1;
 
-		$query='DROP TABLE `'.$GLOBALS['table_prefix'].'account_account_log`,`'.$GLOBALS['table_prefix'].'account_accounts`,`'.$GLOBALS['table_prefix'].'account_log`,`'.$GLOBALS['table_prefix'].'account_mgmt_addressbook`,`'.$GLOBALS['table_prefix'].'account_mgmt_main`,`'.$GLOBALS['table_prefix'].'account_receipts`,`'.$GLOBALS['table_prefix'].'account_stock_log`';
+		$query='DROP TABLE `account_account_log`,`account_accounts`,`account_log`,`account_mgmt_addressbook`,`account_mgmt_main`,`account_receipts`,`account_stock_log`';
 
 		mysql_db_query ($this->db_name,$query);
 		if($errno=mysql_errno()){

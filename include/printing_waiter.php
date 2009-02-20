@@ -169,7 +169,7 @@ function printing_commands(){
 * @return integer
 */
 function printing_orders_to_print ($sourceid) {
-	$query="SELECT * FROM `#prefix#orders`  WHERE `sourceid`='$sourceid' AND `suspend`='0' AND `printed` IS NULL AND `deleted`='0' ORDER BY id ASC";
+	$query="SELECT * FROM `orders`  WHERE `sourceid`='$sourceid' AND `suspend`='0' AND `printed` IS NULL AND `deleted`='0' ORDER BY id ASC";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 
@@ -185,8 +185,8 @@ function printer_print_row($arr,$destid){
 		$modingred=$arr['ingredid'];
 		$modingrednumber= $modingred;
 		
-		$query = "SELECT * FROM `#prefix#ingreds` WHERE id='$modingrednumber'
-		AND #prefix#ingreds.deleted = '0'";
+		$query = "SELECT * FROM `ingreds` WHERE id='$modingrednumber'
+		AND ingreds.deleted = '0'";
 		$res2=common_query($query,__FILE__,__LINE__);
 		if(!$res2) return '';
 		$arr2 = mysql_fetch_array ($res2);
@@ -242,7 +242,7 @@ function printer_print_row($arr,$destid){
 }
 
 function printing_orders_printed_category ($category) {
-	$query="SELECT * FROM `#prefix#orders` WHERE `sourceid`='".$_SESSION['sourceid']."'";
+	$query="SELECT * FROM `orders` WHERE `sourceid`='".$_SESSION['sourceid']."'";
 	$query.=" AND `priority`=$category AND `deleted`=0 AND `printed` IS NOT NULL";
 	$query.=" AND `dishid`!=".MOD_ID;
 	$query.=" AND `dishid`!=".SERVICE_ID;
@@ -271,7 +271,7 @@ function print_category($category){
 	
 	if(!printing_orders_printed_category($category)) return ERR_NO_ORDERS_PRINTED_CATEGORY;
 
-	$query = "SELECT * FROM `#prefix#sources` WHERE id='$sourceid'";
+	$query = "SELECT * FROM `sources` WHERE id='$sourceid'";
 	$res2=common_query($query,__FILE__,__LINE__);
 	if(!$res2) return ERR_MYSQL;
 	
@@ -279,7 +279,7 @@ function print_category($category){
 	if ($row2!=FALSE) {
 		$otablenum = $row2['name'];
 		$ouserid = $row2['userid'];
-		$query = "SELECT * FROM `#prefix#users` WHERE id='$ouserid'";
+		$query = "SELECT * FROM `users` WHERE id='$ouserid'";
 		$res3=common_query($query,__FILE__,__LINE__);
 		if(!$res3) return mysql_errno();
 		
@@ -296,7 +296,7 @@ function print_category($category){
 				break;
 	}
 	
-	$query="SELECT * FROM `#prefix#dests` WHERE `deleted`='0'";
+	$query="SELECT * FROM `dests` WHERE `deleted`='0'";
 	$res_dest=common_query($query,__FILE__,__LINE__);
 	if(!$res_dest) return ERR_MYSQL;
 	
@@ -304,17 +304,17 @@ function print_category($category){
 		$destid=$arr_dest['id'];
 		$lang=$arr_dest['language'];
 
-		$query="SELECT #prefix#orders.extra_care, #prefix#orders.quantity, #prefix#orders.dishid FROM #prefix#orders";
-		$query.=" JOIN #prefix#dishes WHERE #prefix#dishes.id=#prefix#orders.dishid";
-		$query.=" AND #prefix#orders.sourceid ='".$_SESSION['sourceid']."'";
-		$query.=" AND #prefix#orders.priority =$category";
-		$query.=" AND #prefix#orders.deleted = 0";
-		$query.=" AND #prefix#orders.printed IS NOT NULL";
-		$query.=" AND #prefix#orders.dishid != ".MOD_ID;
-		$query.=" AND #prefix#orders.dishid != ".SERVICE_ID;
-		$query.=" AND #prefix#orders.suspend = 0";
-		$query.=" AND #prefix#dishes.destid ='$destid'";
-		$query.=" ORDER BY #prefix#orders.associated_id";
+		$query="SELECT orders.extra_care, orders.quantity, orders.dishid FROM orders";
+		$query.=" JOIN dishes WHERE dishes.id=orders.dishid";
+		$query.=" AND orders.sourceid ='".$_SESSION['sourceid']."'";
+		$query.=" AND orders.priority =$category";
+		$query.=" AND orders.deleted = 0";
+		$query.=" AND orders.printed IS NOT NULL";
+		$query.=" AND orders.dishid != ".MOD_ID;
+		$query.=" AND orders.dishid != ".SERVICE_ID;
+		$query.=" AND orders.suspend = 0";
+		$query.=" AND dishes.destid ='$destid'";
+		$query.=" ORDER BY orders.associated_id";
 
 		$res_ord=common_query($query,__FILE__,__LINE__);
 		if(!$res_ord) return ERR_MYSQL;
@@ -375,7 +375,7 @@ function print_category($category){
 
 	$catprintedtext=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'sources',"catprinted",$sourceid);
 	$catprintedtext.=" ".$category;
-	$query = "UPDATE `#prefix#sources` SET `catprinted`='$catprintedtext' WHERE `id` = '$sourceid'";
+	$query = "UPDATE `sources` SET `catprinted`='$catprintedtext' WHERE `id` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -387,7 +387,7 @@ function print_test_page(){
 
 	$msg="";
 
-	$query="SELECT * FROM `#prefix#dests` WHERE `deleted`='0'";
+	$query="SELECT * FROM `dests` WHERE `deleted`='0'";
 	$res_dest=common_query($query,__FILE__,__LINE__);
 	if(!$res_dest) return ERR_MYSQL;
 	
@@ -441,7 +441,7 @@ function print_line($destid,$msg){
 	debug_msg(__FILE__,__LINE__,$debug);
 
 	if($destid=="all") {
-		$query="SELECT * FROM `#prefix#dests` WHERE `bill`=0 AND `invoice`=0 AND `receipt`=0 AND `deleted`='0' ORDER BY id ASC";
+		$query="SELECT * FROM `dests` WHERE `bill`=0 AND `invoice`=0 AND `receipt`=0 AND `deleted`='0' ORDER BY id ASC";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -542,7 +542,7 @@ function print_line_win($value,$dest) {
 function print_set_printed($orderid){
 	if(CONF_DEBUG_DONT_SET_PRINTED) return 0;
 	
-	$query = "UPDATE `#prefix#orders` SET `printed` = NOW() WHERE `id` = '$orderid'";
+	$query = "UPDATE `orders` SET `printed` = NOW() WHERE `id` = '$orderid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -553,7 +553,7 @@ function print_ticket($orderid,$deleted=false) {
 	$output['orders']='';
 	$tpl_print = new template;
 
-	$query = "SELECT * FROM `#prefix#orders` WHERE `id`='".$orderid."'";
+	$query = "SELECT * FROM `orders` WHERE `id`='".$orderid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -607,7 +607,7 @@ function print_ticket($orderid,$deleted=false) {
 	
 	$output['orders'].=printer_print_row($arr,$destid);
 	
-	$query = "SELECT * FROM `#prefix#orders` WHERE `associated_id`='".$orderid."' AND `id` != '".$orderid."'";
+	$query = "SELECT * FROM `orders` WHERE `associated_id`='".$orderid."' AND `id` != '".$orderid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	while($arr_mods=mysql_fetch_array($res))
@@ -660,7 +660,7 @@ function print_orders($sourceid){
 	$sourceid = $_SESSION['sourceid'];
 	debug_msg(__FILE__,__LINE__,"BEGIN PRINTING");
 
-	$query = "SELECT * FROM `#prefix#orders` WHERE `sourceid`='$sourceid' AND `printed` IS NULL AND `suspend`='0' ORDER BY dest_id ASC, priority ASC, associated_id ASC, id ASC";
+	$query = "SELECT * FROM `orders` WHERE `sourceid`='$sourceid' AND `printed` IS NULL AND `suspend`='0' ORDER BY dest_id ASC, priority ASC, associated_id ASC, id ASC";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 
@@ -887,7 +887,7 @@ function find_last_receipt($db,$type,$year){
 
 	$timestart=date("Y")."0000000000";
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `type`='$type' AND `internal_id`!='' AND `date`>='$timestart'";
 	// CRYPTO
 	$res=common_query($query,__FILE__,__LINE__);
@@ -936,7 +936,7 @@ function receipt_insert($accountdb,$type){
 
 	// creates the new receipt voice in management db, to be next filled
 	// with actual amount values
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	//mizuko... added $user->data['name'] to have user name
 	$user = new user($_SESSION['userid']);
 	$query="INSERT INTO $table (`description`,`who`,`internal_id`,`type`,`waiter_income`) VALUES ('".ucfirst(phr('INCOME')).": $internal_id','".$user->data['name']."','$internal_id','$type','1')";
@@ -948,7 +948,7 @@ function receipt_insert($accountdb,$type){
 
 function receipt_delete($accountdb,$receipt_id){
 	// deletes the receipt voice in management db
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="DELETE FROM $table WHERE `id`='".$receipt_id."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
@@ -962,7 +962,7 @@ function receipt_update_amounts($accountdb,$total,$receipt_id){
 	$taxable=$total['taxable'];
 	$vat=$total['tax'];
 	
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="UPDATE $table SET `waiter_income` = '1',`cash_amount` = '$total_total',`cash_taxable_amount` = '$taxable',`cash_vat_amount` = '$vat' WHERE `id` = '$receipt_id'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;

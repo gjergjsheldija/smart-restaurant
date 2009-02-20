@@ -29,7 +29,7 @@
 class autocalc extends object {
 	function autocalc($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'autocalc';
+		$this->table='autocalc';
 		$this->id=$id;
 		$this -> title = ucphr('AUTOCALC_LEVELS');
 		$this->file=ROOTDIR.'/admin/admin.php';
@@ -202,7 +202,7 @@ class autocalc extends object {
 	}
 	
 	function max_quantity () {
-		$query="SELECT * FROM `#prefix#autocalc`";
+		$query="SELECT * FROM `autocalc`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		

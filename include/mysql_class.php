@@ -84,7 +84,7 @@ class db_manager {
 
 		list($upgrade_id,$from_version,$expected_version)=explode('_',$upgrade_str,3);
 		
-		$query = "SELECT * FROM `#prefix#system` WHERE `name`='upgrade_last_key'";
+		$query = "SELECT * FROM `system` WHERE `name`='upgrade_last_key'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -98,7 +98,7 @@ class db_manager {
 	}
 	
 	function upgrade_get_last_ok () {
-		$query = "SELECT * FROM `#prefix#system` WHERE `name`='upgrade_last_key'";
+		$query = "SELECT * FROM `system` WHERE `name`='upgrade_last_key'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		
@@ -118,14 +118,14 @@ class db_manager {
 
 		list($upgrade_id,$from_version,$expected_version)=explode('_',$upgrade_str,3);
 		
-		$query = "SELECT * FROM `#prefix#system` WHERE `name`='version'";
+		$query = "SELECT * FROM `system` WHERE `name`='version'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
 		$arr=mysql_fetch_array($res);
 		if($arr['value']!=$expected_version) return ERR_UNEXPECTED_VERSION_NUMBER;
 
-		$query = "UPDATE `#prefix#system` SET `value`='".$upgrade_id."' WHERE `name`='upgrade_last_key' LIMIT 1";
+		$query = "UPDATE `system` SET `value`='".$upgrade_id."' WHERE `name`='upgrade_last_key' LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -514,16 +514,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		return $out;
 	}
 
-	function is_mhr_table ($table) {
-		if(!$this->mhr_tables_only) return true;
-		
-		$prefix_len = strlen($GLOBALS['table_prefix']);
-		$tbl_prefix = substr($table,0,$prefix_len);
-		if($tbl_prefix==$GLOBALS['table_prefix']) return true;
-		
-		return false;
-	}
-	
 	function dbstruct_to_xml($db) {
 		$this->database=$db;
 	
@@ -551,7 +541,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		$out .= "\t\t\t<name> $db </name>\n";
 		if($db==$_SESSION['common_db']) $out .= "\t\t\t<type> common </type>\n";
 		else {
-			$table=$GLOBALS['table_prefix'].'accounting_dbs';
+			$table='accounting_dbs';
 			$query="SELECT * FROM `$table`";
 			$res_accounting_dbs = mysql_db_query ($_SESSION['common_db'],$query,$this->link);
 			if($errno=mysql_errno()) {
@@ -570,7 +560,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		
 		while($arr_tables=mysql_fetch_array($res_tables)) {
 			$table=$arr_tables[0];
-			if(!$this -> is_mhr_table($table)) continue;
 			
 			$out .= "\t\t\t<table name=\"$table\">\n";
 			$out .= "\t\t\t\t<name> $table </name>\n";
@@ -627,7 +616,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		
 		if(is_array($tables_show)) {
 			for (reset ($tables_show); list ($key, $value) = each ($tables_show); ) {
-				$tables_show[$key]=$GLOBALS['table_prefix'].$tables_show[$key];
+				$tables_show[$key]=$tables_show[$key];
 				
 				// if the $lang_export var is set, only exports the *language* version of the selected tables
 				if(!empty($lang_export)) $tables_show[$key]=$tables_show[$key].'_'.$lang_export;
@@ -636,7 +625,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		
 		if(is_array($tables_struct_only)) {
 			for (reset ($tables_struct_only); list ($key, $value) = each ($tables_struct_only); ) {
-				$tables_struct_only[$key]=$GLOBALS['table_prefix'].$tables_struct_only[$key];
+				$tables_struct_only[$key]=$tables_struct_only[$key];
 				
 				// if the $lang_export var is set, only exports the *language* version of the selected tables
 				if(!empty($lang_export)) $tables_struct_only[$key]=$tables_struct_only[$key].'_'.$lang_export;
@@ -667,7 +656,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 		$out .= "# Database name: $db\n";
 		if($db==$_SESSION['common_db']) $out .= "# Database type: main\n";
 		else {
-			$table=$GLOBALS['table_prefix'].'accounting_dbs';
+			$table='accounting_dbs';
 			$query="SELECT * FROM `$table`";
 			$res_accounting_dbs = mysql_db_query ($_SESSION['common_db'],$query,$this->link);
 			if($errno=mysql_errno()) {
@@ -728,7 +717,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 	
 	function table_structure ($table,$drop_tables) {
 		$out = '';
-		if(!$this -> is_mhr_table($table)) return '';
 	
 		$out .= "\n";
 		$out .= "#\n";
@@ -758,7 +746,6 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 	
 	function table_dump($table,$mysqldump_format) {
 		$out = '';
-		if(!$this -> is_mhr_table($table)) return '';
 		
 		$query="SHOW COLUMNS FROM `".$table."`";
 		$res_fields=mysql_db_query($this->database,$query,$this->link);
@@ -921,7 +908,7 @@ Done ".$_SESSION['restore_sql']['done_bytes'].'/'.$_SESSION['restore_sql']['tota
 	
 	function upgrade_form ($vars) {
 		$tmp = '';
-		$query="SELECT * FROM `#prefix#system` WHERE `name`='version'";
+		$query="SELECT * FROM `system` WHERE `name`='version'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		

@@ -31,7 +31,7 @@
 function table_set_customer($sourceid,$input_data){
 	if(!isset($input_data['customer'])) return ERR_CUSTOMER_NOT_SPECIFIED;
 	
-	$query="UPDATE `#prefix#sources` SET `customer`='".$input_data['customer']."' WHERE `id`='$sourceid'";
+	$query="UPDATE `sources` SET `customer`='".$input_data['customer']."' WHERE `id`='$sourceid'";
 
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
@@ -57,7 +57,7 @@ function table_pay($paid){
 		return ERR_ACCESS_DENIED;
 	}
 	
-	$query = "UPDATE `#prefix#sources` SET `paid` = '$paid' WHERE `id` = '$sourceid'";
+	$query = "UPDATE `sources` SET `paid` = '$paid' WHERE `id` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -74,7 +74,7 @@ function table_pay_pos($paid){
 		return ERR_ACCESS_DENIED;
 	}
 	
-	$query = "UPDATE `#prefix#sources` SET `paid` = '$paid' WHERE `id` = '$sourceid'";
+	$query = "UPDATE `sources` SET `paid` = '$paid' WHERE `id` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -92,11 +92,11 @@ function table_clear(){
 	$sourceid = $_SESSION['sourceid'];
 	if(order_found_generic_not_priced($sourceid)) return ERR_GENERIC_ORDER_NOT_PRICED_FOUND;
 
-	$query = "DELETE FROM `#prefix#orders` WHERE `sourceid`='$sourceid'";
+	$query = "DELETE FROM `orders` WHERE `sourceid`='$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
-	$query="UPDATE `#prefix#sources` SET
+	$query="UPDATE `sources` SET
 	`userid` = '0'
 	,`toclose` = '0'
 	,`discount` = '0.00'
@@ -334,12 +334,12 @@ function table_cleared_interface_pos() {
 function table_close($sourceid){
 	global $tpl;
 
-	$query = "SELECT * FROM `#prefix#sources` WHERE `id` = '$sourceid'";
+	$query = "SELECT * FROM `sources` WHERE `id` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	if(!mysql_num_rows($res)) return ERR_TABLE_NOT_FOUND;
 			
-	$query = "UPDATE `#prefix#sources` SET `toclose`='1' WHERE `id` = '$sourceid'";
+	$query = "UPDATE `sources` SET `toclose`='1' WHERE `id` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -480,12 +480,12 @@ function table_reopen_confirm_pos() {
 function table_reopen($sourceid) {
 	global $tpl;
 	
-	$query = "SELECT * FROM `#prefix#sources` WHERE `id` = '$sourceid'";
+	$query = "SELECT * FROM `sources` WHERE `id` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	if(!mysql_num_rows($res)) return ERR_TABLE_NOT_FOUND;
 			
-	$query = "UPDATE `#prefix#sources` SET `toclose`='0',`paid`='0' WHERE `id` = '$sourceid'";
+	$query = "UPDATE `sources` SET `toclose`='0',`paid`='0' WHERE `id` = '$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -509,7 +509,7 @@ function table_reopen($sourceid) {
 function table_total($sourceid){
 	$total=table_total_without_discount($sourceid);
 	
-	$query="SELECT * FROM `#prefix#sources` WHERE `id`='".$sourceid."'";
+	$query="SELECT * FROM `sources` WHERE `id`='".$sourceid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
@@ -537,7 +537,7 @@ function table_total($sourceid){
 function table_total_without_discount($sourceid){
 	$total=0;
 
-	$query ="SELECT * FROM `#prefix#orders` WHERE `sourceid`='$sourceid'";
+	$query ="SELECT * FROM `orders` WHERE `sourceid`='$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 
@@ -668,7 +668,7 @@ function table_associate(){
 	// another waiter already is associated to the source
 	if (table_is_associated()) return ERR_TABLE_ALREADY_ASSOCIATED;
 
-	$query = "UPDATE `#prefix#sources` SET `userid` = '".$_SESSION['userid']."' WHERE `id` = '".$_SESSION['sourceid']."'";
+	$query = "UPDATE `sources` SET `userid` = '".$_SESSION['userid']."' WHERE `id` = '".$_SESSION['sourceid']."'";
 	$res=common_query ($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL_ERROR;
 
@@ -684,7 +684,7 @@ function table_associate(){
 * @return integer Waiterid field value (0 if not associated)
 */
 function table_is_associated() {
-	$query = "SELECT * FROM `#prefix#sources` WHERE `id`='".$_SESSION['sourceid']."'";
+	$query = "SELECT * FROM `sources` WHERE `id`='".$_SESSION['sourceid']."'";
 	$res=common_query ($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
@@ -701,14 +701,14 @@ function table_is_associated() {
 * @return integer
 */
 function table_is_closed($sourceid) {
-	if($cache_out=$GLOBALS['cache_var'] -> get ($GLOBALS['table_prefix'].'sources',$sourceid,'toclose')) return $cache_out;
+	if($cache_out=$GLOBALS['cache_var'] -> get ('sources',$sourceid,'toclose')) return $cache_out;
 		
-	$query = "SELECT `toclose` FROM `#prefix#sources` WHERE `id`='".$sourceid."'";
+	$query = "SELECT `toclose` FROM `sources` WHERE `id`='".$sourceid."'";
 	$res=common_query ($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
 	$arr = mysql_fetch_array($res);
-	$GLOBALS['cache_var'] -> set ($GLOBALS['table_prefix'].'sources',$sourceid,'toclose',$arr['toclose']);
+	$GLOBALS['cache_var'] -> set ('sources',$sourceid,'toclose',$arr['toclose']);
 	return $arr['toclose'];
 }
 
@@ -723,7 +723,7 @@ function table_is_closed($sourceid) {
 function table_dissociate(){
 	if (!get_conf(__FILE__,__LINE__,"disassociation_allow")) return ERR_NOT_ALLOWED_TO_DISSOCIATE;
 
-	$query = "UPDATE `#prefix#sources` SET `userid` = '0' WHERE `id` = '".$_SESSION['sourceid']."'";
+	$query = "UPDATE `sources` SET `userid` = '0' WHERE `id` = '".$_SESSION['sourceid']."'";
 	$res=common_query ($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -753,15 +753,15 @@ function table_is_takeaway($table_id) {
 * @return integer takeaway value from sources table
 */
 function table_exists($sourceid) {
-	if($cache_out=$GLOBALS['cache_var'] -> get ($GLOBALS['table_prefix'].'sources',$sourceid,'id')) return $cache_out;
+	if($cache_out=$GLOBALS['cache_var'] -> get ('sources',$sourceid,'id')) return $cache_out;
 
-	$query="SELECT `toclose` FROM `#prefix#sources` WHERE `id`='$sourceid'";
+	$query="SELECT `toclose` FROM `sources` WHERE `id`='$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
 	$arr=mysql_fetch_assoc($res);
 	
-	$GLOBALS['cache_var'] -> set ($GLOBALS['table_prefix'].'sources',$sourceid,'toclose',$arr['toclose']);
+	$GLOBALS['cache_var'] -> set ('sources',$sourceid,'toclose',$arr['toclose']);
 	return mysql_num_rows($res);
 }
 
@@ -825,7 +825,7 @@ function table_suggest_command($sourceid) {
 */
 function table_people_number_line ($sourceid) {
 	$output = '';
-	$query="SELECT * FROM `#prefix#sources` WHERE `id`='".$sourceid."'";
+	$query="SELECT * FROM `sources` WHERE `id`='".$sourceid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return '';
 
@@ -863,7 +863,7 @@ function table_people_number_line ($sourceid) {
 }
 
 function table_people_number ($sourceid) {
-	$query="SELECT SUM(quantity) as quantity FROM `#prefix#orders` WHERE `sourceid`='".$sourceid."' AND `dishid`='".SERVICE_ID."'";
+	$query="SELECT SUM(quantity) as quantity FROM `orders` WHERE `sourceid`='".$sourceid."' AND `dishid`='".SERVICE_ID."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 
@@ -892,7 +892,7 @@ function table_lock_remaining_time($sourceid) {
 	$timestamp_now=date("YmdHis",time());
 	$lock_time=get_conf(__FILE__,__LINE__,"lock_time");
 	
-	$query="SELECT `last_access_time` FROM `#prefix#sources` WHERE `id`='".$sourceid."'";
+	$query="SELECT `last_access_time` FROM `sources` WHERE `id`='".$sourceid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
@@ -926,7 +926,7 @@ function table_lock_check($sourceid) {
 	$timestamp_now=date("YmdHis",time());
 	$lock_time=get_conf(__FILE__,__LINE__,"lock_time");
 	
-	$query="SELECT * FROM `#prefix#sources` WHERE `id`='".$sourceid."'";
+	$query="SELECT * FROM `sources` WHERE `id`='".$sourceid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	
@@ -940,14 +940,14 @@ function table_lock_check($sourceid) {
 	if($elapsed_time<0){
 		// The signed time is in the future, we correct it by setting it as if lock time has expired.
 		
-		$query="UPDATE `#prefix#sources` SET `last_access_time` = NULL , `last_access_userid` = '".$_SESSION['userid']."' WHERE `id` = '".$sourceid."' LIMIT 1";
+		$query="UPDATE `sources` SET `last_access_time` = NULL , `last_access_userid` = '".$_SESSION['userid']."' WHERE `id` = '".$sourceid."' LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 	
 	} elseif($elapsed_time>$lock_time){
 		//lock time has expired, we just sign the table as ours.
 		
-		$query="UPDATE `#prefix#sources` SET `last_access_time` = NULL , `last_access_userid` = '".$_SESSION['userid']."' WHERE `id` = '".$sourceid."' LIMIT 1";
+		$query="UPDATE `sources` SET `last_access_time` = NULL , `last_access_userid` = '".$_SESSION['userid']."' WHERE `id` = '".$sourceid."' LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 
@@ -955,7 +955,7 @@ function table_lock_check($sourceid) {
 		// lock time has not yet expired, but the waiter is the owner of the table,
 		// so we just update the lock_time.
 		
-		$query="UPDATE `#prefix#sources` SET `last_access_time` = NULL WHERE `id` = '".$sourceid."' LIMIT 1";
+		$query="UPDATE `sources` SET `last_access_time` = NULL WHERE `id` = '".$sourceid."' LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 
@@ -980,7 +980,7 @@ function tables_list_all($cols=1,$show=0,$quiet=true){
 	$output = '';
 	
 	if(!$quiet) {
-		$query = "SELECT * FROM `#prefix#sources`";
+		$query = "SELECT * FROM `sources`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return '';
 		if(!mysql_num_rows ($res)) return ucphr('NO_TABLE_FOUND')."<br/>\n";
@@ -988,28 +988,28 @@ function tables_list_all($cols=1,$show=0,$quiet=true){
 	
 	switch($show) {
 		case 0:
-			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`, `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '0'";
+			$query = "SELECT `sources`.`id`, `name`, `userid`, `toclose`,`locktouser`, `sources`.`paid`, `orders`.`id` AS `order` FROM `sources` LEFT JOIN `orders` ON `sourceid`=`sources`.`id` WHERE `takeaway` = '0'";
 			$query .= " AND `visible` = '1'";
 			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";	
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";						
-			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
-			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
+			$query .= " GROUP BY `sources`.`id` ASC";
+			$query .= " ORDER BY `sources`.`ordernum` ASC";
 			break;
 		case 1:
-			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '1'";
+			$query = "SELECT `sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `sources`.`paid`, `orders`.`id` AS `order` FROM `sources` LEFT JOIN `orders` ON `sourceid`=`sources`.`id` WHERE `takeaway` = '1'";
 			$query .= " AND `visible` = '1'";			
 			$query .= " AND ( `locktouser`  = '" . $_SESSION['userid'] . "' ) ";		
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";					
-			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
-			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
+			$query .= " GROUP BY `sources`.`id` ASC";
+			$query .= " ORDER BY `sources`.`ordernum` ASC";
 			break;
 		case 2:
-			$query="SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `userid`='".$_SESSION['userid']."'";
+			$query="SELECT `sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `sources`.`paid`, `orders`.`id` AS `order` FROM `sources` LEFT JOIN `orders` ON `sourceid`=`sources`.`id` WHERE `userid`='".$_SESSION['userid']."'";
 			$query .= " AND `visible` = '1'";
 			$query .= " AND ( `locktouser`  = '" . $_SESSION['userid'] . "' ) ";	
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";						
-			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
-			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
+			$query .= " GROUP BY `sources`.`id` ASC";
+			$query .= " ORDER BY `sources`.`ordernum` ASC";
 			break;
 	}
 	
@@ -1020,10 +1020,10 @@ function tables_list_all($cols=1,$show=0,$quiet=true){
 	
 	if(!$therearerecords) return '';
 	
-	$queryUser = "SELECT `#prefix#users`.name FROM `#prefix#users` ";
-	$queryUser .="WHERE `#prefix#users`.id NOT IN ";
-	$queryUser .="( SELECT `#prefix#sources`.userid FROM `#prefix#sources` ) ";
-	$queryUser .="AND level = '515' AND deleted = '0' AND `#prefix#users`.id = ". $_SESSION['userid'];
+	$queryUser = "SELECT `users`.name FROM `users` ";
+	$queryUser .="WHERE `users`.id NOT IN ";
+	$queryUser .="( SELECT `sources`.userid FROM `sources` ) ";
+	$queryUser .="AND level = '515' AND deleted = '0' AND `users`.id = ". $_SESSION['userid'];
 	
 	$resUser=common_query($queryUser,__FILE__,__LINE__);
 	if(!$resUser) return '';
@@ -1076,7 +1076,7 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 	$output = '';
 	
 	if(!$quiet) {
-		$query = "SELECT * FROM `#prefix#sources`";
+		$query = "SELECT * FROM `sources`";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return '';
 		if(!mysql_num_rows ($res)) return ucphr('NO_TABLE_FOUND')."<br/>\n";
@@ -1084,28 +1084,28 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 	
 	switch($show) {
 		case 0:
-			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`, `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '0'";
+			$query = "SELECT `sources`.`id`, `name`, `userid`, `toclose`,`locktouser`, `sources`.`paid`, `orders`.`id` AS `order` FROM `sources` LEFT JOIN `orders` ON `sourceid`=`sources`.`id` WHERE `takeaway` = '0'";
 			$query .= " AND `visible` = '1'";
 			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";							
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";							
-			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
-			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
+			$query .= " GROUP BY `sources`.`id` ASC";
+			$query .= " ORDER BY `sources`.`ordernum` ASC";
 			break;
 		case 1:
-			$query = "SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `takeaway` = '1'";			
+			$query = "SELECT `sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `sources`.`paid`, `orders`.`id` AS `order` FROM `sources` LEFT JOIN `orders` ON `sourceid`=`sources`.`id` WHERE `takeaway` = '1'";			
 			$query .= " AND `visible` = '1'";
 			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";											
-			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
-			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
+			$query .= " GROUP BY `sources`.`id` ASC";
+			$query .= " ORDER BY `sources`.`ordernum` ASC";
 			break;
 		case 2:
-			$query="SELECT `#prefix#sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `#prefix#sources`.`paid`, `#prefix#orders`.`id` AS `order` FROM `#prefix#sources` LEFT JOIN `#prefix#orders` ON `sourceid`=`#prefix#sources`.`id` WHERE `userid`='".$_SESSION['userid']."'";
+			$query="SELECT `sources`.`id`, `name`, `userid`, `toclose`,`locktouser`,  `sources`.`paid`, `orders`.`id` AS `order` FROM `sources` LEFT JOIN `orders` ON `sourceid`=`sources`.`id` WHERE `userid`='".$_SESSION['userid']."'";
 			$query .= " AND `visible` = '1'";
 			$query .= " AND ( `locktouser` = '" . $_SESSION['userid'] . "' ) ";	
 			$query .= " AND ( `userid` = '" . $_SESSION['userid'] . "' OR `userid` = '0' )";										
-			$query .= " GROUP BY `#prefix#sources`.`id` ASC";
-			$query .= " ORDER BY `#prefix#sources`.`ordernum` ASC";
+			$query .= " GROUP BY `sources`.`id` ASC";
+			$query .= " ORDER BY `sources`.`ordernum` ASC";
 			break;
 	}
 	$res=common_query($query,__FILE__,__LINE__);
@@ -1155,10 +1155,10 @@ function waiter_income_pos() {
 	
 
 		
-	$queryUser = "SELECT `#prefix#users`.name FROM `#prefix#users` ";
-	$queryUser .="WHERE `#prefix#users`.id NOT IN ";
-	$queryUser .="( SELECT `#prefix#sources`.userid FROM `#prefix#sources` ) ";
-	$queryUser .="AND level = '515' AND deleted = '0' AND `#prefix#users`.id = ". $_SESSION['userid'];
+	$queryUser = "SELECT `users`.name FROM `users` ";
+	$queryUser .="WHERE `users`.id NOT IN ";
+	$queryUser .="( SELECT `sources`.userid FROM `sources` ) ";
+	$queryUser .="AND level = '515' AND deleted = '0' AND `users`.id = ". $_SESSION['userid'];
 	
 	$resUser=common_query($queryUser,__FILE__,__LINE__);
 	if(!$resUser) return '';
@@ -1172,9 +1172,9 @@ function waiter_income_pos() {
 
 		$userName = $user->data['name'];
 		
-		$table='#prefix#account_mgmt_main';
+		$table='account_mgmt_main';
 		$queryMoney = "SELECT date, who, description, cash_amount ";
-		$queryMoney .= "FROM `#prefix#account_mgmt_main`";
+		$queryMoney .= "FROM `account_mgmt_main`";
 		$queryMoney .= "WHERE who = '" . $userName . "' AND ";
 		$queryMoney .= "date > '" . $dateStart . "' AND date < '" . $dateEnd . "'";
 
@@ -1365,7 +1365,7 @@ function tables_list_cell_pos($row){
 }
 
 function table_there_are_orders($sourceid){
-	$query = "SELECT * FROM `#prefix#orders` WHERE `sourceid`='$sourceid'";
+	$query = "SELECT * FROM `orders` WHERE `sourceid`='$sourceid'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	

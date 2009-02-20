@@ -211,19 +211,9 @@ function common_find_col_lenght ($arr) {
 	return $col_len;
 }
 
-function database_query_translator ($query) {
-	$prefix=$GLOBALS['table_prefix'];
-
-	$query = str_replace ("#prefix#", $prefix, $query);
-	if(isset($_SESSION['language'])) $query = str_replace ("#lang#", '_'.$_SESSION['language'], $query);
-	else $query = str_replace ("#lang#", '', $query);
-	
-	return $query;
-}
 
 function database_query($query,$file,$line,$db,$silent=false) {
 	if(!isset($GLOBALS['mysql_timer'])) $GLOBALS['mysql_timer']=0;
-	$query = database_query_translator ($query);
 
 	$start = microtime ();
 	mysql_select_db($db);
@@ -327,8 +317,8 @@ function lang_db_to_string($lang) {
 	<language>'.$lang.'</language>
 	<data>
 ';
-	$table="#prefix#lang";
-	$lang_table="#prefix#lang_".$lang;
+	$table="lang";
+	$lang_table="lang_".$lang;
 
 	$query="SELECT * FROM `".$table."` ORDER BY `name`";
 	$res=common_query($query,__FILE__,__LINE__);
@@ -389,7 +379,7 @@ function lang_read_all() {
 }
 
 function lang_file_reader($filename) {
-	debug_msg(__FILE__,__LINE__,'reading lang faile: '.$filename);
+	debug_msg(__FILE__,__LINE__,'reading lang file: '.$filename);
 
 	$xml_parser = xml_parser_create();
 	
@@ -575,17 +565,17 @@ function lang_get_xml($language,$name,$charset='iso-8859-1') {
 	debug_msg(__FILE__,__LINE__,"$name value missing in $conf_language language file.");
 	
 	if(is_array($GLOBALS['lang'])) {
-	for (reset ($GLOBALS['lang']); list ($key, $value) = each ($GLOBALS['lang']); ) {
-		$value=$GLOBALS['lang'][$key][$name];
-		
-		if(empty($value)) continue;
-		
-		$value=stripslashes($value);
-		if($charset=='CHARSET' || empty($charset)) $charset='iso-8859-1';
-		$value = html_entity_decode ($value,ENT_QUOTES,$charset);
-		
-		return $value;
-	}
+		for (reset ($GLOBALS['lang']); list ($key, $value) = each ($GLOBALS['lang']); ) {
+			$value=$GLOBALS['lang'][$key][$name];
+			
+			if(empty($value)) continue;
+			
+			$value=stripslashes($value);
+			if($charset=='CHARSET' || empty($charset)) $charset='iso-8859-1';
+			$value = html_entity_decode ($value,ENT_QUOTES,$charset);
+			
+			return $value;
+		}
 	}
 	
 	return $name;
@@ -595,8 +585,8 @@ function lang_get_db($lang,$name,$charset='iso-8859-1'){
 
 	if(empty($lang)) $lang="en";
 
-	$table="#prefix#lang";
-	$lang_table="#prefix#lang_".$lang;
+	$table="lang";
+	$lang_table="lang_".$lang;
 
 
 	$query="SELECT `table_name` FROM `".$table."` WHERE `name`='".$name."'";
@@ -743,8 +733,8 @@ function list_db_languages() {
 	
 	$res_lang = mysql_list_tables ( $_SESSION ['common_db'] );
 	while ( $arr_lang = mysql_fetch_array ( $res_lang ) ) {
-		if (eregi ( $GLOBALS ['table_prefix'] . '[^_]*_*.*[^_]*_.?.?$', $arr_lang [0] )) {
-			$lang_now = eregi_replace ( $GLOBALS ['table_prefix'] . "[^_]*_*.*[^_]*_(.?.?)$", "\\1", $arr_lang [0] );
+		if (eregi (  '[^_]*_*.*[^_]*_.?.?$', $arr_lang [0] )) {
+			$lang_now = eregi_replace (  "[^_]*_*.*[^_]*_(.?.?)$", "\\1", $arr_lang [0] );
 			$lang_now = substr ( $lang_now, - 2 ); // this is useless if eregi works correctly, but a check it's better, isn't it?
 			
 
@@ -826,7 +816,7 @@ function get_db_data($file,$line,$db,$table,$field,$id){
 	$cache = new cache ();
 	if($cache_out=$cache -> get ($table,$id,$field)) return $cache_out;
 	
-	$table='#prefix#'.$table;
+	$table=''.$table;
 	$query="SELECT * FROM `$table` WHERE id='$id'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
@@ -837,17 +827,17 @@ function get_db_data($file,$line,$db,$table,$field,$id){
 
 function get_conf($file,$line,$name){
 	$cache = new cache ();
-	$cache_out=$cache -> get ('#prefix#conf',$name,'value');
+	$cache_out=$cache -> get ('conf',$name,'value');
 	if($cache_out!='') return $cache_out;
 
-	$query="SELECT * FROM `#prefix#conf` WHERE `name`='$name'";
+	$query="SELECT * FROM `conf` WHERE `name`='$name'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	
 	$arr = mysql_fetch_array ($res);
 	$ret = $arr['value'];
 	
-	$cache -> set ('#prefix#conf',$name,'value',$ret);
+	$cache -> set ('conf',$name,'value',$ret);
 	
 	return $ret;
 }

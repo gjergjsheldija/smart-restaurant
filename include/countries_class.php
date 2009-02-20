@@ -30,7 +30,7 @@
 class country extends object {
 	function country ($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'countries';
+		$this->table='countries';
 		$this->id=$id;
 
 		$this -> fetch_data();

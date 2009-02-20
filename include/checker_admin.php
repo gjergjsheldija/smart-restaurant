@@ -52,7 +52,7 @@ function checker_check_only ($devel=false,$langs=array()) {
 	
 		$res_lang=mysql_list_tables($_SESSION['common_db']);
 		while($arr_lang=mysql_fetch_array($res_lang)) {
-			if($lang_now=stristr($arr_lang[0],$GLOBALS['table_prefix'].$table.'_')) {
+			if($lang_now=stristr($arr_lang[0],$table)) {
 				$lang_now= substr($lang_now,-2);
 			if(isset($langs) && !empty($langs) && in_array($lang_now,$langs)) $lang_array[]=$arr_lang[0];
 			elseif(!isset($langs) || empty($langs)) $lang_array[]=$arr_lang[0];
@@ -79,7 +79,7 @@ function checker_check_only ($devel=false,$langs=array()) {
 function checker_check_and_correct ($table,$silent=false,$langs=array()) {
 	$res_lang=mysql_list_tables($_SESSION['common_db']);
 	while($arr_lang=mysql_fetch_array($res_lang)) {
-		if($lang_now=stristr($arr_lang[0],$GLOBALS['table_prefix'].$table.'_')) {
+		if($lang_now=stristr($arr_lang[0],$table)) {
 			$lang_now= substr($lang_now,-2);
 			if(isset($langs) && !empty($langs) && in_array($lang_now,$langs)) $lang_array[]=$arr_lang[0];
 			elseif(!isset($langs) || empty($langs)) $lang_array[]=$arr_lang[0];
@@ -140,7 +140,7 @@ function checker_corrector($lang_table,$corrections,$silent=false) {
 function checker_insert($lang_table,$input_id) {
 	$table=substr($lang_table,0,-3);
 
-	$tmp_table= stri_replace ($GLOBALS['table_prefix'],'',$table);
+	$tmp_table= $table ;
 	$name=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],$tmp_table,'name',$input_id);
 
 	$name=str_replace("'","\'",$name);

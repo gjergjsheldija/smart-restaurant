@@ -215,7 +215,7 @@
 	We get the printed categories flag, and write to $_SESSION['catprinted'][]
 	*/
 	if (isset($_SESSION['sourceid'])){
-		$query="SELECT * FROM `#prefix#sources` WHERE `id`='".$_SESSION['sourceid']."'";
+		$query="SELECT * FROM `sources` WHERE `id`='".$_SESSION['sourceid']."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		

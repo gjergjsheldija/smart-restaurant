@@ -36,7 +36,7 @@ function delete_receipt_rows($delete){
 		echo GLOBALMSG_RECORD_DELETE_NONE.".<br>\n";
 		return 1;
 	}
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="DELETE FROM $table WHERE ";
 	for (reset ($delete); list ($key, $value) = each ($delete); ) {
 		if($firstline) {
@@ -45,7 +45,7 @@ function delete_receipt_rows($delete){
 		} else {
 			$query.=" OR `id`='".$key."'";
 		}
-		$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$key'");
 		$row=mysql_fetch_array($res);
 		$description[$key]=$row['internal_id'];
@@ -96,7 +96,7 @@ function annul_receipt_rows($delete){
 		return 1;
 	}
 
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="UPDATE $table SET `annulled`='1' WHERE ";
 	for (reset ($delete); list ($key, $value) = each ($delete); ) {
 		if($firstline) {
@@ -105,7 +105,7 @@ function annul_receipt_rows($delete){
 		} else {
 			$query.=" OR `id`='".$key."'";
 		}
-		$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+		$table='account_mgmt_main';
 		$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='$key'");
 		$row=mysql_fetch_array($res);
 		$description[$key]=$row['internal_id'];
@@ -156,7 +156,7 @@ function delete_log_rows($delete){
 		echo GLOBALMSG_RECORD_DELETE_NONE.".<br>\n";
 		return 1;
 	}
-	$table=$GLOBALS['table_prefix'].'account_log';
+	$table='account_log';
 	$query="DELETE FROM $table WHERE ";
 	for (reset ($delete); list ($key, $value) = each ($delete); ) {
 		if($firstline) {
@@ -225,7 +225,7 @@ function table_receipt($orderby){
 	<tbody>\n";
 
 	$i=0;
-	$table=$GLOBALS['table_prefix'].'account_receipts';
+	$table='account_receipts';
 	$query="SELECT * FROM $table ORDER BY `$orderby`";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	if(mysql_num_rows($res)){
@@ -279,7 +279,7 @@ function table_receipt($orderby){
 
 function show_receipt($id){
 	if(!$id) return 1;
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `id`='$id'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	$row=mysql_fetch_array($res);
@@ -298,7 +298,7 @@ function show_receipt($id){
 		return 0;
 	}
 
-	$table=$GLOBALS['table_prefix'].'account_log';
+	$table='account_log';
 	$query="SELECT * FROM $table WHERE `payment`='$id'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	if(!mysql_num_rows($res)) return 2;

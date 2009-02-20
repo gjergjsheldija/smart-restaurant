@@ -33,7 +33,7 @@ class stock_movement extends object {
 	
 	function stock_movement ($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'stock_movements';
+		$this->table='stock_movements';
 		$this->id=$id;
 		$this -> title = ucphr('STOCK_MOVEMENTS');
 		$this -> no_name = true;
@@ -81,14 +81,14 @@ class stock_movement extends object {
 		if(isset($_REQUEST['data']['only_obj']) && $_REQUEST['data']['only_obj']) $this -> only_obj = $_REQUEST['data']['only_obj'];
 		if(isset($_REQUEST['data']['only_dish']) && $_REQUEST['data']['only_dish']) $this -> only_dish = $_REQUEST['data']['only_dish'];
 		
-		$table = "#prefix#stock_movements";
-		$stock_table = "#prefix#stock_objects";
-		$ingred_table = "#prefix#ingreds";
-		$ingred_lang_table = "#prefix#ingreds_".$_SESSION['language'];
-		$dish_table = "#prefix#dishes";
-		$dish_lang_table = "#prefix#dishes_".$_SESSION['language'];
+		$table = "stock_movements";
+		$stock_table = "stock_objects";
+		$ingred_table = "ingreds";
+		$ingred_lang_table = "ingreds_".$_SESSION['language'];
+		$dish_table = "dishes";
+		$dish_lang_table = "dishes".$_SESSION['language'];
 		//mizuko : added $table_users & modified tho the se username
-		$table_users = "#prefix#users";
+		$table_users = "users";
 	
 		$this->fields_show=array('id','timestamp','obj_id','dish_id','dish_quantity','unit_type','quantity','value','user');
 		$query="SELECT

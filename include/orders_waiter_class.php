@@ -35,7 +35,7 @@ class order {
 	var $ingredients;
 	
 	function order($input=0) {
-		$this->table='#prefix#orders';
+		$this->table='orders';
 
 		if(is_int($input)) {
 			$this->id=$input;
@@ -62,7 +62,7 @@ class order {
 	function prepare_default_array ($dishid) {
 		$quantity=0;
 		
-		$query ="SELECT * FROM `#prefix#dishes` WHERE `id` = '$dishid'";
+		$query ="SELECT * FROM `dishes` WHERE `id` = '$dishid'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -112,8 +112,8 @@ class order {
 	
 	function delete () {
 		if ($this->id == $this -> data['associated_id'])
-			$query="DELETE FROM `#prefix#orders` WHERE `associated_id`='".$this->id."'";
-		else $query="DELETE FROM `#prefix#orders` WHERE `id`='".$this->id."' LIMIT 1";
+			$query="DELETE FROM `orders` WHERE `associated_id`='".$this->id."'";
+		else $query="DELETE FROM `orders` WHERE `id`='".$this->id."' LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 
@@ -126,7 +126,7 @@ class order {
 		if(!is_array($this->data)) return -1;
 
 		// Now we'll build the correct INSERT query, based on the fields provided
-		$query="INSERT INTO `#prefix#orders` (";
+		$query="INSERT INTO `orders` (";
 		for (reset ($this->data); list ($key, $value) = each ($this->data); ) {
 			$query.="`".$key."`,";
 		}
@@ -149,7 +149,7 @@ class order {
 	}
 	
 	function get () {
-		$query="SELECT * FROM `#prefix#orders` WHERE `id`='".$this->id."'";
+		$query="SELECT * FROM `orders` WHERE `id`='".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 		
@@ -164,7 +164,7 @@ class order {
 		if(!is_array($this->data)) return -1;
 
 		// Now we'll build the correct UPDATE query, based on the fields provided
-		$query="UPDATE `#prefix#orders` SET ";
+		$query="UPDATE `orders` SET ";
 		for (reset ($this->data); list ($key, $value) = each ($this->data); ) {
 			if($value==NULL && $key=='printed') $query.="`".$key."`= NULL,";
 			else $query.="`".$key."`='".$value."',";
@@ -192,7 +192,7 @@ class order {
 		
 		$sync_array = array ('suspend','printed','extra_care','sourceid','quantity','priority','paid','deleted','dest_id');
 		
-		$query="UPDATE `#prefix#orders` SET ";
+		$query="UPDATE `orders` SET ";
 		foreach ( $sync_array as $value) {
 			if($main->data[$value]==NULL && $value=='printed') $query.="`".$value."`=NULL,";
 			else $query.="`".$value."`='".$main->data[$value]."',";
@@ -214,7 +214,7 @@ class order {
 		$ingreds=array();
 		$dispingreds=array();
 		
-		$query ="SELECT * FROM `#prefix#dishes`
+		$query ="SELECT * FROM `dishes`
 		WHERE `id` = '".$this->data['dishid']."'
 		LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
@@ -248,10 +248,10 @@ class order {
 		}
 
 		if (empty($dispingreds)) {
-			$query ="SELECT #prefix#ingreds.id";
-			$query .= " FROM `#prefix#ingreds`";
-			$query .= " WHERE (#prefix#ingreds.category = '".$this->data['category']."' OR #prefix#ingreds.category = '0')";
-			$query .= " AND #prefix#ingreds.deleted = '0'";
+			$query ="SELECT ingreds.id";
+			$query .= " FROM `ingreds`";
+			$query .= " WHERE (ingreds.category = '".$this->data['category']."' OR ingreds.category = '0')";
+			$query .= " AND ingreds.deleted = '0'";
 			$res=common_query($query,__FILE__,__LINE__);
 			if(!$res) return mysql_errno();
 			
@@ -268,10 +268,10 @@ class order {
 			if ($keydel=array_search($value,$available_add)) unset($available_add[$keydel]);
 		}
 		
-		$query ="SELECT #prefix#orders.*";
-		$query .= " FROM `#prefix#orders`";
-		$query .= " WHERE #prefix#orders.associated_id = '".$this->id."'";
-		$query .= " AND #prefix#orders.id != '".$this->id."'";
+		$query ="SELECT orders.*";
+		$query .= " FROM `orders`";
+		$query .= " WHERE orders.associated_id = '".$this->id."'";
+		$query .= " AND orders.id != '".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -315,13 +315,13 @@ class order {
 	
 	function price_mods_normal ($only_notfree=false) {
 		
-		$query ="SELECT #prefix#orders.* FROM `#prefix#orders` JOIN `#prefix#ingreds`
-		WHERE #prefix#orders.ingredid = #prefix#ingreds.id
-		AND #prefix#orders.associated_id = '".$this->id."'
-		AND #prefix#orders.id != '".$this->id."'
-		AND #prefix#ingreds.deleted = '0'
-		AND #prefix#orders.deleted='0'";
-		if ($only_notfree) $query .= "AND #prefix#ingreds.price != '0'";
+		$query ="SELECT orders.* FROM `orders` JOIN `ingreds`
+		WHERE orders.ingredid = ingreds.id
+		AND orders.associated_id = '".$this->id."'
+		AND orders.id != '".$this->id."'
+		AND ingreds.deleted = '0'
+		AND orders.deleted='0'";
+		if ($only_notfree) $query .= "AND ingreds.price != '0'";
 
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
@@ -334,7 +334,7 @@ class order {
 
 			$price = $ing -> get ('price') * $arr['quantity'] * $arr['operation'];
 			
-			$query ="UPDATE `#prefix#orders` SET `price`='".$price."' WHERE `id` = '".$ord_local_id."'";
+			$query ="UPDATE `orders` SET `price`='".$price."' WHERE `id` = '".$ord_local_id."'";
 			$res2=common_query($query,__FILE__,__LINE__);
 			if(!$res2) return ERR_MYSQL;
 		}
@@ -342,15 +342,15 @@ class order {
 	}
 
 	function price_mods_autocalc () {
-		$query ="SELECT #prefix#orders.* FROM `#prefix#orders` JOIN `#prefix#ingreds`
-		WHERE #prefix#orders.ingredid = #prefix#ingreds.id
-		AND #prefix#ingreds.price = '0'
-		AND #prefix#ingreds.deleted = '0'
-		AND #prefix#ingreds.override_autocalc = '0'
-		AND #prefix#orders.associated_id = '".$this->id."'
-		AND #prefix#orders.id != '".$this->id."'
-		AND #prefix#orders.operation='1'
-		AND #prefix#orders.deleted='0'";
+		$query ="SELECT orders.* FROM `orders` JOIN `ingreds`
+		WHERE orders.ingredid = ingreds.id
+		AND ingreds.price = '0'
+		AND ingreds.deleted = '0'
+		AND ingreds.override_autocalc = '0'
+		AND orders.associated_id = '".$this->id."'
+		AND orders.id != '".$this->id."'
+		AND orders.operation='1'
+		AND orders.deleted='0'";
 		
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
@@ -360,15 +360,15 @@ class order {
 			$added[] = $arr['id'];
 		}
 
-		$query ="SELECT #prefix#orders.* FROM `#prefix#orders` JOIN `#prefix#ingreds`
-		WHERE #prefix#orders.ingredid = #prefix#ingreds.id
-		AND #prefix#ingreds.price = '0'
-		AND #prefix#ingreds.deleted = '0'
-		AND #prefix#ingreds.override_autocalc = '0'
-		AND #prefix#orders.associated_id = '".$this->id."'
-		AND #prefix#orders.id != '".$this->id."'
-		AND #prefix#orders.operation='-1'
-		AND #prefix#orders.deleted='0'";
+		$query ="SELECT orders.* FROM `orders` JOIN `ingreds`
+		WHERE orders.ingredid = ingreds.id
+		AND ingreds.price = '0'
+		AND ingreds.deleted = '0'
+		AND ingreds.override_autocalc = '0'
+		AND orders.associated_id = '".$this->id."'
+		AND orders.id != '".$this->id."'
+		AND orders.operation='-1'
+		AND orders.deleted='0'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 		$removed_num = mysql_num_rows($res);
@@ -397,7 +397,7 @@ class order {
 		}
 		
 		if (isset($added) && is_array ($added)) {
-			$query="UPDATE `#prefix#orders` SET `price`='".$price_unitary."' ";
+			$query="UPDATE `orders` SET `price`='".$price_unitary."' ";
 			$query.=" WHERE (";
 			foreach ($added as $value) {
 				$query.="`id`='".$value."' OR ";
@@ -409,7 +409,7 @@ class order {
 			$res2=common_query($query,__FILE__,__LINE__);
 			if(!$res2) return ERR_MYSQL;
 		
-			$query="UPDATE `#prefix#orders` SET `price`='".$price_corr."' WHERE `id`='".$added[0]."'";
+			$query="UPDATE `orders` SET `price`='".$price_corr."' WHERE `id`='".$added[0]."'";
 			$res2=common_query($query,__FILE__,__LINE__);
 			if(!$res2) return ERR_MYSQL;
 		}
@@ -433,7 +433,7 @@ class order {
 	}
    
 	function price_main () {
-		$query ="SELECT * FROM `#prefix#orders` WHERE `id` = '".$this->id."' AND `deleted`='0'";
+		$query ="SELECT * FROM `orders` WHERE `id` = '".$this->id."' AND `deleted`='0'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 
@@ -452,7 +452,7 @@ class order {
 
 		$price = $price_unitary * $arr['quantity'];
 		
-		$query ="UPDATE `#prefix#orders` SET `price`='".$price."' WHERE `id` = '".$ord_local_id."' AND `deleted`='0'";
+		$query ="UPDATE `orders` SET `price`='".$price."' WHERE `id` = '".$ord_local_id."' AND `deleted`='0'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 
@@ -461,7 +461,7 @@ class order {
 	
 	function price_zero () {
 		$price = 0;
-		$query ="UPDATE `#prefix#orders` SET `price`='".$price."'
+		$query ="UPDATE `orders` SET `price`='".$price."'
 		WHERE `associated_id` = '".$this->id."'
 		AND `deleted`='1'";
 		$res=common_query($query,__FILE__,__LINE__);

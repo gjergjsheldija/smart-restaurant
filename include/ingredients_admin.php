@@ -31,8 +31,7 @@ class ingredient extends object {
 	var $temp_lang;
 
 	function ingredient($id=0) {
-		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'ingreds';
+		$this->table='ingreds';
 		$this->id=$id;
 		$this->fields_names=array(	'id'=>ucphr('ID'),
 								'name'=>ucphr('NAME'),
@@ -82,8 +81,8 @@ class ingredient extends object {
 	function list_query_all () {
 		$table = $this->table;
 		$lang_table = $table."_".$_SESSION['language'];
-		$cat_table = "#prefix#categories_".$_SESSION['language'];
-		$stock_table = "#prefix#stock_objects";
+		$cat_table = "categories_".$_SESSION['language'];
+		$stock_table = "stock_objects";
 		
 		$query="SELECT
 				$table.`id`,
@@ -170,14 +169,14 @@ class ingredient extends object {
 	function find_connected_dishes ($show_deleted=false,$link=false) {
 		$output = array();
 		
-		$query="SELECT #prefix#dishes.id, #prefix#dishes#lang#.table_id, #prefix#dishes#lang#.table_name FROM `#prefix#dishes`";
-		$query .= " JOIN `#prefix#dishes#lang#` WHERE #prefix#dishes#lang#.table_id=#prefix#dishes.id";
+		$query="SELECT dishes.id, dishes.table_id, dishes.table_name FROM `dishes`";
+		$query .= " JOIN `dishes` WHERE dishes.table_id=dishes.id";
 		$query .= " AND (`ingreds` LIKE '% ".$this->id." %'";
 		$query .= " OR `ingreds` LIKE '".$this->id." %'";
 		$query .= " OR `ingreds` LIKE '".$this->id."'";
 		$query .= " OR `ingreds` LIKE '% ".$this->id."')";
-		if(!$show_deleted) $query .= " AND #prefix#dishes.deleted='0'";
-		$query .= " ORDER BY #prefix#dishes#lang#.table_name ASC";
+		if(!$show_deleted) $query .= " AND dishes.deleted='0'";
+		$query .= " ORDER BY dishes.table_name ASC";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -190,14 +189,14 @@ class ingredient extends object {
 					$output['included'][$dish->id] = $tmp;
 		}
 		
-		$query="SELECT #prefix#dishes.id, #prefix#dishes#lang#.table_id, #prefix#dishes#lang#.table_name FROM `#prefix#dishes`";
-		$query .= " JOIN `#prefix#dishes#lang#` WHERE table_id=#prefix#dishes.id";
+		$query="SELECT dishes.id, dishes.table_id, dishes.table_name FROM `dishes`";
+		$query .= " JOIN `dishes` WHERE table_id=dishes.id";
 		$query .= " AND (`dispingreds` LIKE '% ".$this->id." %'";
 		$query .= " OR `dispingreds` LIKE '".$this->id." %'";
 		$query .= " OR `dispingreds` LIKE '".$this->id."'";
 		$query .= " OR `dispingreds` LIKE '% ".$this->id."')";
-		if(!$show_deleted) $query .= " AND #prefix#dishes.deleted='0'";
-		$query .= " ORDER BY #prefix#dishes#lang#.table_name ASC";
+		if(!$show_deleted) $query .= " AND dishes.deleted='0'";
+		$query .= " ORDER BY dishes.table_name ASC";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -439,7 +438,7 @@ class ingredient extends object {
 	if(0==$arr['category']) $output .= ' selected';
 	$output .= '>'.ucphr('ALL').'</option>';
 	
-	$query="SELECT * FROM `#prefix#categories` WHERE `deleted`='0'";
+	$query="SELECT * FROM `categories` WHERE `deleted`='0'";
 	$res_type=common_query($query,__FILE__,__LINE__);
 	if(!$res_type) return ERR_MYSQL;
 	while($arr_type=mysql_fetch_array($res_type)){
@@ -472,7 +471,7 @@ class ingredient extends object {
 	
 		$res_lang=mysql_list_tables($_SESSION['common_db']);
 		while($arr_lang=mysql_fetch_array($res_lang)) {
-			if($lang_now=stristr($arr_lang[0],$GLOBALS['table_prefix'].'ingreds_')) {
+			if($lang_now=stristr($arr_lang[0],'ingreds')) {
 				$lang_now= substr($lang_now,-2);
 	
 				if($editing) {
@@ -495,7 +494,7 @@ class ingredient extends object {
 			<input type="hidden" name="data[name]" value="'.htmlentities($arr['name']).'">';
 		$res_lang=mysql_list_tables($_SESSION['common_db']);
 		while($arr_lang=mysql_fetch_array($res_lang)) {
-			if($lang_now=stristr($arr_lang[0],$GLOBALS['table_prefix'].'ingreds_')) {
+			if($lang_now=stristr($arr_lang[0],'ingreds')) {
 				$lang_now= substr($lang_now,-2);
 				$ingred = new ingredient ($this->id);
 				$lang_name = $ingred -> name ($lang_now);

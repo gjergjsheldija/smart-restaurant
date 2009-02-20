@@ -29,8 +29,7 @@
 
 class customer extends object {
 	function customer($id=0) {
-		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'customers';
+		$this->table='customers';
 		$this->id=$id;
 		$this -> fetch_data();
 	}
@@ -138,7 +137,7 @@ function customer_recognize ($term='') {
 	
 	if(empty($term)) return 0;
 	
-	$query = "SELECT * FROM `#prefix#customers`";
+	$query = "SELECT * FROM `customers`";
 	$query .= " WHERE `surname` LIKE '%$term%'";
 	$query .= " OR `phone` LIKE '%$term%'";
 	$query .= " OR `address` LIKE '%$term%'";
@@ -171,7 +170,7 @@ function customer_list($term='') {
 	
 	$term=trim($term);
 	
-	$query = "SELECT * FROM `#prefix#customers`";
+	$query = "SELECT * FROM `customers`";
 	if(!empty($term)) {
 		$query .= " WHERE `surname` LIKE '%$term%'";
 		$query .= " OR `phone` LIKE '%$term%'";
@@ -245,7 +244,7 @@ function customer_insert($input_data){
 	if(!is_array($input_data)) return $input_data;
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$query="INSERT INTO `#prefix#customers` (";
+	$query="INSERT INTO `customers` (";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`,";
 	}
@@ -270,7 +269,7 @@ function customer_edit($input_data){
 	if($input_data<0) return $input_data;
 
 	// Now we'll build the correct UPDATE query, based on the fields provided
-	$query="UPDATE `#prefix#customers` SET ";
+	$query="UPDATE `customers` SET ";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`='".$value."',";
 	}
@@ -298,7 +297,7 @@ function customer_insert_form() {
 function customer_edit_form($data) {
 	global $tpl;
 	
-	$query="SELECT * FROM `#prefix#customers` WHERE `id`='".$data['id']."'";
+	$query="SELECT * FROM `customers` WHERE `id`='".$data['id']."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 

@@ -31,7 +31,7 @@ function account_movement_from_manage($mgmt_id){
 	require(ROOTDIR."/manage/mgmt_start.php");
 
 	$editing=0;
-	$table='#prefix#account_account_log';
+	$table='account_account_log';
 	$query="SELECT * FROM $table WHERE `mgmt_id`='$mgmt_id'";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 
@@ -44,7 +44,7 @@ function account_movement_from_manage($mgmt_id){
 		$editing=1;
 	}
 
-	$table='#prefix#account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table WHERE `id`='$mgmt_id'";
 
 	$res=common_query($query,__FILE__,__LINE__);
@@ -83,7 +83,7 @@ function account_movement_from_manage($mgmt_id){
 
 function account_select_plugin($id=0){
 	require(ROOTDIR."/manage/mgmt_start.php");
-	$table='#prefix#account_accounts';
+	$table='account_accounts';
 	$query="SELECT * FROM $table ORDER BY `bank`";
 	$res=common_query($query,__FILE__,__LINE__);
 
@@ -106,7 +106,7 @@ function account_select_plugin($id=0){
 function account_movement_list($account_id=0,$orderby){
 	require(ROOTDIR."/manage/mgmt_start.php");
 
-	$table=$GLOBALS['table_prefix'].'account_account_log';
+	$table='account_account_log';
 	if($account_id)
 	$query="SELECT * FROM $table WHERE `account_id`='$account_id'";
 	else
@@ -152,7 +152,7 @@ function account_movement_list($account_id=0,$orderby){
 
 		$edit_link="account.php?command=movement_edit&id=".$arr['id'];
 		if($arr['mgmt_id']){
-			$table='#prefix#account_mgmt_main';
+			$table='account_mgmt_main';
 			$query="SELECT * FROM $table WHERE `id`='".$arr['mgmt_id']."'";
 			$res=common_query($query,__FILE__,__LINE__);
 			if(mysql_num_rows($res_local))
@@ -271,7 +271,7 @@ function account_movement_form($id=0){
 	require(ROOTDIR."/manage/mgmt_start.php");
 	if($id) {
 		$editing=1;
-		$table='#prefix#account_account_log';
+		$table='account_account_log';
 		$query="SELECT * FROM $table WHERE `id`='$id'";
 		$res=common_query($query,__FILE__,__LINE__);
 		$arr=mysql_fetch_array($res);
@@ -321,7 +321,7 @@ function account_movement_form($id=0){
 				<td><?php echo phr('ACCOUNT_LABEL_BANK_ACCOUNT'); ?>:</td>
 				<td><select name="data[account_id]">
 				<?php
-				$table='#prefix#account_accounts';
+				$table='account_accounts';
 				$query="SELECT * FROM $table";
 				$res_type=common_query($query,__FILE__,__LINE__);
 				while($arr_type=mysql_fetch_array($res_type)){
@@ -338,7 +338,7 @@ function account_movement_form($id=0){
 				<td><?php echo phr('ACCOUNT_LABEL_CAUSAL'); ?>:</td>
 				<td><select name="data[type]">
 				<?php
-				$table='#prefix#mgmt_types';
+				$table='mgmt_types';
 				$query="SELECT * FROM $table ORDER BY `name`";
 				$res_type=common_query($query,__FILE__,__LINE__);
 				while($arr_type=mysql_fetch_array($res_type)){
@@ -410,7 +410,7 @@ function account_movement_form($id=0){
 function account_movement_delete($input_id) {
 	require("./mgmt_start.php");
 
-	$table=$GLOBALS['table_prefix'].'account_account_log';
+	$table='account_account_log';
 	$query="SELECT * FROM $table WHERE `id`='$input_id'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	$arr=mysql_fetch_array($res);
@@ -419,14 +419,14 @@ function account_movement_delete($input_id) {
 
 	$account_id=$arr['account_id'];
 
-	$table=$GLOBALS['table_prefix'].'account_accounts';
+	$table='account_accounts';
 	$query="SELECT * FROM $table WHERE `id`='$account_id'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	$arr=mysql_fetch_array($res);
 	$old_amount=$arr['amount'];
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_account_log';
+	$table='account_account_log';
 	$query="DELETE FROM $table ";
 	$query.=" WHERE `id`='$input_id'";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
@@ -443,7 +443,7 @@ function account_movement_delete($input_id) {
 
 		$reset_amount=$old_amount-$old_movement_amount;
 
-		$table=$GLOBALS['table_prefix'].'account_accounts';
+		$table='account_accounts';
 		$query="UPDATE $table SET `amount`='$reset_amount' WHERE `id`='$account_id'";
 		$res = mysql_db_query ($_SESSION['common_db'],$query);
 		$num_affected=mysql_affected_rows();
@@ -471,14 +471,14 @@ function account_movement_update($input_id,$input_data) {
 
 	if(!$input_data['account_id']) return -2;
 
-	$table=$GLOBALS['table_prefix'].'account_account_log';
+	$table='account_account_log';
 	$query="SELECT * FROM $table WHERE `id`='$input_id'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	$arr=mysql_fetch_array($res);
 	$old_movement_amount=$arr['amount'];
 	$old_account_id=$arr['account_id'];
 
-	$table=$GLOBALS['table_prefix'].'account_accounts';
+	$table='account_accounts';
 	$query_local="SELECT * FROM $table WHERE `id`='$old_account_id'";
 	$res_local=mysql_db_query($_SESSION['common_db'],$query_local);
 	$arr_local=mysql_fetch_array($res_local);
@@ -489,7 +489,7 @@ function account_movement_update($input_id,$input_data) {
 	if($input_data<0) return $input_data;
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_account_log';
+	$table='account_account_log';
 	$query="UPDATE $table SET ";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`='".$value."',";
@@ -512,19 +512,19 @@ function account_movement_update($input_id,$input_data) {
 
 		$reset_amount=$old_amount-$old_movement_amount;
 
-		$table=$GLOBALS['table_prefix'].'account_accounts';
+		$table='account_accounts';
 		$query="UPDATE $table SET `amount`='$reset_amount' WHERE `id`='$old_account_id]'";
 		$res = mysql_db_query ($_SESSION['common_db'],$query);
 		$num_affected=mysql_affected_rows();
 
-		$table=$GLOBALS['table_prefix'].'account_accounts';
+		$table='account_accounts';
 		$query="SELECT * FROM $table WHERE `id`='".$input_data['account_id']."'";
 		$res=mysql_db_query($_SESSION['common_db'],$query);
 		$arr=mysql_fetch_array($res);
 		$new_amount=$arr['amount'];
 		$new_amount=$new_amount+$input_data['amount'];
 
-		$table=$GLOBALS['table_prefix'].'account_accounts';
+		$table='account_accounts';
 		$query="UPDATE $table SET `amount`='$new_amount' WHERE `id`='".$input_data['account_id']."'";
 		$res = mysql_db_query ($_SESSION['common_db'],$query);
 		$num_affected=mysql_affected_rows();
@@ -551,7 +551,7 @@ function account_movement_insert($input_data) {
 
 	if(!$input_data['account_id']) return -2;
 
-	$table=$GLOBALS['table_prefix'].'account_accounts';
+	$table='account_accounts';
 	$query="SELECT * FROM $table WHERE `id`='".$input_data['account_id']."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	$arr=mysql_fetch_array($res);
@@ -562,7 +562,7 @@ function account_movement_insert($input_data) {
 	if($input_data<0) return $input_data;
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_account_log';
+	$table='account_account_log';
 	$query="INSERT INTO $table (";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`,";
@@ -590,7 +590,7 @@ function account_movement_insert($input_data) {
 		<?php
 		$new_amount=$old_amount+$input_data['amount'];
 
-		$table=$GLOBALS['table_prefix'].'account_accounts';
+		$table='account_accounts';
 		$query="UPDATE $table SET `amount`='$new_amount' WHERE `id`='".$input_data['account_id']."'";
 		$res = mysql_db_query ($_SESSION['common_db'],$query);
 		$num_affected=mysql_affected_rows();
@@ -653,7 +653,7 @@ function account_update($input_id,$input_data) {
 	if($input_data<0) return $input_data;
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_accounts';
+	$table='account_accounts';
 	$query="UPDATE $table SET ";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`='".$value."',";
@@ -696,7 +696,7 @@ function account_insert($input_data) {
 	if($input_data<0) return $input_data;
 
 	// Now we'll build the correct INSERT query, based on the fields provided
-	$table=$GLOBALS['table_prefix'].'account_accounts';
+	$table='account_accounts';
 	$query="INSERT INTO $table (";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`,";
@@ -741,7 +741,7 @@ function account_form($id=0){
 	require("./mgmt_start.php");
 	if($id) {
 		$editing=1;
-		$table=$GLOBALS['table_prefix'].'account_accounts';
+		$table='account_accounts';
 		$query="SELECT * FROM $table WHERE `id`='$id'";
 		$res=mysql_db_query($_SESSION['common_db'],$query);
 		$arr=mysql_fetch_array($res);
@@ -777,7 +777,7 @@ function account_form($id=0){
 		<td>
 		<select name="data[bank]">
 <?php
-		$table=$GLOBALS['table_prefix'].'account_mgmt_addressbook';
+		$table='account_mgmt_addressbook';
 		$query="SELECT * FROM $table WHERE `type`='1'";
 		$res_bank=mysql_db_query($_SESSION['mgmt_db'],$query);
 		while($arr_bank=mysql_fetch_array($res_bank)){
@@ -905,7 +905,7 @@ if(!$editing){
 function account_list($orderby="name"){
 	require("./mgmt_start.php");
 
-	$table=$GLOBALS['table_prefix'].'account_accounts';
+	$table='account_accounts';
 	$query="SELECT * FROM $table ORDER BY `$orderby`";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	if($errno=mysql_errno()) {
@@ -943,7 +943,7 @@ function account_list($orderby="name"){
 		?>
 		<tr class="<?php echo color_css($i); ?>">
 			<td><?php
-			$table='#prefix#account_mgmt_addressbook';
+			$table='account_mgmt_addressbook';
 			$query="SELECT id FROM $table WHERE `type`='1' AND `name`='".$arr['bank']."'";
 			$res_bank=common_query($query,__FILE__,__LINE__);
 			if($arr_bank=mysql_fetch_array($res_bank)){

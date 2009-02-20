@@ -30,7 +30,7 @@
 class currencies extends object {
 	function currencies($id=0) {
 		$this->db = 'common';
-		$this->table = $GLOBALS['table_prefix'].'currencies';
+		$this->table = 'currencies';
 		$this->id = $id;
 		$this->title = ucphr('EXCHANGE');
 		$this->file=ROOTDIR.'/admin/admin.php';

@@ -34,7 +34,7 @@ class stock_object extends object {
 	
 	function stock_object ($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'stock_objects';
+		$this->table='stock_objects';
 		$this->id=$id;
 		$this -> title = ucphr('STOCK');
 		$this->referring_name = true;
@@ -54,9 +54,9 @@ class stock_object extends object {
 	}
 
 	function list_query_all () {
-		$table = "#prefix#stock_objects";
-		$ingred_table = "#prefix#ingreds";
-		$ingred_lang_table = "#prefix#ingreds_".$_SESSION['language'];
+		$table = "stock_objects";
+		$ingred_table = "ingreds";
+		$ingred_lang_table = "ingreds_".$_SESSION['language'];
 
 		$query="SELECT
 				$table.`id`,
@@ -169,7 +169,7 @@ class stock_object extends object {
 	}
 	
 	function find_external ($obj_id, $obj_type) {
-		$query = "SELECT * FROM #prefix#stock_objects WHERE `ref_type`='".$obj_type."' AND `ref_id`='".$obj_id."' AND `deleted`='0'";
+		$query = "SELECT * FROM stock_objects WHERE `ref_type`='".$obj_type."' AND `ref_id`='".$obj_id."' AND `deleted`='0'";
 		$res = common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 	
@@ -180,8 +180,8 @@ class stock_object extends object {
 	}
 
 	function sync_external ($obj_type) {
-		if($obj_type==TYPE_DISH) $query = "SELECT * FROM #prefix#dishes WHERE `deleted`='0'";
-		elseif($obj_type==TYPE_INGREDIENT) $query = "SELECT * FROM #prefix#ingreds WHERE `deleted`='0'";
+		if($obj_type==TYPE_DISH) $query = "SELECT * FROM dishes WHERE `deleted`='0'";
+		elseif($obj_type==TYPE_INGREDIENT) $query = "SELECT * FROM ingreds WHERE `deleted`='0'";
 		$res = common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		
@@ -338,7 +338,7 @@ class stock_object extends object {
 	}
 	
 	function insert_sample ($quantity) {
-		$query="INSERT INTO `#prefix#stock_samples` (`obj_id`,`quantity`) VALUES ('".$this->id."','".$quantity."')";
+		$query="INSERT INTO `stock_samples` (`obj_id`,`quantity`) VALUES ('".$this->id."','".$quantity."')";
 
 		$res = common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;

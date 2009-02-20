@@ -39,7 +39,7 @@ class template {
 	}
 	
 	function set_print_template_file ($destination,$type) {
-		$query="SELECT * FROM `#prefix#dests` WHERE `id`='$destination'";
+		$query="SELECT * FROM `dests` WHERE `id`='$destination'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		

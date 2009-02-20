@@ -212,7 +212,7 @@ function vat_report(){
 	require("./mgmt_start.php");
 
 	$i=0;
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$query="SELECT * FROM $table";
 	$query.=" WHERE `date`>=$timestamp_start AND `date`<=$timestamp_end";
 	$query.=" order by `id`";
@@ -256,7 +256,7 @@ function check_date($data){
 }
 
 function check_compulsory_fields($data){
-	$table=$GLOBALS['table_prefix'].'mgmt_types';
+	$table='mgmt_types';
 	$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$data['type']."'");
 	$row=mysql_fetch_array($res);
 	$type=strtolower($row['name']);
@@ -320,7 +320,7 @@ function format_date($data) {
 }
 
 function format_currency($data) {
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table");
 
 	$fieldnum=mysql_num_fields($res);
@@ -338,7 +338,7 @@ function format_currency($data) {
 }
 
 function format_checkbox($data) {
-	$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+	$table='account_mgmt_main';
 	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table");
 
 	for (reset ($data); list ($key, $value) = each ($data); ) {
@@ -360,7 +360,7 @@ function calculate_amount($data){
 
 function timestamp_is_between($date_read,$date_start,$date_end){
 	// this function return 1 if the supplied $date_read is between
-	// or the same day (depends on date_is_before and date_is_later condìfiguration)
+	// or the same day (depends on date_is_before and date_is_later condï¿½figuration)
 	// the $date_start and the $date_end dates.
 	// timestamp format is: YYYYMMDDhhmmss
 	if (timestamp_is_before($date_read,$date_end) && timestamp_is_later($date_read,$date_start))
@@ -404,7 +404,7 @@ function timestamp_is_before($date_read,$date_refer){
 
 function date_is_between($date_read,$date_start,$date_end){
 	// this function return 1 if the supplied $date_read is between
-	// or the same day (depends on date_is_before and date_is_later condìfiguration)
+	// or the same day (depends on date_is_before and date_is_later condï¿½figuration)
 	// the $date_start and the $date_end dates.
 	// date format is: DD/MM/YYYY
 	if (date_is_before($date_read,$date_end) && date_is_later($date_read,$date_start))

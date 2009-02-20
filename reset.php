@@ -69,7 +69,7 @@ switch ($_REQUEST['command']){
 		if($_POST['halt']==1){
 			echo '<body bgcolor='.COLOR_BACK_OK.'>';
 			if($_POST['reset']==1){
-				$table=$GLOBALS['table_prefix'].'orders';
+				$table='orders';
 				$res = mysql_db_query($db_common,"TRUNCATE $table");
 
 				echo "$msg_reset_orders_ok<br>";
@@ -93,7 +93,7 @@ switch ($_REQUEST['command']){
 		break;
 	case 'reset_orders1':
 			if($_POST['reset']==1){
-				$table=$GLOBALS['table_prefix'].'orders';
+				$table='orders';
 				$res = mysql_db_query($db_common,"TRUNCATE $table");
 				echo '<body bgcolor='.COLOR_BACK_OK.'>';
 
@@ -114,10 +114,10 @@ switch ($_REQUEST['command']){
 		break;
 	case 'reset_sources1':
 			if($_POST['reset']==1){
-				$table=$GLOBALS['table_prefix'].'orders';
+				$table='orders';
 				$res = mysql_db_query($db_common,"TRUNCATE $table");
 
-				$table=$GLOBALS['table_prefix'].'sources';
+				$table='sources';
 				$query="UPDATE $table SET
 				`userid` = '0'
 				,`toclose` = '0'
@@ -155,14 +155,14 @@ switch ($_REQUEST['command']){
 		break;
 	case 'reset_all1':
 			if($_POST['reset']==1){
-				$table=$GLOBALS['table_prefix'].'customers';
+				$table='customers';
 				$res = mysql_db_query($db_common,"TRUNCATE $table");
-				$table=$GLOBALS['table_prefix'].'orders';
+				$table='orders';
 				$res = mysql_db_query($db_common,"TRUNCATE $table");
-				$table=$GLOBALS['table_prefix'].'last_orders';
+				$table='last_orders';
 				$res = mysql_db_query($db_common,"TRUNCATE $table");
 
-				$table=$GLOBALS['table_prefix'].'accounting_dbs';
+				$table='accounting_dbs';
 				$query="SELECT * FROM `$table`";
 				$res = mysql_db_query ($_SESSION['common_db'],$query);
 				if($errno=mysql_errno()) {
@@ -184,7 +184,7 @@ switch ($_REQUEST['command']){
 					'account_stock_log'
 					);
 					for (reset ($truncate); list ($key, $value) = each ($truncate); ) {
-						$table_local=$GLOBALS['table_prefix'].$value;
+						$table_local=$value;
 						$query="SELECT * FROM `$table_local`";
 						$res_local = mysql_db_query ($arr['db'],$query);
 						if(mysql_num_rows($res_local)) {
@@ -202,10 +202,10 @@ switch ($_REQUEST['command']){
 					}
 				}
 
-				$table=$GLOBALS['table_prefix'].'dishes';
+				$table='dishes';
 				$query="UPDATE $table SET `stock` = '0'";
 
-				$table=$GLOBALS['table_prefix'].'sources';
+				$table='sources';
 				$query="UPDATE $table SET
 				`userid` = '0'
 				,`toclose` = '0'
@@ -244,7 +244,7 @@ switch ($_REQUEST['command']){
 	case 'reset_access_times1':
 			if($_POST['reset']==1){
 
-				$table=$GLOBALS['table_prefix'].'sources';
+				$table='sources';
 				$query="UPDATE $table SET `last_access_time`='0'";
 				$res = mysql_db_query($db_common,$query);
 

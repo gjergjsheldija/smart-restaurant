@@ -52,7 +52,7 @@ class stock_matrix extends object {
 	}
 
 	function create_objects_vector ($var) {
-		$query = "SELECT DISTINCT `$var` as elem FROM #prefix#stock_movements";
+		$query = "SELECT DISTINCT `$var` as elem FROM stock_movements";
 		$res = common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		
@@ -80,7 +80,7 @@ class stock_matrix extends object {
 			}
 		}
 		
-		$query = "SELECT `obj_id`,`dish_id`,`dish_quantity` FROM #prefix#stock_movements";
+		$query = "SELECT `obj_id`,`dish_id`,`dish_quantity` FROM stock_movements";
 		$res = common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 	
@@ -97,13 +97,13 @@ class stock_matrix extends object {
 		if(!is_array($this->objects)) return 0;
 		
 		foreach($this->objects as $key=>$row_number) {
-			$query = "SELECT `timestamp`,`quantity` FROM #prefix#stock_samples WHERE `obj_id`='".$key."' ORDER BY `timestamp` DESC LIMIT 1";
+			$query = "SELECT `timestamp`,`quantity` FROM stock_samples WHERE `obj_id`='".$key."' ORDER BY `timestamp` DESC LIMIT 1";
 			$res = common_query($query,__FILE__,__LINE__);
 			if(!$res) return 0;
 			if($arr = mysql_fetch_array ($res)) $quantity_end = $arr['quantity'];
 			else $quantity_end = 0;
 			
-			$query = "SELECT `timestamp`,`quantity` FROM #prefix#stock_samples WHERE `obj_id`='".$key."' ORDER BY `timestamp` ASC LIMIT 1";
+			$query = "SELECT `timestamp`,`quantity` FROM stock_samples WHERE `obj_id`='".$key."' ORDER BY `timestamp` ASC LIMIT 1";
 			$res = common_query($query,__FILE__,__LINE__);
 			if(!$res) return 0;
 			if($arr = mysql_fetch_array ($res)) $quantity_start = $arr['quantity'];

@@ -31,7 +31,7 @@ class stock_dish extends object {
 	var $form_properties;
 	function stock_dish($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'dishes';
+		$this->table='dishes';
 		$this->id=$id;
 		$this->fields_names=array(	'id'=>ucphr('ID'),
 								'name'=>ucphr('NAME'),
@@ -70,8 +70,8 @@ class stock_dish extends object {
 	function list_query_all () {
 		$table = $this->table;
 		$lang_table = $table."_".$_SESSION['language'];
-		$cat_table = "#prefix#categories";
-		$cat_lang_table = "#prefix#categories_".$_SESSION['language'];
+		$cat_table = "categories";
+		$cat_lang_table = "categories_".$_SESSION['language'];
 		
 		$query="SELECT
 				$table.`id`,

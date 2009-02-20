@@ -88,7 +88,7 @@ function mods_apply_ingreds ($start_data) {
 }
 
 function mods_update_ingred_qty ($ordid, $ingredid, $value) {
-	$query ="SELECT * FROM `#prefix#orders` WHERE `associated_id`='".$ordid."' AND `ingredid` = '".$ingredid."'";
+	$query ="SELECT * FROM `orders` WHERE `associated_id`='".$ordid."' AND `ingredid` = '".$ingredid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 	
@@ -105,7 +105,7 @@ function mods_update_ingred_qty ($ordid, $ingredid, $value) {
 			$err = mods_create_ingreds ($ord, $ingredid, $operation);
 			if($err) return ERR_MOD_NOT_CREATED;
 			
-			$query ="SELECT * FROM `#prefix#orders` WHERE `associated_id`='".$ordid."' AND `ingredid` = '".$ingredid."'";
+			$query ="SELECT * FROM `orders` WHERE `associated_id`='".$ordid."' AND `ingredid` = '".$ingredid."'";
 			$res=common_query($query,__FILE__,__LINE__);
 			if(!$res) return mysql_errno();
 			$arr = mysql_fetch_array ($res);
@@ -117,11 +117,11 @@ function mods_update_ingred_qty ($ordid, $ingredid, $value) {
 	$ord -> ingredients_arrays();
 
 	if($value==0 && $arr['operation']==0) {
-		$query ="DELETE FROM `#prefix#orders` WHERE `id`='".$arr['id']."'";
+		$query ="DELETE FROM `orders` WHERE `id`='".$arr['id']."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 	} elseif($arr['operation']!=-1) {
-		$query ="UPDATE `#prefix#orders` SET `ingred_qty`='".$value."' WHERE `id`='".$arr['id']."'";
+		$query ="UPDATE `orders` SET `ingred_qty`='".$value."' WHERE `id`='".$arr['id']."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 	}
@@ -134,7 +134,7 @@ function mods_update_ingred_qty ($ordid, $ingredid, $value) {
 // 1: adding ingredients (extra or previously removed)
 // -1: removing ingredients (removed or previously added)
 function mods_create_ingreds ($ord, $ingredid, $operation) {
-	$query ="SELECT * FROM `#prefix#orders` WHERE `associated_id`='".$ord->id."' AND `ingredid` = '".$ingredid."'";
+	$query ="SELECT * FROM `orders` WHERE `associated_id`='".$ord->id."' AND `ingredid` = '".$ingredid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return mysql_errno();
 
@@ -287,7 +287,7 @@ function mods_list_delete ($ord) {
 		$ingr = new ingredient ($ingredid);
 		$price = $ingr -> get ('price');
 		
-		$query ="SELECT `ingred_qty` FROM `#prefix#orders` WHERE `associated_id`='".$ord->id."' AND `ingredid` = '".$ingredid."'";
+		$query ="SELECT `ingred_qty` FROM `orders` WHERE `associated_id`='".$ord->id."' AND `ingredid` = '".$ingredid."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 		

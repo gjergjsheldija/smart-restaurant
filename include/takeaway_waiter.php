@@ -44,7 +44,7 @@ function takeaway_is_set ($sourceid) {
 function takeaway_check_values($input_data){
 	global $tpl;
 	
-	$query="SELECT * FROM `#prefix#sources` WHERE `id`='".$_SESSION['sourceid']."'";
+	$query="SELECT * FROM `sources` WHERE `id`='".$_SESSION['sourceid']."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	$arr = mysql_fetch_array($res);
@@ -154,7 +154,7 @@ function takeaway_set_customer_data($sourceid,$input_data){
 	if(!is_array($input_data)) return $input_data;
 
 	// Now we'll build the correct UPDATE query, based on the fields provided
-	$query="UPDATE `#prefix#sources` SET ";
+	$query="UPDATE `sources` SET ";
 	for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
 		$query.="`".$key."`='".$value."',";
 	}
@@ -169,7 +169,7 @@ function takeaway_set_customer_data($sourceid,$input_data){
 }
 
 function takeaway_get_customer_data($sourceid){
-	$query="SELECT * FROM `#prefix#sources` WHERE `id`=$sourceid";
+	$query="SELECT * FROM `sources` WHERE `id`=$sourceid";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	

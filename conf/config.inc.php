@@ -32,6 +32,5 @@ $cfguser='root';
 $cfgpassword='root';
 
 $db_common='smartrestaurant';
-$table_prefix='';
 
 ?>

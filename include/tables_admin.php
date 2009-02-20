@@ -30,7 +30,7 @@
 class table extends object {
 	function table($id=0) {
 		$this->db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'sources';
+		$this->table='sources';
 		$this->id=$id;
 		$this->title = ucphr('TABLES');
 		$this->file=ROOTDIR.'/admin/admin.php';
@@ -66,7 +66,7 @@ class table extends object {
 	}
 	
 	function list_query_all () {
-		$table = "#prefix#sources";
+		$table = "sources";
 		
 		$query="SELECT
 				$table.`id`,
@@ -88,7 +88,7 @@ class table extends object {
 	}
 	
 	function is_empty (){
-		$query = "SELECT * FROM `#prefix#orders` WHERE `sourceid`='".$this->id."'";
+		$query = "SELECT * FROM `orders` WHERE `sourceid`='".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return true;
 		
@@ -97,7 +97,7 @@ class table extends object {
 	
 	function total ($discount=0) {
 		$total=0;
-		$query ="SELECT * FROM `#prefix#orders` WHERE `sourceid`='".$this->id."'";
+		$query ="SELECT * FROM `orders` WHERE `sourceid`='".$this->id."'";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
 		while ($arr = mysql_fetch_array ($res)) {
@@ -152,7 +152,7 @@ class table extends object {
 		<tbody>';
 		$tpl -> append ($output,$tmp);
 		
-		$query="SELECT * FROM `#prefix#orders` WHERE `sourceid`='".$this->id."'";
+		$query="SELECT * FROM `orders` WHERE `sourceid`='".$this->id."'";
 		if($orderid && $mods) $query .= " AND `associated_id`='".$orderid."'";
 		elseif($orderid && !$mods) $query .= " AND `id`='".$orderid."'";
 		
@@ -244,7 +244,7 @@ class table extends object {
 		<tbody>';
 		$tpl -> append ($output,$tmp);
 		
-		$query="SELECT * FROM `#prefix#orders` WHERE `sourceid`='".$this->id."'";
+		$query="SELECT * FROM `orders` WHERE `sourceid`='".$this->id."'";
 		if($orderid && $mods) $query .= " AND `associated_id`='".$orderid."'";
 		elseif($orderid && !$mods) $query .= " AND `id`='".$orderid."'";
 		
@@ -301,7 +301,7 @@ class table extends object {
 	function move_list_tables ($cols=1){
 		global $tpl;
 		
-		$query = "SELECT * FROM `#prefix#sources` WHERE `userid`='0'";
+		$query = "SELECT * FROM `sources` WHERE `userid`='0'";
 		$query .= " AND `toclose` = '0'";
 		$query .= " AND `discount` = '0.00'";
 		$query .= " AND `paid` = '0'";
@@ -346,7 +346,7 @@ class table extends object {
 	}
 
 	function move_list_cell ($arr){
-		$query = "SELECT * FROM `#prefix#orders` WHERE `sourceid`='".$arr['id']."'";
+		$query = "SELECT * FROM `orders` WHERE `sourceid`='".$arr['id']."'";
 		$res=common_query ($query,__FILE__,__LINE__);
 		if(!$res) return '';
 		
@@ -364,7 +364,7 @@ class table extends object {
 	function move($destination){
 		
 		// copies old table info
-		$query="SELECT * FROM `#prefix#sources` WHERE `id`='".$this->id."'";
+		$query="SELECT * FROM `sources` WHERE `id`='".$this->id."'";
 		$res=common_query ($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 		
@@ -375,7 +375,7 @@ class table extends object {
 		unset ($arr_old['name']);
 		unset ($arr_old['takeaway']);
 		
-		$query="SELECT * FROM `#prefix#sources` WHERE `id`='".$destination."'";
+		$query="SELECT * FROM `sources` WHERE `id`='".$destination."'";
 		$res=common_query ($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 		
@@ -391,12 +391,12 @@ class table extends object {
 		}
 	
 		// moves all the orders
-		$query="UPDATE `#prefix#orders` SET `sourceid` = '".$destination."' WHERE `sourceid`='".$this->id."'";
+		$query="UPDATE `orders` SET `sourceid` = '".$destination."' WHERE `sourceid`='".$this->id."'";
 		$res=common_query ($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 	
 		// copies table properties
-		$query="UPDATE `#prefix#sources` SET ";
+		$query="UPDATE `sources` SET ";
 		foreach ($arr_old as $key => $value ) {
 			$query.="`".$key."`='".$value."',";
 		}
@@ -407,7 +407,7 @@ class table extends object {
 		if(!$res) return mysql_errno();
 		
 		// empties the old table
-		$query = "UPDATE `#prefix#sources` SET `userid`='0',`toclose`='0',`discount` = '0.00',`paid` = '0',`catprinted` = '',`last_access_userid` = '0' WHERE `id` = '".$this->id."'";
+		$query = "UPDATE `sources` SET `userid`='0',`toclose`='0',`discount` = '0.00',`paid` = '0',`catprinted` = '',`last_access_userid` = '0' WHERE `id` = '".$this->id."'";
 		$res=common_query ($query,__FILE__,__LINE__);
 		if(!$res) return mysql_errno();
 	

@@ -56,7 +56,6 @@ class cache {
 	
 	function get ($table,$id,$field) {
 		if(!CONF_CACHE_TYPE) return '';
-		$table = $this -> translate_table ($table);
 		if(CONF_CACHE_TYPE==1 && isset($GLOBALS['cachedata_glob'][$table][$id][$field])) return $GLOBALS['cachedata_glob'][$table][$id][$field];
 		elseif(CONF_CACHE_TYPE==2 && isset($_SESSION['cachedata'][$table][$id][$field])) return $_SESSION['cachedata'][$table][$id][$field];
 		elseif(isset($GLOBALS['cachedata_glob'][$table][$id][$field])) return $GLOBALS['cachedata_glob'][$table][$id][$field];
@@ -65,7 +64,6 @@ class cache {
 
 	function set ($table,$id,$field,$value) {
 		if(!CONF_CACHE_TYPE) return 0;
-		$table = $this -> translate_table ($table);
 		if(CONF_CACHE_TYPE==1) $GLOBALS['cachedata_glob'][$table][$id][$field]=$value;
 		elseif(CONF_CACHE_TYPE==2) $_SESSION['cachedata'][$table][$id][$field]=$value;
 		else $GLOBALS['cachedata_glob'][$table][$id][$field]=$value; 
@@ -101,7 +99,6 @@ class cache {
 	}
 
 	function flush ($table,$id) {
-		$table = $this -> translate_table ($table);
 		if(CONF_CACHE_TYPE==1) unset($GLOBALS['cachedata_glob'][$table][$id]);
 		elseif(CONF_CACHE_TYPE==2) unset($_SESSION['cachedata'][$table][$id]);
 		else unset($GLOBALS['cachedata_glob'][$table][$id]);
@@ -122,15 +119,6 @@ class cache {
 		if(CONF_CACHE_TYPE==1) return var_dump_table($GLOBALS['cachedata_glob']);
 		elseif(CONF_CACHE_TYPE==2) return var_dump_table($_SESSION['cachedata']);
 		else return var_dump_table($GLOBALS['cachedata_glob']).'<hr>'.var_dump_table($_SESSION['cachedata']);
-	}
-	
-	function translate_table ($table) {
-		$prefix=$GLOBALS['table_prefix'];
-		$table = str_replace ("#prefix#", $prefix, $table);
-		if(isset($_SESSION['language'])) $table = str_replace ("#lang#", '_'.$_SESSION['language'], $table);
-		else $table = str_replace ("#lang#", '', $table);
-		
-		return $table;
 	}
 }
 ?>

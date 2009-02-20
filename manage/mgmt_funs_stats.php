@@ -31,7 +31,7 @@ function statistics_show(){
 	$timer=0;
 	require("./mgmt_start.php");
 
-	$table=$GLOBALS['table_prefix'].'account_log';
+	$table='account_log';
 	$query = "SELECT * FROM $table";
 	$query .= " WHERE `datetime`>=".$_SESSION['timestamp']['start'] ;
 	$query .= " AND `datetime`<=".$_SESSION['timestamp']['end'];

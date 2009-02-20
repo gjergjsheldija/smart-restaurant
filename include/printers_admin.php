@@ -30,7 +30,7 @@
 class printer extends object {
 	function printer($id=0) {
 		$this -> db = 'common';
-		$this->table=$GLOBALS['table_prefix'].'dests';
+		$this->table='dests';
 		$this->id=$id;
 		$this->fields_names=array(	'id'=>ucphr('ID'),
 								'name'=>ucphr('NAME'),

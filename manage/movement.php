@@ -96,7 +96,7 @@ main_header("movement.php");
 	<td align="left">
 <?php
 
-	$table=$GLOBALS['table_prefix'].'accounting_dbs';
+	$table='accounting_dbs';
 	$query="SELECT * FROM `$table`";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	if($errno=mysql_errno()) {

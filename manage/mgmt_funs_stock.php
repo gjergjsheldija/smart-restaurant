@@ -49,7 +49,7 @@ function stock_insert_item($data){
 	$data['category']=0;
 	$data['stock_is_on']=1;
 
-	$table=$GLOBALS['table_prefix'].'dishes';
+	$table='dishes';
 	$query="INSERT INTO $table (";
 	for (reset ($data); list ($key, $value) = each ($data); ) {
 		$query.="`".$key."`,";
@@ -83,9 +83,9 @@ function form_stock_edit($invoice_id=0){
 	echo "<script src=\"../SpryTabbedPanels.js\" type=\"text/javascript\"></script>";
 	echo "<link href=\"../SpryTabbedPanels.css\" rel=\"stylesheet\" type=\"text/css\" />";
 	
-	$table=$GLOBALS['table_prefix'].'stock_objects';
-	$tablecat=$GLOBALS['table_prefix'].'categories';
-	$tableing=$GLOBALS['table_prefix'].'ingreds';
+	$table='stock_objects';
+	$tablecat='categories';
+	$tableing='ingreds';
 	$query=" SELECT *, $tablecat.`name` as categoryname, $table.name as ingredname "; 
 	$query.="FROM $table INNER JOIN $tableing ON $tableing.`id` = $table.`ref_id` ";
 	$query.="INNER JOIN $tablecat ON $tableing.`category` = $tablecat.`id` ";
@@ -117,7 +117,7 @@ function form_stock_edit($invoice_id=0){
 	$categories = "";
 	$iterator = 0;	
 	do {
-		$table=$GLOBALS['table_prefix'].'account_stock_log';
+		$table='account_stock_log';
 		$query="SELECT * FROM $table WHERE `name`='".$row['name']."' AND `invoice_id`='$invoice_id'";
 		$res_local=mysql_db_query($_SESSION['common_db'],$query);
 		
@@ -158,7 +158,7 @@ function form_stock_edit($invoice_id=0){
 
 
 function form_stock_new(){
-	$table=$GLOBALS['table_prefix'].'stock_objects';	
+	$table='stock_objects';	
 	$query="SELECT * FROM $table WHERE `stock_is_on`='1' AND name NOT LIKE '' AND deleted = 0 order by `name`";	
 
 	// CRYPTO
@@ -190,7 +190,7 @@ function movement_new(){
 }
 
 function movement_insert($data){
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="INSERT INTO $table (";
 	for (reset ($data); list ($key, $value) = each ($data); ) {
 		$query.="`".$key."`,";
@@ -216,7 +216,7 @@ function movement_insert($data){
 function movement_update($data,$id){
 	if(!is_array($data)) return 0;
 
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="SELECT * FROM $table WHERE `id`='$id'";
 
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
@@ -248,7 +248,7 @@ function movement_update($data,$id){
 	}
 
 	if($oldquantity==$data['quantity']) return 0;
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="UPDATE $table SET ";
 	if(is_array($data)){
 		for (reset ($data); list ($key, $value) = each ($data); ) {
@@ -273,7 +273,7 @@ function movement_update($data,$id){
 		return $errno;
 	}
 
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="SELECT * FROM $table WHERE `id`='".$id."'";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	if($errno=mysql_errno()) {
@@ -300,7 +300,7 @@ function movement_update($data,$id){
 }
 
 function movement_delete($id){
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="SELECT * FROM $table WHERE `id`='$id'";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	$row=mysql_fetch_array($res);
@@ -311,14 +311,14 @@ function movement_delete($id){
 
 	set_stock($oldstock,$diffquantity);
 
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="DELETE FROM $table WHERE `id`='$id'";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	return 0;
 }
 
 function movement_invoice_delete($invoice_id){
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="SELECT * FROM $table WHERE `invoice_id`='$invoice_id'";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	while($row=mysql_fetch_array($res)){
@@ -329,7 +329,7 @@ function movement_invoice_delete($invoice_id){
 
 		set_stock($oldstock,$diffquantity);
 	}
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="DELETE FROM $table WHERE `invoice_id`='$invoice_id'";
 	$res = mysql_db_query ($_SESSION['common_db'],$query);
 	return 0;
@@ -347,8 +347,7 @@ function movement_invoice_delete($invoice_id){
 function set_stock($dishname,$diffquantity, $value){
 
 	$dishname = str_replace ("'", "\'", $dishname);
-	//$table=$GLOBALS['table_prefix'].'dishes';
-	$table=$GLOBALS['table_prefix'].'stock_objects';
+	$table='stock_objects';
 	$query="SELECT * FROM $table WHERE `name`='".$dishname."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 
@@ -360,7 +359,7 @@ function set_stock($dishname,$diffquantity, $value){
 	if(!$row['stock_is_on']) return 1;
 	$oldstock=$row['stock'];
 	$newstock=$oldstock+$diffquantity;
-	$table=$GLOBALS['table_prefix'].'dishes';
+	$table='dishes';
 	$query="UPDATE $table SET `stock`= '".$newstock."', value = '". $newvalue ."' WHERE `id`='".$row['id']."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	return 0;
@@ -371,13 +370,13 @@ function set_stock_from_id($orderid,$newquantity){
 	
 	$diffquantity=stock_calculate_diffquantity($orderid,$newquantity);
 	
-	$table=$GLOBALS['table_prefix'].'orders';
+	$table='orders';
 	$query="SELECT * FROM $table WHERE `id`='".$orderid."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	$row=mysql_fetch_array($res);
 
 	$dishid=$row['dishid'];
-	$table=$GLOBALS['table_prefix'].'dishes';
+	$table='dishes';
 	$query="SELECT * FROM $table WHERE `id`='".$dishid."'";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	$row=mysql_fetch_array($res);
@@ -387,7 +386,7 @@ function set_stock_from_id($orderid,$newquantity){
 }
 
 function stock_calculate_diffquantity($orderid,$newquantity){
-	$table=$GLOBALS['table_prefix'].'orders';
+	$table='orders';
 	$query="SELECT * FROM $table WHERE `id`='".$orderid."'";
 
 	$res=mysql_db_query($_SESSION['common_db'],$query);
@@ -399,7 +398,7 @@ function stock_calculate_diffquantity($orderid,$newquantity){
 }
 
 function invoice_stock_show($invoice_id){
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="SELECT * FROM $table WHERE `invoice_id`='$invoice_id' order by `name`";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 
@@ -438,7 +437,7 @@ function stock_table(){
 		</tr>\n";
 
 	$i=0;
-	$table=$GLOBALS['table_prefix'].'dishes';
+	$table='dishes';
 	$query="SELECT * FROM $table WHERE `stock_is_on`='1' order by `name`";
 	$res=mysql_db_query($_SESSION['common_db'],$query);
 	while($row=mysql_fetch_array($res)){
@@ -456,7 +455,7 @@ function movement_form($id){
 
 	if($id) {
 		$editing=1;
-		$table=$GLOBALS['table_prefix'].'account_stock_log';
+		$table='account_stock_log';
 		$query="SELECT * FROM $table WHERE `id`='$id'";
 		$res=mysql_db_query($_SESSION['common_db'],$query);
 		$row=mysql_fetch_array($res);
@@ -543,7 +542,7 @@ function movement_table(){
 		</tr>\n";
 
 	$i=0;
-	$table=$GLOBALS['table_prefix'].'account_stock_log';
+	$table='account_stock_log';
 	$query="SELECT * FROM $table";
 	$query.=" WHERE `timestamp`>=$timestamp_start AND `timestamp`<=$timestamp_end";
 	$query.=" order by `id`";
@@ -567,7 +566,7 @@ function movement_table(){
 		<td>".$row['name']."</td>
 		<td>".$row['quantity']."</td>\n";
 		if($row['invoice_id']) {
-			$table=$GLOBALS['table_prefix'].'account_mgmt_main';
+			$table='account_mgmt_main';
 			$res_local=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$row['invoice_id']."'");
 			if(mysql_num_rows($res_local)) {
 				$row_local=mysql_fetch_array($res_local);

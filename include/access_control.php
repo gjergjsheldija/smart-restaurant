@@ -248,7 +248,7 @@ function access_denied_template () {
 }
 
 function access_allowed ($level) {
-	$query="SELECT `value` FROM `#prefix#system` WHERE `name`='upgrade_last_key'";
+	$query="SELECT `value` FROM `system` WHERE `name`='upgrade_last_key'";
 	$res = common_query($query,__FILE__,__LINE__);
 	if(!$res) return true;
 	$arr=mysql_fetch_array($res);

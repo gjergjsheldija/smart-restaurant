@@ -45,7 +45,7 @@ function order_last_modified_mods () {
 function order_last_modified_links () {
 	$ret=array();
 
-	$query="SELECT * FROM `#prefix#orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
+	$query="SELECT * FROM `orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	$arr = mysql_fetch_array($res);
@@ -93,7 +93,7 @@ function order_last_modified_links () {
 }
 
 function order_last_modified_decrease () {
-	$query="SELECT * FROM `#prefix#orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
+	$query="SELECT * FROM `orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 	$arr = mysql_fetch_array($res);
@@ -116,7 +116,7 @@ function order_last_modified_decrease () {
 }
 
 function order_get_last_modified() {
-	$query="SELECT `id` FROM `#prefix#orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
+	$query="SELECT `id` FROM `orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 	$arr = mysql_fetch_array($res);
@@ -313,7 +313,7 @@ function order_price_modify($id) {
 	$tmp = navbar_form('form1','orders.php');
 	$tpl -> assign ('navbar',$tmp);
 
-	$query="SELECT * FROM `#prefix#orders` WHERE `id`=$id";
+	$query="SELECT * FROM `orders` WHERE `id`=$id";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -350,7 +350,7 @@ function order_is_mod($id){
 	 1. found SERVICE_ID
 	 2. found MOD_ID
 	 */
-	$query="SELECT * FROM `#prefix#orders` WHERE `id`=$id";
+	$query="SELECT * FROM `orders` WHERE `id`=$id";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -366,7 +366,7 @@ function order_is_mod($id){
 }
 
 function order_has_mods($id){
-	$query="SELECT * FROM `#prefix#orders` WHERE `associated_id`='$id' AND `id`!='$id'";
+	$query="SELECT * FROM `orders` WHERE `associated_id`='$id' AND `id`!='$id'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return ERR_MYSQL;
 
@@ -374,7 +374,7 @@ function order_has_mods($id){
 }
 
 function order_find_incrementable ($dishid,$priority){
-	$query="SELECT * FROM `#prefix#orders`
+	$query="SELECT * FROM `orders`
 	 WHERE `sourceid`='".$_SESSION['sourceid']."'
 	AND `dishid`='$dishid'";
 	$res=common_query($query,__FILE__,__LINE__);
@@ -394,14 +394,14 @@ function order_find_incrementable ($dishid,$priority){
 
 
 function order_found_generic_not_priced($sourceid){
-	$query="SELECT * FROM `#prefix#orders`
-			JOIN `#prefix#dishes`
-			WHERE #prefix#dishes.id=#prefix#orders.dishid
-			AND #prefix#dishes.generic='1'
-			AND #prefix#orders.sourceid = '".$sourceid."'
-			AND #prefix#orders.price = '0'
-			AND #prefix#orders.printed IS NOT NULL
-			AND #prefix#orders.deleted='0'";
+	$query="SELECT * FROM `orders`
+			JOIN `dishes`
+			WHERE dishes.id=orders.dishid
+			AND dishes.generic='1'
+			AND orders.sourceid = '".$sourceid."'
+			AND orders.price = '0'
+			AND orders.printed IS NOT NULL
+			AND orders.deleted='0'";
 
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
@@ -419,7 +419,7 @@ function price_calc ($num,$correction=0) {
 
 	$autocalc = array();
 
-	$query="SELECT * FROM `#prefix#autocalc`";
+	$query="SELECT * FROM `autocalc`";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 
@@ -860,7 +860,7 @@ function orders_delete ($start_data) {
 function orders_find_mod_order ($main, $ingredid) {
 	$main = (int) $main;
 
-	$query ="SELECT id FROM `#prefix#orders` WHERE #prefix#orders.associated_id = '".$main."' AND #prefix#orders.id != '".$main."' AND #prefix#orders.ingredid = '".$ingredid."'";
+	$query ="SELECT id FROM `orders` WHERE orders.associated_id = '".$main."' AND orders.id != '".$main."' AND orders.ingredid = '".$ingredid."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 
@@ -870,7 +870,7 @@ function orders_find_mod_order ($main, $ingredid) {
 }
 
 function orders_service_fee_exists(){
-	$query="SELECT `id` FROM `#prefix#orders` WHERE `dishid` = '".SERVICE_ID."' AND `sourceid`='".$_SESSION['sourceid']."'";
+	$query="SELECT `id` FROM `orders` WHERE `dishid` = '".SERVICE_ID."' AND `sourceid`='".$_SESSION['sourceid']."'";
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return 0;
 
@@ -976,7 +976,7 @@ function orders_list_pos () {
 	}
 
 	if (get_conf(__FILE__,__LINE__,"show_summary")) {
-		$query="SELECT * FROM `#prefix#orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
+		$query="SELECT * FROM `orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		$arr = mysql_fetch_array($res);
@@ -1090,7 +1090,7 @@ function orders_list () {
 	}
 
 	if (get_conf(__FILE__,__LINE__,"show_summary")) {
-		$query="SELECT * FROM `#prefix#orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
+		$query="SELECT * FROM `orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
 		$arr = mysql_fetch_array($res);
@@ -1187,23 +1187,23 @@ function dishes_list_cat ($data){
 
 	if ($data['category']<=0) {
 		if(get_conf(__FILE__,__LINE__,"invisible_show"))
-		$query="SELECT #prefix#dishes.*
-			FROM `#prefix#dishes`
-			WHERE #prefix#dishes.deleted='0'
+		$query="SELECT dishes.*
+			FROM `dishes`
+			WHERE dishes.deleted='0'
 			ORDER BY category ASC, name ASC";
 		else
-		$query="SELECT #prefix#dishes.*
-			FROM `#prefix#dishes` 
+		$query="SELECT dishes.*
+			FROM `dishes` 
 			WHERE `visible`='1' 
-			AND #prefix#dishes.deleted='0'
+			AND dishes.deleted='0'
 			ORDER BY category ASC, name ASC";
 	} else {
-		if(get_conf(__FILE__,__LINE__,"invisible_show")) $query="SELECT #prefix#dishes.* FROM `#prefix#dishes` WHERE category='".$data['category']."' ORDER BY name ASC";
-		else $query="SELECT #prefix#dishes.*
-			FROM `#prefix#dishes`
+		if(get_conf(__FILE__,__LINE__,"invisible_show")) $query="SELECT dishes.* FROM `dishes` WHERE category='".$data['category']."' ORDER BY name ASC";
+		else $query="SELECT dishes.*
+			FROM `dishes`
 			WHERE category='".$data['category']."'
 			AND `visible`='1'
-			AND #prefix#dishes.deleted='0'
+			AND dishes.deleted='0'
 			ORDER BY name ASC";
 
 		$class=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],"categories","htmlcolor",$data['category']);
@@ -1268,28 +1268,28 @@ function dishes_list_cat_pos ($data){
 
 	if ($data['category']<=0) {
 		if(get_conf(__FILE__,__LINE__,"invisible_show"))
-		$query="SELECT #prefix#dishes.*
-			FROM `#prefix#dishes`
-			WHERE #prefix#dishes.deleted='0'
+		$query="SELECT dishes.*
+			FROM `dishes`
+			WHERE dishes.deleted='0'
 			ORDER BY category ASC, name ASC";
 		else
-		$query="SELECT #prefix#dishes.*, #prefix#categories.image
-			FROM `#prefix#dishes` 
+		$query="SELECT dishes.*, categories.image
+			FROM `dishes` 
 			WHERE `visible`='1' 
-			AND #prefix#dishes.deleted='0'
+			AND dishes.deleted='0'
 			ORDER BY category ASC, name ASC";
 	} else {
 		if(get_conf(__FILE__,__LINE__,"invisible_show")) {
-			$query="SELECT #prefix#dishes.*, #prefix#categories.image as imgcat
-					FROM #prefix#categories, #prefix#dishes 
+			$query="SELECT dishes.*, categories.image as imgcat
+					FROM categories, dishes 
 					WHERE category='".$data['category']."'";
 		} else { 
-			$query="SELECT #prefix#dishes.*, #prefix#categories.image as imgcat
-			FROM #prefix#categories, #prefix#dishes 
-			WHERE #prefix#categories.id = '".$data['category']."' AND  
+			$query="SELECT dishes.*, categories.image as imgcat
+			FROM categories, dishes 
+			WHERE categories.id = '".$data['category']."' AND  
 			category='".$data['category']."'
 			AND `visible`='1'
-			AND #prefix#dishes.deleted='0'";
+			AND dishes.deleted='0'";
 		}
 		
 		$class=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],"categories","htmlcolor",$data['category']);
@@ -1363,17 +1363,17 @@ function dishes_list_letter ($data){
 	if(empty($letter)) return '';
 
 	if(get_conf(__FILE__,__LINE__,"invisible_show")) {
-		$query="SELECT #prefix#dishes.*,
-		FROM `#prefix#dishes`
+		$query="SELECT dishes.*,
+		FROM `dishes`
 		WHERE `name` LIKE '".$letter."%' 
-		AND #prefix#dishes.deleted='0'
+		AND dishes.deleted='0'
 		ORDER BY name ASC";
 	} else {
-		$query="SELECT #prefix#dishes.*
-		FROM `#prefix#dishes`
+		$query="SELECT dishes.*
+		FROM `dishes`
 		WHERE `name` LIKE '".$letter."%'
 		AND `visible`='1'
-		AND #prefix#dishes.deleted='0'
+		AND dishes.deleted='0'
 		ORDER BY name ASC";
 	}
 	$res=common_query($query,__FILE__,__LINE__);
@@ -1437,8 +1437,8 @@ function dishes_list_search ($data){
 
 	if(empty($search)) return '';
 
-	$query="SELECT #prefix#dishes.*
-	FROM `#prefix#dishes`
+	$query="SELECT dishes.*
+	FROM `dishes`
 	WHERE (LCASE(`name`) LIKE '".$search."%'
 		OR LCASE(`name`) LIKE '% ".$search."%'
 		)";
@@ -1446,7 +1446,7 @@ function dishes_list_search ($data){
 		$query .= "AND `visible`='1'";
 	}
 	$query .= "
-	AND #prefix#dishes.deleted='0'
+	AND dishes.deleted='0'
 	ORDER BY name ASC";
 
 	$res=common_query($query,__FILE__,__LINE__);
