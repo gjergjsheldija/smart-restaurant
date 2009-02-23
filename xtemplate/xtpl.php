@@ -1,11 +1,11 @@
-<?
+<?php
 
 class XTemplate {
 
 /*
 	xtemplate class 0.2.4-3
 	html generation with templates - fast & easy
-	copyright (c) 2000 barnabás debreceni [cranx@users.sourceforge.net]
+	copyright (c) 2000 barnabï¿½s debreceni [cranx@users.sourceforge.net]
 	code optimization by Ivar Smolin <okul@linux.ee> 14-march-2001
 	latest stable & CVS version always available @ http://sourceforge.net/projects/xtpl
 
