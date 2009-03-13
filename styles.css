@@ -26,16 +26,16 @@
  */
 
 *{
-	font-family: sans-serif, arial, verdana;
+	font: 12px "Lucida Grande", Verdana, Verdana, Arial, Helvetica, sans-serif;
 }
 
 body {
 	background-color: #ffffff;
-	font-family: sans-serif, arial, verdana;
+
 	color: #333;
 	margin: 0 auto;
 	padding: 0;
-	font-size: 12,5px;
+
 }
 
 h2 {	
@@ -448,3 +448,72 @@ ul.tabbernav li.tabberactive a:hover {
 	border: 1px solid #c18800;
 }
 
+/*--------------------------------------------------
+	orders page styles
+  --------------------------------------------------*/
+  
+  .menuMain{
+   position: relative;
+   float: left;
+   left: 0.00%;
+   width: 100.00%;
+}
+
+.mainBody{
+   position: relative;
+   float: left;
+   left: 0.00%;
+   width: 100.00%;
+}
+
+.categoriesMenu{
+   position: relative;
+   float: left;
+   left: 0.50%;
+   width: 20.00%;
+   overflow:auto;
+}
+
+.dishesMenu{
+   position: relative;
+   float: left;
+   left: 1.50%;
+   width: 54.00%;
+   overflow:auto;
+}
+
+.receiptMenu{
+   position: relative;
+   float: right;
+   right: 0.50%;
+   width: 24.00%;
+   overflow:auto;
+}
+
+.footer{
+   position: relative;
+   float: left;
+   left: 0.00%;
+   width: 100.00%;
+   background-color: #cfcfcf;
+}
+  
+/*--------------------------------------------------
+	orders page styles categories listing
+  --------------------------------------------------*/
+ 
+a.CategoryElement{
+	background:url(img/button.gif);
+	display:block;
+	color:#555555;
+	font-weight:bold;
+	height:40px;
+	line-height:39px;
+	margin-bottom:5px;
+	text-decoration:none;
+	width:191px;
+}
+
+a:hover.CategoryElement{
+	color:#0066CC;
+}

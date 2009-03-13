@@ -44,8 +44,8 @@ $script = '	<script language="javascript" type="text/javascript">
 	function setFocus() {
 		document.waiterpos.password.select();
 		document.waiterpos.password.focus();
-	}
-	</script>';
+	}; 
+	</script>'; 
 $tpl->assign('script',$script);
 switch ($err) {
 	case '600':
@@ -53,11 +53,11 @@ switch ($err) {
 	case '602':
 	case '603':				
 			$tmp = access_connect_form_waiter_pos($err);
-			$tpl -> assign ('waiter_selection',$tmp);
+			$tpl->assign ('waiter_selection',$tmp);
 		break;
 	default:
 		$tmp = redirect_waiter('tables.php');
-		$tpl -> append ('scripts',$tmp);
+		$tpl->append('scripts',$tmp);
 		
 		$tmp = '
 		  <div id="positive">
@@ -70,20 +70,20 @@ switch ($err) {
 		    </table>
 		  </div>
 		';			
-		$tpl -> append ('messages',$tmp);
+		$tpl->append ('messages',$tmp);
 		break;
 }
 // prints page generation time
 $tmp = generating_time($inizio);
-$tpl -> assign ('generating_time',$tmp);
+$tpl->assign ('generating_time',$tmp);
 
 if($err=$tpl->parse()) return $err; 
 
-$tpl -> clean();
+$tpl->clean();
 $output = $tpl->getOutput();
 
 // prints everything to screen
 echo $output;
 
-if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
+if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl->print_size();
 ?>

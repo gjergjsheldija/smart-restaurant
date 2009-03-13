@@ -247,6 +247,20 @@
 		}
 	}
 	
+	$scripts = '<script language="javascript" type="text/javascript">
+				function loadDish ( pageUrl ) {
+						$.ajax( {
+							type: "POST",
+							url: pageUrl,
+							data : \'\',
+							success: function ( html ) {
+								$( "#dishes_response" ).html(html);
+							}
+						} );
+					}
+				</script>'; 
+	
+	$tpl->append("scripts", $scripts);
 	if(isset($_SESSION['sourceid']) && $_SESSION['sourceid']) $tmp = table_people_number_line ($_SESSION['sourceid']);
 	$tpl -> assign("people_number", $tmp);
 ?>

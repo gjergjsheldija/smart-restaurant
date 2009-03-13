@@ -36,7 +36,7 @@ $GLOBALS['end_require_time']=microtime();
 
 //mizuko : ctrl 2 users not on the same table
 $tbl = new table ($_SESSION['sourceid']);
-if($tbl -> data ['userid'] != $_SESSION['userid'] && $tbl -> data ['userid'] != '0'){
+if($tbl->data ['userid'] != $_SESSION['userid'] && $tbl->data ['userid'] != '0'){
 	$user = new user($_SESSION['userid']);
 	$error_msg = common_header('Tavolina eshte ne perdorim');
 	$error_msg .=  navbar_lock_retry_pos('');
@@ -493,20 +493,20 @@ switch ($command){
 }
 // this line is already in waiter_start, but it's here repeated because of possible modifications from waiter start till now
 $tmp = table_people_number_line ($_SESSION['sourceid']);
-$tpl -> assign("people_number", $tmp);
+$tpl->assign("people_number", $tmp);
 
 // html closing stuff and disconnect line
 $tmp = disconnect_line_pos();
-$tpl -> assign ('logout',$tmp);
+$tpl->assign ('logout',$tmp);
 
 // prints page generation time
 $tmp = generating_time($inizio);
-$tpl -> assign ('generating_time',$tmp);
+$tpl->assign ('generating_time',$tmp);
 
 if($err=$tpl->parse()) return $err; 
 
-$tpl -> clean();
+$tpl->clean();
 echo $tpl->getOutput();
 
-if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
+if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl->print_size();
 ?>

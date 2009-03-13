@@ -937,6 +937,7 @@ function head_line ($title) {
 	<meta http-equiv="content-type" content="text/html; charset='.phr('CHARSET').'">
 	<title>Smart Restaurant - '.$title.'</title>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/overlib/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
+	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.js"></script>
 	<script type="text/javascript" language="JavaScript" src="'.CONF_JS_URL.'"></script>
 	<link rel="stylesheet" href="'.CONF_CSS_URL.'" type="text/css">
 	<meta http-equiv="Cache-Control" content="no-cache">
