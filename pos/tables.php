@@ -45,7 +45,7 @@ if ($time_refresh)
 	$tmp .= '<script src="../js/tabber.js" type="text/javascript"></script>';
 $tpl->append ( 'scripts', $tmp );
 
-$tpl->set_waiter_template_file ( 'tablesp' );
+$tpl->set_waiter_template_file ( 'tables_pos' );
 
 $user = new user ( $_SESSION ['userid'] );
 if (! access_allowed ( USER_BIT_WAITER ) && ! access_allowed ( USER_BIT_CASHIER )) {

@@ -912,7 +912,7 @@ function orders_list_pos () {
 	}
 
 	$_SESSION['order_added']=0;
-	$tpl -> set_waiter_template_file ('ordersp');
+	$tpl -> set_waiter_template_file ('orders_pos');
 
 	if(table_is_takeaway ($_SESSION['sourceid'])) {
 		$tpl -> set_waiter_template_file ('orders_takeaway');

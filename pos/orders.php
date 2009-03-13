@@ -67,7 +67,7 @@ if (!$table -> exists() && $command!='access_denied') {
 	$command = 'none';
 }
 
-$tpl -> set_waiter_template_file ('ordersp');
+$tpl -> set_waiter_template_file ('orders_pos');
 
 // command selection
 switch ($command){
