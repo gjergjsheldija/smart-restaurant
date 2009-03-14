@@ -57,17 +57,17 @@ if(empty($command) || $command=="none")
 	$command=table_suggest_command($_SESSION['sourceid']);
 
 $table = new table($_SESSION['sourceid']);
-if (!$table -> exists() && $command!='access_denied') {
+if (!$table->exists() && $command!='access_denied') {
 	$tmp = 'table doesn\'t exist.<br/>'."\n";
-	$tpl -> append ('messages',$tmp);
+	$tpl->append ('messages',$tmp);
 	
 	$tmp = navbar_menu_pos();
-	$tpl -> assign ('navbar',$tmp);
+	$tpl->assign ('navbar',$tmp);
 
 	$command = 'none';
 }
 
-$tpl -> set_waiter_template_file ('orders_pos');
+$tpl->set_waiter_template_file('orders_pos');
 
 // command selection
 switch ($command){
@@ -94,14 +94,14 @@ switch ($command){
 						dish_list_pos($list);
 						break;
 					} elseif ($num == 0) {
-					// found none
+						// found none
 						$tmp = '<b><font color="Red">'.ucfirst(phr('ERROR_NONE_FOUND'))."</font></b><br>\n";
 						$tpl -> append ('messages',$tmp);
 	
-						orders_list_pos();
+						//orders_list_pos();
 						break;
 					} else {
-					// found one, we directly assume that's the dish the user wanted
+						// found one, we directly assume that's the dish the user wanted
 						$dishid=$num;
 					}
 				}
@@ -109,12 +109,13 @@ switch ($command){
 				$dish=new dish($dishid);
 				if(!$dish->exists()) {
 					$tmp = '<script>$.growl("'.ucphr("Information").'","<b><font color=\"Red\">'.ucfirst(phr('DISH_DOES_NOT_EXIST')).'</font>","../images/error.png")</script>';
-					$tpl -> append ('messages',$tmp);
+					$tpl ->append('messages',$tmp);
 
-					orders_list_pos ();
+					//orders_list_pos ();
 					break;
 				}
-
+				
+				//create the order removing the quantity from the stock
 				if($dishid) $id = orders_create ($dishid,$start_data);
 
 				
@@ -132,11 +133,10 @@ switch ($command){
 					$dish = new dish ($dishid);
 					$list['category'] = $dish -> data['category'];
 					$list['priority'] = $start_data['priority'];
-					
-					dish_list_pos($list);
+					//dish_list_pos($list);
 				} else {
 					$_SESSION['go_back_to_cat'] = 0;
-					orders_list_pos ();
+					orders_list_pos (true);
 				}
 				break;
 	case 'edit':
@@ -164,7 +164,7 @@ switch ($command){
 					
 					dish_list_pos($list);
 				} else {
-					orders_list_pos();
+					orders_list_pos(true);
 				}
 				break;
 	case 'price_modify':
@@ -197,7 +197,7 @@ switch ($command){
 					status_report ('DELETION',$err);
 				}
 			
-				orders_list_pos ();
+				orders_list_pos (true);
 				break;
 	case 'ask_substitute':
 				orders_ask_substitute ($start_data);

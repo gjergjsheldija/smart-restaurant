@@ -472,11 +472,11 @@ function command_bar_table_vertical(){
 }
 
 function command_bar_table_vertical_pos(){
-	$output = '
+	$output = '<span class="rounded">
 		<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
 		<a href="orders.php?command=printing_choose"><img src="'.IMAGE_PRINT.'" alt="'.ucfirst(phr('PRINT')).'" border=0 width="64" height="64"></a>
 		<a href="orders.php?command=close_confirm"><img src="'.IMAGE_CLOSE.'" alt="'.ucfirst(phr('CLOSE_TABLE')).'" border=0 width="64" height="64"></a>
-	';
+	</span>';
 	return $output;
 }
 ?>

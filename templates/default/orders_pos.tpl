@@ -6,9 +6,9 @@
 		{scripts}
 	</head>
 	<body>
-		<div class="menuMain">		
-			<span id="right">{vertical_navbar}</span>			
-			<span id="left">{fast_order_id}</span>	
+		<div class="menuMain">					
+			<span id="right">{vertical_navbar}</span>
+			<span id="left">{fast_order_id}</span>
 			<center id="tableName">{people_number}{messages}</center>	
 		</div>
 		<div class="mainBody">
@@ -17,10 +17,10 @@
 				{categories}
 			</div>
 			<div class="dishesMenu">
-				<div id="dishes_response" style="height:70%"></div>
+				<div id="dishes_response" style="height:100%"></div>
 			</div>			
 			<div class="receiptMenu">
-				{orders_list}
+				<div id="receiptMenu_response" style="height:100%">{orders_list}</div>
 			</div>
 		</div>
 			<!--  {commands} -->

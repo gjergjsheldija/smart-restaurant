@@ -273,7 +273,7 @@ function display_todo($servrd){
 	echo "CLIENT DATA: $servrd\n";
 	echo "<br>Todo file last update:";
 	echo "<b>$lastupdate</b></h5>";
-	echo "<a href=\"todo.php\">Todo and Roadmap</a>";
+	echo "<a href=\"todo.txt\">Todo and Roadmap</a>";
 }
 
 function lang_to_file($string,$filename) {
@@ -941,6 +941,11 @@ function head_line ($title) {
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.growl.js"></script>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/growlCustom.js"></script>	
 	<script type="text/javascript" language="JavaScript" src="'.CONF_JS_URL.'"></script>
+	<script language="javascript" type="text/javascript">
+		 $(document).ready(function(){
+			$("#dishid").each(function () {this.select(); });
+		 });
+	</script> 	
 	<link rel="stylesheet" href="'.CONF_CSS_URL.'" type="text/css">
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta http-equiv="Expires" content="0">';

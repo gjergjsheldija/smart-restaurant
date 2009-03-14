@@ -205,44 +205,127 @@ class table extends object {
 		return 0;
 	}
 
+	
+	function list_orders_only_pos($orderid=0,$mods=false) {
+		global $tpl;
+		$tpl->cancelTeample();
+		
+		if($this->is_empty()) return 1;
+
+		$tmp = '
+		<table bgcolor="'.COLOR_TABLE_GENERAL.'">';
+
+		if(!$orderid) {
+			$tmp .= '
+				<thead>
+				<tr>
+				<th scope=col><font size="-1">'.ucfirst(phr('NUMBER_ABBR')).'</font></th>
+				<th scope=col><font size="-1">'.ucfirst(phr('NAME')).'</font></th>
+				<th scope=col></th>
+				<th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th>
+				<th scope=col><font size="-1">'.ucfirst(phr('PRICE')).'</font></th>
+				<th scope=col> </th>
+				<th scope=col> </th>
+				<th scope=col> </th>
+				</tr>
+				</thead>';
+		} else {
+			$tmp .= '
+				<thead>
+				<tr height="10px">
+				<th colspan="9"><font size="-2">'.ucfirst(phr('LAST_OPERATION')).'</font></th>
+				</tr>
+				</thead>';
+		}
+
+		$tmp .= '
+		<tbody>';
+
+		$query="SELECT * FROM `orders` WHERE `sourceid`='".$this->id."'";
+		if($orderid && $mods) $query .= " AND `associated_id`='".$orderid."'";
+		elseif($orderid && !$mods) $query .= " AND `id`='".$orderid."'";
+
+		if(!get_conf(__FILE__,__LINE__,"orders_show_deleted")) $query .= " AND `deleted`='0'";
+		$query .=" ORDER BY priority ASC, associated_id ASC, dishid DESC, id ASC";
+		$res=common_query($query,__FILE__,__LINE__);
+		if(!$res) return mysql_errno();
+
+		while ($arr = mysql_fetch_array ($res)) {
+			$ord = new order ($arr['id']);
+			$dishnames[] = $ord->table_row_name ($arr);
+			unset ($ord);
+		}
+
+		$res=common_query($query,__FILE__,__LINE__);
+		if(!$res) return mysql_errno();
+
+		while ($arr = mysql_fetch_array ($res)) {
+			$ord = new order ($arr['id']);
+			$tmp .= $ord->table_row_pos ($arr);
+			unset ($ord);
+		}
+
+		$class = COLOR_TABLE_TOTAL;
+
+		// prints a line with the grand total
+		$tmp .= '
+			<tr>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">'.ucfirst(phr('TOTAL')).'</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">'.$this->total().'</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			</tr>
+			</tbody>
+			</table>';
+
+		// prints a line with the grand total
+		$tmp .= '
+			</tbody>
+			</table>';
+		return $tmp;
+	}
+	
 	function list_orders_pos($output='orders_list',$orderid=0,$mods=false) {
 		if($this->is_empty()) return 1;
 		global $tpl;
-		
+
 		$tmp = '
 		<table bgcolor="'.COLOR_TABLE_GENERAL.'">';
-		$tpl -> append ($output,$tmp);
+		$tpl->append ($output,$tmp);
 		
 		if(!$orderid) {
 			$tmp = '
-		<thead>
-		<tr>
-		<th scope=col><font size="-1">'.ucfirst(phr('NUMBER_ABBR')).'</font></th>
-		<th scope=col><font size="-1">'.ucfirst(phr('NAME')).'</font></th>
-		<th scope=col></th>
-		<th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th>
-		<th scope=col><font size="-1">'.ucfirst(phr('PRICE')).'</font></th>
-		<th scope=col> </th>
-		<th scope=col> </th>
-		<th scope=col> </th>
-		</tr>
-		</thead>
-';
-			$tpl -> append ($output,$tmp);
+				<thead>
+				<tr>
+				<th scope=col><font size="-1">'.ucfirst(phr('NUMBER_ABBR')).'</font></th>
+				<th scope=col><font size="-1">'.ucfirst(phr('NAME')).'</font></th>
+				<th scope=col></th>
+				<th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th>
+				<th scope=col><font size="-1">'.ucfirst(phr('PRICE')).'</font></th>
+				<th scope=col> </th>
+				<th scope=col> </th>
+				<th scope=col> </th>
+				</tr>
+				</thead>';
+			$tpl->append ($output,$tmp);
 		} else {
 			$tmp = '
-		<thead>
-		<tr height="10px">
-		<th colspan="9"><font size="-2">'.ucfirst(phr('LAST_OPERATION')).'</font></th>
-		</tr>
-		</thead>
-';
-			$tpl -> append ($output,$tmp);
+				<thead>
+				<tr height="10px">
+				<th colspan="9"><font size="-2">'.ucfirst(phr('LAST_OPERATION')).'</font></th>
+				</tr>
+				</thead>';
+			$tpl->append ($output,$tmp);
 		}
 		
 		$tmp = '
 		<tbody>';
-		$tpl -> append ($output,$tmp);
+		$tpl->append ($output,$tmp);
 		
 		$query="SELECT * FROM `orders` WHERE `sourceid`='".$this->id."'";
 		if($orderid && $mods) $query .= " AND `associated_id`='".$orderid."'";
@@ -264,8 +347,8 @@ class table extends object {
 		
 		while ($arr = mysql_fetch_array ($res)) {
 			$ord = new order ($arr['id']);
-			$tmp = $ord -> table_row_pos ($arr);
-			$tpl -> append ($output,$tmp);
+			$tmp = $ord->table_row_pos ($arr);
+			$tpl->append ($output,$tmp);
 			unset ($ord);
 		}
 		
@@ -273,28 +356,26 @@ class table extends object {
 		
 		// prints a line with the grand total
 		$tmp = '
-		<tr>
-		<td bgcolor="'.$class.'">&nbsp;</td>
-		<td bgcolor="'.$class.'">&nbsp;</td>
-		<td bgcolor="'.$class.'">'.ucfirst(phr('TOTAL')).'</td>
-		<td bgcolor="'.$class.'">&nbsp;</td>
-		<td bgcolor="'.$class.'">&nbsp;</td>
-		<td bgcolor="'.$class.'">'.$this->total().'</td>
-		<td bgcolor="'.$class.'">&nbsp;</td>
-		<td bgcolor="'.$class.'">&nbsp;</td>
-		<td bgcolor="'.$class.'">&nbsp;</td>
-		</tr>
-		</tbody>
-		</table>
-		';
-		if(!$orderid) $tpl -> append ($output,$tmp);
+			<tr>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">'.ucfirst(phr('TOTAL')).'</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">'.$this->total().'</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td bgcolor="'.$class.'">&nbsp;</td>
+			</tr>
+			</tbody>
+			</table>';
+		if(!$orderid) $tpl->append ($output,$tmp);
 
 		// prints a line with the grand total
 		$tmp = '
-		</tbody>
-		</table>
-		';
-		if($orderid) $tpl -> append ($output,$tmp);
+			</tbody>
+			</table>';
+		if($orderid) $tpl->append ($output,$tmp);
 		return 0;
 	}	
 	

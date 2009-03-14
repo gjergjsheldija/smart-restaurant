@@ -204,6 +204,10 @@ class template {
 		$output .= '<hr/>'."\n";
 		echo $output;
 	}
+	function cancelTeample () {
+		$this->filename = '';
+		$this->var = ''; 
+	}
 }
 
 ?>

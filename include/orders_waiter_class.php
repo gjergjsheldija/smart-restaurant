@@ -990,23 +990,25 @@ class order {
 		<td bgcolor="'.$class.'">';
 			if((!$arr['printed'] && $arr['dishid']!=MOD_ID) || $arr['dishid']==SERVICE_ID){
 				$newquantity=$arr['quantity']+1;
-				$link = 'orders.php?command=update&amp;data[quantity]='.$newquantity.'&amp;data[id]='.$orderid;
-				if($arr['suspend']) $link .= '&amp;data[suspend]=1';
-				if($arr['extra_care']) $link .= '&amp;data[extra_care]=1';
-				$output .= '<a href="'.$link.'"><img src="'.IMAGE_PLUS.'" alt="'.ucfirst(phr('PLUS')).' ('.ucfirst(phr('ADD')).')" border=0></a></td>
-		<td>';
+				$link = "command=update&data[quantity]=".$newquantity."&data[id]=".$orderid;
+				if($arr['suspend'])  $link .= "&data[suspend]=1";
+				if($arr['extra_care']) $link .= "&data[extra_care]=1";
+				$output .= '<a href="#" onClick="modifyDishQuantity(\''.$link.'\')"><img src="'.IMAGE_PLUS.'" alt="'.ucfirst(phr('PLUS')).' ('.ucfirst(phr('ADD')).')" border=0></a></td><td>';
 				if($arr['quantity']>1){
 					$newquantity=$arr['quantity']-1;
-					$link = 'orders.php?command=update&amp;data[quantity]='.$newquantity.'&amp;data[id]='.$orderid;
-					if($arr['suspend']) $link .= '&amp;data[suspend]=1';
-					if($arr['extra_care']) $link .= '&amp;data[extra_care]=1';
-					$output .= '<a href="'.$link.'"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
+					$link = "command=update&data[quantity]=".$newquantity."&data[id]=".$orderid;
+					if($arr['suspend']) $link .= "&data[suspend]=1";
+					if($arr['extra_care']) $link .= "&data[extra_care]=1";
+					//$output .= '<a href="'.$link.'"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
+					$output .= '<a href="#" onClick="modifyDishQuantity(\''.$link.'\')"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';					
 				} elseif($arr['quantity']==1 && CONF_ALLOW_EASY_DELETE){
 					$newquantity=0;
-					$link = 'orders.php?command=ask_delete&amp;data[id]='.$orderid;
-					if($arr['suspend']) $link .= '&amp;data[suspend]=1';
-					if($arr['extra_care']) $link .= '&amp;data[extra_care]=1';
-					$output .= '<a href="'.$link.'"><img src="'.IMAGE_TRASH.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
+					//$link = 'orders.php?command=ask_delete&amp;data[id]='.$orderid;
+					$link = "command=ask_delete&data[id]=".$orderid;
+					if($arr['suspend']) $link .= "&data[suspend]=1";
+					if($arr['extra_care']) $link .= "data[extra_care]=1";
+					//$output .= '<a href="'.$link.'"><img src="'.IMAGE_TRASH.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
+					$output .= '<a href="#" onClick="modifyDishQuantity(\''.$link.'\')"><img src="'.IMAGE_TRASH.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
 				} else {
 					$output .= '&nbsp;'."\n";
 				}

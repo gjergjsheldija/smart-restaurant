@@ -30,6 +30,8 @@
 
 body {
 	background-color: #ffffff;
+	font-family: sans-serif, arial, verdana;
+	font-size: 12,5px;
 	color: #333;
 	margin: 0 auto;
 	padding: 0;
@@ -452,10 +454,11 @@ ul.tabbernav li.tabberactive a:hover {
  .menuMain{
    background: #e5e2be;
    position: relative;
+   display: block;
    float: left;
    width: 100.00%;
    border-bottom:2px solid #e1deb7;
-   margin:1 1 10 1px;
+   margin:0 0 10 1px;
    height:80px;
 }
 
@@ -476,7 +479,7 @@ ul.tabbernav li.tabberactive a:hover {
 .dishesMenu{
    position: relative;
    float: left;
-   width: 56.00%;
+   width: 57.00%;
    overflow:auto;
 }
 
@@ -493,7 +496,6 @@ ul.tabbernav li.tabberactive a:hover {
    float: left;
    left: 0.00%;
    width: 100.00%;
-   background-color: #cfcfcf;
 }
   
 /*--------------------------------------------------
@@ -501,15 +503,25 @@ ul.tabbernav li.tabberactive a:hover {
   --------------------------------------------------*/
  
 a.CategoryElement{
-	background:url(img/button.gif);
-	display:block;
-	color:#555555;
-	font-weight:bold;
-	height:40px;
-	line-height:39px;
-	margin-bottom:5px;
-	text-decoration:none;
-	width:191px;
+     padding: 4px 10px 3px 10px;
+     border: solid 1px #8AB134;
+     position: relative;
+     cursor: pointer;
+     display: block;
+     background-image: url(images/bkg.png);
+     background-repeat: repeat;
+     font-size: 11px;
+     height: 40px;
+     width:180px;
+	 line-height:39px;
+	 margin-bottom:5px;     
+     text-decoration: none;
+	 text-align:center;
+     color: #40740D;
+     -moz-border-radius-bottomleft: 5px;
+     -moz-border-radius-bottomright: 5px;
+     -moz-border-radius-topleft: 5px;
+     -moz-border-radius-topright: 5px;	
 }
 
 a:hover.CategoryElement{
@@ -522,7 +534,7 @@ a:hover.CategoryElement{
 }
 
 #right {
-	margin:10px; 
+	margin:1 6px;
 	float:right;
 }
 
@@ -539,4 +551,58 @@ a:hover.CategoryElement{
 	color: #000000;	
 	font-family: sans-serif;	
 	font-size: 12,5px;		
+}
+
+/*--------------------------------------------------
+	dish buttons
+  --------------------------------------------------*/
+  
+.buttonDish {
+     padding: 4px 10px 3px 10px;
+     border: solid 1px #8AB134;
+     position: relative;
+     cursor: pointer;
+     display: inline-block;
+     background-image: url(images/bkg.png);
+     background-repeat: repeat;
+     font-size: 11px;
+     height: 90px;
+     width: 90px;
+     text-decoration: none;
+	 text-align:center;
+	 font-weight:800;
+     color: #40740D;
+     -moz-border-radius-bottomleft: 5px;
+     -moz-border-radius-bottomright: 5px;
+     -moz-border-radius-topleft: 5px;
+     -moz-border-radius-topright: 5px;
+}
+
+.buttonDish img {
+     border: none;
+}
+
+button:hover.buttonDish {
+     color: #8AB134;
+}
+
+/*--------------------------------------------------
+	general ui elements
+  --------------------------------------------------*/
+  
+.rounded {
+     padding: 4px 10px 3px 10px;
+     border: solid 1px #8AB134;
+     background : #D4E5BD;
+     position: relative;
+     cursor: pointer;
+     display: inline-block;
+     height: 100%
+     text-decoration: none;
+	 text-align:center;
+	 font-weight:800;
+     -moz-border-radius-bottomleft: 5px;
+     -moz-border-radius-bottomright: 5px;
+     -moz-border-radius-topleft: 5px;
+     -moz-border-radius-topright: 5px;
 }

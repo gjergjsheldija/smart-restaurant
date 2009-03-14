@@ -258,6 +258,40 @@
 							}
 						} );
 					}
+				function dishOrder ( dishID ) {
+					var priority = $("input[name=\'data[priority]\']:checked").val(); 
+					var from_category = $("input[name=\'from_category\']").val(); 
+					var command = $("input[name=\'command\']").val(); 
+					var quantity = $("#dishquantity").val();
+					
+					$.ajax( {
+						type: "POST",
+						url: "orders.php",
+						data : "dishid=" + dishID + "&data[priority]=" + priority + "&from_category=" + from_category + "&command=" + command + "&data[quantity]=" + quantity,
+						success: function ( html ) {			
+							$( "#receiptMenu_response" ).html(html);
+						}
+					} );
+				}
+				
+				function modifyDishQuantity(dataPost) {
+					$.ajax( {
+						type: "POST",
+						url: "orders.php",
+						data : dataPost,
+						success: function ( html ) {			
+							$( "#receiptMenu_response" ).html(html);
+						}
+					} );					
+				}
+				
+				function setDishSelectedQuantity (priority ) {
+					if(priority == 0 )
+						priority = 1
+					else 
+						priority = priority + 1;
+					$("#dishquantity").val(priority);
+				}
 				</script>'; 
 	
 	$tpl->append("scripts", $scripts);

@@ -22,7 +22,8 @@
 * along with this program; if not, write to the Free Software
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *
-* @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
+* @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com> 
+* @author		Gjergj Sheldija <gjergj.sheldija@gmail.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
@@ -231,7 +232,7 @@ function dish_list_pos ($start_data) {
 		$tbl = new table ($_SESSION['sourceid']);
 		if($last_mod = order_get_last_modified()) {
 			$mods=get_conf(__FILE__,__LINE__,"show_mods_in_summary");
-			$tbl -> list_orders_pos ('last_order',$last_mod,$mods);
+			$tbl->list_orders_pos ('last_order',$last_mod,$mods);
 		}
 	}
 
@@ -289,7 +290,7 @@ function dish_list_pos ($start_data) {
 		$tpl -> assign ('categories',$tmp);
 
 		$tmp = ucfirst(phr('ERROR_NO_CATEGORY_SELECTED'))."<br/>\n";
-		$tpl -> append ('messages',$tmp);
+		$tpl->append ('messages',$tmp);
 	}
 	return 0;
 }
@@ -298,8 +299,8 @@ function order_fast_dishid_form () {
 	$data['nolabel']=1;
 	$data['priority']=1;
 	$tmp = dishlist_form_start(false);
-	$tmp .= quantity_list($data);
 	$tmp .= priority_radio($data);
+	$tmp .= quantity_list($data);	
 	$tmp .= input_dish_id ($start_data);
 	$tmp .= dishlist_form_end();
 	return $tmp;
@@ -894,9 +895,11 @@ function orders_service_fee_questions () {
 	orders_edit ($start_data,$created);
 }
 
-function orders_list_pos () {
+function orders_list_pos ($showOrdersOnly = false) {
 	global $tpl;
-
+	$table = new table ($_SESSION['sourceid']);
+	$user = new user($_SESSION['userid']);
+		
 	// use session to decide wether to show the orders list or not
 	// TODO: add get_conf here
 	if(!isset($_SESSION['show_orders_list_pos'])) $_SESSION['show_orders_list_pos']=false;
@@ -904,22 +907,25 @@ function orders_list_pos () {
 	unset($_SESSION['select_all']);
 	$_SESSION['go_back_to_cat']=0;
 
-	$user = new user($_SESSION['userid']);
-
+	//ajax hack :(
+	if($showOrdersOnly == true ) {
+		echo $table->list_orders_only_pos();
+		return 0;	
+	}
+	
 	if(table_is_closed($_SESSION['sourceid']) && !$user->level[USER_BIT_CASHIER]) {
 		table_closed_interface_pos();
 		return 0;
 	}
 
 	$_SESSION['order_added']=0;
+	
 	$tpl->set_waiter_template_file ('orders_pos');
-
 	if(table_is_takeaway ($_SESSION['sourceid'])) {
 		$tpl->set_waiter_template_file ('orders_takeaway');
 		takeaway_form();
 	}
 
-	$table = new table ($_SESSION['sourceid']);
 	$table->fetch_data(true);
 	if (!orders_service_fee_exists () && get_conf(__FILE__,__LINE__,'service_fee_use')) {
 		$tmp = '<a href="orders.php?command=create&amp;dishid='.SERVICE_ID.'">'.ucfirst(phr('CREATE_SERVICE_FEE')).'</a><br/>';
@@ -952,7 +958,8 @@ function orders_list_pos () {
 
 	if(CONF_FAST_ORDER){
 		$tmp = order_fast_dishid_form ();
-		$tpl->assign ('fast_order_id',$tmp);
+		$fast_order_id = '<span class="rounded">' . $tmp . '</span>';
+		$tpl->assign ('fast_order_id',$fast_order_id);
 	} else {
 	// activate scripts
 		$tmp = keys_orders ();
@@ -1102,11 +1109,10 @@ function orders_list () {
 
 function dishlist_form_start ($back_to_cat=false) {
 	$output = '
-	<form action="orders.php" method="POST" name="order_form">
-	<INPUT TYPE="HIDDEN" NAME="command" VALUE="create">
-	<INPUT TYPE="HIDDEN" NAME="dishid" VALUE="0">
+	<form action="orders.php" method="POST" name="order_form" id="order_form_dishes">
+	<input type="hidden" name="command" value="create">
+	<input type="hidden" name="dishid" id="form_order_dishid" value="0">
 	<input type="hidden" name="from_category" value="1">';
-
 	return $output;
 }
 
@@ -1149,9 +1155,9 @@ function priority_radio ($data) {
 
 	$output = '
 	'.ucfirst(phr('PRIORITY')).':
-	<input type="radio" '.$chk[1].' name="data[priority]" value=1><a href="#" onClick="check_prio(\'order_form\',0);return false;">1</a>
-	<input type="radio" '.$chk[2].' name="data[priority]" value=2><a href="#" onClick="check_prio(\'order_form\',1);return false;">2</a>
-	<input type="radio" '.$chk[3].' name="data[priority]" value=3><a href="#" onClick="check_prio(\'order_form\',2);return false;">3</a>
+	<label for="priority1">1</label><input type="radio" '.$chk[1].' name="data[priority]" id="priority1" value="1"></input>
+	<label for="priority2">2</label><input type="radio" '.$chk[2].' name="data[priority]" id="priority2" value="2"></input>
+	<label for="priority3">3</label><input type="radio" '.$chk[3].' name="data[priority]" id="priority3" value="3"></input>
 	';
 	return $output;	
 }
@@ -1167,7 +1173,8 @@ function quantity_list ($data=array()) {
 
 	if (!isset($data['nolabel']) || !$data['nolabel']) $tmp = ucfirst(phr('QUANTITY')).':';
 	$tmp .= '
-	<select class="pos" name="data[quantity]" size="1">';
+	<input type="hidden" id="dishquantity" value="1">
+	<select class="pos" name="data[quantity]" onChange="setDishSelectedQuantity(this.selectedIndex)" size="1">';
 	for ($i=1; $i<=MAX_QUANTITY; $i++) {
 		if ($i==$selected_qty) $selected = ' selected';
 		else $selected = '';
@@ -1297,13 +1304,14 @@ function dishes_list_cat_pos ($data){
 	}
 	$res=common_query($query,__FILE__,__LINE__);
 	if(!$res) return '';
-	$output .= '<table bgcolor="'.COLOR_TABLE_GENERAL.'">';
+	//$output .= '<table bgcolor="'.COLOR_TABLE_GENERAL.'">';
+	$output .= '<table>';
 
 	// ascii letter A
 	$i=65;
 	unset($GLOBALS['key_binds_letters']);
 
-	$cikel=0;
+	$cikel=-1;
 	while ($arr = mysql_fetch_array ($res)) {
 		$cikel++;
 		$dishid = $arr['id'];
@@ -1320,7 +1328,7 @@ function dishes_list_cat_pos ($data){
 			debug_msg(__FILE__,__LINE__,"class: $class");
 		}
 
-		if (!$cikel%4) {
+		if (!$cikel%6) {
 			$output .= '<tr>';
 		}
 
@@ -1332,9 +1340,17 @@ function dishes_list_cat_pos ($data){
 				$i++;
 			} else $letter='';
 				
-			$output .= '<td bgcolor="'.$class.'" onclick="order_select('.$dishid.',\'order_form\'); return false;"><b><a href="#" onclick="JavaScript:order_select('.$dishid.',\'order_form\'); return false;"><img src="..'.$image.'" height=48 width=48><br>'.strtoupper($dishname).'</a></b></td>';
+			//$output .= '<td bgcolor="'.$class.'" onclick="order_select('.$dishid.',\'order_form\'); return false;"><b><a href="#" onclick="JavaScript:order_select('.$dishid.',\'order_form\'); return false;"><img src="..'.$image.'" height=48 width=48><br>'.strtoupper($dishname).'</a></b></td>';
+			$output .= '
+			<td onclick="dishOrder('.$dishid.'); return false;">
+				<a href="#" class="buttonDish">
+						<img src="..'.$image.'" height=48 width=48>
+						<br />
+						'.wordwrap(strtoupper($dishname),25,"<br/>\n").'
+					</a>
+			</td>';
 				
-			if(!(($cikel+1)%4)) {
+			if(!(($cikel+1)%6)) {
 				$output .= '</tr>';
 			}
 
@@ -1349,7 +1365,7 @@ function dishes_list_cat_pos ($data){
 function input_dish_id ($data){
 	$output = '';
 
-	$output .= ucphr('DISH').': <input onChange="document.order_form.submit()" type="text" name="dishid" value="" size="6" maxlength="6">';
+	$output .= ucphr('DISH').': <input onChange="document.order_form.submit()" type="text" name="dishid" id="dishid" value="" size="6" maxlength="6">';
 
 	return  $output;
 }
