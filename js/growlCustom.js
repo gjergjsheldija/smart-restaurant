@@ -13,3 +13,9 @@
     position: 'relative',
     opacity: .85
   };
+  $.growl.settings.dockCss = {
+    position: 'absolute',
+    bottom: '30px',
+    right: '10px',
+    width: '300px'
+  };
