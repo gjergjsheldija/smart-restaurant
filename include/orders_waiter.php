@@ -912,10 +912,10 @@ function orders_list_pos () {
 	}
 
 	$_SESSION['order_added']=0;
-	$tpl -> set_waiter_template_file ('orders_pos');
+	$tpl->set_waiter_template_file ('orders_pos');
 
 	if(table_is_takeaway ($_SESSION['sourceid'])) {
-		$tpl -> set_waiter_template_file ('orders_takeaway');
+		$tpl->set_waiter_template_file ('orders_takeaway');
 		takeaway_form();
 	}
 
@@ -929,7 +929,7 @@ function orders_list_pos () {
 	$associated_waiter = table_is_associated ();
 	if ($user->level[USER_BIT_CASHIER] && table_is_closed($_SESSION['sourceid'])) {
 		$tmp = '<a href="orders.php?command=reopen_confirm">'.ucfirst(phr('REOPEN_TABLE')).'</a><br/>';
-		$tpl -> append ('commands',$tmp);
+		$tpl->append ('commands',$tmp);
 	}
 	if ($_SESSION['show_orders_list_pos'] == false) {
 		$image = '<img src="'.IMAGE_SHOW_ORDERS.'" height=48 width=48><br>';
@@ -939,24 +939,24 @@ function orders_list_pos () {
 		$desc=ucfirst(phr('HIDE_ORDERS'));
 	}
 	$tmp = '<a href="orders.php?command=set_show_orders">'.$image.$desc.'</a><br/>';
-	$tpl -> append ('commands',$tmp);
+	$tpl->append('commands',$tmp);
 
 
 	$tmp = categories_list_pos();
-	$tpl -> assign ('categories',$tmp);
+	$tpl->assign ('categories',$tmp);
 
 	
 	 $tmp = letters_list();
-	 $tpl -> assign ('letters',$tmp);
+	 $tpl->assign ('letters',$tmp);
 	 
 
 	if(CONF_FAST_ORDER){
 		$tmp = order_fast_dishid_form ();
-		$tpl -> assign ('fast_order_id',$tmp);
+		$tpl->assign ('fast_order_id',$tmp);
 	} else {
 	// activate scripts
 		$tmp = keys_orders ();
-		$tpl -> append ('scripts',$tmp);
+		$tpl->append ('scripts',$tmp);
 	}
 	
 	// use session to decide wether to show the orders list or not
@@ -965,14 +965,14 @@ function orders_list_pos () {
 		toplist_show();
 	} elseif(get_conf(__FILE__,__LINE__,"top_list_show_top")) {
 		$tmp = '<a href="orders.php?command=set_show_toplist">'.ucphr('SHOW_TOPLIST').'</a><br/>';
-		$tpl -> assign ('toplist',$tmp);
+		$tpl->assign ('toplist',$tmp);
 	}
 	
 	$tmp = command_bar_table_vertical_pos();
-	$tpl -> assign ('vertical_navbar',$tmp);
+	$tpl->assign('vertical_navbar',$tmp);
 
 	if($show_orders) {
-		$table -> list_orders_pos ();
+		$table->list_orders_pos ();
 	}
 
 	if (get_conf(__FILE__,__LINE__,"show_summary")) {
@@ -981,7 +981,7 @@ function orders_list_pos () {
 		if(!$res) return ERR_MYSQL;
 		$arr = mysql_fetch_array($res);
 		$mods=get_conf(__FILE__,__LINE__,"show_mods_in_summary");
-		$table -> list_orders_pos ('last_order',$arr['id'],$mods);
+		$table->list_orders_pos ('last_order',$arr['id'],$mods);
 	}
 	return 0;
 }

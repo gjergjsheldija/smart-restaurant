@@ -1,4 +1,3 @@
-
 /**
  * Smart Restaurant
  *
@@ -26,16 +25,14 @@
  */
 
 *{
-	font: 12px "Lucida Grande", Verdana, Verdana, Arial, Helvetica, sans-serif;
+	font: 12,5px "Lucida Grande", Verdana, Verdana, Arial, Helvetica, sans-serif;
 }
 
 body {
 	background-color: #ffffff;
-
 	color: #333;
 	margin: 0 auto;
 	padding: 0;
-
 }
 
 h2 {	
@@ -452,11 +449,14 @@ ul.tabbernav li.tabberactive a:hover {
 	orders page styles
   --------------------------------------------------*/
   
-  .menuMain{
+ .menuMain{
+   background: #e5e2be;
    position: relative;
    float: left;
-   left: 0.00%;
    width: 100.00%;
+   border-bottom:2px solid #e1deb7;
+   margin:1 1 10 1px;
+   height:80px;
 }
 
 .mainBody{
@@ -469,16 +469,14 @@ ul.tabbernav li.tabberactive a:hover {
 .categoriesMenu{
    position: relative;
    float: left;
-   left: 0.50%;
-   width: 20.00%;
+   width: 16.00%;
    overflow:auto;
 }
 
 .dishesMenu{
    position: relative;
    float: left;
-   left: 1.50%;
-   width: 54.00%;
+   width: 56.00%;
    overflow:auto;
 }
 
@@ -486,7 +484,7 @@ ul.tabbernav li.tabberactive a:hover {
    position: relative;
    float: right;
    right: 0.50%;
-   width: 24.00%;
+   width: 26.00%;
    overflow:auto;
 }
 
@@ -516,4 +514,29 @@ a.CategoryElement{
 
 a:hover.CategoryElement{
 	color:#0066CC;
+}
+
+#left { 
+	margin:5 6px;
+	float:left;
+}
+
+#right {
+	margin:10px; 
+	float:right;
+}
+
+#center {
+	width: 50%; 
+	margin-left: auto; 
+	margin-right: auto;
+}
+
+#tableName {
+	margin-top:17px;
+	font-variant: small-caps;
+	font-weight: bold;
+	color: #000000;	
+	font-family: sans-serif;	
+	font-size: 12,5px;		
 }

@@ -427,8 +427,8 @@ function lang_file_reader($filename) {
 
 function status_report ($name,$err) {
 	global $tpl;
-	if(!$err) $tmp = '<font color="green">'.ucphr($name).' ok'.'</font>'."<br/>\n";
-	else $tmp = '<font color="red">'.ucphr($name).' '.ucphr('FAILED').'</font>'."<br/>\n";
+	if(!$err) $tmp ='<script>$.growl("'.ucphr("Information").'","'.ucphr($name).' ' . 'ok' .'","../images/info.png")</script>';
+	else $tmp = '<script>$.growl("'.ucphr("Information").'","<font color="red">'.ucphr($name).' '.ucphr('FAILED').'</font>","../images/error.png")</script>';
 	$tpl -> append ('messages',$tmp);
 	
 	if($err) error_display($err,true);
@@ -938,6 +938,8 @@ function head_line ($title) {
 	<title>Smart Restaurant - '.$title.'</title>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/overlib/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.js"></script>
+	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.growl.js"></script>
+	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/growlCustom.js"></script>	
 	<script type="text/javascript" language="JavaScript" src="'.CONF_JS_URL.'"></script>
 	<link rel="stylesheet" href="'.CONF_CSS_URL.'" type="text/css">
 	<meta http-equiv="Cache-Control" content="no-cache">

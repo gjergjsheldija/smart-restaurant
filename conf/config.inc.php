@@ -29,8 +29,7 @@
 
 $cfgserver='localhost';
 $cfguser='root';
-$cfgpassword='root';
+$cfgpassword='';
 
 $db_common='smartrestaurant';
-
 ?>

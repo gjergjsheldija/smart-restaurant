@@ -531,5 +531,6 @@ You are &amp;lt;b&amp;gt;strongly&amp;lt;/b&amp;gt; suggested to &amp;lt;a href=
 		<item name="GIVE_PASSWORD">Please write a password to login</item>
 		<item name="TOTAL_WAITER_INCOME">Total income for</item>
 		<item name="INCOME">Income</item>
+		<item name="INFORMATION">Information</item>
 	</data>
 </SmartRestaurant>

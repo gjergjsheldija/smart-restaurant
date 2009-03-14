@@ -370,8 +370,8 @@ function table_ask_close() {
 	global $tpl;
 	
 	if(!takeaway_is_set($_SESSION['sourceid'])) {
-		$tmp = '<font color="Red">'.ucfirst(phr('SET_TAKEAWAY_SURNAME_FIRST')).'</font>';
-		$tpl -> append ('messages',$tmp);
+		$tmp = '$.growl("","<font color="Red">'.ucfirst(phr('SET_TAKEAWAY_SURNAME_FIRST')).'</font>")';
+		$tpl->append ('messages',$tmp);
 		orders_list();
 		return 0;
 	}
@@ -835,11 +835,10 @@ function table_people_number_line ($sourceid) {
 		if(categories_orders_present ($sourceid,2) && !categories_printed ($sourceid,2)) $toprint_2=true;
 		if(categories_orders_present ($sourceid,3) && !categories_printed ($sourceid,3)) $toprint_3=true;
 		
-		$output .= '<table><tr>';
 		
 		if($toprint_2) $output .= '<td align="left" width="10" bgcolor="'.COLOR_ORDER_PRIORITY_2.'">&nbsp;&nbsp;</td>';
 		
-		$output .= '<td align="center">';
+		$output .= '<span id="tableName">';
 		$output .= ucfirst(phr('TABLE'))." ".$_SESSION['tablenum'];
 
 		if($sourceid && get_conf(__FILE__,__LINE__,'service_fee_use')) {
@@ -847,13 +846,9 @@ function table_people_number_line ($sourceid) {
 			$output .= " - $service_quantity ".ucfirst(phr('PEOPLE'));
 		}
 		
-		$output .= '</td>';
+		$output .= '</span>';
 		
-		if($toprint_3) $output .= '<td align="right" width="10" bgcolor="'.COLOR_ORDER_PRIORITY_3.'">&nbsp;&nbsp;</td>';
-		
-		$output .= '</tr></table>';
-		
-		//$output .= "<br/>\n";
+		//if($toprint_3) $output .= '<td align="right" width="10" bgcolor="'.COLOR_ORDER_PRIORITY_3.'">&nbsp;&nbsp;</td>';
 	}
 	unset($res);
 	unset($arr);

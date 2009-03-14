@@ -3,19 +3,13 @@
 	<head>
 		<META name="HandheldFriendly" content="True">
 		{head}
+		{scripts}
 	</head>
 	<body>
-		{scripts}
-		<div class="informational message">{messages} - {people_number}</div>
-		<div class="menuMain">
-			<table>
-				<tr>
-					<td align="left" width="30%">{fast_order_id}</td>
-					<td width="45%">{scripts}</td>
-					<td align="right" width="25%">{vertical_navbar}</td>
-				</tr>
-			</table>
-			<!--{logout} -->
+		<div class="menuMain">		
+			<span id="right">{vertical_navbar}</span>			
+			<span id="left">{fast_order_id}</span>	
+			<center id="tableName">{people_number}{messages}</center>	
 		</div>
 		<div class="mainBody">
 			<div class="categoriesMenu">
