@@ -274,6 +274,25 @@
 					} );
 				}
 				
+				function quickDishOrder (  ) {
+					var quickDishID = $("#quickdishid").val();
+					var priority = $("input[name=\'data[priority]\']:checked").val(); 
+					var from_category = $("input[name=\'from_category\']").val(); 
+					var command = $("input[name=\'command\']").val(); 
+					var quantity = $("#dishquantity").val();
+					
+					$.ajax( {
+						type: "POST",
+						url: "orders.php",
+						data : "dishid=" + quickDishID + "&data[priority]=" + priority + "&from_category=" + from_category + "&command=" + command + "&data[quantity]=" + quantity,
+						success: function ( html ) {			
+							$( "#receiptMenu_response" ).html(html);
+						}
+					} );
+					$("#quickdishid").val("");
+					return false;
+				}
+								
 				function modifyDishQuantity(dataPost) {
 					$.ajax( {
 						type: "POST",

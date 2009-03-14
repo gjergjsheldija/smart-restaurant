@@ -999,15 +999,12 @@ class order {
 					$link = "command=update&data[quantity]=".$newquantity."&data[id]=".$orderid;
 					if($arr['suspend']) $link .= "&data[suspend]=1";
 					if($arr['extra_care']) $link .= "&data[extra_care]=1";
-					//$output .= '<a href="'.$link.'"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
 					$output .= '<a href="#" onClick="modifyDishQuantity(\''.$link.'\')"><img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';					
 				} elseif($arr['quantity']==1 && CONF_ALLOW_EASY_DELETE){
 					$newquantity=0;
-					//$link = 'orders.php?command=ask_delete&amp;data[id]='.$orderid;
 					$link = "command=ask_delete&data[id]=".$orderid;
 					if($arr['suspend']) $link .= "&data[suspend]=1";
 					if($arr['extra_care']) $link .= "data[extra_care]=1";
-					//$output .= '<a href="'.$link.'"><img src="'.IMAGE_TRASH.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
 					$output .= '<a href="#" onClick="modifyDishQuantity(\''.$link.'\')"><img src="'.IMAGE_TRASH.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
 				} else {
 					$output .= '&nbsp;'."\n";

@@ -129,12 +129,12 @@ function dish_list ($start_data) {
 
 	$_SESSION['order_added']=0;
 
-	$tpl -> set_waiter_template_file ('dishlist');
+	$tpl->set_waiter_template_file ('dishlist');
 
 	$tmp = navbar_empty();
 	if(printing_orders_to_print($_SESSION['sourceid'])) $tmp = navbar_with_printer();
 	else $tmp = navbar_empty();
-	$tpl -> assign ('navbar',$tmp);
+	$tpl->assign ('navbar',$tmp);
 
 
 	if(	get_conf(__FILE__,__LINE__,"show_summary") &&
@@ -143,7 +143,7 @@ function dish_list ($start_data) {
 		$tbl = new table ($_SESSION['sourceid']);
 		if($last_mod = order_get_last_modified()) {
 			$mods=get_conf(__FILE__,__LINE__,"show_mods_in_summary");
-			$tbl -> list_orders ('last_order',$last_mod,$mods);
+			$tbl->list_orders ('last_order',$last_mod,$mods);
 		}
 	}
 
@@ -1109,7 +1109,7 @@ function orders_list () {
 
 function dishlist_form_start ($back_to_cat=false) {
 	$output = '
-	<form action="orders.php" method="POST" name="order_form" id="order_form_dishes">
+	<form action="orders.php" method="POST" name="order_form" id="order_form_dishes" onSubmit="quickDishOrder();return false;">
 	<input type="hidden" name="command" value="create">
 	<input type="hidden" name="dishid" id="form_order_dishid" value="0">
 	<input type="hidden" name="from_category" value="1">';
@@ -1365,7 +1365,8 @@ function dishes_list_cat_pos ($data){
 function input_dish_id ($data){
 	$output = '';
 
-	$output .= ucphr('DISH').': <input onChange="document.order_form.submit()" type="text" name="dishid" id="dishid" value="" size="6" maxlength="6">';
+	//$output .= ucphr('DISH').': <input onChange="document.order_form.submit()" type="text" name="dishid" id="dishid" value="" size="6" maxlength="6">';
+	$output .= ucphr('DISH').': <input type="text" name="dishid" id="quickdishid" value="" size="6" maxlength="6">';
 
 	return  $output;
 }
