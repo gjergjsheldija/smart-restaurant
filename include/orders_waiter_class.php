@@ -774,7 +774,7 @@ class order {
 			$dishname .= ' ('.orders_print_elapsed_time ($ord,true).')';
 			unset ($ord);
 		}
-		$generic=$dish -> get ('generic');
+		$generic=$dish->get ('generic');
 		
 		$deleted=$arr['deleted'];
 		$orderid=$arr['id'];
@@ -809,7 +809,7 @@ class order {
 			// if the original price is 0 and the actual price is 0
 			// then it means that the ingred has passed through the autocalc system
 			// and we let the waiter know this, so he could check the prices.
-			$modingredprice = $ingr -> get ('price');
+			$modingredprice = $ingr->get ('price');
 			//$modingredprice=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],"ingreds","price",$modingred);
 			if($modingredprice==0 && $arr['price']!=0) {
 				$dishname.=" (auto)";
@@ -830,27 +830,17 @@ class order {
 		$classextra=order_extra_class($arr['extra_care'],$class);
 
 		// row begins
-		$output .= '
-	<tr bgcolor="'.$class.'">';
+		$output .= '<tr>';
 		
 		// quantity cell
 		if ($deleted && $arr['dishid']!=MOD_ID) {
-			$output .= '
-		<td bgcolor="'.$class.'">
-			<s>'.$arr['quantity'].'</s>
-		</td>';
+			$output .= '<td><s>'.$arr['quantity'].'</s></td>';
 		
 		} elseif (!$deleted && $arr['dishid']!=MOD_ID) {
-			$output .= '
-		<td bgcolor="'.$class.'">
-			'.$arr['quantity'].'
-		</td>';
+			$output .= '<td><strong>'.$arr['quantity'].'</strong></td>';
 		
 		} else {
-			$output .= '
-		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>';
+			$output .= '<td>&nbsp;</td>';
 		
 		}
 		
@@ -867,10 +857,7 @@ class order {
 		
 		// Name of the dish
 		if($deleted) {
-			$output .= '
-		<td bgcolor="'.$classtime.'">
-			<s>'.$dishname.'</s>
-		</td>';
+			$output .= '<td><s>'.$dishname.'</s></td>';
 		} else {
 			if(!$deleted
 				&& $arr['printed']==NULL
@@ -878,116 +865,66 @@ class order {
 				&& $arr['dishid']!=SERVICE_ID) {
 				$link = 'orders.php?command=listmods&amp;data[id]='.$orderid;
 				$output .= '
-		<td bgcolor="'.$classtime.'" onclick="redir(\''.$link.'\');">
-			<a href="'.$link.'">'.$dishname.'</a>
-		</td>';
+				<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">'.$dishname.'</a></td>';
 			} elseif(!$deleted
 				&& $arr['printed']==NULL
 				&& $arr['dishid']==MOD_ID) {
 				$link = 'orders.php?command=listmods&amp;data[id]='.$arr['associated_id'];
-				$output .= '
-		<td bgcolor="'.$classtime.'" onclick="redir(\''.$link.'\');">
-			<a href="'.$link.'">'.$dishname.'</a>
-		</td>';
+				$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">'.$dishname.'</a></td>';
 			} else {
-				$output .= '
-		<td bgcolor="'.$classtime.'">
-			'.$dishname.'
-		</td>';
+				$output .= '<td>'.$dishname.'</td>';
 			}
 		}
 		
 		if($deleted) {
-			$output .= '
-		<td bgcolor="'.$class.'">
-			<s>'.$oextra.'</s>
-		</td>';
+			$output .= '<td ><s>'.$oextra.'</s></td>';
 		} else {
-			$output .= '
-		<td bgcolor="'.$classextra.'">
-			'.$oextra.'
-		</td>';
+			$output .= '<td>'.$oextra.'</td>';
 		}
 		
 		// priority cell
-		$output .= '
-		<td bgcolor="'.$classpriority.'">
-			'.$arr['priority'].'
-		</td>';
+		$output .= '<td >'.$arr['priority'].'</td>';
 		
 		// price cell
 		$user = new user($_SESSION['userid']);
 		
 		if($generic && $user->level[USER_BIT_CASHIER] && $arr['printed'] && !$deleted) {
 			$link = 'orders.php?command=price_modify&amp;data[id]='.$arr['id'];
-			$output .= '
-		<td bgcolor="'.$class.'" onclick="redir(\''.$link.'\');">
-			<a href="'.$link.'">'.$arr['price'].'</a>
-		</td>';
+			$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">'.$arr['price'].'</a></td>';
 		} elseif($deleted) {
-			$output .= '
-		<td bgcolor="'.$class.'">
-			<s>'.$arr['price'].'</s>
-		</td>';
+			$output .= '<td><s>'.$arr['price'].'</s></td>';
 		} else {
-			$output .= '
-		<td bgcolor="'.$class.'">
-			'.$arr['price'].'
-		</td>';
+			$output .= '<td >'.$arr['price'].'</td>';
 		}
 	
 		// edit button
 		if($toclose){
 			// the table has been closed, can't modify rows
-			$output .= '
-		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>';
-		} elseif (!$deleted
-			&& $arr['printed']!=NULL
-			&& $arr['dishid']!=MOD_ID) {
+			$output .= '<td>&nbsp;</td>';
+		} elseif (!$deleted && $arr['printed']!=NULL && $arr['dishid']!=MOD_ID) {
 			// printed orderd, special edit (only deleting or substiting)
 			$link = 'orders.php?command=edit&amp;data[id]='.$orderid;
-			$output .= '
-		<td bgcolor="'.$class.'" onclick="redir(\''.$link.'\');">
-			<a href="'.$link.'">Edit</a>
-		</td>';
+			//$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">Edit</a></td>';
 		} elseif (!$deleted
 			&& $arr['dishid']==MOD_ID) {
 			// modification, can't edit directly, only via associated order
-			$output .= '
-		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>';
+			$output .= '<td>&nbsp;</td>';
 		} elseif ($deleted)  {
 			// deleted order, no editing, of course
-			$output .= '
-		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>';
+			$output .= '<td>&nbsp;</td>';
 		} else {
 			// other cases, normal editing
 			$link = 'orders.php?command=edit&amp;data[id]='.$orderid;
-			$output .= '
-		<td bgcolor="'.$class.'" onclick="redir(\''.$link.'\');">
-			<a href="'.$link.'">Edit</a>
-		</td>';
+			$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">Edit</a></td>';
 		}
 
 		// quantity arrows
 		if ($toclose) {
 			// table is closed, no more editing
-			$output .= '
-		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>
-		<td bgcolor="'.$class.'">
-			&nbsp;
-		</td>';
+			$output .= '<td>&nbsp;</td>';
 		} else {
 			// normal section to rapidly add or subtract single quantities
-			$output .= '
-		<td bgcolor="'.$class.'">';
+			$output .= '<td>';
 			if((!$arr['printed'] && $arr['dishid']!=MOD_ID) || $arr['dishid']==SERVICE_ID){
 				$newquantity=$arr['quantity']+1;
 				$link = "command=update&data[quantity]=".$newquantity."&data[id]=".$orderid;
@@ -1010,15 +947,11 @@ class order {
 					$output .= '&nbsp;'."\n";
 				}
 			} else {
-				$output .= '
-			&nbsp;</td>
-			<td>&nbsp;';
+				$output .= '&nbsp;</td><td>&nbsp;';
 			}
-			$output .= '
-		</td>';
+			$output .= '</td>';
 		}
-		$output .= '
-	</tr>'."\n\n";
+		$output .= '</tr>'."\n\n";
 
 		return $output;
 	}

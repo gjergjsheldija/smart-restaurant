@@ -213,17 +213,17 @@ class table extends object {
 		if($this->is_empty()) return 1;
 
 		$tmp = '
-		<table bgcolor="'.COLOR_TABLE_GENERAL.'">';
+		<table class="receipt-table">';
 
 		if(!$orderid) {
 			$tmp .= '
 				<thead>
 				<tr>
-				<th scope=col><font size="-1">'.ucfirst(phr('NUMBER_ABBR')).'</font></th>
-				<th scope=col><font size="-1">'.ucfirst(phr('NAME')).'</font></th>
-				<th scope=col></th>
-				<th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th>
-				<th scope=col><font size="-1">'.ucfirst(phr('PRICE')).'</font></th>
+				<th scope=col>'.ucfirst(phr('NUMBER_ABBR')).'</th>
+				<th scope=col> </th>
+				<th scope=col>'.ucfirst(phr('NAME')).'</th>
+				<th scope=col>'.ucfirst(phr('PRIORITY_ABBR')).'</th>
+				<th scope=col>'.ucfirst(phr('PRICE')).'</th>
 				<th scope=col> </th>
 				<th scope=col> </th>
 				<th scope=col> </th>
@@ -233,7 +233,7 @@ class table extends object {
 			$tmp .= '
 				<thead>
 				<tr height="10px">
-				<th colspan="9"><font size="-2">'.ucfirst(phr('LAST_OPERATION')).'</font></th>
+				<th colspan="9">'.ucfirst(phr('LAST_OPERATION')).'</th>
 				</tr>
 				</thead>';
 		}
@@ -270,15 +270,14 @@ class table extends object {
 		// prints a line with the grand total
 		$tmp .= '
 			<tr>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">'.ucfirst(phr('TOTAL')).'</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">'.$this->total().'</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td class="alt">&nbsp;</td>
+			<td><strong>'.ucfirst(phr('TOTAL')).'</strong></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><strong>'.$this->total().'</strong></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 			</tr>
 			</tbody>
 			</table>';
@@ -295,22 +294,22 @@ class table extends object {
 		global $tpl;
 
 		$tmp = '
-		<table bgcolor="'.COLOR_TABLE_GENERAL.'">';
+		<table class="receipt-table">';
 		$tpl->append ($output,$tmp);
 		
 		if(!$orderid) {
 			$tmp = '
 				<thead>
-				<tr>
-				<th scope=col><font size="-1">'.ucfirst(phr('NUMBER_ABBR')).'</font></th>
-				<th scope=col><font size="-1">'.ucfirst(phr('NAME')).'</font></th>
-				<th scope=col></th>
-				<th scope=col><font size="-1">'.ucfirst(phr('PRIORITY_ABBR')).'</font></th>
-				<th scope=col><font size="-1">'.ucfirst(phr('PRICE')).'</font></th>
-				<th scope=col> </th>
-				<th scope=col> </th>
-				<th scope=col> </th>
-				</tr>
+					<tr>
+						<th scope=col>'.ucfirst(phr('NUMBER_ABBR')).'</th>
+						<th scope=col>'.ucfirst(phr('NAME')).'</th>
+						<th scope=col> </th>
+						<th scope=col>'.ucfirst(phr('PRIORITY_ABBR')).'</th>
+						<th scope=col>'.ucfirst(phr('PRICE')).'</th>
+						<th scope=col> </th>
+						<th scope=col> </th>
+						<th scope=col> </th>
+					</tr>
 				</thead>';
 			$tpl->append ($output,$tmp);
 		} else {
@@ -338,7 +337,7 @@ class table extends object {
 		
 		while ($arr = mysql_fetch_array ($res)) {
 			$ord = new order ($arr['id']);
-			$dishnames[] =$ord ->  table_row_name ($arr);
+			$dishnames[] =$ord->table_row_name ($arr);
 			unset ($ord);
 		}
 
@@ -357,15 +356,13 @@ class table extends object {
 		// prints a line with the grand total
 		$tmp = '
 			<tr>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">'.ucfirst(phr('TOTAL')).'</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">'.$this->total().'</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
-			<td bgcolor="'.$class.'">&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><strong>'.ucfirst(phr('TOTAL')).'</strong></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><strong>'.$this->total().'</strong></td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
 			</tr>
 			</tbody>
 			</table>';

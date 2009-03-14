@@ -606,3 +606,52 @@ button:hover.buttonDish {
      -moz-border-radius-topleft: 5px;
      -moz-border-radius-topright: 5px;
 }
+
+/*--------------------------------------------------
+	receipt table 
+  --------------------------------------------------*/
+
+.receipt-table {
+  padding: 0;
+  margin: 0;
+  border-collapse: collapse;
+  border: 1px solid #333;
+  font-family: "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+  color: #000;
+  background: #e5e2be;
+  width:100%;
+}
+
+.receipt-table th, .receipt-table td {
+  border: 1px dotted #666;
+  text-align: left;
+  color: #000;
+}
+
+.receipt-table th[scope=col] {
+  color: #000;
+  background-color: #D5DCB7;
+  text-transform: uppercase;
+  border-bottom: 2px solid #333;
+  border-right: 2px solid #333;
+}
+
+.receipt-table th+th[scope=col] {
+  color: #000;
+  background-color: #D5DCB7;
+  border-right: 1px dotted #666;
+}
+
+.receipt-table th[scope=row] {
+  background-color: #D5DCB7;
+  border-right: 2px solid #333;
+}
+
+.receipt-table tr.alt th, .receipt-table tr.alt td {
+  color: #000;
+}
+
+.receipt-table tr:hover th[scope=row], .receipt-table tr:hover td {
+  background-color: #fff;
+  color: #000;
+}
