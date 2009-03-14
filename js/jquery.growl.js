@@ -127,10 +127,10 @@ $.growl.settings = {
 		color: '#ffffff'
 	},
 	noticeDisplay: function(notice) {
-		notice.css({'opacity':'0'}).fadeIn(jQuery.growl.settings.noticeFadeTimeout);
+		notice.css({'opacity':'0.75'}).fadeIn(jQuery.growl.settings.noticeFadeTimeout);
 	},
 	noticeRemove: function(notice, callback) {
-		notice.animate({opacity: '0', height: '0px'}, {duration:jQuery.growl.settings.noticeFadeTimeout, complete: callback});
+		notice.animate({opacity: '0.75', height: '0px'}, {duration:jQuery.growl.settings.noticeFadeTimeout, complete: callback});
 	},
 	noticeFadeTimeout: 'slow',
 	displayTimeout: 3500,

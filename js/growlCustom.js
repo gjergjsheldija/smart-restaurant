@@ -10,5 +10,6 @@
     + '<div style="float: right; background-image: url(../images/dm_bottom.png); position: relative; width: 259px; height: 16px; margin-bottom: 10px;"></div>'
     + '</div>';
   $.growl.settings.noticeCss = {
-    position: 'relative'
+    position: 'relative',
+    opacity: .85
   };
