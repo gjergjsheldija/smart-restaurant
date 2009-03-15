@@ -914,8 +914,9 @@ class order {
 			$output .= '<td>&nbsp;</td>';
 		} else {
 			// other cases, normal editing
-			$link = 'orders.php?command=edit&amp;data[id]='.$orderid;
-			$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">Edit</a></td>';
+			$link = 'orders.php?command=edit&data[id]='.$orderid;
+			//$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">Edit</a></td>';
+			$output .= '<td onclick="loadModal(\''.$link.'\');">Edit</a></td>';
 		}
 
 		// quantity arrows

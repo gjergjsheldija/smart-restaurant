@@ -610,10 +610,10 @@ function orders_get_data ($start_data) {
 	return $ret;
 }
 
-function orders_edit ($start_data,$fee_destroyer=false) {
+function orders_edit_pos ($start_data,$fee_destroyer=false) {
 	global $tpl;
 
-	$tpl -> set_waiter_template_file ('edit');
+	$tpl->set_waiter_template_file ('edit_pos');
 
 	$ordid = (int) $start_data['id'];
 	$ord = new order ($ordid);
@@ -621,7 +621,7 @@ function orders_edit ($start_data,$fee_destroyer=false) {
 
 	if($fee_destroyer) $tmp = navbar_form('form1','orders.php?command=delete&amp;data[silent]=1&amp;data[id]='.$start_data['id']);
 	else $tmp = navbar_trash('form1','orders.php?command=list',$start_data);
-	$tpl -> assign ('navbar',$tmp);
+	$tpl->assign ('navbar',$tmp);
 
 	orders_edit_printed_info ($ord);
 
@@ -629,7 +629,42 @@ function orders_edit ($start_data,$fee_destroyer=false) {
 
 	if($ord->data['dishid'] != SERVICE_ID && $ord->data['printed']) {
 		$tmp = navbar_trash('','orders.php?command=list',$start_data);
-		$tpl -> assign ('navbar',$tmp);
+		$tpl->assign ('navbar',$tmp);
+		return 0;
+	}
+
+	orders_edit_form ($ord);
+
+	orders_edit_quantity ($ord);
+	orders_edit_dish_name ($ord);
+
+	if($ord->data['dishid'] == SERVICE_ID) return 0;
+
+	orders_edit_priority ($ord);
+	orders_edit_extra_care ($ord);
+	orders_edit_suspend ($ord);
+	return 0;
+}
+function orders_edit ($start_data,$fee_destroyer=false) {
+	global $tpl;
+
+	$tpl->set_waiter_template_file ('edit');
+
+	$ordid = (int) $start_data['id'];
+	$ord = new order ($ordid);
+	if (!$ord->exists ()) return ERR_ORDER_NOT_FOUND;
+
+	if($fee_destroyer) $tmp = navbar_form('form1','orders.php?command=delete&amp;data[silent]=1&amp;data[id]='.$start_data['id']);
+	else $tmp = navbar_trash('form1','orders.php?command=list',$start_data);
+	$tpl->assign ('navbar',$tmp);
+
+	orders_edit_printed_info ($ord);
+
+	if($ord->data['dishid'] != SERVICE_ID) orders_edit_substitute ($ord);
+
+	if($ord->data['dishid'] != SERVICE_ID && $ord->data['printed']) {
+		$tmp = navbar_trash('','orders.php?command=list',$start_data);
+		$tpl->assign ('navbar',$tmp);
 		return 0;
 	}
 
@@ -687,13 +722,14 @@ function orders_print_elapsed_time ($ord,$string=false) {
 function orders_edit_dish_name ($ord) {
 	global $tpl;
 
-	if ($ord -> data['dishid'] == SERVICE_ID) $tmp = ucfirst(phr('SERVICE_FEE'));
-	else {
+	if ($ord->data['dishid'] == SERVICE_ID) {
+		$tmp = ucfirst(phr('SERVICE_FEE'));
+	}else {
 		$dish = new dish ($ord -> data['dishid']);
 		$tmp = $dish -> name ($_SESSION ['language']);
 	}
-	$tpl -> assign ('dishname',$tmp);
-
+	
+	$tpl->assign ('dishname',$tmp);
 	return 0;
 }
 
@@ -702,9 +738,9 @@ function orders_edit_suspend ($ord) {
 
 	$checked='';
 	if ($ord -> data['suspend']) $checked=" checked";
-	$tmp = '<input type="checkbox" name="data[suspend]" value="1"'.$checked.'>';
-	$tmp .= ucfirst(phr('SUSPEND_PRINT'));
-	$tpl -> assign ('suspend',$tmp);
+	$tmp = '<input type="checkbox" name="data[suspend]" value="1"'.$checked.' id="suspend">';
+	$tmp .= '<label for="suspend">' . ucfirst(phr('SUSPEND_PRINT')). '</label>';
+	$tpl->assign ('suspend',$tmp);
 
 	return 0;
 }
@@ -713,12 +749,12 @@ function orders_edit_extra_care ($ord) {
 	global $tpl;
 
 	$checked='';
-	if ($ord -> data['extra_care']) $checked=" checked";
+	if ($ord->data['extra_care']) $checked=" checked";
 
-	$tmp = '<input type="checkbox" name="data[extra_care]" value="1"'.$checked.'>';
-	$tmp .= ucfirst(phr('EXTRA_CARE'));
+	$tmp = '<input type="checkbox" name="data[extra_care]" value="1"'.$checked.' id="extracare">';
+	$tmp .= '<label for="extracare">' . ucfirst(phr('EXTRA_CARE')) . '</label>';
 
-	$tpl -> assign ('extra_care',$tmp);
+	$tpl->assign ('extra_care',$tmp);
 	return 0;
 }
 

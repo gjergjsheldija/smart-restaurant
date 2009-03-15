@@ -655,3 +655,33 @@ button:hover.buttonDish {
   background-color: #fff;
   color: #000;
 }
+
+/*--------------------------------------------------
+	modal container general css
+  --------------------------------------------------*/
+
+#simplemodal-overlay {
+	background-color:#000; 
+	cursor:wait;
+}
+
+#simplemodal-container {
+	height:450px; width:600px;	
+	background-color:#fff; 
+	border:3px solid #ccc;
+}
+
+#simplemodal-container a.modalCloseImg {
+	background:url(images/no.png) no-repeat; 
+	width:64px; 
+	height:64px; 
+	display:inline; 
+	z-index:3200; 
+	position:absolute; 
+	top:-32px; 
+	right:-32px;
+	cursor:pointer;
+}
+#simplemodal-container #basicModalContent {
+	padding:8px;
+}

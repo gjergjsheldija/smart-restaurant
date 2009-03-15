@@ -311,6 +311,17 @@
 						priority = priority + 1;
 					$("#dishquantity").val(priority);
 				}
+				
+				function loadModal ( pageurl ) {
+					$.get(pageurl,  
+						function(returned_data){
+							$(returned_data).modal({
+								close: false,
+								position: ["15%"],
+								onClose: function (dialog) {$.modal.close();}
+						})
+					});
+				}
 				</script>'; 
 	
 	$tpl->append("scripts", $scripts);

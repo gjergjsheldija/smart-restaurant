@@ -99,6 +99,8 @@ switch ($command){
 						$tpl -> append ('messages',$tmp);
 	
 						//orders_list_pos();
+						//gjergji : remove it or not ?!
+						//orders_list_pos (true);
 						break;
 					} else {
 						// found one, we directly assume that's the dish the user wanted
@@ -112,6 +114,7 @@ switch ($command){
 					$tpl ->append('messages',$tmp);
 
 					//orders_list_pos ();
+					orders_list_pos (true);
 					break;
 				}
 				
@@ -140,7 +143,7 @@ switch ($command){
 				}
 				break;
 	case 'edit':
-				orders_edit ($start_data);
+				orders_edit_pos ($start_data);
 				break;
 	case 'update':
 				if ($start_data['quantity']==0) {

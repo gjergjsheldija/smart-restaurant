@@ -940,6 +940,7 @@ function head_line ($title) {
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.js"></script>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.growl.js"></script>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/growlCustom.js"></script>	
+	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.simplemodal.js"></script>
 	<script type="text/javascript" language="JavaScript" src="'.CONF_JS_URL.'"></script>
 	<script language="javascript" type="text/javascript">
 		 $(document).ready(function(){
