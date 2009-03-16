@@ -904,7 +904,6 @@ class order {
 		} elseif (!$deleted && $arr['printed']!=NULL && $arr['dishid']!=MOD_ID) {
 			// printed orderd, special edit (only deleting or substiting)
 			$link = 'orders.php?command=edit&amp;data[id]='.$orderid;
-			//$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">Edit</a></td>';
 		} elseif (!$deleted
 			&& $arr['dishid']==MOD_ID) {
 			// modification, can't edit directly, only via associated order
@@ -915,8 +914,7 @@ class order {
 		} else {
 			// other cases, normal editing
 			$link = 'orders.php?command=edit&data[id]='.$orderid;
-			//$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">Edit</a></td>';
-			$output .= '<td onclick="loadModal(\''.$link.'\');">Edit</a></td>';
+			$output .= '<td onclick="loadModal(\''.$link.'\');"><img src="../images/source.png" width="32" border="0"></a></td>';
 		}
 
 		// quantity arrows
@@ -943,7 +941,7 @@ class order {
 					$link = "command=ask_delete&data[id]=".$orderid;
 					if($arr['suspend']) $link .= "&data[suspend]=1";
 					if($arr['extra_care']) $link .= "data[extra_care]=1";
-					$output .= '<a href="#" onClick="modifyDishQuantity(\''.$link.'\')"><img src="'.IMAGE_TRASH.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
+					$output .= '<a href="#" onClick="modifyDishQuantity(\''.$link.'\')"><img src="'.IMAGE_TRASH.'" width="32" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('REMOVE')).')" border=0></a>';
 				} else {
 					$output .= '&nbsp;'."\n";
 				}
