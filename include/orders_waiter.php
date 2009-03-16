@@ -619,8 +619,9 @@ function orders_edit_pos ($start_data,$fee_destroyer=false) {
 	$ord = new order ($ordid);
 	if (!$ord->exists ()) return ERR_ORDER_NOT_FOUND;
 
+	//gjergji : $fee_destroyer what is ?
 	if($fee_destroyer) $tmp = navbar_form('form1','orders.php?command=delete&amp;data[silent]=1&amp;data[id]='.$start_data['id']);
-	else $tmp = navbar_trash('form1','orders.php?command=list',$start_data);
+	else $tmp = navbar_trash_pos('form1','orders.php?command=list',$start_data);
 	$tpl->assign ('navbar',$tmp);
 
 	orders_edit_printed_info ($ord);

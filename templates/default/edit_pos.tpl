@@ -20,6 +20,5 @@
 			<td valign="top"><strong>{extra_care}</strong></td>
 		</tr>
 	</table>
-
 {form_end}
 </div>

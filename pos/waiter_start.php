@@ -292,6 +292,20 @@
 					$("#quickdishid").val("");
 					return false;
 				}
+				
+				function modifyDishOrder ( formName ) {
+					 var formUrl = $("[name=" + formName + "]").serialize();
+					 $.ajax( {
+						type: "POST",
+						url: "orders.php",
+						data : formUrl,
+						success: function ( html ) {	
+							$( "#receiptMenu_response" ).html(html);
+							$.modal.close();
+						}
+					} );
+					return false;
+				}
 								
 				function modifyDishQuantity(dataPost) {
 					$.ajax( {
@@ -303,6 +317,17 @@
 						}
 					} );					
 				}
+				
+				function generalDishModifier(urldata) {
+					$.ajax( {
+						type: "POST",
+						url: urldata,
+						success: function ( html ) {			
+							$("#receiptMenu_response").html(html);
+							$.modal.close();
+						}
+					} );					
+				}				
 				
 				function setDishSelectedQuantity (priority ) {
 					if(priority == 0 )
@@ -317,7 +342,7 @@
 						function(returned_data){
 							$(returned_data).modal({
 								close: false,
-								position: ["15%"],
+								position: ["15%",],
 								onClose: function (dialog) {$.modal.close();}
 						})
 					});

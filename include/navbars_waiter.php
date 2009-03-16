@@ -64,6 +64,24 @@ function navbar_trash($form='',$show_abort='',$start_data) {
 	return $msg;
 }
 
+function navbar_trash_pos($form='',$show_abort='',$start_data) {
+	$msg = '
+	<table>
+		<tr>
+			<td width="35" onclick="generalDishModifier(\'orders.php?command=ask_delete&data[id]='.$start_data['id'].'\');">
+					<img src="'.IMAGE_TRASH.'" alt="'.ucfirst(phr('REMOVE')).'" border=0>
+			</td>
+			<td width="35">
+				<a href="#" onclick="modifyDishOrder(\''.$form.'\'); return false">
+					<img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64">
+				</a>
+			</td>
+		</tr>
+	</table>
+	';
+	return $msg;
+}
+
 function navbar_empty($show_abort='') {
 	$msg = '
 	<table>
