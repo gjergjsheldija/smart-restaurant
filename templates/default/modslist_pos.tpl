@@ -1,14 +1,14 @@
-<div>
+<div width="700px">
 	<a class="modalCloseImg simplemodal-close" title="Close"></a>
-	{navbar}	
+	{navbar}
+	{scripts}	
 	<center>
 		{form_start}
 		<table>	
 			<tr>
-				<td>{mod_quantity}</td>
-				<td valign="top">{mod_letters}</td>
-				<td>{add_list}</td>
-				<td>{delete_list}</td>
+				<td valign="top">{mod_quantity}</td>
+				<td valign="top">{add_list}</td>
+				<td valign="top">{delete_list}</td>
 			</tr>
 		</table>			
 		{form_end}

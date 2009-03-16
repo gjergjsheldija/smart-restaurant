@@ -279,10 +279,17 @@ function mods_list_delete ($ord) {
 
 	$ord -> ingredients_arrays();
 	
-	$output .= ucfirst(phr('CONTAINED')).':<br/>'."\n";
 	$output .= '
-<table>
-	<tbody>'."\n";
+<table class="receipt-table">
+	<tbody>
+	<tr>
+		<td></td>	
+		<td><strong>' . ucfirst(phr('CONTAINED')).'</strong></td>
+		<td style="text-align:center"><img src="../images/up.png" width="16" border="0" height="16"></td>
+		<td style="text-align:center"><img src="../images/field.png" width="16" border="0" height="16"></td>
+		<td style="text-align:center"><img src="../images/down.png" width="16" border="0" height="16"></td>
+	</tr>
+	';
 	foreach ($ord->ingredients['contained'] as $name => $ingredid) {
 		$ingr = new ingredient ($ingredid);
 		$price = $ingr -> get ('price');
@@ -310,14 +317,21 @@ function mods_list_delete ($ord) {
 		
 		$output .= '
 		<tr>
-			<td><input type="checkbox" name="data[ingreds]['.$ingredid.']" value="'.$ingredid.'" checked></td>
-			<td onClick="check_elem(\'form1\',\'data[ingreds]\','.$ingredid.');return false;">'.ucfirst($name).' '.$price.'</td>
-			<td><input type="radio" name="data[ingred_qty]['.$ingredid.']" value="1"'.$checked_lot.'></td>
-			<td onClick="check_ingredqty('.$ingredid.',0);return false;">+&nbsp;&nbsp;</td>
-			<td><input type="radio" name="data[ingred_qty]['.$ingredid.']" value="0"'.$checked_normal.'></td>
-			<td onClick="check_ingredqty('.$ingredid.',1);return false;">=&nbsp;&nbsp;</td>
-			<td><input type="radio" name="data[ingred_qty]['.$ingredid.']" value="-1"'.$checked_few.'></td>
-			<td onClick="check_ingredqty('.$ingredid.',2);return false;">-&nbsp;&nbsp;</td>
+			<td>
+				<input class="largerInput" type="checkbox" name="data[ingreds]['.$ingredid.']" value="'.$ingredid.'" checked>
+			</td>
+			<td onClick="check_elem(\'form1\',\'data[ingreds]\','.$ingredid.');return false;">
+				'.ucfirst($name).' '.$price.'
+			</td>
+			<td>
+				<input class="largerInput" type="radio" name="data[ingred_qty]['.$ingredid.']" value="1"'.$checked_lot.'>
+			</td>
+			<td>
+				<input class="largerInput" type="radio" name="data[ingred_qty]['.$ingredid.']" value="0"'.$checked_normal.'>
+			</td>
+			<td>
+				<input class="largerInput" type="radio" name="data[ingred_qty]['.$ingredid.']" value="-1"'.$checked_few.'>
+			</td>
 		</tr>';
 
 		$linecounter++;
@@ -433,27 +447,46 @@ function mods_letter_list ($ord) {
 	return $output;
 }
 
+function mods_letter_list_pos ($form ,$ord) {
+	$char_per_line =5;
+	$i=0;
+	$output = '';
+	
+	$i++;
+
+	$letters=mods_letter_array($ord);
+	
+	$output .= '<a href="#" onclick="getDishStartingByLetter(\'' . $form . '\',\'ALL\'); return false;">'.ucfirst(phr('ALL')).'</a><br/>'."\n";
+	foreach ($letters as $char) {
+		$output .= '<a href="#" onclick="getDishStartingByLetter(\'' . $form . '\',\''.$char.'\'); return false;">'.$char.'</a>&nbsp;&nbsp;'."\n";
+		if(($i % $char_per_line) == 0)
+			$output .= "<br/>\n";
+		$i++;
+	}
+	return $output;
+}
+
 function mods_list($start_data,$letter='') {
 	global $tpl;
 	
 	$_SESSION['order_added']=0;
 
-	$tpl -> set_waiter_template_file ('modslist');
+	$tpl->set_waiter_template_file ('modslist');
 
 	$tmp = navbar_form('form1','orders.php?command=list');
-	$tpl -> assign ('navbar',$tmp);
+	$tpl->assign ('navbar',$tmp);
 	
 	$tmp=(int) $start_data['id'];
 	if(!$ord = new order($tmp)) return 1;
 	
 	$tmp = mods_form_start ($ord);
-	$tpl -> assign ('form_start',$tmp);
+	$tpl->assign ('form_start',$tmp);
 	
 	$tmp = "</FORM>\n";
-	$tpl -> assign ('form_end',$tmp);
+	$tpl->assign ('form_end',$tmp);
 
 	$tmp = mods_quantity ($ord);
-	$tpl -> assign ('mod_quantity',$tmp);
+	$tpl->assign ('mod_quantity',$tmp);
 
 	$tmp =mods_letter_list ($ord);
 	$tpl -> assign ('mod_letters',$tmp);
@@ -495,10 +528,10 @@ function mods_list_pos($start_data,$letter='') {
 	$tmp = mods_quantity ($ord);
 	$tpl->assign ('mod_quantity',$tmp);
 
-	$tmp =mods_letter_list ($ord);
+	$tmp = mods_letter_list_pos ('form1',$ord);
 	$tpl->assign ('mod_letters',$tmp);
 
-	$tmp = mods_key_binds ($ord);
+	$tmp = mods_key_binds_pos ('form1',$ord);
 	$tpl->append ('scripts',$tmp);
 
 	$ord->ingredients_arrays();
@@ -512,8 +545,55 @@ function mods_list_pos($start_data,$letter='') {
 		$tmp = mods_list_add ($ord,$letter);
 		$tpl->assign ('add_list',$tmp);
 	}
+	
+	return 0;
 }
 
+function mods_key_binds_pos ($form, $ord) {
+	$output = '
+<script language="JavaScript1.2">
+<!--
+	if(!document.all) {
+		window.captureEvents(Event.KEYUP);
+	} else {
+		document.onkeypress = keypressHandler;
+	}
+	function keypressHandler(e) {
+		var e;
+		if(document.all) { //it\'s IE
+			e = window.event.keyCode;
+		} else {
+			e = e.which;
+		}
+		
+		// key bindings
+		';
+		
+		// letters
+		$letters_arr=mods_letter_array($ord);
+		for ($i=65;$i<=90;$i++) {
+			$letter = chr($i);
+			if(in_array($letter, $letters_arr, false)) {
+				$output .= '
+		if (e == '.$i.') getDishStartingByLetter(\''.$form.'\',\''.$letter.'\');';
+			}
+		}
+		
+		// numbers
+		for($i=1;$i<=$ord->data['quantity'];$i++) {
+			$j=$i+48;
+			$output .= '
+		if (e == '.$j.') select_one(\'form1\',\'data[quantity]\','.($i-1).');';
+		}
+		
+		$output .= '
+		// key bindings end
+	}
+	window.onkeyup = keypressHandler;
+//-->
+</script>';
+	return $output;
+}
 function mods_key_binds ($ord) {
 	$output = '
 <script language="JavaScript1.2">

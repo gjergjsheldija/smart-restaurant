@@ -666,7 +666,8 @@ button:hover.buttonDish {
 }
 
 #simplemodal-container {
-	height:450px; width:600px;	
+	height:450px; 
+	width:600px;	
 	background-color:#fff; 
 	border:3px solid #ccc;
 }
@@ -684,4 +685,9 @@ button:hover.buttonDish {
 }
 #simplemodal-container #basicModalContent {
 	padding:8px;
+}
+
+input.largerInput {
+	width: 25px;
+	height: 25px;
 }

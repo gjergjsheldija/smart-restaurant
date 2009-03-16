@@ -245,7 +245,7 @@ switch ($command){
 					elseif(isset($_REQUEST['letter'])) $letter=$_REQUEST['letter']{0};
 					else $letter='';
 					
-					mods_list ($start_data,$letter);
+					mods_list_pos ($start_data,$letter);
 				}
 				break;
 	case 'list':
