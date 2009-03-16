@@ -391,28 +391,11 @@ function navbar_form($form,$show_abort='') {
 }
 
 function navbar_form_pos($form,$show_abort='') {
-	$msg = '
-	<table>
-		<tr>
-			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
-			</td>
-			<td width=35>
-				<a href="orders.php?command=list"><img src="'.IMAGE_SOURCE.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64"></a>
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-			';
-	if(!empty($show_abort))
-		$msg .= '<a href="'.$show_abort.'"><img src="'.IMAGE_NO.'" alt="'.ucfirst(phr('NO')).'" border=0 width="64" height="64"></a>';
-
-	$msg .= '
-			</td>
-			<td width=35>
-				<a href="#" onclick="JavaScript:document.'.$form.'.submit(); return false;"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64"></a>
+	$msg .= '<table><tr>
+			<td>
+				<a href="#" onclick="modifyDishOrder(\''.$form.'\'); return false">
+					<img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64">
+				</a>
 			</td>
 		</tr>
 	</table>

@@ -785,7 +785,7 @@ class order {
 
 			// then we find the ingredient name
 			$ingr = new ingredient ($modingred);
-			$moddeddishname = $ingr -> name ($_SESSION['language']);
+			$moddeddishname = $ingr->name ($_SESSION['language']);
 
 			// say if it's added or subtracted
 			if ($arr['operation']==1) {
@@ -865,12 +865,12 @@ class order {
 				&& $arr['dishid']!=SERVICE_ID) {
 				$link = 'orders.php?command=listmods&amp;data[id]='.$orderid;
 				$output .= '
-				<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">'.$dishname.'</a></td>';
+				<td onclick="loadModal(\''.$link.'\');">'.$dishname.'</td>';
 			} elseif(!$deleted
 				&& $arr['printed']==NULL
 				&& $arr['dishid']==MOD_ID) {
 				$link = 'orders.php?command=listmods&amp;data[id]='.$arr['associated_id'];
-				$output .= '<td onclick="redir(\''.$link.'\');"><a href="'.$link.'">'.$dishname.'</a></td>';
+				$output .= '<td onclick="loadModal(\''.$link.'\');">'.$dishname.'</td>';
 			} else {
 				$output .= '<td>'.$dishname.'</td>';
 			}

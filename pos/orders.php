@@ -222,29 +222,25 @@ switch ($command){
 				
 				if(!isset($_SESSION['go_back_to_cat'])) $_SESSION['go_back_to_cat']=0;
 				
-				mods_list ($start_data,$letter);
+				mods_list_pos ($start_data,$letter);
 				break;
 	case 'mod_set':
 				$err = mods_set ($start_data);
 				status_report ('MODS_SETTING',$err);
 
 				if($_REQUEST['last']) {
-											echo "-----IF";
 					$last_mod = order_get_last_modified();
 					if($last_mod && isset($_SESSION['go_back_to_cat']) && $_SESSION['go_back_to_cat']) {
 						$ord = new order ((int) $last_mod);
-						echo "-----IF inside";
-						$dish = new dish ($ord ->  data['dishid']);
-						$list['category'] = $dish -> data['category'];
-						$list['priority'] = $ord -> data['priority'];
+						$dish = new dish ($ord->data['dishid']);
+						$list['category'] = $dish->data['category'];
+						$list['priority'] = $ord->data['priority'];
 						
 						dish_list_pos($list);
 					} else {
-												echo "-----else inside";
-						orders_list_pos ();
+						orders_list_pos (true);
 					}
 				} else {
-											echo "-----IF";
 					if(isset($_REQUEST['letter']) && $_REQUEST['letter']=='ALL') $letter='ALL';
 					elseif(isset($_REQUEST['letter'])) $letter=$_REQUEST['letter']{0};
 					else $letter='';

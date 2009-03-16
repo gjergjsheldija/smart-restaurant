@@ -473,6 +473,46 @@ function mods_list($start_data,$letter='') {
 		$tpl -> assign ('add_list',$tmp);
 	}
 }
+function mods_list_pos($start_data,$letter='') {
+	global $tpl;
+	
+	$_SESSION['order_added']=0;
+
+	$tpl->set_waiter_template_file ('modslist_pos');
+
+	$tmp = navbar_form_pos('form1','orders.php?command=list');
+	$tpl->assign ('navbar',$tmp);
+	
+	$tmp=(int) $start_data['id'];
+	if(!$ord = new order($tmp)) return 1;
+	
+	$tmp = mods_form_start ($ord);
+	$tpl->assign ('form_start',$tmp);
+	
+	$tmp = "</FORM>\n";
+	$tpl->assign ('form_end',$tmp);
+
+	$tmp = mods_quantity ($ord);
+	$tpl->assign ('mod_quantity',$tmp);
+
+	$tmp =mods_letter_list ($ord);
+	$tpl->assign ('mod_letters',$tmp);
+
+	$tmp = mods_key_binds ($ord);
+	$tpl->append ('scripts',$tmp);
+
+	$ord->ingredients_arrays();
+	
+	if(!empty($ord->ingredients['contained'])) {
+		$tmp = mods_list_delete ($ord);
+		$tpl->assign ('delete_list',$tmp);
+	}
+	
+	if(!empty($ord->ingredients['available'])) {
+		$tmp = mods_list_add ($ord,$letter);
+		$tpl->assign ('add_list',$tmp);
+	}
+}
 
 function mods_key_binds ($ord) {
 	$output = '
