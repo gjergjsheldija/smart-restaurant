@@ -678,8 +678,8 @@ button:hover.buttonDish {
 	display:inline; 
 	z-index:3200; 
 	position:absolute; 
-	top:-32px; 
-	right:-32px;
+	top:0px; 
+	right:10px;
 	cursor:pointer;
 }
 #simplemodal-container #basicModalContent {

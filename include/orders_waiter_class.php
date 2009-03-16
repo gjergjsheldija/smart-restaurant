@@ -789,21 +789,21 @@ class order {
 
 			// say if it's added or subtracted
 			if ($arr['operation']==1) {
-				$dishname="&nbsp;&nbsp;&nbsp;&nbsp; ".ucfirst(phr('PLUS'));
+				$dishname="".ucfirst(phr('PLUS'));
 			} elseif ($arr['operation']==-1) {
-				$dishname="&nbsp;&nbsp;&nbsp;&nbsp; ".ucfirst(phr('MINUS'));
+				$dishname="".ucfirst(phr('MINUS'));
 			} elseif ($arr['operation']==0) {
-				$dishname="&nbsp;&nbsp;&nbsp;&nbsp; ";
+				$dishname="";
 			}
-
-			$dishname.=" ".$moddeddishname;
 
 			// and finally consider any optional info (lot/few)
 			if($arr['ingred_qty']==1) {
-				$dishname.=" ".ucfirst(phr('LOT'));
+				$dishname.='<img src="../images/up.png" height="16" width="16" border="0">';
 			} elseif($arr['ingred_qty']==-1) {
-				$dishname.=" ".ucfirst(phr('FEW'));
+				$dishname.='<img src="../images/down.png" height="16" width="16" border="0">';
 			}
+
+			$dishname.=" ".$moddeddishname;
 
 			// gets the original ingred price (from ingreds table)
 			// if the original price is 0 and the actual price is 0
@@ -812,7 +812,7 @@ class order {
 			$modingredprice = $ingr->get ('price');
 			//$modingredprice=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],"ingreds","price",$modingred);
 			if($modingredprice==0 && $arr['price']!=0) {
-				$dishname.=" (auto)";
+				$dishname.="(auto)";
 			}
 		}
 
