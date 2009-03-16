@@ -203,7 +203,7 @@ switch ($command){
 				orders_list_pos (true);
 				break;
 	case 'ask_substitute':
-				orders_ask_substitute ($start_data);
+				orders_ask_substitute_pos ($start_data);
 				break;
 	case 'substitute':
 				$saved_data = orders_get_data ($start_data);

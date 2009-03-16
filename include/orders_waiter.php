@@ -599,6 +599,32 @@ function orders_ask_substitute ($start_data) {
 	</form>';
 	$tpl -> assign ('question',$tmp);
 }
+function orders_ask_substitute_pos ($start_data) {
+	global $tpl;
+
+	$tpl -> set_waiter_template_file ('question_pos');
+
+	$tmp = navbar_form('form1','orders.php?command=list');
+	$tpl -> assign ('navbar',$tmp);
+
+	$ord = new order ((int) $start_data['id']);
+
+	if ($ord -> data['dishid'] == SERVICE_ID) $dishname = ucfirst(phr('SERVICE_FEE'));
+	else {
+		$dish = new dish ($ord -> data['dishid']);
+		$dishname = $dish -> name ($_SESSION ['language']);
+	}
+
+	$tmp = '
+	<form action="orders.php" method="post" name="form1">
+	<input type="hidden" name="command" value="substitute">
+	<input type="hidden" name="data[id]" value="'.$start_data['id'].'">
+	'.ucfirst(phr('SUBSTITUTE_ASK')).'<br/>
+	<b>'.$dishname.'</b>
+	
+	</form>';
+	$tpl -> assign ('question',$tmp);
+}
 
 function orders_get_data ($start_data) {
 	$id = (int) $start_data['id'];
@@ -626,6 +652,8 @@ function orders_edit_pos ($start_data,$fee_destroyer=false) {
 
 	orders_edit_printed_info ($ord);
 
+	//gjergji : don't need subsitute because it 
+	//shotcuts to delete
 	if($ord->data['dishid'] != SERVICE_ID) orders_edit_substitute ($ord);
 
 	if($ord->data['dishid'] != SERVICE_ID && $ord->data['printed']) {
