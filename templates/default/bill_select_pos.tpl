@@ -1,26 +1,33 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<META name="HandheldFriendly" content="True">
-{head}
-</head>
-<body>
-{scripts}
-<center>
-  {people_number}
-  {messages}
-  <table>
-  	<tr colspan="2"><td><div align="left">{navbar}</div></td></tr>
-    <tr>
-      <td><div align="left"> {method} </div></td>
-      <td><div align="left"> {type} </div></td>
-    </tr>
-    <tr>
-      <td>{discount} </td>
-      <td> {orders} </td>
-    </tr>
-  </table>
-  <dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
-</center>
-</body>
-</html>
+<div>
+	{script}
+	<a class="modalCloseImg simplemodal-close" title="Close"></a>
+	  <table>
+	  	<tr><td>{navbar}</td></tr>
+	  </table>	
+	<center>
+	  <div id="header">
+	    <div id="tabsAndContent">
+	      <ul id="tabsNav">
+	        <li><a href="#orders">orders</a></li>	      	
+	        <li><a href="#method">method</a></li>
+	        <li><a href="#type">type</a></li>
+	        <li><a href="#discount">discount</a></li>
+	      </ul>
+	      <ul id="tabContent">
+	        <li id="orders">
+				{orders}
+	        </li>     	      	
+	        <li id="method">
+				{method}
+	        </li>
+	        <li id="type">
+				{type}
+	        </li>
+	        <li id="discount">
+				{discount}
+	        </li>   
+	      </ul>
+	    </div>
+	  </div>	  
+	</center>
+</div>

@@ -212,7 +212,7 @@ function table_closed_interface_pos() {
 		return 0;
 	}
 	
-	$tpl -> set_waiter_template_file ('closed_table');
+	$tpl->set_waiter_template_file ('closed_table');
 	
 	$paid=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'sources',"paid",$_SESSION['sourceid']);
 	$total=table_total($_SESSION['sourceid']);
@@ -228,7 +228,7 @@ function table_closed_interface_pos() {
 	$tmp = navbar_tables_only_pos();
 	$user = new user($_SESSION['userid']);
 	if($user->level[USER_BIT_CASHIER]) $tmp = navbar_empty_pos();
-	$tpl -> assign ('navbar',$tmp);
+	$tpl->assign ('navbar',$tmp);
 	
 	$tmp = '
 		'.ucfirst(phr('TABLE_TOTAL_DISCOUNTED')).': <b>'.country_conf_currency(true).' '.$total.'</b>
@@ -239,7 +239,7 @@ function table_closed_interface_pos() {
 		 ('.ucfirst(phr('DISCOUNT')).': '.country_conf_currency(true).' '.$discount.')';
 	}
 	$tmp .= '<br />'."\n";
-	$tpl -> assign ('total',$tmp);
+	$tpl->assign ('total',$tmp);
 
 	if($paid){
 		$tmp = '
@@ -276,7 +276,7 @@ function table_closed_interface_pos() {
 	$tmp .= '
 		</FORM>';
 	$tmp .= '<br />'."\n";
-	$tpl -> assign ('pay',$tmp);
+	$tpl->assign ('pay',$tmp);
 
 	return 0;
 }

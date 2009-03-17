@@ -870,10 +870,25 @@ function bill_select_pos(){
 		return 0;
 	}
 	
-	$tpl -> set_waiter_template_file ('bill_select_pos');
+	$tpl->set_waiter_template_file ('bill_select_pos');
 
+	$script = "<script language=\"JavaScript\" type=\"text/javascript\">
+		$(document).ready(function(){
+		$('#tabContent>li:gt(0)').hide();
+		$('#tabsNav li:first').addClass('active');
+		$('#tabsAndContent #tabsNav li').bind('click', function() {
+			$('li.active').removeClass('active');
+			$(this).addClass('active');
+			var target = $('a', this).attr('href');
+			$(target).slideDown(\"fast\").siblings().slideUp(\"fast\");
+			return false;
+		});
+	});	
+	</script>";
+	$tpl->assign ('script',$script);
+	
 	$tmp = navbar_form_pos('form_type','orders.php?command=printing_choose');
-	$tpl -> assign ('navbar',$tmp);
+	$tpl->assign ('navbar',$tmp);
 
 	$_SESSION['bill_printed']=0;
 	if(order_found_generic_not_priced($_SESSION['sourceid'])) return ERR_GENERIC_ORDER_NOT_PRICED_FOUND;

@@ -691,3 +691,83 @@ input.largerInput {
 	width: 25px;
 	height: 25px;
 }
+
+/*--------------------------------------------------
+	styles for bill tabs
+  --------------------------------------------------*/
+
+#tabsAndContent ul, #tabsAndContent li{
+	padding: 0
+}
+
+ul#tabsNav{
+	float: left;
+	width: 200px;
+	list-style: none;
+}
+
+ul#tabsNav li{
+	background: url(images/tabsNavBg.png) no-repeat center #a8a8a8;
+}
+
+ul#tabsNav li:hover{
+	background: url(images/tabsNavHover.png) no-repeat center #eee;
+}
+
+ul#tabsNav *:focus {
+	 outline: none
+}
+
+ul#tabsNav li.active{
+	background: url(images/tabsNavActive.png) no-repeat center #fff;
+}
+
+ul#tabsNav li.active a{
+	color: #303030;
+}
+
+ul#tabsNav li a{
+	padding: 1em 15px;
+	margin: 0 0 1em 0;
+	display: block;
+	width: 170px;
+	text-decoration: none;
+	color: #7e7e7e;
+	font: 11px/20px Georgia;
+	text-transform: uppercase;
+}
+
+ul#tabsNav a:hover{
+	color: #0a0a0a
+}
+
+ul#tabContent{
+	margin: 1em 0 0;
+	background: url(images/tabContent.png) no-repeat top right#fff;
+	min-height: 180px;
+	width: 350px;
+	float: left;
+	list-style: none;
+	padding: 0 25px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+#tabContent>li{
+	width: 350px;
+	list-style: none;
+	padding: 0 25px 20px 0;
+}
+
+#tabContent li ul li{
+	list-style: none;
+}
+
+#tabContent li ul li a{
+	display: block;
+	border-bottom: 1px solid #e7e7e7;
+	padding: 10px 0;
+}
+
+#tabContent li ul li a:hover{
+	background: url(images/tabContentHover.png) no-repeat center bottom;
+}
