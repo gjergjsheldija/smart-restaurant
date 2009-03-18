@@ -212,7 +212,6 @@ function discount_form_javascript($sourceid){
 				<input type="radio" name="discount_type" value="amount" onclick="JavaScript:discount_switch();" '.$chk[2].'>'.ucfirst(phr('VALUE')).' 
 				<INPUT TYPE="text" name="amount" size="4" maxlength="4" value="'.$amount.'" '.$dis[2].'>'.country_conf_currency (true).'<br />
 				<INPUT TYPE="button" onClick="applyDiscount(\'form_discount\')" value="'.ucfirst(phr('APPLY_DISCOUNT')).'"><br />
-				<!-- <INPUT TYPE="SUBMIT" value="'.ucfirst(phr('APPLY_DISCOUNT')).'"><br /> -->
 			</FORM>
 		</FIELDSET>
 	';

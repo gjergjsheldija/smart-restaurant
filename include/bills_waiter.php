@@ -874,16 +874,16 @@ function bill_select_pos($isAjax = false){
 
 	$script = "<script language=\"JavaScript\" type=\"text/javascript\">
 		$(document).ready(function(){
-		$('#tabContent>li:gt(0)').hide();
-		$('#tabsNav li:first').addClass('active');
-		$('#tabsAndContent #tabsNav li').bind('click', function() {
-			$('li.active').removeClass('active');
-			$(this).addClass('active');
-			var target = $('a', this).attr('href');
-			$(target).slideDown(\"fast\").siblings().slideUp(\"fast\");
-			return false;
-		});
-	});	
+			$('#tabContent>li:gt(0)').hide();
+			$('#tabsNav li:first').addClass('active');
+			$('#tabsAndContent #tabsNav li').bind('click', function() {
+				$('li.active').removeClass('active');
+				$(this).addClass('active');
+				var target = $('a', this).attr('href');
+				$(target).slideDown(\"fast\").siblings().slideUp(\"fast\");
+				return false;
+			});
+		});	
 	</script>";
 	$tpl->assign ('script',$script);
 	
@@ -900,7 +900,7 @@ function bill_select_pos($isAjax = false){
 	$tmp = bill_method_selector();
 	$tpl -> assign ('method',$tmp);
 	
-	$tmp = bill_type_selection($_SESSION['sourceid']);
+	$tmp = bill_type_selection_pos($_SESSION['sourceid']);
 	$tpl -> assign ('type',$tmp);
 	
 	$tmp = discount_form_javascript($_SESSION['sourceid']);
@@ -1077,6 +1077,64 @@ function bill_save_session($sourceid){
 }
 
 
+function bill_type_selection_pos($sourceid){
+	/*
+	sets the bill/invoice type in waiter's session environment
+	types:
+	1. bill
+	2. invoice
+	3. receipt
+	*/
+	for($i=1;$i<=3;$i++) $chk[$i]='';
+
+	if(isset($_SESSION['type'])){
+		$type=$_SESSION['type'];
+	} else {
+		$type=1; // if type is not set, it automatically sets it to 1;
+		if(table_is_takeaway($_SESSION['sourceid'])) {
+			$type=3; // if type is not set and table is takeaway type is set to 3;
+		}
+		$_SESSION['type']=$type;
+	}
+
+	// Next is a micro-form to set a discount in percent value
+	$output = '
+	<form action="orders.php" NAME="form_type" method=post>
+	<input type="hidden" name="command" VALUE="bill_print">
+	<INPUT TYPE="HIDDEN" NAME="keep_separated" VALUE="1">
+	<div align="center">
+		'.ucfirst(phr('ACCOUNT')).': 
+		<table>
+			<tr>
+				<td rowspan="3">'.ucfirst(phr('TYPE')).':</td>
+				<td><input type="radio" name="type" value="1" '.$chk[1].'> '.ucfirst(phr('BILL')).'</td></tr>
+			<tr>
+				<td><input type="radio" name="type" value="2" '.$chk[2].'> '.ucfirst(phr('INVOICE')).'</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="type" value="3" '.$chk[3].'> '.ucfirst(phr('RECEIPT')).'</td>
+			</tr>
+		</table>
+	</div>
+	</form>
+	';	
+
+	$table = new table ($_SESSION['sourceid']);
+	$table->fetch_data(true);
+	if($cust_id=$table->data['customer']) {
+		$cust = new customer ($cust_id);
+		$tmp = ucphr('CUSTOMER').': '.$cust->data['surname'];
+		$tmp .= ' <a href="orders.php?command=customer_search">'.ucphr('EDIT').'</a>/';
+		$tmp .= '<a href="orders.php?command=set_customer&amp;data[customer]=0">'.ucphr('REMOVE').'</a>';
+		$tmp .= '<br/>';
+	} else {
+		//$tmp = '<a href="orders.php?command=customer_search">'.ucfirst(phr('INSERT_CUSTOMER_DATA')).'</a><br/>';
+		$tmp = '<input type="text" size="20" value="" id="inputCustomer" onkeyup="lookupCustomer(this.value);" onblur="fillCustomer();" />';
+	}
+	$output .= $tmp;
+	
+	return $output;
+}
 function bill_type_selection($sourceid){
 	/*
 	sets the bill/invoice type in waiter's session environment
@@ -1103,18 +1161,18 @@ function bill_type_selection($sourceid){
 	<input type="hidden" name="command" VALUE="bill_print">
 	<INPUT TYPE="HIDDEN" NAME="keep_separated" VALUE="1">
 	<div align="center">
-	'.ucfirst(phr('ACCOUNT')).': 
-	';
-
-
-	$output .= '
-	<table>
-	<tr>
-	<td rowspan="3">'.ucfirst(phr('TYPE')).':</td>
-	<td><input type="radio" name="type" value="1" '.$chk[1].'> '.ucfirst(phr('BILL')).'</td></tr>
-	<tr><td><input type="radio" name="type" value="2" '.$chk[2].'> '.ucfirst(phr('INVOICE')).'</td></tr>
-	<tr><td><input type="radio" name="type" value="3" '.$chk[3].'> '.ucfirst(phr('RECEIPT')).'</td></tr>
-	</table>
+		'.ucfirst(phr('ACCOUNT')).': 
+		<table>
+			<tr>
+				<td rowspan="3">'.ucfirst(phr('TYPE')).':</td>
+				<td><input type="radio" name="type" value="1" '.$chk[1].'> '.ucfirst(phr('BILL')).'</td></tr>
+			<tr>
+				<td><input type="radio" name="type" value="2" '.$chk[2].'> '.ucfirst(phr('INVOICE')).'</td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="type" value="3" '.$chk[3].'> '.ucfirst(phr('RECEIPT')).'</td>
+			</tr>
+		</table>
 	</div>
 	</form>
 	';	

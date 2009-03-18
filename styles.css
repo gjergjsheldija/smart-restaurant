@@ -771,3 +771,34 @@ ul#tabContent{
 #tabContent li ul li a:hover{
 	background: url(images/tabContentHover.png) no-repeat center bottom;
 }
+
+/*--------------------------------------------------
+	autosuggestion box 
+  --------------------------------------------------*/
+ 
+.suggestionsBox {
+	position: relative;
+	width:300px;
+	font-weight:bold;
+	left: 0px;
+	margin: 10px 0px 0px 0px;
+	background-color: #e5e2be;
+	color: #000000;
+}
+
+.suggestionList {
+	width:300px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.suggestionList li {
+	margin: 0px 0px 3px 0px;
+	padding: 3px;
+	cursor: pointer;
+}
+
+.suggestionList li:hover {
+	background-color: #d4e5bd;
+}
+ 

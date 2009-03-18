@@ -23,6 +23,9 @@
 	        </li>
 	        <li id="type">
 				{type}
+				<div class="suggestionsBox" id="suggestions" style="display: none;">
+					<div class="suggestionList" id="autoSuggestionsList"> &nbsp; </div>
+				</div>
 	        </li>
 	        <li id="discount">
 				{discount}

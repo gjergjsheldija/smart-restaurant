@@ -36,6 +36,28 @@ class customer extends object {
 }
 
 
+function customer_search_page_pos($data) {
+	
+	global $tpl;
+	$tpl->cancelTeample();
+	//if(customer_recognize ($data)) return 0;
+	
+	//$tpl -> set_waiter_template_file ('standard');
+	
+	//$tmp = navbar_empty('orders.php');
+	//$tpl -> assign ('navbar',$tmp);
+	
+	//$tmp = '';
+	//$tmp .= customer_search_form();
+	//$tmp .= '
+	//<a href="orders.php?command=customer_insert_form">'.ucfirst(phr('INSERT_NEW')).'</a><br>
+	//';
+	$tmp = customer_list_pos($data);
+	//$tpl -> assign ('content',$tmp);
+	return $tmp;
+	//return 0;
+}
+
 function customer_search_page($data=array()) {
 	global $tpl;
 	
@@ -165,6 +187,40 @@ function customer_recognize ($term='') {
 	return 0;
 }
 
+function customer_list_pos($term='') {
+	global $tpl;
+	
+	$term=trim($term);
+	
+	$query = "SELECT * FROM `customers`";
+	if(!empty($term)) {
+		$query .= " WHERE `surname` LIKE '%$term%'";
+		$query .= " OR `phone` LIKE '%$term%'";
+		$query .= " OR `address` LIKE '%$term%'";
+		$query .= " OR `email` LIKE '%$term%'";
+		$query .= " OR `vat_account` LIKE '%$term%'";
+	}
+	$query .= " ORDER BY `surname` ASC";
+
+	$res=common_query($query,__FILE__,__LINE__);
+	if(!$res) return ERR_MYSQL;
+
+	if(!mysql_num_rows ($res)) {
+		$msg = ucphr('ERR_NO_CUSTOMER_FOUND');
+		$msg='<font color="Red">'.$msg.'</font>';
+		$tpl -> append ('messages',$msg);
+		return '';
+	}
+	while ($arr = mysql_fetch_array ($res)) {
+		$msg .= '
+		<li onClick="fillCustomer( \'orders.php?command=set_customer&data[takeaway_surname]='.$arr['surname'].'&data[customer]='.$arr['id'].'\', \''.$arr['name'].' '.$arr['surname'].' \' )">
+			'.$arr['name'].' '.$arr['surname'].'
+		</li>
+		';		
+	}
+
+	return $msg;
+}
 function customer_list($term='') {
 	global $tpl;
 	

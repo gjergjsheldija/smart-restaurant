@@ -316,10 +316,11 @@ switch ($command){
 				}
 				
 				if (isset($_SESSION['select_all'])) {
-					$err=bill_select_pos();
+					$err = bill_select_pos();
 					if($err) error_display($err);
-				} else orders_list_pos();
-				
+				} else { 
+					//orders_list_pos();
+				}
 				break;
 	case 'customer_insert_form':
 				customer_insert_page();
@@ -328,7 +329,7 @@ switch ($command){
 				customer_edit_page($start_data);
 				break;
 	case 'customer_search':
-				customer_search_page($start_data);
+				echo customer_search_page_pos($_REQUEST['queryString']);
 				break;
 	case 'customer_list':
 				customer_search_page();

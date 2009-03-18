@@ -295,7 +295,6 @@
 				
 				function modifyDishOrder ( formName ) {
 					 var formUrl = $("[name=" + formName + "]").serialize();
-					 alert(formUrl);
 					 $.ajax( {
 						type: "POST",
 						url: "orders.php",
@@ -363,6 +362,33 @@
 						})
 					});
 				}
+				
+				function lookupCustomer(inputCustomer) {
+					if(inputCustomer.length == 0) {
+						$("#suggestions").hide();
+					} else {
+						$.post("orders.php?command=customer_search", {queryString: ""+inputCustomer+""}, function(data){
+							if(data.length >0) {
+								$("#suggestions").show();
+								$("#autoSuggestionsList").html(data);
+							}
+						});
+					}
+				} 
+				
+				function fillCustomer(thisValue, customer) {
+					//alert(thisValue);
+					//alert(customer);
+					$.ajax( {
+						type: "POST",
+						url: thisValue,
+						success: function ( html ) {			
+							$("#inputCustomer").val(customer);
+							setTimeout("$(\'#suggestions\').hide();", 200);
+						}
+					} );
+				}	
+							
 				</script>'; 
 	
 	$tpl->append("scripts", $scripts);
