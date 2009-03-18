@@ -208,7 +208,7 @@ class table extends object {
 	
 	function list_orders_only_pos($orderid=0,$mods=false) {
 		global $tpl;
-		$tpl->cancelTeample();
+		$tpl->clearTemplate();
 		
 		if($this->is_empty()) return 1;
 

@@ -39,7 +39,7 @@ class customer extends object {
 function customer_search_page_pos($data) {
 	
 	global $tpl;
-	$tpl->cancelTeample();
+	$tpl->clearTemplate();
 	//if(customer_recognize ($data)) return 0;
 	
 	//$tpl -> set_waiter_template_file ('standard');

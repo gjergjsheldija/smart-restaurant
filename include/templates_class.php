@@ -204,7 +204,7 @@ class template {
 		$output .= '<hr/>'."\n";
 		echo $output;
 	}
-	function cancelTeample () {
+	function clearTemplate () {
 		$this->filename = '';
 		$this->var = ''; 
 	}
