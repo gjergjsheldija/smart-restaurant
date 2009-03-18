@@ -295,6 +295,7 @@
 				
 				function modifyDishOrder ( formName ) {
 					 var formUrl = $("[name=" + formName + "]").serialize();
+					 alert(formUrl);
 					 $.ajax( {
 						type: "POST",
 						url: "orders.php",
@@ -304,6 +305,21 @@
 							$.modal.close();
 						}
 					} );
+					return false;
+				}
+				
+				function applyDiscount ( formName ) {
+					var formUrl = $("[name=" + formName + "]").serialize();
+					var pageurl = "orders.php?" +  formUrl;
+					$.modal.close();
+					$.get(pageurl,  
+						function(returned_data){
+							$(returned_data).modal({
+								close: false,
+								position: ["15%",],
+								onClose: function (dialog) {$.modal.close();}
+						})
+					});
 					return false;
 				}
 								

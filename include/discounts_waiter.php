@@ -199,21 +199,22 @@ function discount_form_javascript($sourceid){
 						break;
 
 	}
-	// Next is a micro-form to set a sicount in percent value
+	// Next is a micro-form to set a discount in percent value
 	$output .= '
-	<FIELDSET>
-	<LEGEND>'.ucfirst(phr('DISCOUNT')).'</LEGEND>
-	<FORM ACTION="orders.php" NAME="form_discount" METHOD=POST>
-	<INPUT TYPE="HIDDEN" NAME="command" VALUE="bill_discount">
-	<INPUT TYPE="HIDDEN" NAME="keep_separated" VALUE="1">
-	<input type="radio" name="discount_type" value="none" onclick="JavaScript:discount_switch();" '.$chk[0].'>'.ucfirst(phr('NONE')).'<br />
-	<input type="radio" name="discount_type" value="percent" onclick="JavaScript:discount_switch();" '.$chk[1].'>
-	'.ucfirst(phr('PERCENTUAL')).' <INPUT TYPE="text" name="percent" size="2" maxlength="2" value="'.$percent.'" '.$dis[1].'>% <br />
-	<input type="radio" name="discount_type" value="amount" onclick="JavaScript:discount_switch();" '.$chk[2].'>'.ucfirst(phr('VALUE')).' <INPUT TYPE="text" name="amount"
-	size="4" maxlength="4" value="'.$amount.'" '.$dis[2].'>'.country_conf_currency (true).'<br />
-	<INPUT TYPE="SUBMIT" value="'.ucfirst(phr('APPLY_DISCOUNT')).'"><br />
-	</FORM>
-	</FIELDSET>
+		<FIELDSET>
+			<LEGEND>'.ucfirst(phr('DISCOUNT')).'</LEGEND>
+			<FORM ACTION="orders.php" NAME="form_discount" METHOD="POST">
+				<INPUT TYPE="HIDDEN" NAME="command" VALUE="bill_discount">
+				<INPUT TYPE="HIDDEN" NAME="keep_separated" VALUE="1">
+				<input type="radio" name="discount_type" value="none" onclick="JavaScript:discount_switch();" '.$chk[0].'>'.ucfirst(phr('NONE')).'<br />
+				<input type="radio" name="discount_type" value="percent" onclick="JavaScript:discount_switch();" '.$chk[1].'>
+				'.ucfirst(phr('PERCENTUAL')).' <INPUT TYPE="text" name="percent" size="2" maxlength="2" value="'.$percent.'" '.$dis[1].'>% <br />
+				<input type="radio" name="discount_type" value="amount" onclick="JavaScript:discount_switch();" '.$chk[2].'>'.ucfirst(phr('VALUE')).' 
+				<INPUT TYPE="text" name="amount" size="4" maxlength="4" value="'.$amount.'" '.$dis[2].'>'.country_conf_currency (true).'<br />
+				<INPUT TYPE="button" onClick="applyDiscount(\'form_discount\')" value="'.ucfirst(phr('APPLY_DISCOUNT')).'"><br />
+				<!-- <INPUT TYPE="SUBMIT" value="'.ucfirst(phr('APPLY_DISCOUNT')).'"><br /> -->
+			</FORM>
+		</FIELDSET>
 	';
 	return $output;
 }

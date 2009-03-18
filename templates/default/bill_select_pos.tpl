@@ -1,4 +1,5 @@
 <div>
+	<div id="orders_response" style="height:100%">
 	{script}
 	<a class="modalCloseImg simplemodal-close" title="Close"></a>
 	  <table>
@@ -30,4 +31,5 @@
 	    </div>
 	  </div>	  
 	</center>
+	</div>
 </div>

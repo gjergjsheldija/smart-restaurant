@@ -34,7 +34,7 @@ require_once(ROOTDIR."/pos/waiter_start.php");
 
 $GLOBALS['end_require_time']=microtime();
 
-//mizuko : ctrl 2 users not on the same table
+//gjergj : ctrl 2 users not on the same table
 $tbl = new table ($_SESSION['sourceid']);
 if($tbl->data ['userid'] != $_SESSION['userid'] && $tbl->data ['userid'] != '0'){
 	$user = new user($_SESSION['userid']);
@@ -46,7 +46,7 @@ if($tbl->data ['userid'] != $_SESSION['userid'] && $tbl->data ['userid'] != '0')
 	$error_msg .= common_bottom();
 	die($error_msg);
 }
-//end : mizuko
+//end : gjergj
 
 if(!access_allowed(USER_BIT_WAITER) && !access_allowed(USER_BIT_CASHIER)) {
 	$command='access_denied';
@@ -363,7 +363,7 @@ switch ($command){
 
 				status_report ('DISCOUNT',$err);
 
-				$err = bill_select_pos();
+				$err = bill_select_pos(true);
 				if($err) error_display($err);
 				break;
 	case 'bill_quantity':
@@ -385,7 +385,7 @@ switch ($command){
 				break;
 	case 'bill_print':
 				if(isset($_REQUEST['type'])) $type=$_REQUEST['type'];
-				
+
 				if(!bill_type_set($type) ) {
 					$err = bill_print();
 					

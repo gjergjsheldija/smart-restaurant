@@ -852,7 +852,7 @@ function bill_select(){
 	return 0;
 }
 
-function bill_select_pos(){
+function bill_select_pos($isAjax = false){
 	/*
 	name:
 	bill_select_pos()
