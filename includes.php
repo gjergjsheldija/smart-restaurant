@@ -43,7 +43,7 @@ include_once(ROOTDIR."/manage/mgmt_funs_printable.php");
 include_once(ROOTDIR."/manage/mgmt_funs_account.php");
 include_once(ROOTDIR."/manage/mgmt_funs_stock.php");
 
-include_once(ROOTDIR."/xtemplate/xtpl.php");
+include_once(ROOTDIR."/xtemplate/xtemplate.class.php");
 
 // includes all the files in include dir
 clearstatcache();
