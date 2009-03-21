@@ -139,7 +139,7 @@ function get_user_unit ($type) {
 	return '';
 }
 /**
- *@author:mizuko
+ *@author:gjergj
  * converted quantity
  */
 function convert_units ($eq, $dest_unit='') {

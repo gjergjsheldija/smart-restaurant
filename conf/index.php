@@ -78,10 +78,6 @@ $title='Smart Restaurant - Configuration';
 	<link rel="stylesheet" href="<?php echo CONF_CSS_URL; ?>" type="text/css">
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta http-equiv="Expires" content="0">
-	
-	<!-- Using a linked stylesheet -->
-	<link rel="STYLESHEET" type="text/css" href="../coolmenu.css">
-	<script type="text/javascript" language="JavaScript1.2" src="../coolmenus4.js">
 	</script>
 	</head>
 	

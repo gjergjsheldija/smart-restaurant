@@ -275,23 +275,6 @@ if(!$header_printed){
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta http-equiv="Expires" content="0">
 	<script type="text/javascript" language="JavaScript" src="<?php echo $jsurl; ?>"></script>
-	<link rel="stylesheet" href="<?php echo ROOTDIR.'/styles.css.php'; ?>" type="text/css">
-
-	<!-- calendar stylesheet -->
-	<link rel="stylesheet" type="text/css" media="all" href="../jscalendar/calendar-blue.css" title="winter" />
-	<!-- main calendar program -->
-	<script type="text/javascript" src="../jscalendar/calendar.js"></script>
-	<!-- language for the calendar -->
-	<script type="text/javascript" src="<?php echo $cal_lang_file; ?>"></script>
-	<!-- the following script defines the Calendar.setup helper function, which makes
-	adding a calendar a matter of 1 or 2 lines of code. -->
-	<script type="text/javascript" src="../jscalendar/calendar-setup.js"></script>
-
-	
-	
-	<!-- Using a linked stylesheet -->
-	<link rel="STYLESHEET" type="text/css" href="../coolmenu.css">
-	<script type="text/javascript" language="JavaScript1.2" src="../coolmenus4.js">
 	</script>
 	</head>
 <?php if(!isset($_GET['print'])) { ?>

@@ -23,8 +23,10 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
+* @author		Gjergj Sheldija <gjergj.sheldija@gmail.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright		Copyright 2006-2009, Gjergj Sheldija
 */
 
 require_once(ROOTDIR."/funs_common.php");

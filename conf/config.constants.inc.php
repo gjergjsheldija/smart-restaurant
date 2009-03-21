@@ -97,7 +97,7 @@ define('LANG_TABLES_NUMBER',7);			// The number of tables added per language to 
 define('LANG_FILES_NUMBER',1);			// The number of files added per language to the lang dir
 
 define('AUTOSELECT_FIRST',0);			// if 1: selects the first item in mods' quantity to be modified
-						// else selects the last item in mods' quantity to be modified
+										// else selects the last item in mods' quantity to be modified
 
 
 // if yes checks for translation problems in the tables every time the translators page is loaded (heavy CPU load).
