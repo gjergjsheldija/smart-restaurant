@@ -212,7 +212,7 @@ function table_closed_interface_pos() {
 		return 0;
 	}
 	
-	$tpl->set_waiter_template_file ('closed_table');
+	$tpl->set_waiter_template_file ('closed_table_pos');
 	
 	$paid=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'sources',"paid",$_SESSION['sourceid']);
 	$total=table_total($_SESSION['sourceid']);

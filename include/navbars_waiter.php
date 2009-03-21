@@ -23,6 +23,7 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
+* @author		Gjergj Sheldija <gjergj.sheldija@gmail.com> 
 * @package		MyHandyRestaurant
 * @copyright	Copyright 2003-2005, Fabio De Pascale
 */
@@ -403,6 +404,18 @@ function navbar_form_pos($form,$show_abort='') {
 	return $msg;
 }
 
+function navbar_separatebills_pos($form,$show_abort='') {
+	$msg .= '<table><tr>
+			<td>
+				<a href="#" onclick="separatedBills(\''.$form.'\'); return false">
+					<img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('BACK_TO_TABLE')).'" border=0 width="64" height="64">
+				</a>
+			</td>
+		</tr>
+	</table>
+	';
+	return $msg;
+}
 function command_bar_table_horizontal(){
 	$output = '
 	<table>

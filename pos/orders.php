@@ -397,13 +397,14 @@ switch ($command){
 					}
 				}
 				
-				$err = table_pay_pos($start_data['paid']);
+/*				$err = table_pay_pos($start_data['paid']);
 				status_report ('PAYMENT',$err);
 				
 				$err = table_clear();
 				status_report ('CLEARING',$err);				
 				
-				table_cleared_interface_pos();				
+				table_cleared_interface_pos();		*/
+				bill_select_pos();		
 				break;
 	case 'bill_reset':
 				if(isset($_REQUEST['reset'])){
@@ -461,6 +462,7 @@ switch ($command){
 	case 'close':
 				$err = table_close($_SESSION['sourceid']);
 				status_report ('CLOSE',$err);
+
 				if (!$err) {
 					table_closed_interface_pos();
 				} else {

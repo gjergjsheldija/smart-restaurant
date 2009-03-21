@@ -132,8 +132,10 @@ function write_log_item($item_id,$quantity,$price,$receipt_id) {
 }
 
 function bill_check_keep_separated(){
-	if(isset($_REQUEST['keep_separated'])) $keep_separated=$_REQUEST['keep_separated'];
-	else $keep_separated=0;
+	if(isset($_REQUEST['keep_separated'])) 
+		$keep_separated=$_REQUEST['keep_separated'];
+	else 
+		$keep_separated=0;
 
 	if(!$keep_separated){
 		unset($_SESSION['separated']);
@@ -852,7 +854,7 @@ function bill_select(){
 	return 0;
 }
 
-function bill_select_pos($isAjax = false){
+function bill_select_pos(){
 	/*
 	name:
 	bill_select_pos()
@@ -887,14 +889,20 @@ function bill_select_pos($isAjax = false){
 	</script>";
 	$tpl->assign ('script',$script);
 	
-	$tmp = navbar_form_pos('form_type','orders.php?command=printing_choose');
-	$tpl->assign ('navbar',$tmp);
-
 	$_SESSION['bill_printed']=0;
 	if(order_found_generic_not_priced($_SESSION['sourceid'])) return ERR_GENERIC_ORDER_NOT_PRICED_FOUND;
 
 	$keep_separated = bill_check_keep_separated();
-
+	
+	if($keep_separated == 1) {
+		$tmp = navbar_separatebills_pos('form_type','orders.php?command=printing_choose');
+		$tpl->assign ('navbar',$tmp);
+	} else {
+		$tmp = navbar_form_pos('form_type','orders.php?command=printing_choose');
+		$tpl->assign ('navbar',$tmp);		
+	}
+	
+	
 	if($err=bill_clear_prices($_SESSION['sourceid'])) return $err;
 	if($err=bill_save_session($_SESSION['sourceid'])) return $err;
 	$tmp = bill_method_selector();
@@ -919,7 +927,7 @@ function bill_method_selector(){
 		<a href="orders.php?sourceid='.$_SESSION['sourceid'].'&amp;command=bill_select_all">'.ucfirst(phr('SELECT_ALL')).'</a>'."\n";
 	} else {
 		$output = '
-		<a href="orders.php?command=bill_select">'.ucfirst(phr('SEPARATED_BILLS')).'</a>'."\n";
+		<a href="#" onClick="$.modal.close();loadModal(\'orders.php?command=bill_select\');">'.ucfirst(phr('SEPARATED_BILLS')).'</a>'."\n";
 	}
 	return $output;
 }
@@ -988,9 +996,10 @@ function bill_show_list(){
 		';
 		if(!$_SESSION['separated'][$key]['special'] && !$_SESSION['select_all']){
 			if($_SESSION['separated'][$key]['topay']<$_SESSION['separated'][$key]['max_quantity']){
-				$output .= '<a href="orders.php?command=bill_quantity&amp;keep_separated=1&amp;orderid='.$key.'&amp;operation=1&amp;rndm='.rand(0,100000).'">
-		<img src="'.IMAGE_PLUS.'" alt="'.ucfirst(phr('PLUS')).' ('.ucfirst(phr('ADD')).')" border=0>
-		</a>';
+				$output .= '
+				<a href="#" onClick="$.modal.close();loadModal(\'orders.php?command=bill_quantity&keep_separated=1&orderid='.$key.'&operation=1&rndm='.rand(0,100000).'\');">
+					<img src="'.IMAGE_PLUS.'" alt="'.ucfirst(phr('PLUS')).' ('.ucfirst(phr('ADD')).')" border=0>
+				</a>';
 			}
 		}
 		$output .= '
@@ -999,9 +1008,10 @@ function bill_show_list(){
 		';
 		if(!$_SESSION['separated'][$key]['special'] && !$_SESSION['select_all']){
 			if($_SESSION['separated'][$key]['topay']>0){
-				$output .= '<a href="orders.php?command=bill_quantity&amp;keep_separated=1&amp;orderid='.$key.'&amp;operation=-1&amp;rndm='.rand(0,100000).'">
-		<img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('ADD')).')" border=0>
-		</a>';
+				$output .= '
+				<a href="#" onClick="$.modal.close();loadModal(\'orders.php?command=bill_quantity&amp;keep_separated=1&amp;orderid='.$key.'&amp;operation=-1&amp;rndm='.rand(0,100000).'\');">
+					<img src="'.IMAGE_MINUS.'" alt="'.ucfirst(phr('MINUS')).' ('.ucfirst(phr('ADD')).')" border=0>
+				</a>';
 			}
 		}
 		$output .= '

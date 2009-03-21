@@ -307,6 +307,24 @@
 					return false;
 				}
 				
+				function separatedBills ( formName ) {
+					 var formUrl = $("[name=" + formName + "]").serialize();
+					 $.ajax( {
+						type: "POST",
+						url: "orders.php",
+						data : formUrl,
+						success: function ( html ) {	
+							$.modal.close();
+							$(html).modal({
+								close: false,
+								position: ["15%",],
+								onClose: function (dialog) {$.modal.close();}
+							})
+						}
+					});
+					return false;
+				}
+								
 				function applyDiscount ( formName ) {
 					var formUrl = $("[name=" + formName + "]").serialize();
 					var pageurl = "orders.php?" +  formUrl;
