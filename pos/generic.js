@@ -1,3 +1,8 @@
+function redir(url) { 
+	document.location.href=url; 
+	return false; 
+} 
+
 function type_insert_check(form_name,elem_name,id){
 	doc_form=eval("document."+form_name+'.'+elem_name);
 	doc_form[id].checked=true;

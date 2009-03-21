@@ -29,13 +29,13 @@
   --------------------------------------------------*/
   
 *{
-	font: 12,5px "Lucida Grande", Verdana, Verdana, Arial, Helvetica, sans-serif;
+	font: 12.5px "Lucida Grande", Verdana, Verdana, Arial, Helvetica, sans-serif;
 }
 
 body {
 	background-color: #ffffff;
 	font-family: sans-serif, arial, verdana;
-	font-size: 12,5px;
+	font-size: 12.5px;
 	color: #333;
 	margin: 0 auto;
 	padding: 0;
@@ -367,7 +367,6 @@ a.CategoryElement{
 	 line-height:39px;
 	 margin-bottom:5px;     
      text-decoration: none;
-	 text-align:center;
      color: #40740D;
      -moz-border-radius-bottomleft: 5px;
      -moz-border-radius-bottomright: 5px;
@@ -401,7 +400,7 @@ a:hover.CategoryElement{
 	font-weight: bold;
 	color: #000000;	
 	font-family: sans-serif;	
-	font-size: 12,5px;		
+	font-size: 12.5px;		
 }
 
 /*--------------------------------------------------
@@ -448,7 +447,6 @@ button:hover.buttonDish {
      position: relative;
      cursor: pointer;
      display: inline-block;
-     height: 100%
      text-decoration: none;
 	 text-align:center;
 	 font-weight:800;

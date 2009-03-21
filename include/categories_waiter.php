@@ -124,7 +124,7 @@ function categories_list_pos($data=''){
 		
 		$output .= '
 			<a class="CategoryElement" href="#" onclick="loadDish(\''.$link.'\');return(false);">
-				<span style="text-indent:64px;display:block;background:url(' . $catimg . ') no-repeat 1px 3px;">
+				<span style="text-indent:64px;display:block;height:100%;background:url(' . $catimg . ') no-repeat 1px 3px;">
 					<strong>'.$name.'</strong>
 				</span>
 			</a>
