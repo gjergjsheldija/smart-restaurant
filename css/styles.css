@@ -24,6 +24,10 @@
  * 
  */
 
+/*--------------------------------------------------
+	home / pos login 
+  --------------------------------------------------*/
+  
 *{
 	font: 12,5px "Lucida Grande", Verdana, Verdana, Arial, Helvetica, sans-serif;
 }
@@ -100,97 +104,6 @@ dd {
 	margin: 0 0 5px 80px;
 }
 
-.aligncenter {
-	align: center;
-}
-
-.modified {
-	font-size: smaller;
-}
-
-.color_table_cell {
-	height: 15px;
-	width: 15px;
-}
-
-.mgmt_main_table {
-	background: #FFCA68;
-	border: 0px;
-}
-
-.mgmt_main_table tbody {
-	height: 350px;
-	overflow: auto;
-}
-
-.mgmt_main_table tbody tr {
-	height: 1em;
-}
-
-.mgmt_printable_table {
-	background: #AAAAAA;
-	border: 0px #000 solid background: #eee;
-	font-size: 10 pt;
-}
-
-.break {
-	page-break-before: always;
-}
-
-.mgmt_printable_tablebg {
-	border: 0px;
-}
-
-.mgmt_printable_cellbg0 {
-	background: #CCCCCC;
-	border: 0px #000 solid;
-	height: 1em;
-}
-
-.mgmt_printable_cellbg1 {
-	background: #FFFFFF;
-	border: 0px #000 solid;
-	height: 1em;
-}
-
-.admin_table {
-	background-color: #FFFFFF;
-	border-width: 0px;
-}
-
-.admin_th {
-	border-width: 0px;
-	text-align: left;
-}
-
-.admin_tr_0 {
-	background-color: #EDF1ED;
-	border-width: 0px;
-}
-
-.admin_tr_1 {
-	background-color: #FDFFD5;
-	border-width: 0px;
-}
-
-.admin_tr_highlight {
-	background-color: #DDDDDD;
-}
-
-.admin_td_0 {
-	border-width: 0px;
-	vertical-align: text-bottom;
-}
-
-.admin_td_1 {
-	border-width: 0px;
-	vertical-align: text-bottom;
-}
-
-.admin_ingreds_list {
-	font-size: 85%;
-}
-
 a:link {
 	color: #0E17BF;
 	text-decoration: none;
@@ -204,80 +117,6 @@ a:visited {
 a:hover {
 	color: #CC0000;
 	text-decoration: none;
-}
-
-.invisible {
-	color: #FFFFFF;
-	font-size: 0pt;
-	text-decoration: none;
-}
-
-.preferred_answer {
-	font-size: 150%;
-}
-
-.error_msg {
-	align: center;
-	color: red;
-}
-
-.page_title {
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 150%;
-	font-weight: bold;
-}
-
-.form {
-	background-color: #FFCC99;
-	border: 1px #CC0000 solid;
-	color: #333333;
-	font-family: "Lucida Console", "Courier New", "Courier", "mono";
-}
-
-.mgmt_body_index {
-	background: #FEEFAC;
-}
-
-.mgmt_color_tablebg {
-	background: #FFCA68;
-	border: 0px;
-}
-
-.mgmt_color_cellbg0 {
-	background: #FFE9B7;
-	height: 1em;
-}
-
-.mgmt_color_cellbg1 {
-	background: #FAFF97;
-	height: 1em;
-}
-
-.help_text {
-	font-size: 100%;
-}
-
-.help_text * {
-	font-size: 100%;
-}
-
-.help_bg {
-	background-color: #333399;
-}
-
-.help_fg {
-	background-color: #FFFFCC;
-}
-
-.help_caption {
-	color: #FFFFFF;
-	font-size: 100%;
-	vertical-align: middle;
-}
-
-.help_close A {
-	color: #FFFFFF;
-	font-size: 100%;
 }
 
 .pos {
@@ -312,6 +151,14 @@ legend {
 }
 
 /*--------------------------------------------------
+	waiter / palm
+  --------------------------------------------------*/
+  
+.preferred_answer {
+	font-size: 150%;
+}
+
+/*--------------------------------------------------
 	income table
   --------------------------------------------------*/
 #table_income  {
@@ -338,6 +185,10 @@ legend {
 	background: #f7f7f7; 
 	border-right: 1px solid #CCCCCC;
 }
+
+/*--------------------------------------------------
+	tabber pos main page menu 
+  --------------------------------------------------*/
 
 /*--------------------------------------------------
   REQUIRED to hide the non-active tab content.
