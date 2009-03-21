@@ -56,7 +56,7 @@ $( function(){
 						<tr>
 							<td><?=$row->name ?></td>
 							<td align="right"><?=$row->locktouser ?></td>
-							<td align="right"><?=anchor_image('table/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('table/delete/'.$row->id , '../img/edit_remove.png');?></td>
+							<td align="right"><?=anchor_image('table/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('table/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 					<? endforeach; ?>
 					</tbody>

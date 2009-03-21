@@ -37,7 +37,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?=anchor_image(site_url()."/bankaccount/report_actual_pdf/",'../img/save-pdf.png') ?></h2>
+				<h2><?=lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?=anchor_image(site_url()."/bankaccount/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h2>
 				<?=form_open('bankaccount/report_actual');?>
 				<br /><br />
 				<table class="zebra">

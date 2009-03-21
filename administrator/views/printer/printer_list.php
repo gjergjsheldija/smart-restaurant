@@ -59,7 +59,7 @@ $( function(){
 							<td><?=$row->name ?></td>
 							<td align="right"><?=$row->dest ?></td>
 							<td align="right"><?=$row->driver ?></td>
-							<td align="right"><?=anchor_image('printer/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('printer/delete/'.$row->id , '../img/edit_remove.png');?></td>
+							<td align="right"><?=anchor_image('printer/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('printer/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 					<? endforeach; ?>
 					</tbody>

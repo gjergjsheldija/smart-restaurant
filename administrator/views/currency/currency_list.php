@@ -59,7 +59,7 @@ $( function(){
 							<td><?=$row->name ?></td>
 							<td align="right"><?=$row->rate ?></td>
 							<td align="right"><?php echo ($row->active == 1) ? lang('yes') : lang('no'); ?></td>
-							<td align="right"><?=anchor_image('currency/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('currency/delete/'.$row->id , '../img/edit_remove.png');?></td>
+							<td align="right"><?=anchor_image('currency/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('currency/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 					<? endforeach; ?>
 					</tbody>

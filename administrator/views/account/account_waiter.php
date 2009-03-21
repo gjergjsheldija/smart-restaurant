@@ -62,7 +62,7 @@ $( function(){
 					<td><?=lang('from'); ?> : <?=form_input($date_from) ?></td>
 					<td><?=lang('to'); ?> : <?=form_input($date_to) ?></td>
 					<td><input type="submit" value="<?=lang('show'); ?>"></td>
-					<td align="right"><?=anchor_image(site_url()."/account/report_waiter_pdf/" . $tmp_from . "_" . $tmp_to,'../img/save-pdf.png') ?></td>
+					<td align="right"><?=anchor_image(site_url()."/account/report_waiter_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
 				</tr>
 			</table>
 			<br /><br />

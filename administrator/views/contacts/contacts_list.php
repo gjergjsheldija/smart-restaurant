@@ -66,7 +66,7 @@ $( function(){
 							}						
 						?>		<tr>
 									<td><?=$row->name ?></td>
-									<td><?=anchor_image('contacts/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('contacts/delete/'.$row->id , '../img/edit_remove.png');?></td>
+									<td><?=anchor_image('contacts/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('contacts/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
 							$kot = $query->next_row();

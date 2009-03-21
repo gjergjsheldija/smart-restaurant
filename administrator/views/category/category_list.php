@@ -58,7 +58,7 @@ $( function(){
 						<tr>
 							<td><?=$row->name ?></td>
 							<td><?php echo isset($row->image) ? img('..'.$row->image) : lang('no_info'); ?></td>
-							<td><?=anchor_image('category/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('category/delete/'.$row->id , '../img/edit_remove.png');?></td>
+							<td><?=anchor_image('category/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('category/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 					<? endforeach; ?>
 					</tbody>

@@ -48,7 +48,7 @@ jQuery().ready(function() {
 function addFormField() {
 	
 	var id = document.getElementById("id").value;	
-	var image = '   <?=img('img/edit_remove.png') ?>';
+	var image = '   <?=img('images/administrator/edit_remove.png') ?>';
 	$.ajax({
 		type : "POST",
 		url : "<?=base_url() . '?c=stock&m=ingredientList' ?>",
@@ -121,7 +121,7 @@ div.error { display: none; }
 							</tr>
 							<tr>
 								<td colspan="6">
-									<a href="#" onClick="addFormField(); return false;"><?=img('../img/edit_add.png') ?></a>
+									<a href="#" onClick="addFormField(); return false;"><?=img('../images/administrator/edit_add.png') ?></a>
 								</td>
 							</tr>
 							<tr>

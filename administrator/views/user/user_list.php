@@ -59,7 +59,7 @@ $( function(){
 							<td><?=$row->name ?></td>
 							<td align="right"><?=($row->level  == 515)  ? lang('waiter') : lang('administrator')?></td>
 							<td align="right"><?=$row->dest_type ?></td>
-							<td align="right"><?=anchor_image('user/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('user/delete/'.$row->id , '../img/edit_remove.png');?></td>
+							<td align="right"><?=anchor_image('user/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('user/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 					<? endforeach; ?>
 					</tbody>

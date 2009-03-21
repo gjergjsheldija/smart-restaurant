@@ -75,7 +75,7 @@ $( function(){
 									<td align="right"><?=$row->price ?></td>
 									<td align="right"><?=$row->destname ?></td>
 									<td align="center"><?php echo isset($row->image) ? img('../'.$row->image) : lang('no_info'); ?></td>
-									<td align="right"><?=anchor_image('dish/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('dish/delete/'.$row->id , '../img/edit_remove.png');?></td>
+									<td align="right"><?=anchor_image('dish/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('dish/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
 							$kot = $query->next_row();

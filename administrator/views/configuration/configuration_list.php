@@ -53,7 +53,7 @@ jQuery().ready(function(){
 							<td align="left" title="<?=lang('hint_' . $row->name); ?>" id="helphint<?=$row->id ?>"><?=lang('desc_' . $row->name); ?></td>
 							<script type="text/javascript">
 							   	$('#helphint<?=$row->id; ?>').
-							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?=img('../img/cross.png');?>', positionBy: 'Top'});
+							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?=img('../images/administrator/cross.png');?>', positionBy: 'Top'});
 							</script>
 							<td align="right">
 								<div id="value_<?=$row->id; ?>"><?php if ($row->bool) echo $row->value == '1' ? lang('yes') : lang('no'); else echo $row->value;?>

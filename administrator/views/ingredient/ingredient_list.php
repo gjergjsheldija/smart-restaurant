@@ -73,7 +73,7 @@ $( function(){
 							<td><?=$row->name ?></td>					
 							<td align="right"><?=$row->price ?></td>
 							<td align="right"><?=$row->sell_price?></td>
-							<td align="right"><?=anchor_image('ingredient/edit/'.$row->id, '../img/edit.png');?> :: <?=anchor_image('ingredient/delete/'.$row->id , '../img/edit_remove.png');?></td>
+							<td align="right"><?=anchor_image('ingredient/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('ingredient/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 				<?php 
 					$kot = $query->next_row();
