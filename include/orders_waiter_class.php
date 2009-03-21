@@ -798,9 +798,9 @@ class order {
 
 			// and finally consider any optional info (lot/few)
 			if($arr['ingred_qty']==1) {
-				$dishname.='<img src="../images/up.png" height="16" width="16" border="0">';
+				$dishname.='<img src="'.IMAGE_PLUS.'" height="16" width="16" border="0">';
 			} elseif($arr['ingred_qty']==-1) {
-				$dishname.='<img src="../images/down.png" height="16" width="16" border="0">';
+				$dishname.='<img src="'.IMAGE_MINUS.'" height="16" width="16" border="0">';
 			}
 
 			$dishname.=" ".$moddeddishname;
@@ -914,7 +914,7 @@ class order {
 		} else {
 			// other cases, normal editing
 			$link = 'orders.php?command=edit&data[id]='.$orderid;
-			$output .= '<td onclick="loadModal(\''.$link.'\');"><img src="../images/source.png" width="32" border="0"></a></td>';
+			$output .= '<td onclick="loadModal(\''.$link.'\');"><img src="' .IMAGE_SOURCE . '" width="32" border="0"></a></td>';
 		}
 
 		// quantity arrows

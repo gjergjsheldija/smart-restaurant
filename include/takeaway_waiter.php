@@ -230,7 +230,7 @@ function takeaway_form() {
 		$cust_id = $data['customer'];
 		$cust = New customer ($cust_id);
 		
-		$tmp .= '<a href="orders.php?command=customer_edit_form&amp;data[id]='.$data['customer'].'"><img src="'.IMAGE_CUSTOMER_KNOWN.'" width="22" height="22" border="0"></a>';
+		$tmp .= '<a href="orders.php?command=customer_edit_form&amp;data[id]='.$data['customer'].'"><img src="'.IMAGE_PERSON.'" width="22" height="22" border="0"></a>';
 		$tmp .= '
 		</td>
 		</tr>

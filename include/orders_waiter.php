@@ -1385,7 +1385,7 @@ function dishes_list_cat_pos ($data){
 		$dishname = $arr['name'];
 
 		$dishprice = $arr['price'];
-		$image = (isset($arr['image']) ? $arr['image'] : $arr['imgcat']);
+		$image = (isset($arr['image']) ? $arr['image'] : IMAGE_DISH_DEFAULT);
 		if($data['category']<=0) {
 			$dishcat = $arr['category'];
 			debug_msg(__FILE__,__LINE__,"dishcat: $dishcat");
@@ -1405,11 +1405,10 @@ function dishes_list_cat_pos ($data){
 				$i++;
 			} else $letter='';
 				
-			//$output .= '<td bgcolor="'.$class.'" onclick="order_select('.$dishid.',\'order_form\'); return false;"><b><a href="#" onclick="JavaScript:order_select('.$dishid.',\'order_form\'); return false;"><img src="..'.$image.'" height=48 width=48><br>'.strtoupper($dishname).'</a></b></td>';
 			$output .= '
 			<td onclick="dishOrder('.$dishid.'); return false;">
 				<a href="#" class="buttonDish">
-						<img src="..'.$image.'" height=48 width=48>
+						<img src="'.$image.'" >
 						<br />
 						'.wordwrap(strtoupper($dishname),25,"<br/>\n").'
 					</a>

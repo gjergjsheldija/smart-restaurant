@@ -71,7 +71,7 @@ class dish extends object {
 	*/
 	function search_name_rows ($search) {
 	
-		$query="SELECTdishes.id, 
+		$query="SELECT dishes.id, 
 		dishes.table_name
 		FROM `dishes`
 		JOIN `dishes` ON dishes.id=dishes.table_id
@@ -618,7 +618,7 @@ class dish extends object {
 		if($arr['autocalc']) $checked = ' checked';
 		else $checked='';
 		$display->properties[$row][$col]='valign="baseline"';
-		$display->rows[$row][$col]=ucphr('DISH_AUTOMATIC_CALCULATOR').' '.help_sticky('DISH_AUTOMATIC_CALCULATOR');
+		$display->rows[$row][$col]=ucphr('DISH_AUTOMATIC_CALCULATOR').' '. ('DISH_AUTOMATIC_CALCULATOR');
 		$col++;
 		$display->rows[$row][$col]='<input type="checkbox" name="data[autocalc]" value="1"'.$checked.'>';
 		$col++;

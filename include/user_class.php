@@ -525,7 +525,7 @@ class user extends object {
 			if($write_line) $output .='
 			<td>
 				<center>
-					<input type="image" name="loginimage" id="loginimage" value="'.$arr['id'].'" src="'.IMAGE_LOGIN.'" width=64 height=64 hspace="20" vspace="20" onClick="(document.getElementById(\'userid\')).value = this.value;" />
+					<input type="image" name="loginimage" id="loginimage" value="'.$arr['id'].'" src="'.IMAGE_PERSON.'" width=64 height=64 hspace="20" vspace="20" onClick="(document.getElementById(\'userid\')).value = this.value;" />
 					<br>
 					<strong>'.strtoupper($arr['name']).'</strong>
 				</center>
@@ -714,7 +714,7 @@ class user extends object {
 
 		$tmp = ucfirst(phr('CONNECTED_AS')).": <b>".$this->data['name'];
 		$tmp .= ucfirst(phr('DISCONNECT_ASK'));
-		$tmp .= '<a href="?command=destroy&rndm='.rand(0,100000).'"><h4><div class="preferred_answer"><img src='.IMAGE_YES.' height=64 width=64></div></h4></a>';
+		$tmp .= '<a href="?command=destroy&rndm='.rand(0,100000).'"><h4><div class="preferred_answer"><img src='.IMAGE_OK.' height=64 width=64></div></h4></a>';
 
 		// don't know if this works correctly with any browser.
 		// we should try but go(-1) and back() ways and report success or failures.

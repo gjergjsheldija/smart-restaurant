@@ -595,7 +595,7 @@ function table_ask_association() {
 	$tmp .= '
 			</td>
 			<td width=35>
-				<a href="orders.php?command=associate"><img src="'.IMAGE_YES.'" alt="'.ucfirst(phr('YES')).'" border=0></a>
+				<a href="orders.php?command=associate"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('YES')).'" border=0></a>
 			</td>
 		</tr>
 	</table>
@@ -643,7 +643,7 @@ function table_ask_association_pos() {
 	$tmp .= '
 			</td>
 			<td width=35>
-				<a href="orders.php?command=associate"><img src="'.IMAGE_YES.'" alt="'.ucfirst(phr('YES')).'" border=0></a>
+				<a href="orders.php?command=associate"><img src="'.IMAGE_OK.'" alt="'.ucfirst(phr('YES')).'" border=0></a>
 			</td>
 		</tr>
 	</table>
@@ -1055,7 +1055,7 @@ function tables_list_all($cols=1,$show=0,$quiet=true){
 </table>'."\n";
 
 	if($therearerecordsUser) {
-		$output .='<p align="left"><a href="../pos/dailyincome.php"><img src="../images/newclose.png"></a></p>';	
+		$output .='<p align="left"><a href="../pos/dailyincome.php"><img src="'.IMAGE_CLOSE.'"></a></p>';	
 	}	
 	
 	return $output;

@@ -113,8 +113,8 @@ function categories_list_pos($data=''){
 		$cat = new category ($catid);
 		$name=strtoupper(ucfirst($cat->name($_SESSION['language'])));
 
-		$proveimg = $arr['image'];
-		if(!$proveimg) $proveimg = '/images/noimage.png';
+		$catimg = $arr['image'];
+		if(!$catimg) $catimg = IMAGE_CATEGORY_DEFAULT;
 
 		$backcommand="order_create1";
 		$bgcolor=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'categories','htmlcolor',$catid);
@@ -124,7 +124,7 @@ function categories_list_pos($data=''){
 		
 		$output .= '
 			<a class="CategoryElement" href="#" onclick="loadDish(\''.$link.'\');return(false);">
-				<span style="text-indent:64px;display:block;background:url(../' . $proveimg . ') no-repeat 1px -8px;">
+				<span style="text-indent:64px;display:block;background:url(' . $catimg . ') no-repeat 1px 3px;">
 					<strong>'.$name.'</strong>
 				</span>
 			</a>

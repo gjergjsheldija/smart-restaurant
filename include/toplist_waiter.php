@@ -104,7 +104,7 @@ function toplist_show(){
 				<b>'.ucfirst(phr('TOPLIST')).'('.ucfirst(phr('LASTS')).' '.CONF_TOPLIST_SAVED_NUMBER.')</b>
 				&nbsp;&nbsp;
 				<a href="orders.php?command=set_show_toplist">
-				<img src="'.ROOTDIR.'/images/fileclose.png" border="0" alt="'.ucphr('HIDE_TOPLIST').'">
+				<img src="'.ROOTDIR.'/images/waiter/fileclose.png" border="0" alt="'.ucphr('HIDE_TOPLIST').'">
 				</a>
 			</td>
 		</tr>

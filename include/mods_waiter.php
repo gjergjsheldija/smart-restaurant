@@ -285,9 +285,9 @@ function mods_list_delete ($ord) {
 	<tr>
 		<td></td>	
 		<td><strong>' . ucfirst(phr('CONTAINED')).'</strong></td>
-		<td style="text-align:center"><img src="../images/up.png" width="16" border="0" height="16"></td>
-		<td style="text-align:center"><img src="../images/field.png" width="16" border="0" height="16"></td>
-		<td style="text-align:center"><img src="../images/down.png" width="16" border="0" height="16"></td>
+		<td style="text-align:center"><img src="'.IMAGE_PLUS.'" width="16" border="0" height="16"></td>
+		<td style="text-align:center"><img src="'.IMAGE_FIELD.'" width="16" border="0" height="16"></td>
+		<td style="text-align:center"><img src="'.IMAGE_MINUS.'" width="16" border="0" height="16"></td>
 	</tr>
 	';
 	foreach ($ord->ingredients['contained'] as $name => $ingredid) {

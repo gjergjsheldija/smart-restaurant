@@ -82,7 +82,7 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 			  <div id="negative">
 			    <table width="450" cellpadding="0" cellspacing="12">
 			      <tr>
-			        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="52"><div align="center"><img src="'.IMAGE_NEGATIVE.'" alt="negative" width="18" height="18" /></div></td>
 			        <td width="388" >'.ucfirst(phr('GIVE_PASSWORD')).'</td> 
 			      </tr>
 			    </table>
@@ -94,7 +94,7 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 			  <div id="negative">
 			    <table width="450" cellpadding="0" cellspacing="12">
 			      <tr>
-			        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="52"><div align="center"><img src="'.IMAGE_NEGATIVE.'" alt="negative" width="18" height="18" /></div></td>
 			        <td width="388">'.ucfirst(phr('SELECT_USER')).'</td> 
 			      </tr>
 			    </table>
@@ -106,7 +106,7 @@ function access_connect_form_waiter_pos ( $err, $url='') {
 			  <div id="tip">
 			    <table width="450" cellpadding="0" cellspacing="12">
 			      <tr>
-			        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="52"><div align="center"><img src="'.IMAGE_ERROR.'" alt="negative" width="18" height="18"/></div></td>
 			        <td width="388">'.ucfirst(phr('NO_PASSWORD_GIVEN')).'</td> 
 			      </tr>
 			    </table>
@@ -160,7 +160,7 @@ function access_denied_waiter () {
 	  <div id="negative">
 	    <table width="450" cellpadding="0" cellspacing="12">
 	      <tr>
-	        <td width="52"><div align="center"><img src="../images/negative.png" alt="negative" width="18" height="18" /></div></td>
+	        <td width="52"><div align="center"><img src="'.IMAGE_NEGATIVE.'" alt="negative" width="18" height="18" /></div></td>
 	        <td width="388">'.ucfirst(phr('ACCESS_DENIED')).'</td> 
 	      </tr>
 	    </table>
@@ -181,7 +181,7 @@ function access_denied_waiter_pos () {
 	$tmp='<div id="tip">
 		    <table width="450" cellpadding="0" cellspacing="12">
 		      <tr>
-		        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="52"><div align="center"><img src="'.IMAGE_ERROR.'" alt="negative" width="18" height="18"/></div></td>
 		        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'</td> 
 		      </tr>
 		    </table>
@@ -202,7 +202,7 @@ function access_denied_admin () {
 	$tmp='<div id="tip">
 		    <table width="450" cellpadding="0" cellspacing="12">
 		      <tr>
-		        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="52"><div align="center"><img src="'.IMAGE_ERROR.'" alt="negative" width="18" height="18" /></div></td>
 		        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'<br/>'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'</td> 
 		      </tr>
 		    </table>
@@ -217,7 +217,7 @@ function access_denied_admin () {
 		$tmp='<div id="tip">
 			    <table width="450" cellpadding="0" cellspacing="12">
 			      <tr>
-			        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+			        <td width="52"><div align="center"><img src="'.IMAGE_ERROR.'" alt="negative" width="18" height="18" /></div></td>
 			        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'<br/>'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'<br/><a href="'.$link.'">'.ucfirst(phr('CONNECT')).'</a></td> 
 			      </tr>
 			    </table>
@@ -236,7 +236,7 @@ function access_denied_template () {
 	$tmp='<div id="tip">
 		    <table width="450" cellpadding="0" cellspacing="12">
 		      <tr>
-		        <td width="52"><div align="center"><img src="../images/attention.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="52"><div align="center"><img src="'.IMAGE_ERROR.'" alt="negative" width="18" height="18" /></div></td>
 		        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'<br/>'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'<br/><a href="'.$link.'">'.ucfirst(phr('CONNECT')).'</a></td> 
 		      </tr>
 		    </table>

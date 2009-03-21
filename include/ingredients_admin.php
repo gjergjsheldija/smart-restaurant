@@ -531,7 +531,7 @@ class ingredient extends object {
 			<td colspan="2">
 			<input type="checkbox" name="data[override_autocalc]" value="1"';
 	if($arr['override_autocalc']) $output .= ' checked';
-	$output .= '>'.ucphr('INGREDIENT_OVERRIDE_AUTOCALC').' '.help_sticky('INGREDIENT_OVERRIDE_AUTOCALC').'
+	$output .= '>'.ucphr('INGREDIENT_OVERRIDE_AUTOCALC').' '.('INGREDIENT_OVERRIDE_AUTOCALC').'
 			</td>
 		</tr>';
 		
@@ -540,7 +540,7 @@ class ingredient extends object {
 			<td colspan="2">
 			<input type="checkbox" name="data[visible]" value="1"';
 	if($arr['visible']) $output .= ' checked';
-	$output .= '>'.ucphr('VISIBLE_TO_WAITERS').' '.help_sticky('VISIBLE_TO_WAITERS').'
+	$output .= '>'.ucphr('VISIBLE_TO_WAITERS').' '.('VISIBLE_TO_WAITERS').'
 			</td>
 		</tr>
 		
