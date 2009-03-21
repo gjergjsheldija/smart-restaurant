@@ -189,34 +189,38 @@ $unit_types_mass = array ('oz','lb','mg','cg','dg','g','dag','hg','kg');
 
 define('CONF_HTTP_ROOT_DIR',ROOTDIR.'/');
 
-define('CONF_JS_URL',CONF_HTTP_ROOT_DIR."generic.js");
-define('CONF_JS_URL_WAITER',CONF_HTTP_ROOT_DIR."waiter.js");
-define('CONF_CSS_URL',CONF_HTTP_ROOT_DIR."styles.css");
+define('CONF_JS_URL',CONF_HTTP_ROOT_DIR."pos/generic.js");
+define('CONF_JS_URL_WAITER',CONF_HTTP_ROOT_DIR."waiter/waiter.js");
+define('CONF_CSS_URL',CONF_HTTP_ROOT_DIR."css/styles.css");
 
-define('CONF_JS_URL_CONFIG',"./generic.js");
+define('CONF_JS_URL_CONFIG',CONF_HTTP_ROOT_DIR."pos/generic.js");
 
-// images used
+//pos images
+define('IMAGE_PERSON',CONF_HTTP_ROOT_DIR."images/pos/personal.png");
+define('IMAGE_MENU',CONF_HTTP_ROOT_DIR."images/pos/home.png");
+define('IMAGE_NO',CONF_HTTP_ROOT_DIR."images/pos/no.png");
+define('IMAGE_OK',CONF_HTTP_ROOT_DIR."images/pos/ok.png");
+define('IMAGE_PRINT',CONF_HTTP_ROOT_DIR."images/pos/print.png");
+define('IMAGE_SOURCE',CONF_HTTP_ROOT_DIR."images/pos/source.png");
+define('IMAGE_TRASH',CONF_HTTP_ROOT_DIR."images/pos/trash.png");
+define('IMAGE_CLOSE',CONF_HTTP_ROOT_DIR."images/pos/close.png");
+define('IMAGE_MINUS',CONF_HTTP_ROOT_DIR."images/pos/down.png");
+define('IMAGE_PLUS',CONF_HTTP_ROOT_DIR."images/pos/up.png");
+define('IMAGE_FIELD',CONF_HTTP_ROOT_DIR."images/pos/field.png");
+define('IMAGE_LOGOUT',CONF_HTTP_ROOT_DIR."images/pos/logout.png");
+define('IMAGE_SHOW_ORDERS',CONF_HTTP_ROOT_DIR."images/pos/show.png");
+define('IMAGE_HIDE_ORDERS',CONF_HTTP_ROOT_DIR."images/pos/hide.png");
+define('IMAGE_TABLE',CONF_HTTP_ROOT_DIR."images/pos/table.png");
+define('IMAGE_ERROR',CONF_HTTP_ROOT_DIR."images/pos/error.png");
+define('IMAGE_INFO',CONF_HTTP_ROOT_DIR."images/pos/info.png");
+define('IMAGE_NEGATIVE',CONF_HTTP_ROOT_DIR."images/pos/negative.png");
+define('IMAGE_POSITIVE',CONF_HTTP_ROOT_DIR."images/pos/positive.png");
+define('IMAGE_CATEGORY_DEFAULT',CONF_HTTP_ROOT_DIR."images/pos/category.png");
+define('IMAGE_DISH_DEFAULT',CONF_HTTP_ROOT_DIR."images/pos/dish.png");
 
-define('IMAGE_CUSTOMER_KNOWN',CONF_HTTP_ROOT_DIR."images/personal.png");
-define('IMAGE_MENU',CONF_HTTP_ROOT_DIR."images/gohome.png");
-define('IMAGE_NO',CONF_HTTP_ROOT_DIR."images/agt_action_fail.png");
-define('IMAGE_OK',CONF_HTTP_ROOT_DIR."images/agt_action_success.png");
-define('IMAGE_PRINT',CONF_HTTP_ROOT_DIR."images/print.png");
-define('IMAGE_SOURCE',CONF_HTTP_ROOT_DIR."images/source.png");
-define('IMAGE_TRASH',CONF_HTTP_ROOT_DIR."images/trash.png");
-define('IMAGE_LITTLE_TRASH',CONF_HTTP_ROOT_DIR."images/little_trash.png");
-define('IMAGE_YES',CONF_HTTP_ROOT_DIR."images/agt_action_success.png");
-define('IMAGE_BACK',CONF_HTTP_ROOT_DIR."./images/back.jpg");
-define('IMAGE_CLOSE',CONF_HTTP_ROOT_DIR."images/newclose.png");
-define('IMAGE_MINUS',CONF_HTTP_ROOT_DIR."images/down.png");
-define('IMAGE_PLUS',CONF_HTTP_ROOT_DIR."images/up.png");
-define('IMAGE_FIND',CONF_HTTP_ROOT_DIR."images/find.png");
-define('IMAGE_NEW',CONF_HTTP_ROOT_DIR."images/new.png");
-define('IMAGE_LOGOUT',CONF_HTTP_ROOT_DIR."images/logout.png");
-define('IMAGE_SHOW_ORDERS',CONF_HTTP_ROOT_DIR."images/show.png");
-define('IMAGE_HIDE_ORDERS',CONF_HTTP_ROOT_DIR."images/hide.png");
-define('IMAGE_TABLE',CONF_HTTP_ROOT_DIR."images/tavolina.png");
-define('IMAGE_LOGIN',CONF_HTTP_ROOT_DIR."images/personal.png");
+//waiter images
+define('IMAGE_LITTLE_TRASH',CONF_HTTP_ROOT_DIR."images/waiter/little_trash.png");
+define('IMAGE_CLOSE',CONF_HTTP_ROOT_DIR."images/waiter/fileclose.png");
 
 
 // all the colors used in background and tables

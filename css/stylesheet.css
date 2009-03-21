@@ -268,14 +268,14 @@ div#Container {
 }
 
 .contentLeft {
-	background: transparent url(../img/bgLeft.png) top left no-repeat;
+	background: transparent url(../images/administrator/bgLeft.png) top left no-repeat;
 	margin-left: -10px;
 	padding-left: 10px;
 	min-height: 400px;
 }
 
 .contentRight {
-	background: transparent url(../img/bgRight.png) top right no-repeat;
+	background: transparent url(../images/administrator/bgRight.png) top right no-repeat;
 	padding-right: 10px;
 	min-height: 400px;
 }
@@ -290,7 +290,7 @@ div#Container {
 }
 
 .Full .bottom,.Left .bottom {
-	/*	background:url(../../img/bottom-bg.gif) top right no-repeat; */
+	/*	background:url(../../images/bottom-bg.gif) top right no-repeat; */
 	
 }
 
@@ -355,7 +355,7 @@ a:link,a:visited { /*color:#03c;*/
 pre.run a{
 	display:block;
 	text-indent:-9999em;
-	background:url(../img/jq_run.gif) no-repeat; 
+	background:url(../images/jq_run.gif) no-repeat; 
 	position:absolute;
 	top:-17px;
 	right:0;
