@@ -74,20 +74,20 @@ if (floor(phpversion()) < 5) {
 <div id="Dialog">
   <table>
     <tr>
-      <td rowspan="3"><img src="./images/intro_logo.png" width="132" height="271" /></td>
-      <td valign="bottom"><a href="waiter/"><img src="./images/pda_alt.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
+      <td rowspan="3"><img src="./images/home_menu/intro_logo.png" width="132" height="271" /></td>
+      <td valign="bottom"><a href="waiter/"><img src="./images/home_menu/pda_alt.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
       <td valign="bottom"><a href="waiter/">waiter</a>
       <br />
       <p>palm access point of sale</p></td>
     </tr>
     <tr>
-      <td valign="bottom"><a href="pos/"><img src="./images/setup_assistant.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
+      <td valign="bottom"><a href="pos/"><img src="./images/home_menu/setup_assistant.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
       <td valign="bottom"><a href="pos/">pos</a>      
       <br />
       <p>touch screen pos</p></td>
     </tr>
     <tr>
-      <td valign="bottom"><a href="administrator"><img src="./images/blockdevice.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
+      <td valign="bottom"><a href="administrator"><img src="./images/home_menu/blockdevice.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
       <td valign="bottom"><a href="administrator">administrator</a>
       <br />
       <p>stock, account, bank management</p></td>

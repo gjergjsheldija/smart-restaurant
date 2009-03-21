@@ -427,8 +427,8 @@ function lang_file_reader($filename) {
 
 function status_report ($name,$err) {
 	global $tpl;
-	if(!$err) $tmp ='<script>$.growl("'.ucphr("Information").'","'.ucphr($name).' ' . 'ok' .'","../images/info.png")</script>';
-	else $tmp = '<script>$.growl("'.ucphr("Information").'","<font color="red">'.ucphr($name).' '.ucphr('FAILED').'</font>","../images/error.png")</script>';
+	if(!$err) $tmp ='<script>$.growl("'.ucphr("Information").'","'.ucphr($name).' ' . 'ok' .'","'.IMAGE_INFO.'")</script>';
+	else $tmp = '<script>$.growl("'.ucphr("Information").'","<font color="red">'.ucphr($name).' '.ucphr('FAILED').'</font>","'.IMAGE_ERROR.'")</script>';
 	$tpl -> append ('messages',$tmp);
 	
 	if($err) error_display($err,true);
@@ -915,20 +915,6 @@ function strip_newlines($msg) {
 	return $msg;
 }
 
-function help_sticky ($msg_code) {
-	
-	$help=strip_newlines(ucphr($msg_code.'_HELP'));
-	$title=strip_newlines(ucphr($msg_code));
-	$help=str_replace("'","\'",$help);
-	$title=str_replace("'","\'",$title);
-	
-	$overlib_code="return overlib('".$help."', AUTOSTATUS, CAPICON,'".ROOTDIR."/images/docs_small.png', CAPTION,'".$title."',FGCLASS, 'help_fg',BGCLASS, 'help_bg',CLOSECLICK, TEXTFONTCLASS, 'help_text',CAPTIONFONTCLASS,'help_caption', CLOSEFONTCLASS, 'help_close', WIDTH, 400, DELAY, 300);";
-	
-	$tmp .= '<img src="'.ROOTDIR.'/images/help_small.png" border="0" alt="'.ucphr('MHR_ONLINE_HELP').'" width="16" height="16" style="vertical-align: text-bottom"';
-	$tmp .= ' onmouseover="'.$overlib_code.'" onmouseout="nd();"';
-	$tmp .= '>';
-	return $tmp;
-}
 
 function head_line ($title) {
 	global $tpl;
@@ -936,7 +922,6 @@ function head_line ($title) {
 	$output='
 	<meta http-equiv="content-type" content="text/html; charset='.phr('CHARSET').'">
 	<title>Smart Restaurant - '.$title.'</title>
-	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/overlib/overlib.js"><!-- overLIB (c) Erik Bosrup --></script>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.js"></script>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.growl.js"></script>
 	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/growlCustom.js"></script>	
@@ -952,7 +937,6 @@ function head_line ($title) {
 	<meta http-equiv="Expires" content="0">';
 	$tpl -> assign("head", $output);
 
-	$tmp = '<div id="overDiv" style="position:absolute; visibility:hidden; z-index:1000;"></div>';
 	$tpl -> append("scripts", $tmp);
 
 	return $output;

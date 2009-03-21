@@ -24,7 +24,7 @@
 	{head}
 	</head>
 	<body>
-		<center><a href="#" onClick='javascript:history.go(-1);'><img src="../images/tavolina.png"></a><a href="#" onClick='printPage();'><img src="../images/print.png"></a><br><br></center>
+		<center><a href="#" onClick='javascript:history.go(-1);'><img src="../images/pos/table.png"></a><a href="#" onClick='printPage();'><img src="../images/pos/print.png"></a><br><br></center>
 		{scripts}
 		<center>
 		{navbar}

@@ -110,7 +110,7 @@ switch ($command){
 				
 				$dish=new dish($dishid);
 				if(!$dish->exists()) {
-					$tmp = '<script>$.growl("'.ucphr("Information").'","<b><font color=\"Red\">'.ucfirst(phr('DISH_DOES_NOT_EXIST')).'</font>","../images/error.png")</script>';
+					$tmp = '<script>$.growl("'.ucphr("Information").'","<b><font color=\"Red\">'.ucfirst(phr('DISH_DOES_NOT_EXIST')).'</font>","'.IMAGE_ERROR.'")</script>';
 					$tpl ->append('messages',$tmp);
 
 					//orders_list_pos ();

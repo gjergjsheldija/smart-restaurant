@@ -63,7 +63,7 @@ switch ($err) {
 		  <div id="positive">
 		    <table width="450" cellpadding="0" cellspacing="12">
 		      <tr>
-		        <td width="52"><div align="center"><img src="../images/positive.png" alt="negative" width="18" height="18" /></div></td>
+		        <td width="52"><div align="center"><img src="'.IMAGE_POSITIVE.'" alt="positive" width="18" height="18" /></div></td>
 		        <td width="388">'.ucfirst(phr('ALREADY_CONNECTED')).'</td> 
 		        <td width="388"><a href="tables.php">'.ucfirst(phr('GO_ON')).'</a></td> 
 		      </tr>
