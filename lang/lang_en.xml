@@ -8,10 +8,9 @@
 	<!ELEMENT type ( #PCDATA ) >
 ]>
 <SmartRestaurant>
-	<type> translation </type>
+	<type>translation</type>
 	<language>en</language>
 	<data>
-		<item name="ABOUT_MHR">about MHR</item>
 		<item name="ACCESS_DENIED">access denied</item>
 		<item name="ACCESS_DENIED_EXPLAIN">you have not the authorization required to enter this area.&amp;lt;br/&amp;gt;
 Maybe you didn\&amp;#039;t authenticate yet or you authenticated without a password. In such cases, connect before trying to enter this zone, otherwise ask the administrator to give you the access.</item>
@@ -19,55 +18,6 @@ Maybe you didn\&amp;#039;t authenticate yet or you authenticated without a passw
 		<item name="ACCOUNTING">Accounting</item>
 		<item name="ACCOUNTING_DATABASE">Accounting Database</item>
 		<item name="ACCOUNTING_DATABASES">Accounting Databases</item>
-		<item name="ACCOUNT_ABI">ABI Code</item>
-		<item name="ACCOUNT_BANK">Bank</item>
-		<item name="ACCOUNT_BIC">Destination BIC code</item>
-		<item name="ACCOUNT_CAB">CAB code</item>
-		<item name="ACCOUNT_CIN">CIN code</item>
-		<item name="ACCOUNT_CURRENCY">Currency (International code, eg. EUR, USD, etc)</item>
-		<item name="ACCOUNT_EDIT">Edit Account</item>
-		<item name="ACCOUNT_IBAN">IBAN code</item>
-		<item name="ACCOUNT_INITIAL_AMOUNT">Initial Amount</item>
-		<item name="ACCOUNT_INSERT">Insert Account</item>
-		<item name="ACCOUNT_LABEL_AMOUNT">Amount</item>
-		<item name="ACCOUNT_LABEL_BANK_ACCOUNT">Bank Account</item>
-		<item name="ACCOUNT_LABEL_CAUSAL">Causal</item>
-		<item name="ACCOUNT_LABEL_DATE">Date</item>
-		<item name="ACCOUNT_LABEL_DESCRIPTION">Description</item>
-		<item name="ACCOUNT_LABEL_IF_NEGATIVE">If negative</item>
-		<item name="ACCOUNT_LABEL_IN">In</item>
-		<item name="ACCOUNT_LABEL_OUT">Out</item>
-		<item name="ACCOUNT_LEGEND">Bank Account</item>
-		<item name="ACCOUNT_LIST">Accounts List</item>
-		<item name="ACCOUNT_MAIN_LEGEND">Bank Accounts</item>
-		<item name="ACCOUNT_MOVEMENT">The movement</item>
-		<item name="ACCOUNT_MOVEMENT_ADD_SUCCESS">has been successfully added</item>
-		<item name="ACCOUNT_MOVEMENT_DELETE">Delete movement</item>
-		<item name="ACCOUNT_MOVEMENT_DELETE_SUCCESS">has been successfully deleted</item>
-		<item name="ACCOUNT_MOVEMENT_EDIT">Edit Movement</item>
-		<item name="ACCOUNT_MOVEMENT_INSERT">Insert Movement</item>
-		<item name="ACCOUNT_MOVEMENT_LEGEND">Bank Account Movement</item>
-		<item name="ACCOUNT_MOVEMENT_LIST">Movements list</item>
-		<item name="ACCOUNT_MOVEMENT_NOTHING_DONE">Nothing has been done</item>
-		<item name="ACCOUNT_MOVEMENT_UPDATE_SUCCESS">has been successfully updated</item>
-		<item name="ACCOUNT_NAME">Name</item>
-		<item name="ACCOUNT_NUMBER">Account number</item>
-		<item name="ACCOUNT_SWIFT">Receiver BIC code (SWIFT)</item>
-		<item name="ACCOUNT_TABLE_ABI">ABI</item>
-		<item name="ACCOUNT_TABLE_AMOUNT">Amount</item>
-		<item name="ACCOUNT_TABLE_BANK">Bank</item>
-		<item name="ACCOUNT_TABLE_BIC">BIC</item>
-		<item name="ACCOUNT_TABLE_CAB">CAB</item>
-		<item name="ACCOUNT_TABLE_CIN">CIN</item>
-		<item name="ACCOUNT_TABLE_CURRENCY">Currency</item>
-		<item name="ACCOUNT_TABLE_IBAN">IBAN</item>
-		<item name="ACCOUNT_TABLE_NAME">Name</item>
-		<item name="ACCOUNT_TABLE_NUMBER">Number</item>
-		<item name="ACCOUNT_TABLE_SWIFT">SWIFT</item>
-		<item name="ACCOUNT_TABLE_TITLE">Bank Accounts</item>
-		<item name="ACCOUNT_THE">The Bank Account</item>
-		<item name="ACCOUNT_TITLE">Movements for the account</item>
-		<item name="ACTION_IS_DEFINITIVE">This action is &amp;lt;b&amp;gt;definitive&amp;lt;/b&amp;gt;</item>
 		<item name="ADD">add</item>
 		<item name="ADDRESS">Address</item>
 		<item name="ALL">All</item>
@@ -92,8 +42,6 @@ Maybe you didn\&amp;#039;t authenticate yet or you authenticated without a passw
 		<item name="BACK_TO_TABLE">back to the table</item>
 		<item name="BACK_TO_TABLES">back to tables list</item>
 		<item name="BANK">Bank	</item>
-		<item name="BANK_ACCOUNT">Bank Account</item>
-		<item name="BANK_FILE">Bank File</item>
 		<item name="BILL">bill</item>
 		<item name="BILL_ANNULLED_OK">the bill has been annulled</item>
 		<item name="BILL_PRINT">bill print</item>
@@ -108,10 +56,6 @@ Maybe you didn\&amp;#039;t authenticate yet or you authenticated without a passw
 		<item name="CATEGORY_PRINT">category print</item>
 		<item name="CHANGELOG">Changelog</item>
 		<item name="CHARSET">iso-8859-1</item>
-		<item name="CHECK_COLOR">Check the color value</item>
-		<item name="CHECK_COLOR_BEGIN">The color value has to begin with #</item>
-		<item name="CHECK_DATABASE_FOUND">The database already exists, select another database name.</item>
-		<item name="CHECK_DATABASE_NAME">Check the database name</item>
 		<item name="CHECK_DATE">Check the date</item>
 		<item name="CHECK_DAY">Check the day</item>
 		<item name="CHECK_DESCRIPTION">Check the description</item>
@@ -124,8 +68,6 @@ Maybe you didn\&amp;#039;t authenticate yet or you authenticated without a passw
 		<item name="CHECK_NO_TYPE_ERROR">Internal error: no type supplied. Please contact</item>
 		<item name="CHECK_NUMBER">Check the number.</item>
 		<item name="CHECK_ORDER">Check the ordering number</item>
-		<item name="CHECK_PASSWORD_COMPARE">check that the passwords are the same</item>
-		<item name="CHECK_PASSWORD_LENGHT">check the password length. It should be at least 6 characters.</item>
 		<item name="CHECK_QUANTITY">check the quantity</item>
 		<item name="CHECK_SURNAME">Check the surname</item>
 		<item name="CHECK_TAXABLE">Check the taxable amount.</item>
@@ -136,41 +78,28 @@ Maybe you didn\&amp;#039;t authenticate yet or you authenticated without a passw
 		<item name="CHEQUE_NUMBER">Check number</item>
 		<item name="CITY">City</item>
 		<item name="CLEARING">table clearing</item>
-		<item name="CLICK_HERE_TO_UPGRADE">click here to upgrade My Handy Restaurant</item>
 		<item name="CLOSE">table close</item>
 		<item name="CLOSED">closed</item>
 		<item name="CLOSE_TABLE">close the table</item>
 		<item name="CLOSE_TABLE_ASK">Do you want to close this table?&amp;lt;br/&amp;gt;After closing it only the cashier will be able to access it.</item>
 		<item name="COME_BACK_HERE">come back here</item>
-		<item name="CONFIG">configuration</item>
-		<item name="CONFIGURATION">Configuration</item>
 		<item name="CONNECT">Connect</item>
 		<item name="CONNECTED_AS">you&amp;#039;re connected as</item>
 		<item name="CONTACTS">Contacts</item>
 		<item name="CONTACTS_LIST">Contacts List</item>
 		<item name="CONTACT_INSERT">Insert</item>
 		<item name="CONTAINED">contained</item>
-		<item name="CREATE_ASSOCIATED_STOCK">create the associated stock record</item>
 		<item name="CREATE_SERVICE_FEE">Insert people number</item>
 		<item name="CREATION">creation</item>
 		<item name="CUSTOMER">customer</item>
 		<item name="CUSTOMER_DATA">customer data</item>
 		<item name="DATABASE">Database</item>
-		<item name="DATABASE_BACKUP">Backup</item>
-		<item name="DATABASE_COMMON">Common Database</item>
-		<item name="DATABASE_COMPARE">Compare</item>
-		<item name="DATABASE_DELETE_WARNING">&amp;lt;b&amp;gt;Warning:&amp;lt;/b&amp;gt; If you delete the database, all the data associated to it (accounting, statistics log, addressbook, receipts log, stock movements) will be deleted and &amp;lt;b&amp;gt;unrecoverable&amp;lt;/b&amp;gt;</item>
-		<item name="DATABASE_FROM">Base Database&amp;lt;br /&amp;gt;(the new version&amp;#039;s one)</item>
-		<item name="DATABASE_NAME">&amp;lt;b&amp;gt;Database Name&amp;lt;/b&amp;gt;&amp;lt;br /&amp;gt;the database name as in mysql databases list</item>
-		<item name="DATABASE_RESTORE">restore</item>
-		<item name="DATABASE_TO">Target Database&amp;lt;br /&amp;gt;(the old version&amp;#039;s one)</item>
 		<item name="DATE">date</item>
 		<item name="DEBTS">debts</item>
 		<item name="DEFAULT">default</item>
 		<item name="DELETE">Delete</item>
 		<item name="DELETE_ALL">delete all</item>
-		<item name="DELETE_ALL_CONFIRM">Are you sure you want to delete ALL THE RECORDS?
-This is equivalent to a total reset of this subsystem.</item>
+		<item name="DELETE_ALL_CONFIRM">Are you sure you want to delete ALL THE RECORDS? This is equivalent to a total reset of this subsystem.</item>
 		<item name="DELETE_DATABASE">&amp;lt;b&amp;gt;Delete the database&amp;lt;/b&amp;gt; (includes deletion of all the tables).</item>
 		<item name="DELETE_DATABASE_TABLES">&amp;lt;b&amp;gt;Delete My Handy Restaurant tables&amp;lt;/b&amp;gt; from this database when deleting this record.</item>
 		<item name="DELETE_NONE">No record has been deleted</item>
@@ -188,10 +117,6 @@ This is equivalent to a total reset of this subsystem.</item>
 		<item name="DISH">Dish</item>
 		<item name="DISHES">Dishes</item>
 		<item name="DISHES_INGREDIENT_QUANTITIES">ingredient quantities in dishes</item>
-		<item name="DISH_AUTOMATIC_CALCULATOR">Automatic price calculator (Autocalc)</item>
-		<item name="DISH_AUTOMATIC_CALCULATOR_HELP">The Autocalc system calculates the price of the dish by counting the ingredients number.&amp;lt;br/&amp;gt;
-You can set the prices in the Menu-&amp;gt;Autocalc page.&amp;lt;br/&amp;gt;
-&amp;lt;b&amp;gt;If the Autocalc is on the price of the dish is ignored.&amp;lt;/b&amp;gt;</item>
 		<item name="DISH_CODE">Code</item>
 		<item name="DISH_COST">dish cost</item>
 		<item name="DISH_DATA">dish data</item>
@@ -244,12 +169,10 @@ You can set the prices in the Menu-&amp;gt;Autocalc page.&amp;lt;br/&amp;gt;
 		<item name="HIDE_NAMES">hide the names</item>
 		<item name="HIDE_ORDERS">hide the orders</item>
 		<item name="HIDE_TOPLIST">hide the toplist</item>
-		<item name="HTML">HTML</item>
 		<item name="ID">ID</item>
 		<item name="IF_YOU_ARE_NOT_DISCONNECT_0">If you\&amp;#039;re not</item>
 		<item name="IF_YOU_ARE_NOT_DISCONNECT_1">&amp;lt;a href=\&amp;quot;disconnect.php\&amp;quot;&amp;gt;disconnect&amp;lt;/a&amp;gt;</item>
 		<item name="INCLUDED">included</item>
-		<item name="INCLUDING_NOT_PAID_INVOICES">including not paid invoices</item>
 		<item name="INCOME">income</item>
 		<item name="INCOME_COLLAPSE">Collapse incomes</item>
 		<item name="INCOME_EXPAND">Expand incomes</item>
@@ -257,10 +180,6 @@ You can set the prices in the Menu-&amp;gt;Autocalc page.&amp;lt;br/&amp;gt;
 		<item name="INGREDIENT">Ingredient</item>
 		<item name="INGREDIENTS">Ingredients</item>
 		<item name="INGREDIENT_CODE">Code</item>
-		<item name="INGREDIENT_OVERRIDE_AUTOCALC">Disable Autocalc</item>
-		<item name="INGREDIENT_OVERRIDE_AUTOCALC_HELP">If you disable Autocalc for this ingredient, the price of the ingredient will be used anyway.&amp;lt;br/&amp;gt;
-Furthermore the Autocalc system will not count this ingredient when calculating the price.&amp;lt;br&amp;gt;
-You should use this option if you want the price of the ingredient to be always 0.</item>
 		<item name="INGREDIENT_QUANTITIES">ingredients quantities</item>
 		<item name="INSERT">Insert</item>
 		<item name="INSERT_CUSTOMER_DATA">insert customer data</item>
@@ -289,12 +208,8 @@ You should use this option if you want the price of the ingredient to be always 
 		<item name="MONEY">money</item>
 		<item name="MOVEMENT">movement</item>
 		<item name="MOVE_TABLE">Move the table</item>
-		<item name="MYSQLDUMP_FORMAT">Use &amp;#039;complete&amp;#039; and &amp;#039;extended&amp;#039; output format (smaller output file)</item>
-		<item name="MYSQL_VERSION">MySQL server version</item>
 		<item name="MY_TABLES">My tables</item>
 		<item name="NAME">name</item>
-		<item name="NAME_INTERNAL_DATABASE">&amp;lt;b&amp;gt;Internal Name&amp;lt;/b&amp;gt;&amp;lt;br /&amp;gt;used when displaying the name to users</item>
-		<item name="NAME_PRINTER">&amp;lt;b&amp;gt;Internal name&amp;lt;/b&amp;gt;&amp;lt;br/&amp;gt;used only to set where to print dishes in the dishes list</item>
 		<item name="NO">No</item>
 		<item name="NONE">none</item>
 		<item name="NOTE">note</item>
@@ -332,9 +247,7 @@ You should use this option if you want the price of the ingredient to be always 
 		<item name="PERCENTUAL">Percentual</item>
 		<item name="PERCENT_INSERTED">percent inserted</item>
 		<item name="PERIOD">period</item>
-		<item name="PERMISSIONS">permessi</item>
 		<item name="PHONE">Phone</item>
-		<item name="PHP_VERSION">PHP version</item>
 		<item name="PIECE">piece</item>
 		<item name="PLACE">place</item>
 		<item name="PLUS">plus</item>
@@ -343,19 +256,9 @@ You should use this option if you want the price of the ingredient to be always 
 		<item name="PRINT">Print</item>
 		<item name="PRINTABLE_VERSION">printable version</item>
 		<item name="PRINTER">Printer</item>
-		<item name="PRINTER_DESTINATION">&amp;lt;b&amp;gt;Printing queue name&amp;lt;/b&amp;gt;&amp;lt;br&amp;gt;the name of the printing queue&amp;lt;br&amp;gt;(name previously defined in the external printing system)</item>
-		<item name="PRINTER_DRIVER">&amp;lt;b&amp;gt;Internal driver name&amp;lt;/b&amp;gt;&amp;lt;br/&amp;gt;the internal driver to be used to get command codes</item>
-		<item name="PRINTER_INTERNAL_NAME">Internal name</item>
-		<item name="PRINTER_INVOICE">&amp;lt;b&amp;gt;Invoices printer&amp;lt;/b&amp;gt; - Print invoices on this printer</item>
-		<item name="PRINTER_LANGUAGE">&amp;lt;b&amp;gt;Printer language&amp;lt;/b&amp;gt;&amp;lt;br/&amp;gt;The language in which the tickets should be printed&amp;lt;br&amp;gt;(experimental)</item>
-		<item name="PRINTER_RECEIPT">&amp;lt;b&amp;gt;Receipts printer&amp;lt;/b&amp;gt; - Print receipts on this printer</item>
-		<item name="PRINTER_TEMPLATE">&amp;lt;b&amp;gt;Templates directory&amp;lt;/b&amp;gt;&amp;lt;br&amp;gt;directory containing the set of printing templates to be used for printing</item>
 		<item name="PRINTER_TEST_PAGE">Test page</item>
 		<item name="PRINTER_TEST_PAGE_END">Test page end</item>
 		<item name="PRINTER_TEST_SENT">Test page sent to printers</item>
-		<item name="PRINTING_DRIVER">printing driver</item>
-		<item name="PRINTING_QUEUE">printing queue</item>
-		<item name="PRINTING_TEMPLATE">printing template</item>
 		<item name="PRINTS_ATTENTION">ATTENTION</item>
 		<item name="PRINTS_BILL">bill</item>
 		<item name="PRINTS_DELETED">Deleted</item>
@@ -389,9 +292,6 @@ You should use this option if you want the price of the ingredient to be always 
 		<item name="PRIORITY_DEFAULT">suggested priority - set to none to give no suggestion</item>
 		<item name="QUANTITY">quantity</item>
 		<item name="QUANTITY_ABBR">q.ty</item>
-		<item name="QUANTITY_AUTOCALC_EXPLAIN">Quantity&amp;lt;br/&amp;gt;
-The price of the modifications will be the one set here when this quantity is reached.&amp;lt;br/&amp;gt;
-Set this to default to price beyond the maximum quantity considered.</item>
 		<item name="QUANTITY_TO_MODIFY">quantity to modify</item>
 		<item name="QUANTITY_UPDATE">quantity update</item>
 		<item name="QUEUE">queue</item>
@@ -399,7 +299,6 @@ Set this to default to price beyond the maximum quantity considered.</item>
 		<item name="RECEIPT_ANNULLED_OK">the receipt has been annulled</item>
 		<item name="RECONNECT_WITH_PASSWORD">Reconnect with password</item>
 		<item name="RECORDS">records</item>
-		<item name="REDIRECTED_FOR_UPGRADE_EXPLAIN">You have been redirected here because an upgrade is available. You should upgrade your version of My Handy Restaurant before going on.</item>
 		<item name="REMOVE">Remove</item>
 		<item name="REMOVE_CUSTOMER_DATA">remove customer data</item>
 		<item name="REMOVE_DEFINITIVE">Remove (definitive)</item>
@@ -416,13 +315,6 @@ The use of this function is suggested &amp;lt;b&amp;gt;only&amp;lt;/b&amp;gt; if
 &amp;lt;br/&amp;gt;
 &amp;lt;br/&amp;gt;
 To proceed, check the \&amp;#039;Reset separated bills\&amp;#039; checkbox and click on the \&amp;#039;OK\&amp;#039; image on the upper right corner.</item>
-		<item name="RESTORE_DB">database on which the restore should be applied</item>
-		<item name="RESTORE_FILE">restore file</item>
-		<item name="RESTORE_OK">restore completed successfully</item>
-		<item name="RESTORE_WARNING">&amp;lt;b&amp;gt;Warning:&amp;lt;/b&amp;gt; Restoring the database is a dangerous operation.&amp;lt;br/&amp;gt;
-It may delete all the data that is in the database now.&amp;lt;br/&amp;gt;
-You will lose all the data added to the database since the creation of the backup file you will restore.&amp;lt;br/&amp;gt;
-You are &amp;lt;b&amp;gt;strongly&amp;lt;/b&amp;gt; suggested to &amp;lt;a href=\&amp;quot;../admin/export_db.php?command=none\&amp;quot;&amp;gt;make a backup&amp;lt;/a&amp;gt; of the actual database before going on.</item>
 		<item name="SEARCH">search</item>
 		<item name="SEARCH_IN">search in</item>
 		<item name="SEARCH_RESULTS">search results</item>
@@ -438,11 +330,7 @@ You are &amp;lt;b&amp;gt;strongly&amp;lt;/b&amp;gt; suggested to &amp;lt;a href=
 		<item name="SHOW_NAMES">show the names</item>
 		<item name="SHOW_ORDERS">show the orders</item>
 		<item name="SHOW_TOPLIST">show the toplist</item>
-		<item name="SIMULATE_ONLY">Simulate only (doesn&amp;#039;t modify the database)</item>
-		<item name="SIMULATION_ACTIVE">Simulation mode&amp;lt;br/&amp;gt;(database has not been modified)</item>
 		<item name="SOCIAL_SECURITY_NUMBER">social security number</item>
-		<item name="STATISTICS">statistics</item>
-		<item name="STATS_TOTAL_WAITERS">Total revenue per waiter</item>
 		<item name="STOCK">Stock</item>
 		<item name="STOCK_INSERT_INGREDS_QUANTITIES">insert ingredient quantites</item>
 		<item name="STOCK_MOVEMENT">stock movement</item>
@@ -509,23 +397,16 @@ You are &amp;lt;b&amp;gt;strongly&amp;lt;/b&amp;gt; suggested to &amp;lt;a href=
 		<item name="VERBOSITY_HIGH">High</item>
 		<item name="VERBOSITY_LOW">Low</item>
 		<item name="VERBOSITY_NONE">None</item>
-		<item name="VERSION_FROM">From Version</item>
-		<item name="VERSION_INSTALLED">Installed version</item>
-		<item name="VERSION_TO">to version</item>
 		<item name="VISIBLE">visible</item>
 		<item name="VISIBLE_TO_WAITERS">visible to waiters</item>
 		<item name="VISIBLE_TO_WAITERS_HELP">Allows to hide the item in the waiters\&amp;#039; section. You can disable this function in the configuration file to make all the items visible.</item>
 		<item name="WAITER">waiter</item>
 		<item name="WAITERS">Waiters</item>
-		<item name="WAIT_THIS_MAY_TAKE_TIME">please wait, the process may take some time...</item>
-		<item name="WEBSERVER_VERSION">Web server version</item>
-		<item name="WEBSITE">website</item>
 		<item name="WHO">who</item>
 		<item name="WHO_ARE_YOU">who are you?</item>
 		<item name="XML">XML</item>
 		<item name="YES">Yes</item>
 		<item name="ZIP_CODE">Zip code</item>
-		<!-- start client translation codes -->
 		<item name="NO_PASSWORD_GIVEN">No password given for the following account!!</item>
 		<item name="SELECT_USER">Select a user to login</item>
 		<item name="GIVE_PASSWORD">Please write a password to login</item>
