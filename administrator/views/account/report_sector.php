@@ -147,7 +147,7 @@ foreach($sector_movements->result() as $row) {
 	<?php foreach($totalSector as $sector => $value) {
 		echo '<tr><td align="left">' . $sector . '</td><td align="right">' . $value . ' </td></tr>';
 	}
-	echo '<tr><td align="left"><strong>' lang('total') .' : </strong></td><td align="right"><strong>' . array_sum($totalSector)  . ' </strong></td></tr>';
+	echo '<tr><td align="left"><strong>'. lang('total') .' : </strong></td><td align="right"><strong>' . array_sum($totalSector)  . ' </strong></td></tr>';
 	?>
 </table>
 <table style="PAGE-BREAK-BEFORE: always; WIDTH: 100%;border:0px" align="center">
@@ -181,9 +181,9 @@ foreach($sector_movements->result() as $row) {
   	$pdf->line(16, $y, $w - 16, $y, $color, 1);
 
   	$width = Font_Metrics::get_text_width("Page 1 of 2", $font, $size);
-	$width2= Font_Metrics::get_text_width("Smart Bar (c) 2006/2008 Gjergj Sheldija                                ", $font, $size);
+	$width2= Font_Metrics::get_text_width("Smart Restaurant (c) 2006/2009 Gjergj Sheldija                                ", $font, $size);
   	$pdf->page_text($w / 2 - $width / 2, $y, "Page {PAGE_NUM} of {PAGE_COUNT}", $font, $size, $color);
-  	$pdf->page_text($w - $width2, $y, "Smart Bar (c) 2006/2008 Gjergj Sheldija", $font, $size, $color);
+  	$pdf->page_text($w - $width2, $y, "Smart Restaurant (c) 2006/2009 Gjergj Sheldija", $font, $size, $color);
 
 }
 </script>
