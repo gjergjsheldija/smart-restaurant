@@ -174,7 +174,7 @@
 		*/
 		$error_msg = common_header('Waiter not connected');
 		$error_msg .= redirect_waiter('index.php');
-		$error_msg .= MSG_WAITER_NOT_CONNECTED_ERROR.'<br>
+		$error_msg .= phr('MSG_WAITER_NOT_CONNECTED_ERROR').'<br>
 	<a href="index.php">'.ucfirst(phr('CONNECT')).'</a>';
 		$error_msg .= common_bottom();
 		die($error_msg);

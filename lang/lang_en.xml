@@ -380,11 +380,6 @@ To proceed, check the \&amp;#039;Reset separated bills\&amp;#039; checkbox and c
 		<item name="UPDATE_INGREDIENT_QUANTITIES">update ingredients quantities</item>
 		<item name="UPDATE_NOTE">update the note</item>
 		<item name="UPDATE_PRICE">Update the price</item>
-		<item name="UPGRADE">Upgrade</item>
-		<item name="UPGRADES_AVAILABLE">there are upgrades available. The upgrades should be applied as soon as possible, otherwise the system may not work correctly.</item>
-		<item name="UPGRADE_FILE">Upgrade file</item>
-		<item name="UPGRADE_MINIMUM_VERSION">You must have fresh installed version 0.8.3-beta6 or later to use the upgrader.</item>
-		<item name="UPGRADE_STRING">Upgrade SQL string (&amp;lt;b&amp;gt;for advanced users only&amp;lt;/b&amp;gt;)</item>
 		<item name="USER">user</item>
 		<item name="USERS">Users</item>
 		<item name="VALUE">Value</item>
@@ -405,6 +400,7 @@ To proceed, check the \&amp;#039;Reset separated bills\&amp;#039; checkbox and c
 		<item name="WHO">who</item>
 		<item name="WHO_ARE_YOU">who are you?</item>
 		<item name="XML">XML</item>
+		<item name="MSG_WAITER_NOT_CONNECTED_ERROR">You are not connected!</item>
 		<item name="YES">Yes</item>
 		<item name="ZIP_CODE">Zip code</item>
 		<item name="NO_PASSWORD_GIVEN">No password given for the following account!!</item>
