@@ -922,17 +922,14 @@ function head_line ($title) {
 	$output='
 	<meta http-equiv="content-type" content="text/html; charset='.phr('CHARSET').'">
 	<title>Smart Restaurant - '.$title.'</title>
-	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.js"></script>
-	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.growl.js"></script>
-	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/growlCustom.js"></script>	
-	<script type="text/javascript" language="JavaScript" src="'.ROOTDIR.'/js/jquery.simplemodal.js"></script>
-	<script type="text/javascript" language="JavaScript" src="'.CONF_JS_URL.'"></script>
+	<script type="text/javascript" language="JavaScript" src="../min/?b=smartres/trunk&f=js/jquery.js,js/jquery.growl.js,js/growlCustom.js,js/jquery.simplemodal.js,pos/generic.js"></script>	
 	<script language="javascript" type="text/javascript">
 		 $(document).ready(function(){
 			$("#dishid").each(function () {this.select(); });
 		 });
 	</script> 	
-	<link rel="stylesheet" href="'.CONF_CSS_URL.'" type="text/css">
+	
+	<link type="text/css" rel="stylesheet" href="../min/?f=smartres/trunk/css/styles.css" />
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta http-equiv="Expires" content="0">';
 	$tpl -> assign("head", $output);
