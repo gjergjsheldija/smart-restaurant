@@ -922,7 +922,7 @@ function head_line ($title) {
 	$output='
 	<meta http-equiv="content-type" content="text/html; charset='.phr('CHARSET').'">
 	<title>Smart Restaurant - '.$title.'</title>
-	<script type="text/javascript" language="JavaScript" src="../min/?b=demo/smartres&f=js/jquery.js,js/jquery.growl.js,js/growlCustom.js,js/jquery.simplemodal.js,pos/generic.js"></script>	
+	<script type="text/javascript" language="JavaScript" src="../min/?b=smartres/trunk&f=js/jquery.js,js/jquery.growl.js,js/growlCustom.js,js/jquery.simplemodal.js,pos/generic.js"></script>	
 	<script language="javascript" type="text/javascript">
 		 $(document).ready(function(){
 			$("#dishid").each(function () {this.select(); });
