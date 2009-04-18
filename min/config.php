@@ -12,7 +12,7 @@
  * To allow debugging, set this option to true and add "&debug=1" to 
  * a URI. E.g. /min/?f=script1.js,script2.js&debug=1
  */
-$min_allowDebugFlag = false;
+$min_allowDebugFlag = true;
 
 
 /**
@@ -32,7 +32,7 @@ $min_errorLogger = false;
  * Allow use of the Minify URI Builder app. If you no longer need 
  * this, set to false.
  **/
-$min_enableBuilder = true;
+$min_enableBuilder = false;
 
 
 /**
@@ -40,8 +40,8 @@ $min_enableBuilder = true;
  * will have to load extra code to guess. Some examples below:
  */
 //$min_cachePath = 'c:\\WINDOWS\\Temp';
-//$min_cachePath = '/tmp';
-$min_cachePath = preg_replace('/^\\d+;/', '', session_save_path());
+$min_cachePath = '/tmp';
+//$min_cachePath = preg_replace('/^\\d+;/', '', session_save_path());
 
 
 /**
@@ -54,10 +54,9 @@ $min_cachePath = preg_replace('/^\\d+;/', '', session_save_path());
  * If /min/ is directly inside your document root, just uncomment the 
  * second line. The third line might work on some Apache servers.
  */
-$min_documentRoot = '';
+//$min_documentRoot = '';
 //$min_documentRoot = substr(__FILE__, 0, strlen(__FILE__) - 15);
 //$min_documentRoot = $_SERVER['SUBDOMAIN_DOCUMENT_ROOT'];
-
 
 /**
  * Cache file locking. Set to false if filesystem is NFS. On at least one 
@@ -108,7 +107,7 @@ $min_serveOptions['minApp']['groupsOnly'] = false;
 /**
  * Maximum # of files that can be specified in the "f" GET parameter
  */
-$min_serveOptions['minApp']['maxFiles'] = 10;
+$min_serveOptions['minApp']['maxFiles'] = 20;
 
 
 /**

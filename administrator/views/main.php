@@ -30,26 +30,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/ColorPicker.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.easing.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.dimensions.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/ui.core.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/ui.accordion.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/ui.tabs.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/ui.datepicker.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.jeditable.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.cluetip.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.validate.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.metadata.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.form.js"></script>
-<script language="javascript" src="<?=base_url(); ?>../js/jquery.highlightFade.js"></script>
-<?=link_tag('../css/stylesheet.css') ?>
-<?=link_tag('../css/ColorPicker.css') ?>
-<?=link_tag('../css/menu.css') ?>
-<?=link_tag('../css/ui.tabs.css') ?>
-<?=link_tag('../css/ui.datepicker.css') ?>
-<?=link_tag('../css/jquery.cluetip.css') ?>
+<script type="text/javascript" src="<?=base_url(); ?>../min/?b=smartres/trunk/js&amp;f=jquery.js,ColorPicker.js,jquery.easing.js,jquery.dimensions.js,ui.core.js,ui.accordion.js,ui.tabs.js,ui.datepicker.js,jquery.jeditable.js,jquery.cluetip.js,jquery.validate.js,jquery.metadata.js,jquery.form.js,jquery.highlightFade.js"></script>
+<link type="text/css" rel="stylesheet" href="<?=base_url(); ?>../min/?b=smartres/trunk/css&amp;f=stylesheet.css,ColorPicker.css,menu.css,ui.tabs.css,ui.datepicker.css,jquery.cluetip.css" />
 </head>
 <body>
 

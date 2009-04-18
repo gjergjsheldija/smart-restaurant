@@ -236,7 +236,7 @@
 	header("Content-Language: ".$_SESSION['language']);
 	header("Content-type: text/html; charset=".phr('CHARSET'));
 	
-	$tmp = head_line('Seksioni i kameriereve');
+	$tmp = head_line('Waiters Section');
 	$tpl -> assign("head", $tmp);
 
 	if(!isset($dont_redirect_to_menu)) {

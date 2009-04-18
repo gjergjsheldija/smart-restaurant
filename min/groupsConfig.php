@@ -4,31 +4,28 @@
  * @package Minify
  */
 
-/** 
- * You may wish to use the Minify URI Builder app to suggest
- * changes. http://yourdomain/min/builder/
- **/
-
 return array(
-    // 'js' => array('//js/file1.js', '//js/file2.js'),
-    // 'css' => array('//css/file1.css', '//css/file2.css'),
-
-    // custom source example
-    /*'js2' => array(
-        dirname(__FILE__) . '/../min_unit_tests/_test_files/js/before.js',
-        // do NOT process this file
-        new Minify_Source(array(
-            'filepath' => dirname(__FILE__) . '/../min_unit_tests/_test_files/js/before.js',
-            'minifier' => create_function('$a', 'return $a;')
-        ))
-    ),//*/
-
-    /*'js3' => array(
-        dirname(__FILE__) . '/../min_unit_tests/_test_files/js/before.js',
-        // do NOT process this file
-        new Minify_Source(array(
-            'filepath' => dirname(__FILE__) . '/../min_unit_tests/_test_files/js/before.js',
-            'minifier' => array('Minify_Packer', 'minify')
-        ))
-    ),//*/
+ 	'adminjs' => array(
+    	'/smartres/trunk/js/jquery.js'
+    	'/smartres/trunk/js/ColorPicker.js', 
+    	'/smartres/trunk/js/jquery.easing.js', 
+    	'/smartres/trunk/js/jquery.dimensions.js', 
+    	'/smartres/trunk/js/ui.core.js', 
+    	'/smartres/trunk/js/ui.accordion.js', 
+    	'/smartres/trunk/js/ui.tabs.js', 
+    	'/smartres/trunk/js/ui.datepicker.js', 
+    	'/smartres/trunk/js/jquery.jeditable.js', 
+    	'/smartres/trunk/js/jquery.cluetip.js', 
+    	'/smartres/trunk/js/jquery.validate.js', 
+    	'/smartres/trunk/js/jquery.metadata.js',
+		'/smartres/trunk/js/jquery.form.js', 
+		'/smartres/trunk/js/jquery.highlightFade.js'
+	),
+	'waiterjs' => array (
+		'/smartres/trunk/js/jquery.js',
+		'/smartres/trunk/js/jquery.growl.js',
+		'/smartres/trunk/js/growlCustom.js',
+		'/smartres/trunk/js/jquery.simplemodal.js',
+		'/smartres/trunk/pos/generic.js',
+	)
 );
