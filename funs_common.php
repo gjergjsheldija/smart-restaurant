@@ -68,20 +68,6 @@ function check_db_status () {
 	}
 }
 
-function timestamp_to_unix ($str) {
-	$year=substr($str,0,4);
-	$month=substr($str,4,2);
-	$day=substr($str,6,2);
-	$hour=substr($str,8,2);
-	$minute=substr($str,10,2);
-	$second=substr($str,12,2);
-
-	$new_timestamp = $year.'/'.$month.'/'.$day.' '.$hour.':'.$minute.':'.$second;
-
-	if (($unix = strtotime($new_timestamp)) === -1) return 0;
-	return $unix;
-}
-
 function show_logo () {
 	$ret = '<img src="'.ROOTDIR.'/images/logo2.jpg" alt="Smart Restaurant Logo">'."\n";
 	return $ret;
@@ -190,26 +176,6 @@ function common_set_error_reporting () {
 	return 0;
 }
 
-function common_get_language () {
-	if(isset($_SESSION['language'])) return $_SESSION['language'];
-	
-	$value=get_conf(__FILE__,__LINE__,'default_language');
-	$value=trim($value);
-	if ($value == null || strlen($value) == 0) return "en";
-
-	return $value;
-}
-
-function common_find_col_lenght ($arr) {
-	$trim=4;
-
-	foreach ($arr as $value) {
-		$value = str_replace('&nbsp;',' ',$value);
-		$tmp=strlen($value);
-		if ($tmp > ($col_len+$trim)) $col_len=$tmp-$trim;
-	}
-	return $col_len;
-}
 
 
 function database_query($query,$file,$line,$db,$silent=false) {
@@ -264,85 +230,6 @@ function accounting_query($query,$file,$line,$silent=false) {
 	return $res;
 }
 
-function display_todo($servrd){
-
-	clearstatcache(void);
-	$lastupdate=date("j F Y G:i:s",filemtime("./todo.php"));
-
-	echo "<hr><h5>\n";
-	echo "CLIENT DATA: $servrd\n";
-	echo "<br>Todo file last update:";
-	echo "<b>$lastupdate</b></h5>";
-	echo "<a href=\"todo.txt\">Todo and Roadmap</a>";
-}
-
-function lang_to_file($string,$filename) {
-	if (!is_writable($filename)) {
-		print "Cannot write to file ($filename)";
-		return 2;	
-	}
-	
-	// Opening $filename in append mode.
-	// The file pointer is at the bottom of the file.
-	if (!$handle = fopen($filename, 'w')) {
-		print "Cannot open file ($filename)";
-		return 1;
-	}
-	
-	// Write message to opened file.
-	if (!fwrite($handle, $string)) {
-		print "Cannot write to file ($filename)";
-		return 3;
-	}
-	
-	fclose($handle);
-	return 0;
-}
-
-function lang_db_to_string($lang) {
-	$output=
-'<?xml version="1.0"?>
-<!DOCTYPE SmartRestaurant [
-	<!ELEMENT SmartRestaurant (type,data+)>
-	<!ELEMENT type (#PCDATA)>
-	<!ELEMENT language (#PCDATA)>
-	<!ELEMENT data (item*)>
-	<!ELEMENT item (#PCDATA)>
-	<!ATTLIST item
-		name (CDATA) #REQUIRED
-	>
-]>
-<SmartRestaurant>
-	<type> translation </type>
-	<language>'.$lang.'</language>
-	<data>
-';
-	$table="lang";
-	$lang_table="lang_".$lang;
-
-	$query="SELECT * FROM `".$table."` ORDER BY `name`";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return ERR_MYSQL;
-
-	while($arr = mysql_fetch_array ($res)) {
-		$id = $arr['id'];
-		$name=$arr['name'];
-	
-		$query="SELECT `table_name` FROM `".$lang_table."` WHERE `table_id`='".$id."'";
-		$reslocal=common_query($query,__FILE__,__LINE__);
-		if(!$reslocal) return ERR_MYSQL;
-	
-		$arrlocal = mysql_fetch_array ($reslocal);
-		$value=htmlentities($arrlocal['table_name']);
-
-		$output.="\t\t".'<item name="'.$name.'">'.$value.'</item>'."\n" ;
-	}
-	$output.=
-'	</data>
-</SmartRestaurant>';
-
-	return $output;
-}
 
 function start_language () {
 	lang_read_all();
@@ -438,11 +325,10 @@ function status_report ($name,$err) {
 function error_display($number,$silent=false,$level=ERROR_LEVEL_USER) {
 	global $tpl;
 	$tmp='';
-	if(!$silent) $tmp .= ucfirst(phr('ERROR')).': ';
-	$tmp .= ucfirst(error_get($number))."<br/>\n";
-	$tmp='<font color="Red">'.$tmp.'</font>';
+	if(!$silent) 	
+		$tmp = '<script>$.growl("'.ucphr("Information").'","<font color="red">'.ucfirst(error_get($number)) . ucphr($name).' '.ucphr('ERROR').'</font>","'.IMAGE_ERROR.'")</script>';
 	$tpl -> append ('messages',$tmp);
-
+	
 	if($level==ERROR_LEVEL_USER) return 0;
 	elseif($level==ERROR_LEVEL_DEBUG) debug_msg(__FILE__,__LINE__,$msg);
 	elseif($level==ERROR_LEVEL_ERROR) error_msg(__FILE__,__LINE__,$msg);
@@ -486,8 +372,6 @@ function ucphr($name) {
 	else $lang= get_conf(__FILE__,__LINE__,"default_language");
 	
 	$ret = lang_get($lang,$name);
-	// optimisation
-	//if(ord($ret)>97 && ord($ret)<122)
 	$ret = ucfirst ($ret);
 	
 	return $ret;
@@ -581,29 +465,6 @@ function lang_get_xml($language,$name,$charset='iso-8859-1') {
 	return $name;
 }
 
-function lang_get_db($lang,$name,$charset='iso-8859-1'){
-
-	if(empty($lang)) $lang="en";
-
-	$table="lang";
-	$lang_table="lang_".$lang;
-
-
-	$query="SELECT `table_name` FROM `".$table."` WHERE `name`='".$name."'";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return ERR_MYSQL;
-
-	$arr = mysql_fetch_array ($res);
-	
-
-	$ret=$arr['table_name'];
-	$ret=stripslashes($ret);
-	
-	if($charset=='CHARSET' || empty($charset)) $charset='iso-8859-1';
-	$ret = html_entity_decode ($ret,ENT_QUOTES,$charset);
-	
-	return $ret;
-}
 
 function var_dump_table($var){
 $tmp = '';
@@ -649,20 +510,6 @@ function var_dump_string($var){
 		$out .= $var;
 	}
 	return $out;
-}
-
-function list_upgrades($dir) {
-clearstatcache();
-if ($handle = opendir($dir)) {
-	while (false !== ($file = readdir($handle))) {
-		if (is_file($dir.'/'.$file) && is_readable($dir.'/'.$file) && $file != "." && $file != ".." && eregi("^mhr_",$file) && eregi("\.sql$",$file)) {
-			$output[]=$file;
-		}
-	}
-	closedir($handle);
-}
-
-return $output;
 }
 
 function list_drivers($dir) {
@@ -908,14 +755,6 @@ function common_header($title,$mgmt='') {
 	return $msg;
 }
 
-function strip_newlines($msg) {
-	$msg=str_replace("\r\n",'',$msg);
-	$msg=str_replace("\r",'',$msg);
-	$msg=str_replace("\n",'',$msg);
-	return $msg;
-}
-
-
 function head_line ($title) {
 	global $tpl;
 	
@@ -1021,11 +860,6 @@ function redirect_waiter($url) {
 	return $msg;
 }
 
-function redirect_manage($url) {
-	$refresh_time=get_conf(__FILE__,__LINE__,"refresh_time_management");
-	$msg = redirect_timed($url,$refresh_time*1000);
-	return $msg;
-}
 
 function redirect_timed($url,$millitime) {
 	$msg = '
@@ -1135,51 +969,6 @@ function error_msg($file,$line,$msg){
 	
 	fclose($handle);
 	return 0;
-}
-
-/* Used to display detailed information about an array */
-function printa($obj,$sql_commented=0) {
-  global $__level_deep;
-   
-  if (!isset($__level_deep)) $__level_deep = array();
-
-  if (is_object($obj))
-    print '[obj]';
-  elseif (is_array($obj)) {
-    foreach(array_keys($obj) as $keys) {
-      array_push($__level_deep, "[".$keys."]");
-      $printa_output .= printa_child($obj[$keys],$sql_commented);
-      array_pop($__level_deep);
-    }
-  } else {
-  	if($sql_commented) $printa_output .= "# ";
-  	$printa_output .= implode(" ",$__level_deep)." = $obj\n";
-  	if(!$sql_commented) $printa_output .= "<br />";
-}
-	return $printa_output;
-
-}
-
-function printa_child ($obj,$sql_commented=0) {
-  global $__level_deep;
-  
-  if (!isset($__level_deep)) $__level_deep = array();
-
-  if (is_object($obj))
-    print '[obj]';
-  elseif (is_array($obj)) {
-    foreach(array_keys($obj) as $keys) {
-      array_push($__level_deep, "[".$keys."]");
-      $local .= printa_child($obj[$keys],$sql_commented);
-      array_pop($__level_deep);
-    }
-  } else {
-  	if($sql_commented) $local .= "# ";
-  	$local .= implode(" ",$__level_deep)." = $obj\n";
-  	if(!$sql_commented) $local .= "<br />";
-}
-	return $local;
-
 }
 
 function generating_time($inizio){
