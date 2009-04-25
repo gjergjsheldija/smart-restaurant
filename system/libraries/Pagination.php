@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2006, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -88,7 +88,7 @@ class CI_Pagination {
 				{
 					$this->$key = $val;
 				}
-			}		
+			}
 		}
 	}
 	
@@ -118,7 +118,7 @@ class CI_Pagination {
 		}
 
 		// Determine the current page number.		
-		$CI =& get_instance();	
+		$CI =& get_instance();
 		
 		if ($CI->config->item('enable_query_strings') === TRUE OR $this->page_query_string === TRUE)
 		{
@@ -172,7 +172,7 @@ class CI_Pagination {
 		// string. If post, add a trailing slash to the base URL if needed
 		if ($CI->config->item('enable_query_strings') === TRUE OR $this->page_query_string === TRUE)
 		{
-			$this->base_url = rtrim($this->base_url).AMP.$this->query_string_segment.'=';
+			$this->base_url = rtrim($this->base_url).'&amp;'.$this->query_string_segment.'=';
 		}
 		else
 		{
@@ -183,7 +183,7 @@ class CI_Pagination {
 		$output = '';
 
 		// Render the "First" link
-		if  ($this->cur_page > $this->num_links)
+		if  ($this->cur_page > ($this->num_links + 1))
 		{
 			$output .= $this->first_tag_open.'<a href="'.$this->base_url.'">'.$this->first_link.'</a>'.$this->first_tag_close;
 		}

@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2006, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -46,7 +46,7 @@ class CI_Config {
 	{
 		$this->config =& get_config();
 		log_message('debug', "Config Class Initialized");
-	}  	
+	}
   	
 	// --------------------------------------------------------------------
 

@@ -94,7 +94,7 @@ class BankAccount extends Controller {
 	}
 
 	function addnewMovement() {
-		//shtoj levizjen bankare
+		//add a new bank movement
 		$this->db->insert('account_account_log', $_POST);	
 
 		redirect('bankaccount/index/movement');

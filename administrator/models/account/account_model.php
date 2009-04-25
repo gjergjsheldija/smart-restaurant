@@ -33,7 +33,7 @@ class Account_Model extends Model {
 	
 	function account_list($type) {
 		if($type == 'ap') {
-			$this->db->select('account_mgmt_main.*')
+			$this->db->select('*')
 					->from('account_mgmt_main')
 					->join('mgmt_types','mgmt_types.id = account_mgmt_main.type')
 					->where('account_mgmt_main.waiter_income','0')
@@ -41,7 +41,7 @@ class Account_Model extends Model {
 					->where('account_mgmt_main.bank_amount <=','0') // < 0
 					->order_by('account_mgmt_main.who','ASC');		
 		}elseif($type == 'ar'){
-			$this->db->select('account_mgmt_main.*')
+			$this->db->select('*')
 					->from('account_mgmt_main')
 					->join('mgmt_types','mgmt_types.id = account_mgmt_main.type')
 					->where('account_mgmt_main.waiter_income','0')
@@ -94,9 +94,9 @@ class Account_Model extends Model {
 	
 	function payment_type($type = '') {
 		if($type == '')
-			$this->db->select('mgmt_types.*')->from('mgmt_types')->where('is_invoice_payment','1')->or_where('is_invoice','1');
+			$this->db->select('*')->from('mgmt_types')->where('is_invoice_payment','1')->or_where('is_invoice','1');
 		else
-			$this->db->select('mgmt_types.*')->from('mgmt_types');
+			$this->db->select('*')->from('mgmt_types');
 		$query = $this->db->get();
 		$payment_type = array();
 		
@@ -140,7 +140,7 @@ class Account_Model extends Model {
 	}
 	
 	function account_movement($from, $to) {
-		$query = $this->db->select('mgmt_types.name, account_mgmt_main.*')
+		$query = $this->db->select('*')
 						  ->from('account_mgmt_main')
 						  ->join('mgmt_types','mgmt_types.id = account_mgmt_main.type')
 						  ->where('account_mgmt_main.date >=', $from)
@@ -154,7 +154,7 @@ class Account_Model extends Model {
 	}
 	
 	function waiter_movement($from, $to) {
-		$query = $this->db->select('mgmt_types.name, account_mgmt_main.*')
+		$query = $this->db->select('*')
 						  ->from('account_mgmt_main')
 						  ->join('mgmt_types','mgmt_types.id = account_mgmt_main.type')
 						  ->where('account_mgmt_main.date >=', $from)
@@ -182,7 +182,7 @@ class Account_Model extends Model {
 	}
 	
 	function sector_numdish($from, $to) {
-		$query = $this->db->select('dishes.name, COUNT(dishes.name) AS numdish')
+		$query = $this->db->select('dishes.name, count( dishes.name ) AS numdish')
 						  ->from('dishes')
 						  ->join('account_log','dishes.id = account_log.dish')
 						  ->where('account_log.datetime >=', $from)

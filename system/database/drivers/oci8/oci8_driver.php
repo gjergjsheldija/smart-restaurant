@@ -6,7 +6,7 @@
  *
  * @package	 	CodeIgniter
  * @author	  	ExpressionEngine Dev Team
- * @copyright   Copyright (c) 2006, EllisLab, Inc.
+ * @copyright   Copyright (c) 2008, EllisLab, Inc.
  * @license	 	http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since	   	Version 1.0
@@ -42,6 +42,11 @@
  */
 
 class CI_DB_oci8_driver extends CI_DB {
+
+	var $dbdriver = 'oci8';
+	
+	// The character used for excaping
+	var $_escape_char = '"';
 
 	/**
 	 * The syntax to count rows is slightly different across different
@@ -111,7 +116,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */
 	function db_set_charset($charset, $collation)
 	{
-		// TODO - add support if needed
+		// @todo - add support if needed
 		return TRUE;
 	}
 
@@ -141,6 +146,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	{
 		// oracle must parse the query before it is run. All of the actions with
 		// the query are based on the statement id returned by ociparse
+		$this->stmt_id = FALSE;
 		$this->_set_stmt_id($sql);
 		ocisetprefetch($this->stmt_id, 1000);
 		return @ociexecute($this->stmt_id, $this->_commit);
@@ -205,11 +211,11 @@ class CI_DB_oci8_driver extends CI_DB {
 	 * params array keys
 	 *
 	 * KEY	  OPTIONAL	NOTES
-	 * name	 no		  the name of the parameter should be in :<param_name> format
-	 * value	no		  the value of the parameter.  If this is an OUT or IN OUT parameter,
-	 *					  this should be a reference to a variable
-	 * type	 yes		 the type of the parameter
-	 * length   yes		 the max size of the parameter
+	 * name		no		the name of the parameter should be in :<param_name> format
+	 * value	no		the value of the parameter.  If this is an OUT or IN OUT parameter,
+	 *					this should be a reference to a variable
+	 * type		yes		the type of the parameter
+	 * length	yes		the max size of the parameter
 	 */
 	function stored_procedure($package, $procedure, $params)
 	{
@@ -366,7 +372,10 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */
 	function escape_str($str)
 	{
-		return $str;
+		// Access the CI object
+		$CI =& get_instance();
+
+		return $CI->_remove_invisible_characters($str);
 	}
 
 	// --------------------------------------------------------------------
@@ -413,7 +422,7 @@ class CI_DB_oci8_driver extends CI_DB {
 		if ($table == '')
 			return '0';
 
-		$query = $this->query($this->_count_string . $this->_protect_identifiers('numrows'). " FROM " . $this->_protect_identifiers($this->dbprefix.$table));
+		$query = $this->query($this->_count_string . $this->_protect_identifiers('numrows'). " FROM " . $this->_protect_identifiers($table, TRUE, NULL, FALSE));
 
 		if ($query == FALSE)
 			{
@@ -476,7 +485,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */
 	function _field_data($table)
 	{
-		return "SELECT * FROM ".$this->_escape_table($table)." where rownum = 1";
+		return "SELECT * FROM ".$table." where rownum = 1";
 	}
 
 	// --------------------------------------------------------------------
@@ -506,89 +515,38 @@ class CI_DB_oci8_driver extends CI_DB {
 		$error = ocierror($this->conn_id);
 		return $error['code'];
 	}
-
+	
 	// --------------------------------------------------------------------
 
 	/**
-	 * Escape Table Name
+	 * Escape the SQL Identifiers
 	 *
-	 * This function adds backticks if the table name has a period
-	 * in it. Some DBs will get cranky unless periods are escaped
-	 *
-	 * @access  private
-	 * @param   string  the table name
-	 * @return  string
-	 */
-	function _escape_table($table)
-	{
-		if (strpos($table, '.') !== FALSE)
-		{
-			$table = '"' . str_replace('.', '"."', $table) . '"';
-		}
-
-		return $table;
-	}
-
-	// --------------------------------------------------------------------
-
-	/**
-	 * Protect Identifiers
-	 *
-	 * This function adds backticks if appropriate based on db type
+	 * This function escapes column and table names
 	 *
 	 * @access	private
-	 * @param	mixed	the item to escape
-	 * @param	boolean	only affect the first word
-	 * @return	mixed	the item with backticks
+	 * @param	string
+	 * @return	string
 	 */
-	function _protect_identifiers($item, $first_word_only = FALSE)
+	function _escape_identifiers($item)
 	{
-		if (is_array($item))
+		if ($this->_escape_char == '')
 		{
-			$escaped_array = array();
-
-			foreach($item as $k=>$v)
-			{
-				$escaped_array[$this->_protect_identifiers($k)] = $this->_protect_identifiers($v, $first_word_only);
-			}
-
-			return $escaped_array;
-		}	
-
-		// This function may get "item1 item2" as a string, and so
-		// we may need ""item1" "item2"" and not ""item1 item2""
-		if (ctype_alnum($item) === FALSE)
+			return $item;
+		}
+	
+		if (strpos($item, '.') !== FALSE)
 		{
-			if (strpos($item, '.') !== FALSE)
-			{
-				$aliased_tables = implode(".",$this->ar_aliased_tables).'.';
-				$table_name =  substr($item, 0, strpos($item, '.')+1);
-				$item = (strpos($aliased_tables, $table_name) !== FALSE) ? $item = $item : $this->dbprefix.$item;
-			}
-
-			// This function may get "field >= 1", and need it to return ""field" >= 1"
-			$lbound = ($first_word_only === TRUE) ? '' : '|\s|\(';
-
-			$item = preg_replace('/(^'.$lbound.')([\w\d\-\_]+?)(\s|\)|$)/iS', '$1"$2"$3', $item);
+			$str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;			
 		}
 		else
 		{
-			return "\"{$item}\"";
+			$str = $this->_escape_char.$item.$this->_escape_char;
 		}
-
-		$exceptions = array('AS', '/', '-', '%', '+', '*', 'OR', 'IS');
 		
-		foreach ($exceptions as $exception)
-		{
-		
-			if (stristr($item, " \"{$exception}\" ") !== FALSE)
-			{
-				$item = preg_replace('/ "('.preg_quote($exception).')" /i', ' $1 ', $item);
-			}
-		}
-		return $item;
+		// remove duplicates if the user already included the escape
+		return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
 	}
-			
+	
 	// --------------------------------------------------------------------
 
 	/**
@@ -626,7 +584,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */
 	function _insert($table, $keys, $values)
 	{
-	return "INSERT INTO ".$this->_escape_table($table)." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+	return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
 	}
 
 	// --------------------------------------------------------------------
@@ -655,8 +613,10 @@ class CI_DB_oci8_driver extends CI_DB {
 		
 		$orderby = (count($orderby) >= 1)?' ORDER BY '.implode(", ", $orderby):'';
 	
-		$sql = "UPDATE ".$this->_escape_table($table)." SET ".implode(', ', $valstr);
+		$sql = "UPDATE ".$table." SET ".implode(', ', $valstr);
+
 		$sql .= ($where != '' AND count($where) >=1) ? " WHERE ".implode(" ", $where) : '';
+
 		$sql .= $orderby.$limit;
 		
 		return $sql;
@@ -677,7 +637,7 @@ class CI_DB_oci8_driver extends CI_DB {
 	 */	
 	function _truncate($table)
 	{
-		return "TRUNCATE TABLE ".$this->_escape_table($table);
+		return "TRUNCATE TABLE ".$table;
 	}
 	
 	// --------------------------------------------------------------------

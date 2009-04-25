@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2006, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -59,7 +59,7 @@ class CI_Email {
 	var	$_atc_boundary	= "";
 	var	$_header_str	= "";
 	var	$_smtp_connect	= "";
-	var	$_encoding		= "8bit";	
+	var	$_encoding		= "8bit";
 	var $_IP			= FALSE;
 	var	$_smtp_auth		= FALSE;
 	var $_replyto_flag	= FALSE;
@@ -74,24 +74,26 @@ class CI_Email {
 	var	$_protocols		= array('mail', 'sendmail', 'smtp');
 	var	$_base_charsets	= array('us-ascii', 'iso-2022-');	// 7-bit charsets (excluding language suffix)
 	var	$_bit_depths	= array('7bit', '8bit');
-	var	$_priorities	= array('1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)');	
+	var	$_priorities	= array('1 (Highest)', '2 (High)', '3 (Normal)', '4 (Low)', '5 (Lowest)');
 
 
 	/**
 	 * Constructor - Sets Email Preferences
 	 *
 	 * The constructor can be passed an array of config values
-	 */	
+	 */
 	function CI_Email($config = array())
-	{
+	{	
 		if (count($config) > 0)
 		{
 			$this->initialize($config);
 		}	
-
-		$this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? FALSE : TRUE;	
-		$this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
-
+		else
+		{
+			$this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? FALSE : TRUE;	
+			$this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
+		}
+		
 		log_message('debug', "Email Class Initialized");
 	}
 
@@ -103,7 +105,7 @@ class CI_Email {
 	 * @access	public
 	 * @param	array
 	 * @return	void
-	 */	
+	 */
 	function initialize($config = array())
 	{
 		$this->clear();
@@ -123,6 +125,9 @@ class CI_Email {
 				}	
 			}
 		}
+		
+		$this->_smtp_auth = ($this->smtp_user == '' AND $this->smtp_pass == '') ? FALSE : TRUE;	
+		$this->_safe_mode = ((boolean)@ini_get("safe_mode") === FALSE) ? FALSE : TRUE;
 	}
   	
 	// --------------------------------------------------------------------
@@ -272,7 +277,9 @@ class CI_Email {
 		$cc = $this->clean_email($cc);
 
 		if ($this->validate)
+		{
 			$this->validate_email($cc);
+		}
 
 		$this->_set_header('Cc', implode(", ", $cc));
 
@@ -625,15 +632,15 @@ class CI_Email {
 	{	
 		if	($this->mailtype == 'html' &&  count($this->_attach_name) == 0)
 		{
-				return 'html';
+			return 'html';
 		}
 		elseif	($this->mailtype == 'html' &&  count($this->_attach_name)  > 0)
 		{
-				return 'html-attach';
+			return 'html-attach';
 		}
 		elseif	($this->mailtype == 'text' &&  count($this->_attach_name)  > 0)
 		{
-				return 'plain-attach';
+			return 'plain-attach';
 		}
 		else
 		{
@@ -945,7 +952,9 @@ class CI_Email {
 		}
 
 		if ($this->_get_protocol() == 'mail')
+		{
 			$this->_header_str = substr($this->_header_str, 0, -1);
+		}
 	}
   	
 	// --------------------------------------------------------------------
@@ -1163,10 +1172,13 @@ class CI_Email {
 		// Reduce multiple spaces
 		$str = preg_replace("| +|", " ", $str);
 
+		// kill nulls
+		$str = preg_replace('/\x00+/', '', $str);
+		
 		// Standardize newlines
 		if (strpos($str, "\r") !== FALSE)
 		{
-			$str = str_replace(array("\r\n", "\r"), "\n", $str);			
+			$str = str_replace(array("\r\n", "\r"), "\n", $str);
 		}
 
 		// We are intentionally wrapping so mail servers will encode characters
@@ -1176,8 +1188,8 @@ class CI_Email {
 		// Break into an array of lines
 		$lines = explode("\n", $str);
 
-	    $escape = '=';
-	    $output = '';
+		$escape = '=';
+		$output = '';
 
 		foreach ($lines as $line)
 		{
@@ -1196,7 +1208,7 @@ class CI_Email {
 				// Convert spaces and tabs but only if it's the end of the line
 				if ($i == ($length - 1))
 				{
-					$char = ($ascii == '32' OR $ascii == '9') ? $escape.sprintf('%02s', dechex($char)) : $char;
+					$char = ($ascii == '32' OR $ascii == '9') ? $escape.sprintf('%02s', dechex($ascii)) : $char;
 				}
 
 				// encode = signs
@@ -1417,18 +1429,26 @@ class CI_Email {
 		if ($this->_safe_mode == TRUE)
 		{
 			if ( ! mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str))
+			{
 				return FALSE;
+			}
 			else
+			{
 				return TRUE;
+			}
 		}
 		else
 		{
 			// most documentation of sendmail using the "-f" flag lacks a space after it, however
 			// we've encountered servers that seem to require it to be in place.
 			if ( ! mail($this->_recipients, $this->_subject, $this->_finalbody, $this->_header_str, "-f ".$this->clean_email($this->_headers['From'])))
+			{
 				return FALSE;
+			}
 			else
+			{
 				return TRUE;
+			}
 		}
 	}
   	
@@ -1479,14 +1499,18 @@ class CI_Email {
 		$this->_send_command('from', $this->clean_email($this->_headers['From']));
 
 		foreach($this->_recipients as $val)
+		{
 			$this->_send_command('to', $val);
+		}
 	
 		if (count($this->_cc_array) > 0)
 		{
 			foreach($this->_cc_array as $val)
 			{
 				if ($val != "")
-				$this->_send_command('to', $val);
+				{
+					$this->_send_command('to', $val);
+				}
 			}
 		}
 
@@ -1495,7 +1519,9 @@ class CI_Email {
 			foreach($this->_bcc_array as $val)
 			{
 				if ($val != "")
-				$this->_send_command('to', $val);
+				{
+					$this->_send_command('to', $val);
+				}
 			}
 		}
 

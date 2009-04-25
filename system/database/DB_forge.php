@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2006, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -97,6 +97,16 @@ class CI_DB_forge {
 	 */
 	function add_key($key = '', $primary = FALSE)
 	{
+		if (is_array($key))
+		{
+			foreach($key as $one)
+			{
+				$this->add_key($one, $primary);
+			}
+			
+			return;
+		}
+	
 		if ($key == '')
 		{
 			show_error('Key information is required for that operation.');
@@ -181,7 +191,7 @@ class CI_DB_forge {
 		}
 
 		$sql = $this->_create_table($this->db->dbprefix.$table, $this->fields, $this->primary_keys, $this->keys, $if_not_exists);
-
+		
 		$this->_reset();
 		return $this->db->query($sql);
 	}
@@ -243,7 +253,7 @@ class CI_DB_forge {
 	{
 		if ($table == '')
 		{
-				show_error('A table name is required for that operation.');
+			show_error('A table name is required for that operation.');
 		}
 
 		// add field info into field array, but we can only do one at a time
@@ -276,12 +286,12 @@ class CI_DB_forge {
 	
 		if ($table == '')
 		{
-				show_error('A table name is required for that operation.');
+			show_error('A table name is required for that operation.');
 		}
 
 		if ($column_name == '')
 		{
-				show_error('A column name is required for that operation.');
+			show_error('A column name is required for that operation.');
 		}
 
 		$sql = $this->_alter_table('DROP', $this->db->dbprefix.$table, $column_name);
@@ -302,10 +312,9 @@ class CI_DB_forge {
 	 */
 	function modify_column($table = '', $field = array())
 	{
-	
 		if ($table == '')
 		{
-				show_error('A table name is required for that operation.');
+			show_error('A table name is required for that operation.');
 		}
 
 		// add field info into field array, but we can only do one at a time

@@ -32,7 +32,7 @@ class BankAccount_Model extends Model {
 	}
 	
 	function bankaccount_list() {
-		$this->db->select('account_accounts.*, account_mgmt_addressbook.name as bankname')
+		$this->db->select('*, account_mgmt_addressbook.name as bankname')
 				->from('account_accounts')
 				->join('account_mgmt_addressbook','account_accounts.bank = account_mgmt_addressbook.id')
 				->order_by('account_accounts.bank');	
@@ -81,10 +81,10 @@ class BankAccount_Model extends Model {
 	}
 	
 	function bankaccount_movement($from, $to) {
-		$this->db->select('account_account_log.*,account_accounts.name as accountname,mgmt_types.name,account_mgmt_addressbook.name as bankname')
+		$this->db->select('*,account_accounts.name as accountname,mgmt_types.name,account_mgmt_addressbook.name as bankname')
 				 ->from('account_account_log')
 				 ->join('account_accounts','account_account_log.account_id = account_accounts.id')
-				 ->join('mgmt_types','account_account_log.`type` = mgmt_types.id')
+				 ->join('mgmt_types','account_account_log.type = mgmt_types.id')
 				 ->join('account_mgmt_addressbook','account_accounts.bank = account_mgmt_addressbook.id')
 				 ->where('account_account_log.timestamp >=',$from)
 				 ->where('account_account_log.timestamp <=',$to)

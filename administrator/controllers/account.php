@@ -74,13 +74,13 @@ class Account extends Controller {
 			'type' => $_POST['payment_type']
 		);
 		
-		//ca asht AP ose AR
+		//AP or AR
 		if($id == 'ap')
 			$amount = -$_POST['amount'];
 		elseif($id == 'ar')
 			$amount = $_POST['amount'];
 		
-		//paguar ose jo
+		//payed or not
 		if(isset($_POST['paid'])) { 
 			$insertArray['paid'] =  '1';
 			$insertArray['debit'] = '0';
@@ -89,7 +89,7 @@ class Account extends Controller {
 			$insertArray['debit'] = '1';
 		}
 		
-		//nqs asht ba pagese me banke ose jo
+		//bank payment ?
 		if(isset($_POST['bank_account']) && $_POST['payment_type'] != 3) {
 			$insertArray['bank_amount'] = $amount;
 			$insertArray['account_id'] =  $_POST['bank_account'];
