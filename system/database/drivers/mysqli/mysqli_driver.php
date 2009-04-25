@@ -60,7 +60,15 @@ class CI_DB_mysqli_driver extends CI_DB {
 	 */	
 	function db_connect()
 	{
-		return @mysqli_connect($this->hostname, $this->username, $this->password, $this->database, $this->port);
+		if ($this->port != '')
+		{
+			return @mysqli_connect($this->hostname, $this->username, $this->password, $this->database, $this->port);			
+		}
+		else
+		{
+			return @mysqli_connect($this->hostname, $this->username, $this->password, $this->database);
+		}
+
 	}
 
 	// --------------------------------------------------------------------
@@ -308,15 +316,19 @@ class CI_DB_mysqli_driver extends CI_DB {
 	function count_all($table = '')
 	{
 		if ($table == '')
-			return '0';
-		
-		$query = $this->query($this->_count_string . $this->_protect_identifiers('numrows'). " FROM " . $this->_protect_identifiers($table, TRUE, NULL, FALSE));
-		
+		{
+			return 0;
+		}
+
+		$query = $this->query($this->_count_string . $this->_protect_identifiers('numrows') . " FROM " . $this->_protect_identifiers($table, TRUE, NULL, FALSE));
+
 		if ($query->num_rows() == 0)
-			return '0';
+		{
+			return 0;
+		}
 
 		$row = $query->row();
-		return $row->numrows;
+		return (int) $row->numrows;
 	}
 
 	// --------------------------------------------------------------------
@@ -417,7 +429,18 @@ class CI_DB_mysqli_driver extends CI_DB {
 		{
 			return $item;
 		}
-	
+		
+		foreach ($this->_reserved_identifiers as $id)
+		{
+			if (strpos($item, '.'.$id) !== FALSE)
+			{
+				$str = $this->_escape_char. str_replace('.', $this->_escape_char.'.', $item);  
+				
+				// remove duplicates if the user already included the escape
+				return preg_replace('/['.$this->_escape_char.']+/', $this->_escape_char, $str);
+			}		
+		}
+		
 		if (strpos($item, '.') !== FALSE)
 		{
 			$str = $this->_escape_char.str_replace('.', $this->_escape_char.'.'.$this->_escape_char, $item).$this->_escape_char;			
