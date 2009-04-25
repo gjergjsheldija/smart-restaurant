@@ -39,7 +39,6 @@ include_once(ROOTDIR."/manage/mgmt_funs_other.php");
 include_once(ROOTDIR."/manage/mgmt_funs_database.php");
 include_once(ROOTDIR."/manage/mgmt_funs_supply.php");
 include_once(ROOTDIR."/manage/mgmt_funs_receipt.php");
-include_once(ROOTDIR."/manage/mgmt_funs_printable.php");
 include_once(ROOTDIR."/manage/mgmt_funs_account.php");
 include_once(ROOTDIR."/manage/mgmt_funs_stock.php");
 
