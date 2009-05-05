@@ -222,51 +222,6 @@ function account_movement_check_values($input_data){
 	return $input_data;
 }
 
-function account_main_header() {
-	?>
-<table border="0">
-	<tbody>
-		<tr>
-			<td>
-			<FIELDSET><LEGEND><?php echo phr('ACCOUNT_MAIN_LEGEND'); ?></LEGEND>
-
-			<form action="account.php" method="GET" name="account_main_form">
-			<table border="0">
-				<tbody>
-					<tr>
-						<td><input type="radio"
-							onClick="document.account_main_form.submit()" name="command"
-							value="list" checked> <a href="#"
-							onclick="JavaScript:type_insert_check('account_main_form','command',0);document.account_main_form.submit();return(false);"><?php echo phr('ACCOUNT_LIST'); ?></a><br>
-						</td>
-					</tr>
-					<tr>
-						<td><input type="radio"
-							onClick="document.account_main_form.submit()" name="command"
-							value="new"> <a href="#"
-							onclick="JavaScript:type_insert_check('account_main_form','command',1);document.account_main_form.submit();return(false);"><?php echo phr('ACCOUNT_INSERT'); ?></a><br>
-						</td>
-					</tr>
-					<tr>
-						<td><input type="radio"
-							onClick="document.account_main_form.submit()" name="command"
-							value="movement_new"> <a href="#"
-							onclick="JavaScript:type_insert_check('account_main_form','command',2);document.account_main_form.submit();return(false);"><?php echo phr('ACCOUNT_MOVEMENT_INSERT'); ?></a><br>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			</form>
-
-			</FIELDSET>
-			</td>
-		</tr>
-	</tbody>
-</table>
-
-	<?php
-}
-
 function account_movement_form($id=0){
 	require(ROOTDIR."/manage/mgmt_start.php");
 	if($id) {

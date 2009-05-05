@@ -399,10 +399,7 @@ class user extends object {
 		/* begin : mizuko selects users for POS and HandHeld */
 
 		$query="SELECT `id`,`name` FROM `users` WHERE `disabled`='0' ";
-		if( !$admin_only ) $query.=" AND dest_type = 'palm' ";
-
-		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
-		$query.=" ORDER BY name ASC";
+		if( !$admin_only ) $query.=" AND dest_type = 'palm'  AND `deleted`='0' ORDER BY name ASC";
 
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return $output;
@@ -453,8 +450,7 @@ class user extends object {
 		}
 
 
-		$query="SELECT `id`,`name` FROM `users` WHERE `disabled`='0'";
-		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
+		$query="SELECT `id`,`name` FROM `users` WHERE `disabled`='0' AND `deleted`='0'";
 		$query.=" ORDER BY name ASC";
 
 		$res=common_query($query,__FILE__,__LINE__);
@@ -537,8 +533,7 @@ class user extends object {
 	}
 
 	function count_users () {
-		$query="SELECT * FROM `users`";
-		if (system::upgradeCompleted(6)) $query .= " WHERE `deleted`='0'";
+		$query="SELECT * FROM `users` WHERE `deleted`='0'";
 
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return 0;
@@ -570,8 +565,7 @@ class user extends object {
 	function connect() {
 		if (!isset($_REQUEST['userid'])) return ERR_NO_USER_PROVIDED;
 
-		$query="SELECT * FROM `users` WHERE `id`='".$_REQUEST['userid']."'";
-		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
+		$query="SELECT * FROM `users` WHERE `id`='".$_REQUEST['userid']."' AND `deleted`='0'";
 
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
@@ -605,8 +599,7 @@ class user extends object {
 	function connect_pos() {
 		if (!isset($_REQUEST['password']) || empty($_REQUEST['password']) ) return ERR_NO_PASSWORD;
 
-		$query="SELECT * FROM `users` WHERE dest_type = 'pos' AND `password` = '".md5($_REQUEST['password'])."'";
-		if (system::upgradeCompleted(6)) $query .= " AND `deleted`='0'";
+		$query="SELECT * FROM `users` WHERE dest_type = 'pos' AND `password` = '".md5($_REQUEST['password'])."' AND `deleted`='0'";
 
 		$res=common_query($query,__FILE__,__LINE__);
 		if(!$res) return ERR_MYSQL;
@@ -826,5 +819,5 @@ class user extends object {
 
 		return false;
 	}
-
+}
 ?>

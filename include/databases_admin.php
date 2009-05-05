@@ -31,25 +31,7 @@ class accounting_database extends object {
 	var $db_name;
 	var $create_db;
 	
-	function accounting_database($id=0) {
-		$this->table='accounting_dbs';
-		$this->id=$id;
-		$this -> title = ucphr('ACCOUNTING_DATABASES');
-		$this->file=ROOTDIR.'/admin/admin.php';
-		
-		$this->disable_mass_delete=true;
-		
-		$this->fields_names=array(	'id'=>ucphr('ID'),
-								'name'=>ucphr('NAME'),
-								'db'=>ucphr('DATABASE'),
-								'print_bill'=>ucphr('PRINT_BILL'));
-		$this->fields_width=array(	'name'=>'60%',
-								'db'=>'20%',
-								'print_bill'=>'20%');
-		$this->fields_boolean=array('print_bill');
-		$this->allow_single_update = array ('print_bill');
-		$this -> fetch_data();
-	}
+
 	
 	function list_query_all () {
 		$table = $this->table;
