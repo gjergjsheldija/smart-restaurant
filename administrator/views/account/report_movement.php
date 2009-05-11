@@ -103,7 +103,6 @@ tfoot th em {
     font-size: 10px;
     font-style: normal;
     }    
-}
 </style>
 </head>
 <body>
@@ -123,7 +122,7 @@ foreach($account_movements->result() as $row) {
 		$total_out += $row->cash_amount;
 		$partial_out += $row->cash_amount;
 	}
-	
+
 	if($tmp != $row->who) {
 		echo '<br><div align="left"><h3><strong>' . $row->who.'</strong></h3></div>';?>
 	<table width="100%">
@@ -153,7 +152,7 @@ foreach($account_movements->result() as $row) {
 			<td align="left"><?=$row->name?></td>
 			<td align="right"><?=$row->cash_amount > '0' ? $row->cash_amount : '-'?></td>
 			<td align="right"><?=$row->cash_amount < '0' ? $row->cash_amount : '-'?></td>
-			<td align="right"><?=$row->debit == '1' ? 'Po' : 'Jo'?></td>
+			<td align="right"><?=$row->debit == '1' ? 'Yes' : 'No'?></td>
 		</tr>
 <?php 									
 	$kot = $account_movements->next_row();
@@ -167,16 +166,15 @@ foreach($account_movements->result() as $row) {
 		echo "</table>";
 	}
 }; ?>
-<tr><td colspan="6" align="right"><strong><?=lang('total'); ?> : <?php echo ($partial_in -(-$partial_out)) ?></strong></td></tr>							
-</table>			
+	
 <table width="100%">
 	<tr><td colspan="6"></td></tr>
 	<tr><td colspan="3"></td><td align="right"><?=lang('in'); ?></td><td align="right"><?=lang('out'); ?></td><td align="right"><?=lang('diff'); ?></td></tr>
 	<tr>
 		<td colspan="3" align="right"><strong><?=lang('total'); ?> : </strong></td>
 		<td align="right"><strong><?=$total_in ?></strong></td>
-	<td align="right"><strong><?=$total_out ?></strong></td>
-	<td align="right"><strong><?=$total_in -(-$total_out)?></strong></td>
+		<td align="right"><strong><?=$total_out ?></strong></td>
+		<td align="right"><strong><?=$total_in -(-$total_out)?></strong></td>
 	</tr>	
 </table>			
 <script type="text/php">
