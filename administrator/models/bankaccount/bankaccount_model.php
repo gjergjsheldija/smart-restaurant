@@ -32,7 +32,7 @@ class BankAccount_Model extends Model {
 	}
 	
 	function bankaccount_list() {
-		$this->db->select('*, account_mgmt_addressbook.name as bankname')
+		$this->db->select('*, account_accounts.id as bankid,account_accounts.name as accname, account_mgmt_addressbook.name as bankname')
 				->from('account_accounts')
 				->join('account_mgmt_addressbook','account_accounts.bank = account_mgmt_addressbook.id')
 				->order_by('account_accounts.bank');	

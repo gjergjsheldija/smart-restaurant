@@ -31,10 +31,10 @@ class BankAccount extends Controller {
 		$this->load->helper('html');
 		$this->load->helper('MY_url_helper');
 		$this->load->helper('language');
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 	}
 
-	function index($type) {
+	function index($type  = 'account') {
 		if (!$this->site_sentry->is_logged_in())
 			redirect('login');
 		if($type == 'account') {

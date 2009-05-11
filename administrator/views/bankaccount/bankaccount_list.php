@@ -65,8 +65,8 @@ $( function(){
 						<?php		
 							}						
 						?>		<tr>
-									<td><?=$row->name ?></td>
-									<td><?=anchor_image('bankaccount/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('bankaccount/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+									<td><?=$row->accname ?></td>
+									<td><?=anchor_image('bankaccount/edit/'.$row->bankid, '../images/administrator/edit.png');?> :: <?=anchor_image('bankaccount/delete/'.$row->bankid , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
 							$kot = $query->next_row();
