@@ -6,7 +6,7 @@
  *
  * @package		SmartRestaurant
  * @author		Gjergj Sheldija
- * @copyright	Copyright (c) 2008, Gjergj Sheldija
+ * @copyright	Copyright (c) 2008-2009, Gjergj Sheldija
  * @license		http://www.gnu.org/licenses/gpl.txt
  * @since		Version 1.0
  * @filesource
@@ -38,6 +38,6 @@
 <?=$this->load->view('menu');?>
 <?php if(isset($body)) echo $body; else echo '';?>
 <br /><br /><br />
-<p align="center"><strong>Copyright (c) 2008 Smart Restaurant</strong></p>
+<p align="center"><strong>Copyright (c) 2008-2009 Smart Restaurant</strong></p>
 </body>
 </html>

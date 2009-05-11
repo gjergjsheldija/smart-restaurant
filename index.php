@@ -6,7 +6,7 @@
  *
  * @package		SmartRestaurant
  * @author		Gjergj Sheldija
- * @copyright	Copyright (c) 2008, Gjergj Sheldija
+ * @copyright	Copyright (c) 2008-2009, Gjergj Sheldija
  * @license		http://www.gnu.org/licenses/gpl.txt
  * @since		Version 1.0
  * @filesource
@@ -66,7 +66,7 @@ if (floor(phpversion()) < 5) {
 <head>
 <script type="text/javascript" language="JavaScript" src="./generic.js"></script>
 <link rel="stylesheet" href="./css/styles.css" type="text/css">
-<title>SmartRes - (c) 2006 - 2008 Smart Restaurant</title>
+<title>SmartRes - (c) 2006 - 2008-2009 Smart Restaurant</title>
 <META name="HandheldFriendly" content="True">
 </head>
 <body class="login">
