@@ -35,9 +35,9 @@ class Ingredient_Model extends Model {
 		parent::Model();
 	}
 	/**
-	 * lista e perberesve
+	 * ingredient list
 	 *
-	 * @return array me listen e perberesve
+	 * @return array with ingredients list
 	 */
 	function ingredient_list() {
 		$this->db->select('ingreds.id, ingreds.name, ingreds.price, ingreds.sell_price, categories.name as catname')
@@ -52,10 +52,9 @@ class Ingredient_Model extends Model {
 	}
 	
 	/**
-	 * nderton dropdonw te perderes te 
-	 * kataktereistikat e artikullit
+	 * creates a dropdonw of the ingredients 
 	 *
-	 * @return array me listen e peberesve
+	 * @return array with ingredients list
 	 */
 	function ingredient_dropdown($catid) {
 		$this->db->select('ingreds.id, ingreds.name')
@@ -73,10 +72,10 @@ class Ingredient_Model extends Model {
 		return $ingreds;
 	}	
 	/**
-	 * nderton dropdonw te perderes te 
-	 * furnizimi
+	 * creates a dropdonw of the ingredients 
+	 * used in the supply screen
 	 *
-	 * @return array me listen e peberesve
+	 * @return array with ingredients list
 	 */
 	function ingredient_dropdown_stock() {
 		$this->db->select('ingreds.id, ingreds.name')
@@ -94,10 +93,10 @@ class Ingredient_Model extends Model {
 	}	
 	
 	/**
-	 * lista e perberesve sipas kategorise
+	 * ingredients by category
 	 *
 	 * @param int $catid
-	 * @return array me listen e perberesve
+	 * @return array with ingredients list
 	 */
 	function ingredient_list_by_category($catid) {
 		$query = $this->db->get_where('ingreds', array('id' => $catid ));
@@ -105,7 +104,7 @@ class Ingredient_Model extends Model {
 	}
 	
 	/**
-	 * lista e perberesve per artikullin
+	 * ingredients list by dish
 	 *
 	 * @param int $dishid
 	 * @return array
@@ -125,8 +124,8 @@ class Ingredient_Model extends Model {
 	}
 	
 	/**
-	 * karakteristikat e nje perberesi
-	 * ne baze te id te perzgjkedhur
+	 * ingredient details
+	 * by the selected id
 	 *
 	 * @param int $id
 	 * @return object

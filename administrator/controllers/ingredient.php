@@ -32,7 +32,7 @@ class Ingredient extends Controller {
 		$this->load->helper('html');
 		$this->load->helper('MY_url_helper');
 		$this->load->helper('language');
-		//$this->output->enable_profiler(TRUE);		
+		$this->output->enable_profiler(TRUE);		
 	}	
 	
 	function index() {
@@ -70,9 +70,9 @@ class Ingredient extends Controller {
 	}
 	
 	/**
-	 * krijon nje perberes te ri ty ba 2 veprime
-	 * - shton entry ne tabelen ingreds
-	 * - krijon elementin ne tabelen stock_objects
+	 * creating a new ingredient
+	 * - new entry in the ingreds table
+	 * - new entry in the stock_objects
 	 *
 	 */
 	function addnew() {

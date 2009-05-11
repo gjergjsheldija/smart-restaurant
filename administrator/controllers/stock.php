@@ -32,7 +32,7 @@ class Stock extends Controller {
 		$this->load->helper('url');
 		$this->load->helper('MY_url_helper');
 		$this->load->helper('language');
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 	}
 
 	function index() {
@@ -74,11 +74,11 @@ class Stock extends Controller {
 		$session_data =  $this->session->userdata;
 		$user_id = $session_data['user_id'];
 
-		//magazina supozohet FIFO
+		//stock supposed FIFO
 		$this->db->trans_start();
-		//levizjet ne magazine
-		//hapi 1 : me marre obj_id te perberesit
-		//hapi 2 : azhornue gjendjen ne stock_movements
+		//stock movements
+		//step 1 : obj_id of the dish
+		//step 2 : update quantity in ne stock_movements
 		foreach($ingredients as $key => $value) {
 			$sqlInsert = "INSERT INTO stock_movements ( obj_id, quantity, value, timestamp, user )"
 				 . " SELECT id, '" .$quantity[$key] . "', '".$price[$key]."','" . $timestamp . "', '" . $user_id . "' "
@@ -88,9 +88,9 @@ class Stock extends Controller {
 		}
 		
 
-		//gjendja ne magazine
+		//stock state
 		foreach($ingredients as $key => $value) {
-			//hapi 3 : marre vleren per njesi
+			//step 3 : value of unit
 			$sqlValue = "SELECT ROUND(SUM(value) / SUM(quantity), 2) AS value "
 					  . "FROM stock_movements "
 					  . "WHERE obj_id = (SELECT id FROM stock_objects WHERE ref_id = '".$value ."') ";
@@ -102,7 +102,7 @@ class Stock extends Controller {
 			else
 				$ingredientValue = $price[$key];
 				
-			//hapi 4 : azhornue stock_objects
+			//hapi 4 : update stock_objects
 			$sqlUpdate = "UPDATE stock_objects SET quantity = quantity + " . $quantity[$key] . ", " 
 				 	   . " value =  '" . $ingredientValue . "'"
 				 	   . " WHERE ref_id = '".$value ."'";
@@ -111,9 +111,9 @@ class Stock extends Controller {
 			$queryUpdate = $this->db->query($sqlUpdate);
 		}
 		
-		//tesh edhe ana kontabel...
+		//the money...
 		
-		//paguar ose jo
+		//payed or not
 		$debit = FALSE;
 		if(isset($paid) && $paid == 'paid') {
 			$sqlPaid = "  '1' ,  '0' ,  '0' ";
@@ -123,7 +123,7 @@ class Stock extends Controller {
 			$debit = TRUE;
 		}
 		
-		//menyra e pageses
+		//payment type
 		$bank = FALSE;
 		if( isset($type) && $type == '3') {
 			$sqlPayment = ", '". $type ."' , '0' ";
@@ -143,7 +143,7 @@ class Stock extends Controller {
 		
 		$queryInsertPayment = $this->db->query($sqlInsertPayment);
 		
-		//nqs asht ba pagese me banke...
+		//if bank payment...
 		if( isset($bank) && $bank == TRUE) {
 			$bankMovement = array('account_id' => $account_id,
 								  'type' => $type,

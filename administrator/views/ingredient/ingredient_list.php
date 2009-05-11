@@ -27,7 +27,7 @@
 ?>
 <script type="text/javascript">
 	jQuery().ready(function(){
-		jQuery('#tabelapare').accordion({
+		jQuery('#firsttable').accordion({
 				header: 'div.mytitle',
 			    active: false, 
 			    alwaysOpen: false
@@ -45,7 +45,7 @@ $( function(){
 		<div class="col">
 			<div class="Left">
 				<h2><?=lang('ingredients') ?> :: <?=anchor('ingredient/newIngredient',lang('new_ingredient')) ?></h2>
-				<div class="basic" style="float:left;"  id="tabelapare">
+				<div class="basic" style="float:left;"  id="firsttable">
 				<?php 
 				$tmp = "";
 				foreach($query->result() as $row) {	
@@ -76,8 +76,8 @@ $( function(){
 							<td align="right"><?=anchor_image('ingredient/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('ingredient/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 				<?php 
-					$kot = $query->next_row();
-					$tmp = $kot->catname;
+					$rowtmp = $query->next_row();
+					$tmp = $rowtmp->catname;
 					if($tmp != $row->catname) {
 						$tmp = $row->catname;
 						echo "</table>";
