@@ -94,7 +94,7 @@
 			<td><?=$ingredient->name; ?></td>
 			<td align="right"><div id="quantity_<?=$ingredient->object_id; ?>"><?=$ingredient->quantity; ?></div><?=form_hidden('object_id_'.$ingredient->object_id ,$ingredient->object_id); ?></td>
 			<td align="right"><div id="unit_type_<?=$ingredient->stock_id; ?>"><?=$ingredient->unit_type == '2' ? 'lt' : 'kg' ;?></div><?=form_hidden('stock_id_'.$ingredient->stock_id,$ingredient->stock_id); ?></td>
-			<td align="right"><?=anchor_image('dish/deleteIngredient/'.$ingredient->object_id . "-" . $edit[0]->id . "-" . $ingredient->id, 'images/administrator/edit_remove.png');?></td>
+			<td align="right"><?=anchor_image('dish/deleteIngredient/'.$ingredient->object_id . "-" . $edit[0]->id . "-" . $ingredient->id, '../images/administrator/edit_remove.png');?></td>
 		</tr>
 		<script type="text/javascript">
 		jQuery().ready(function() {
