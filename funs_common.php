@@ -42,7 +42,7 @@ function check_db_status () {
 	$tableslist = common_query($query,__FILE__,__LINE__,true);
 	// this is unlikely to happen
 	if(!$tableslist) {
-		$url=ROOTDIR.'/install.php?command=fresh_install';
+		$url=ROOTDIR.'/install/install.php';
 		header('Location: '.$url);
 		$error_msg = common_header ('Database tables not found');
 		$error_msg .= redirectJS ($url);
@@ -53,7 +53,7 @@ function check_db_status () {
 	}
 	$numtables = mysql_num_rows ($tableslist);
 	if(!$numtables) {
-		$url=ROOTDIR.'/install.php?command=fresh_install';
+		$url=ROOTDIR.'/install/install.php';
 		header('Location: '.$url);
 		$error_msg = common_header ('Database tables not found');
 		$error_msg .= redirectJS ($url);			/*RTG: I prefer to get a exception in somewhere in my code I use a not existing lang

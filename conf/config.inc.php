@@ -26,10 +26,8 @@
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
-
 $cfgserver='localhost';
 $cfguser='root';
-$cfgpassword='root';
-
-$db_common='smartrestaurant';
+$cfgpassword='';
+$db_common='smartres2';
 ?>
