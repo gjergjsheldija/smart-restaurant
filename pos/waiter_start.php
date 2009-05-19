@@ -114,7 +114,7 @@
 
 			switch($res_loc) {
 				case 1: $err='error file not writeable.<br>Solution: set write permission for everybody (or at least for the user running the webserver) on file error.log'; break;
-				case 2: $err='error dir not writeable<br>Solution: set write permission for everybody (or at least for the user running the webserver) on the directory containing Alb-Rest files '; break;
+				case 2: $err='error dir not writeable<br>Solution: set write permission for everybody (or at least for the user running the webserver) on the directory containing Smart Restaurant files '; break;
 				case 3: $err='debug file not writeable.<br>Solution: set write permission for everybody (or at least for the user running the webserver) on file debug.log'; break;
 				case 4: $err='debug dir not writeable'; break;
 			}
