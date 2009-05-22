@@ -40,19 +40,17 @@ class Ingredient_Model extends Model {
 	 * @return array with ingredients list
 	 */
 	function ingredient_list() {
-		$this->db->select('ingreds.id, ingreds.name, ingreds.price, ingreds.sell_price, categories.name as catname')
+		$this->db->select('ingreds.id, ingreds.name, ingreds.price, ingreds.sell_price, ingreds.category as catname')
 						->from('ingreds')
-						->join('categories','categories.id=ingreds.category','inner')
 						->where('ingreds.deleted' , '0')
-						->where('categories.deleted' , '0')
-						->order_by('categories.name', 'asc')
+						->order_by('ingreds.category', 'asc')
 						->order_by('ingreds.name', 'asc');
 		$query = $this->db->get();						
 		return $query;
 	}
 	
 	/**
-	 * creates a dropdonw of the ingredients 
+	 * creates a dropdown of the ingredients 
 	 *
 	 * @return array with ingredients list
 	 */
@@ -61,6 +59,7 @@ class Ingredient_Model extends Model {
 				->from('ingreds')
 				->where('ingreds.deleted' , '0')
 				->where('ingreds.category',$catid->catid )
+				->or_where('ingreds.category', '0')
 				->order_by('ingreds.name', 'asc');
 		$query = $this->db->get();
 		$ingreds = array();
@@ -72,7 +71,7 @@ class Ingredient_Model extends Model {
 		return $ingreds;
 	}	
 	/**
-	 * creates a dropdonw of the ingredients 
+	 * creates a dropdown of the ingredients 
 	 * used in the supply screen
 	 *
 	 * @return array with ingredients list
@@ -104,7 +103,7 @@ class Ingredient_Model extends Model {
 	}
 	
 	/**
-	 * ingredients list by dish
+	 * ingredients list by dish id
 	 *
 	 * @param int $dishid
 	 * @return array
@@ -125,22 +124,42 @@ class Ingredient_Model extends Model {
 	
 	/**
 	 * ingredient details
-	 * by the selected id
+	 * by the selected ingredient id
 	 *
 	 * @param int $id
 	 * @return object
 	 */
 	function list_one($id) {
-		$this->db->select('ingreds.id, ingreds.name, ingreds.price, ingreds.sell_price, ingreds.category as catid')
+		$this->db->select('ingreds.id, ingreds.name, ingreds.price, ingreds.sell_price, ingreds.category as catid, stock_objects.stock_is_on, stock_objects.quantity, stock_objects.unit_type')
 						->from('ingreds')
-						->join('categories','categories.id=ingreds.category','inner')
+						->join('stock_objects','stock_objects.ref_id = ingreds.id','inner')
 						->where('ingreds.deleted' , '0')
-						->where('categories.deleted' , '0')						
 						->where('ingreds.id', $id)
-						->order_by('categories.name', 'asc')
 						->order_by('ingreds.name', 'asc');
+						
 		$query = $this->db->get();			
 		return $query->result();
+	}
+	
+	/**
+	 * list of dishes which contain the selected 
+	 * the selected ingredient id
+	 *
+	 * @param int $id
+	 * @return object
+	 */	
+	function list_dishes_of_ingredient($ingred_id) {
+		$this->db->select('dishes.name, dishes.id, stock_objects.unit_type, stock_ingredient_quantities.quantity')
+				->from('stock_objects')
+				->join('stock_ingredient_quantities','stock_objects.id = stock_ingredient_quantities.obj_id','inner')
+				->join('ingreds','stock_objects.ref_id = ingreds.id')
+				->join('dishes','dishes.id = stock_ingredient_quantities.dish_id')
+				->where('ingreds.deleted','0')
+				->where('ingreds.id',$ingred_id)
+				->order_by('ingreds.name', 'asc');
+				
+		$query = $this->db->get();						
+		return $query;
 	}
 }
 ?>

@@ -32,6 +32,11 @@
 			    active: false, 
 			    alwaysOpen: false
 		});
+		jQuery('#secondtable').accordion({
+			header: 'div.mytitle',
+		    active: false, 
+		    alwaysOpen: false
+		});		
 });
 $( function(){
 	$("table.zebra tr:even").addClass("even");
@@ -50,7 +55,7 @@ $( function(){
 				$tmp = "";
 				foreach($query->result() as $row) {	
 					if($tmp != $row->catname) {
-						echo '<div class="mytitle">'.$row->catname.'</div>';?>
+						echo '<div class="mytitle">'.  $category_names[$row->catname]   . '</div>';?>
 					<table class="zebra">
 						<colgroup>
 							<col style='width:15%;' />
@@ -89,6 +94,7 @@ $( function(){
 			</div>
 			<div class="Right">				
 				<?php $this->load->view('ingredient/ingredient_edit') ?>
+				<?php $this->load->view('ingredient/dish_list_by_ingredient') ?>
 			</div>
         </div>
         </div>

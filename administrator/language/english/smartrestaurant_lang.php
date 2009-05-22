@@ -41,6 +41,8 @@ $lang['show']				= "Show";
 $lang['in']					= "In";
 $lang['out']				= "Out";
 $lang['log_out']			= "Log Out";
+$lang['all']				= "All";
+$lang['pieces']				= "pc";
 
 //login
 $lang['username']			= "Username";
@@ -76,6 +78,7 @@ $lang['new_ingredient']		= "New Ingredient";
 $lang['quantity']			= "Quantity";
 $lang['uom']				= "UOM";
 $lang['sell_price']			= "Sell Price";
+$lang['helper']				= "Helper";
 
 //tables
 $lang['tables']				= "Tables";
@@ -180,6 +183,12 @@ $lang['supplier']			= "Supplier";
 $lang['inventory']			= "Inventory";
 $lang['article']			= "Article";
 $lang['price']				= "Price";
+$lang['buy_price']			= "Buy Price";
+$lang['value_price_sell']	= "Value Sell";
+$lang['value_price_buy']	= "Value Buy";
+$lang['destid']				= "Warehouse";
+$lang['total_value_sell']	= "Total Sell";
+$lang['total_value_buy']	= "Total Buy";
 
 //management people types
 $lang['bank']				= 'Bank';

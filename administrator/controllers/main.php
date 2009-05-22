@@ -37,7 +37,7 @@ class Main extends Controller {
 	function index() {
 		if (!$this->site_sentry->is_logged_in())
 			redirect('login');		
-		$data['page_title'] = "Smart Res";
+		$data['page_title'] = "Smart Restaurant";
 		$this->load->view('main', $data);
 
 	}

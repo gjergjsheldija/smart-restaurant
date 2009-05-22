@@ -1745,7 +1745,7 @@ function mainConfig($config) {
 	$configFile .= '$config[\'sess_cookie_name\']		= \'ci_session\';'."\n";
 	$configFile .= '$config[\'sess_expiration\']		= 7200;'."\n";
 	$configFile .= '$config[\'sess_encrypt_cookie\']	= FALSE;'."\n";
-	$configFile .= '$config[\'sess_use_database\']	= FALSE;'."\n";
+	$configFile .= '$config[\'sess_use_database\']	= TRUE;'."\n";
 	$configFile .= '$config[\'sess_table_name\']		= \'ci_sessions\';'."\n";
 	$configFile .= '$config[\'sess_match_ip\']		= FALSE;'."\n";
 	$configFile .= '$config[\'sess_match_useragent\']	= TRUE;'."\n";

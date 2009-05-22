@@ -467,69 +467,7 @@ class object {
 		return 0;
 	}
 	
-	function list_table () {
-		global $tpl;
-		global $display;
-		
-		$output = '';
-		
-		$display = new display;
-		$display->show_head=true;
-		
-		// the correct query for this object
-		$query = $this->list_query_all ();
 
-		if(empty($query)) return '';
-		
-		// Other query data (search, orderby, sort)
-		$query .= $this->list_standard_query_edit ();
-		
-		// first query run to get number of rows
-		if($this->db=='common') $res = common_query($query,__FILE__,__LINE__);
-		else $res = accounting_query($query,__FILE__,__LINE__);
-		if(!$res) return '';
-
-		$this->num_total=mysql_num_rows($res);
-		
-		$query .= $this->list_calc_limits ();
-		$this->list_navbar ();
-	
-		if(empty($this->search) && !$this->count_records()) return '';
-		if(!$this->num_total) return '';
-
-		$this->form_name = 'list_form_'.get_class($this);
-		
-		// query run to get head
-		if($this->db=='common') $res = common_query($query,__FILE__,__LINE__);
-		else $res = accounting_query($query,__FILE__,__LINE__);
-		if(!$res) return '';
-		
-		$arr = mysql_fetch_assoc ($res);
-		$this->list_head ($arr);
-
-		// query run to get head
-		if($this->db=='common') $res = common_query($query,__FILE__,__LINE__);
-		else $res = accounting_query($query,__FILE__,__LINE__);
-		if(!$res) return '';
-		
-		$row = 1;						// $row[0] is the head
-		while($arr=mysql_fetch_assoc($res)) {
-			$this->list_rows ($arr,$row);
-			$row++;
-		}
-		
-		$tmp .= $this->list_form_start();
-		
-		$tmp .= $display -> list_table ();
-		
-		$tmp .= $this->list_buttons ();
-		
-		$tmp .= '</form>';
-
-		$tpl -> append("list", $tmp);
-		return $tmp;
-	}
-	
 	function list_form_start () {
  		$tmp = '<form name="'.$this->form_name.'" action="'.$this->file.'?" method="post">'."\n";
 		return $tmp;

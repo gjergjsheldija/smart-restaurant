@@ -32,7 +32,8 @@ class Stock extends Controller {
 		$this->load->helper('url');
 		$this->load->helper('MY_url_helper');
 		$this->load->helper('language');
-		$this->output->enable_profiler(TRUE);
+		if($this->config->item('enable_app_debug'))
+			$this->output->enable_profiler(TRUE);
 	}
 
 	function index() {
@@ -78,7 +79,7 @@ class Stock extends Controller {
 		$this->db->trans_start();
 		//stock movements
 		//step 1 : obj_id of the dish
-		//step 2 : update quantity in ne stock_movements
+		//step 2 : update quantity in the stock_movements table
 		foreach($ingredients as $key => $value) {
 			$sqlInsert = "INSERT INTO stock_movements ( obj_id, quantity, value, timestamp, user )"
 				 . " SELECT id, '" .$quantity[$key] . "', '".$price[$key]."','" . $timestamp . "', '" . $user_id . "' "
@@ -93,7 +94,7 @@ class Stock extends Controller {
 			//step 3 : value of unit
 			$sqlValue = "SELECT ROUND(SUM(value) / SUM(quantity), 2) AS value "
 					  . "FROM stock_movements "
-					  . "WHERE obj_id = (SELECT id FROM stock_objects WHERE ref_id = '".$value ."') ";
+					  . "WHERE obj_id = (SELECT id FROM stock_objects WHERE ref_id = '".$value ."' and deleted = '0') ";
 			$queryValue = $this->db->query($sqlValue);
 			$tmp = $queryValue->result_array();
 			
@@ -102,7 +103,7 @@ class Stock extends Controller {
 			else
 				$ingredientValue = $price[$key];
 				
-			//hapi 4 : update stock_objects
+			//step 4 : update stock_objects
 			$sqlUpdate = "UPDATE stock_objects SET quantity = quantity + " . $quantity[$key] . ", " 
 				 	   . " value =  '" . $ingredientValue . "'"
 				 	   . " WHERE ref_id = '".$value ."'";
@@ -148,7 +149,7 @@ class Stock extends Controller {
 			$bankMovement = array('account_id' => $account_id,
 								  'type' => $type,
 								  'amount' => -array_sum($price),
-								  'description' => 'Fatura Nr. : ' .$invoice_id);
+								  'description' => 'Invoice Nr. : ' .$invoice_id);
 			$this->db->insert('account_account_log', $bankMovement);
 		}
 		$this->db->trans_complete();
@@ -157,7 +158,10 @@ class Stock extends Controller {
 	
 	function report_actual() {
 		$this->load->model('stock/stock_model');
-		$stock['stock_actual'] = $this->stock_model->stock_actual();				
+		$stock['stock_actual'] = $this->stock_model->stock_actual();
+		$this->load->model('printer/printer_model');
+		$stock['warehouse'] = $this->printer_model->printer_dropdown();
+		$stock['uom'] = array('0' => lang('pieces'),'1' => 'kg', '2' => 'lt');				
 		$stock['body'] = $this->load->view('stock/stock_actual', $stock, TRUE);
 		$this->load->view('main', $stock);		
 	}

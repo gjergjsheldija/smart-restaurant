@@ -31,7 +31,7 @@ class Contacts_Model extends Model {
 	}
 	
 	function contacts_list() {
-		$this->db->select('*, mgmt_people_types.name as contacttype')
+		$this->db->select('*, mgmt_people_types.name as contacttype, account_mgmt_addressbook.id as contact_id')
 				->from('account_mgmt_addressbook')
 				->join('mgmt_people_types','account_mgmt_addressbook.type = mgmt_people_types.id')
 				->order_by('account_mgmt_addressbook.type');

@@ -42,45 +42,50 @@ $( function(){
 				<br /><br />
 				<table class="zebra">
 					<colgroup>
-						<col style='width:15%;' />
 						<col style='width:20%;' />
+						<col style='width:10%;' />
+						<col style='width:10%;' />
+						<col style='width:10%;' />
+						<col style='width:10%;' />
+						<col style='width:10%;' />
+						<col style='width:10%;' />
 						<col style='width:10%;' />
 						<col style='width:10%;' />
 					</colgroup>				
 					<thead>
 						<tr>
 							<th><?=lang('name'); ?></th>
-							<th align="right"><?=lang('quantity'); ?></th>
 							<th align="right"><?=lang('uom'); ?></th>
-							<th align="right"><?=lang('amount'); ?></th>
+							<th align="right"><?=lang('quantity'); ?></th>
+							<th align="right"><?=lang('sell_price'); ?></th>
+							<th align="right"><?=lang('buy_price'); ?></th>
+							<th align="right"><?=lang('value_price_sell'); ?></th>
+							<th align="right"><?=lang('value_price_buy'); ?></th>
+							<th align="right"><?=lang('total'); ?></th>
+							<th align="right"><?=lang('destid'); ?></th>
 						</tr>
 					</thead>
 				<?php 
-					$total = 0; 
+					$value_price_sell = $value_price_buy = 0; 
 					foreach($stock_actual->result() as $row) { 
-					$total += $row->value;
+					$value_price_sell += $row->value_price_sell;
+					$value_price_buy += $row->value_price_buy;
 				?>
 					<tr>
 						<td><?=$row->name;?></td>
+						<td align="right"><?=$uom[$row->uom];?></td>
 						<td align="right"><?=$row->quantity;?></td>
-						<td align="right"><?php 
-						switch( $row->unit_type ) {
-							case 0;
-								echo 'cp';
-								break;
-							case 1;
-								echo 'kg';
-								break;
-							case 2;
-								echo 'lt';
-								break;
-						}
-						?></td>
-						<td align="right"><?=$row->value;?></td>
+						<td align="right"><?=$row->sell_price;?></td>
+						<td align="right"><?=$row->buy_price;?></td>
+						<td align="right"><?=$row->value_price_sell;?></td>
+						<td align="right"><?=$row->value_price_buy;?></td>
+						<td align="right"><?=$row->total;?></td>
+						<td align="right"><?=$warehouse[$row->destid];?></td>
 					</tr>
-				<?php } ?>	
-				<tr><td colspan="4"></td></tr>
-				<tr><td colspan="4" align="right"><strong><?=lang('total'); ?> : <?=$total; ?></strong></td></tr>
+				<?php }?>	
+				<tr><td colspan="9"></td></tr>
+				<tr><td colspan="9" align="right"><strong><?=lang('total_value_sell'); ?> : <?=$value_price_sell; ?></strong></td></tr>
+				<tr><td colspan="9" align="right"><strong><?=lang('total_value_buy'); ?> : <?=$value_price_buy; ?></strong></td></tr>
 				</table>
 				</form>
 			</div>	

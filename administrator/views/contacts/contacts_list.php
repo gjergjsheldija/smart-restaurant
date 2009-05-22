@@ -66,11 +66,11 @@ $( function(){
 							}						
 						?>		<tr>
 									<td><?=$row->name ?></td>
-									<td><?=anchor_image('contacts/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('contacts/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+									<td><?=anchor_image('contacts/edit/'.$row->contact_id, '../images/administrator/edit.png');?> :: <?=anchor_image('contacts/delete/'.$row->contact_id , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
-							$kot = $query->next_row();
-							$tmp = $kot->contacttype;
+							$temp = $query->next_row();
+							$tmp = $temp->contacttype;
 							if($tmp != $row->contacttype) {
 								$tmp = $row->contacttype;
 								echo "</table>";

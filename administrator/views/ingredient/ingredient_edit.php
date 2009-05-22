@@ -53,6 +53,10 @@
 			<td><?=form_input('sell_price',$edit[0]->sell_price); ?></td>
 		</tr>
 		<tr>
+			<td><?=form_label(lang('helper'));?> :</td>
+			<td><?=form_dropdown('stock_is_on',$stockison,$edit[0]->stock_is_on); ?></td>
+		</tr>
+		<tr>
 			<td><input type="submit" value="<?=lang('save'); ?>"></td>
 			<td></td>
 		</tr>
@@ -86,6 +90,10 @@
 			<td><?=form_label(lang('sell_price'));?> :</td>
 			<td><?=form_input('sell_price'); ?></td>
 		</tr>
+		<tr>
+			<td><?=form_label(lang('helper'));?> :</td>
+			<td><?=form_dropdown('stock_is_on',$stockison); ?></td>
+		</tr>		
 		<tr>
 			<td><input type="submit" value="<?=lang('save') ?>"></td>
 			<td></td>

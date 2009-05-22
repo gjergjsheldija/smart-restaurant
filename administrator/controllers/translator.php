@@ -168,14 +168,14 @@ class Translator extends Controller {
 	 *
 	 * @return void
 	 */
-	function Translator() {
+	function __construct() {
 		parent::Controller();	
 		$this->load->helper(array('form', 'url', 'file', 'html','language' ));
 		$this->langDirs = array( BASEPATH . 'language', APPPATH . 'language' );
 		$this->data[ 'postUniquifier' ] = $this->postUniquifier;
-		//$this->output->enable_profiler(TRUE);
 		$this->_configure();
-
+		if($this->config->item('enable_app_debug'))
+			$this->output->enable_profiler(TRUE);
 	}
 
 	

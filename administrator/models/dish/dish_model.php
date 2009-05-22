@@ -48,6 +48,7 @@ class Dish_Model extends Model {
 		return $query->result();	
 	}
 	
+	
 	function list_one($id) {
 		$this->db->select('dishes.id, dishes.name, dishes.destid, dishes.price, dishes.image, dishes.category as catid')
 						->from('dishes')

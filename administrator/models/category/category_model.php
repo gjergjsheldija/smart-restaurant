@@ -36,6 +36,19 @@ class Category_Model extends Model {
 		return $query->result();
 	}
 	
+	function category_array() {
+		$query = $this->db->get_where('categories', array('deleted' => '0'));
+		
+		$categories = array();
+		$categories[0] = lang('all');
+		
+		foreach($query->result_array() as $row) {
+			$categories[$row['id']] = $row['name']; 	
+		}
+		
+		return $categories;
+	}
+	
 	function list_one($id) {
 		$query = $this->db->get_where('categories', array('id' => $id ));
 		return $query->result();
@@ -50,7 +63,8 @@ class Category_Model extends Model {
 		$categories = array();
 
 		foreach ($query->result_array() as $row) {
-		   $categories[$row['id']] = $row['name'];
+			//$categories[0] = lang('all');
+			$categories[$row['id']] = $row['name'];
 		}
 
 		return $categories;

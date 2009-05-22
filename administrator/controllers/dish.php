@@ -31,7 +31,8 @@ class Dish extends Controller {
 		$this->load->helper('html');
 		$this->load->helper('MY_url_helper');
 		$this->load->helper('language');
-		//$this->output->enable_profiler(TRUE);		
+		if($this->config->item('enable_app_debug'))
+			$this->output->enable_profiler(TRUE);		
 	}	
 	
 	function index() {
@@ -63,7 +64,8 @@ class Dish extends Controller {
 		$dishes['ingredients'] = $this->ingredient_model->ingredient_dropdown($dishes['edit'][0]);	
 		$dishes['ingredient_quantity'] = $this->ingredient_model->ingredient_list_by_dish($dish_id);	
 		$this->load->model('printer/printer_model');
-		$dishes['printer'] = $this->printer_model->printer_dropdown();		
+		$dishes['printer'] = $this->printer_model->printer_dropdown();	
+		$dishes['uom'] = array('0' => lang('pieces'),'1' => 'kg', '2' => 'lt');	
 		$dishes['body'] = $this->load->view('dish/dish_list', $dishes, TRUE);
 		$this->load->view('main', $dishes);		
 	}
@@ -83,7 +85,7 @@ class Dish extends Controller {
 	function addnew() {
 		if($_FILES['image']['tmp_name']) {
 			move_uploaded_file($_FILES['image']['tmp_name'],'../images/dishes/' . $_FILES['image']['name']);
-			$_POST['image'] = '/images/pjatat/' . $_FILES['image']['name'];
+			$_POST['image'] = '/images/dishes/' . $_FILES['image']['name'];
 		} 
 		$this->db->insert('dishes', $_POST);
 
@@ -93,7 +95,7 @@ class Dish extends Controller {
 	function save() {
 		if($_FILES['image']['tmp_name']) {
 			move_uploaded_file($_FILES['image']['tmp_name'],'../images/dishes/' . $_FILES['image']['name']);
-			$_POST['image'] = '/images/pjatat/' . $_FILES['image']['name'];
+			$_POST['image'] = '/images/dishes/' . $_FILES['image']['name'];
 		} 
 		$this->db->where('id',$_POST['id']);
 		$this->db->update('dishes', $_POST);
@@ -137,11 +139,13 @@ class Dish extends Controller {
 		$data = array('unit_type' => $_POST['value'] );
 		$this->db->where('id', $_POST['stock_id']);
 		$this->db->update('stock_objects',$data);
-		print $_POST['value'] == '2' ? 'lt' : 'kg';	
+		$uom = array('0' => lang('pieces'),'1' => 'kg', '2' => 'lt');
+		print $uom[$_POST['value']];	
 	}
 	
 	function deleteIngredient($ingredient) {
 		$vars = explode("-",$ingredient);
+		
 		//delete ingredient from stock_ingredient_quantities
 		$this->db->select('dish_id')->from('stock_ingredient_quantities')->where('id', $vars[0]);
 		$query = $this->db->get();
@@ -155,9 +159,11 @@ class Dish extends Controller {
 		foreach($queryList->result_array() as $row) $ingreds = $row['ingreds'];
 		$ingred = explode(" ", $ingreds);
 		$mods = '';
+		
 		foreach($ingred as $key=>$val) {
 			if($val != $vars[2]) { $mods .= ' ' . $val; };
 		}
+		
 		$this->db->query("UPDATE dishes SET ingreds = '" . $mods . "' WHERE id = '" .  $vars[1] . "'"); 
 
 	}
