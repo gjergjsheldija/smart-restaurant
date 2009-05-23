@@ -36,7 +36,13 @@
 
 <?=$this->load->view('menu');?>
 <?php if(isset($body)) echo $body; else echo '';?>
-<br /><br /><br />
-<p align="center"><strong>Copyright (c) 2008-2009 Smart Restaurant</strong></p>
+    <div id="footer"><hr>
+      <a id="smartpowered" href="http://smartres.sourceforge.net/"><img src="<?=$this->config->site_url();?>/../../images/administrator/logo_menu.png" alt="logo" height="35" width="60"></a>
+      <p class="left">
+      <br />
+        Powered by <a href="http://smartres.sourceforge.net/"><strong>Smart Restaurant</strong></a>.
+      </p>
+      <p class="right"></p>
+    </div>
 </body>
 </html>
