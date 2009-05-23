@@ -30,9 +30,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 
-<script type="text/javascript" src="<?=base_url(); ?>../min/?b=smartres/trunk/js&amp;f=jquery.js,ColorPicker.js,jquery.easing.js,jquery.dimensions.js,ui.core.js,ui.accordion.js,ui.tabs.js,ui.datepicker.js,jquery.jeditable.js,jquery.cluetip.js,jquery.validate.js,jquery.metadata.js,jquery.form.js,jquery.highlightFade.js"></script>
-<link type="text/css" rel="stylesheet" href="<?=base_url(); ?>../min/?b=smartres/trunk/css&amp;f=stylesheet.css,ColorPicker.css,menu.css,ui.tabs.css,ui.datepicker.css,jquery.cluetip.css" />
-</head>
+<script type="text/javascript" src="<?=base_url(); ?>../min/?g=adminjs"></script>
+<link type="text/css" rel="stylesheet" href="<?=base_url(); ?>../min/?g=admincss" /></head>
 <body>
 
 <?=$this->load->view('menu');?>

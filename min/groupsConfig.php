@@ -5,27 +5,27 @@
  */
 
 return array(
- 	'adminjs' => array(
-    	'/smartres/trunk/js/jquery.js'
-    	'/smartres/trunk/js/ColorPicker.js', 
-    	'/smartres/trunk/js/jquery.easing.js', 
-    	'/smartres/trunk/js/jquery.dimensions.js', 
-    	'/smartres/trunk/js/ui.core.js', 
-    	'/smartres/trunk/js/ui.accordion.js', 
-    	'/smartres/trunk/js/ui.tabs.js', 
-    	'/smartres/trunk/js/ui.datepicker.js', 
-    	'/smartres/trunk/js/jquery.jeditable.js', 
-    	'/smartres/trunk/js/jquery.cluetip.js', 
-    	'/smartres/trunk/js/jquery.validate.js', 
-    	'/smartres/trunk/js/jquery.metadata.js',
-		'/smartres/trunk/js/jquery.form.js', 
-		'/smartres/trunk/js/jquery.highlightFade.js'
-	),
-	'waiterjs' => array (
-		'/smartres/trunk/js/jquery.js',
-		'/smartres/trunk/js/jquery.growl.js',
-		'/smartres/trunk/js/growlCustom.js',
-		'/smartres/trunk/js/jquery.simplemodal.js',
-		'/smartres/trunk/pos/generic.js',
-	)
+    'admincss' => array(
+    	'../css/stylesheet.css', 
+    	'../css/ColorPicker.css', 
+    	'../css/menu.css', 
+    	'../css/ui.tabs.css', 
+    	'../css/ui.datepicker.css', 
+    	'../css/jquery.cluetip.css'),
+    'adminjs' => array(
+    	'../js/jquery.js', 
+    	'../js/ColorPicker.js', 
+    	'../js/jquery.easing.js', 
+    	'../js/jquery.dimensions.js', 
+    	'../js/ui.core.js', 
+    	'../js/ui.accordion.js',
+    	'../js/ui.tabs.js',
+    	'../js/ui.datepicker.js',
+    	'../js/jquery.jeditable.js',
+    	'../js/jquery.cluetip.js',
+    	'../js/jquery.validate.js',
+    	'../js/jquery.metadata.js',
+    	'../js/jquery.form.js',
+    	'../js/jquery.highlightFade.js'
+		)
 );
