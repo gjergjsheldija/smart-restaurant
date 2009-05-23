@@ -29,7 +29,7 @@ function check_db_status () {
 	$query="USE `".$_SESSION['common_db'].'`';
 	$res = common_query($query,__FILE__,__LINE__,true);
 	if(!$res) {
-		$url=ROOTDIR.'/install.php';
+		$url=ROOTDIR.'/install/install.php';
 		header('Location: '.$url);
 		$error_msg = common_header ('Database not found');
 		$error_msg .= redirectJS ($url);
@@ -761,14 +761,14 @@ function head_line ($title) {
 	$output='
 	<meta http-equiv="content-type" content="text/html; charset='.phr('CHARSET').'">
 	<title>Smart Restaurant - '.$title.'</title>
-	<script type="text/javascript" language="JavaScript" src="../min/?b=smartres/trunk&f=js/jquery.js,js/jquery.growl.js,js/growlCustom.js,js/jquery.simplemodal.js,pos/generic.js"></script>	
+	<script type="text/javascript" language="JavaScript" src="../min/?g=waiterjs"></script>	
 	<script language="javascript" type="text/javascript">
 		 $(document).ready(function(){
 			$("#dishid").each(function () {this.select(); });
 		 });
 	</script> 	
 	
-	<link type="text/css" rel="stylesheet" href="../min/?f=smartres/trunk/css/styles.css" />
+	<link type="text/css" rel="stylesheet" href="../min/?g=waitercss" />
 	<meta http-equiv="Cache-Control" content="no-cache">
 	<meta http-equiv="Expires" content="0">';
 	$tpl -> assign("head", $output);

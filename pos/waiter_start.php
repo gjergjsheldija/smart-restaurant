@@ -41,7 +41,7 @@
 	*/
 
 	if(!$link = @mysql_pconnect ($cfgserver, $cfguser,$cfgpassword)) {
-		header('Location: '.ROOTDIR.'/install.php');
+		header('Location: '.ROOTDIR.'/install/install.php');
 		die ('Error connecting to the db');
 	}
 	

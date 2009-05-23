@@ -11,7 +11,8 @@ return array(
     	'../css/menu.css', 
     	'../css/ui.tabs.css', 
     	'../css/ui.datepicker.css', 
-    	'../css/jquery.cluetip.css'),
+    	'../css/jquery.cluetip.css'
+		),
     'adminjs' => array(
     	'../js/jquery.js', 
     	'../js/ColorPicker.js', 
@@ -27,5 +28,15 @@ return array(
     	'../js/jquery.metadata.js',
     	'../js/jquery.form.js',
     	'../js/jquery.highlightFade.js'
-		)
+		),
+	'waiterjs' => array (
+		'../js/jquery.js', 	
+		'../js/jquery.growl.js', 	
+		'../js/growlCustom.js', 	
+		'../js/jquery.simplemodal.js', 	
+		'../pos/generic.js' 	
+		),
+	'waitercss' => array (
+		'../css/styles.css', 	
+		),
 );

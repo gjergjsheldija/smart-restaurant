@@ -28,6 +28,6 @@
 */
 $cfgserver='localhost';
 $cfguser='root';
-$cfgpassword='';
-$db_common='smartres2';
+$cfgpassword='root';
+$db_common='smartrestaurant';
 ?>
