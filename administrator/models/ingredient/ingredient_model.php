@@ -79,7 +79,9 @@ class Ingredient_Model extends Model {
 	function ingredient_dropdown_stock() {
 		$this->db->select('ingreds.id, ingreds.name')
 				->from('ingreds')
+				->join('stock_objects','stock_objects.ref_id = ingreds.id','inner')
 				->where('ingreds.deleted' , '0')
+				->where('stock_objects.stock_is_on','1')
 				->order_by('ingreds.name', 'asc');
 		$query = $this->db->get();
 		$ingreds = array();
