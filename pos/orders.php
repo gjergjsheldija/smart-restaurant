@@ -38,7 +38,7 @@ $GLOBALS['end_require_time']=microtime();
 $tbl = new table ($_SESSION['sourceid']);
 if($tbl->data ['userid'] != $_SESSION['userid'] && $tbl->data ['userid'] != '0'){
 	$user = new user($_SESSION['userid']);
-	$error_msg = common_header('Tavolina eshte ne perdorim');
+	$error_msg = common_header('Table in use');
 	$error_msg .=  navbar_lock_retry_pos('');
 	
 	$error_msg .= ucfirst(phr('TABLE_ALREADY_IN_USE_ERROR')).' '.'.<br><br>'."\n";
