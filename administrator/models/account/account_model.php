@@ -154,7 +154,7 @@ class Account_Model extends Model {
 	}
 	
 	function waiter_movement($from, $to) {
-		$query = $this->db->select('*')
+		$query = $this->db->select('*, account_mgmt_main.id as accid')
 						  ->from('account_mgmt_main')
 						  ->join('mgmt_types','mgmt_types.id = account_mgmt_main.type')
 						  ->where('account_mgmt_main.date >=', $from)
@@ -164,7 +164,24 @@ class Account_Model extends Model {
 						  ->order_by('account_mgmt_main.date','desc');
 		
 		$query = $this->db->get();	
-		return $query->result_array();		
+		$account_movements = $query->result_array();
+
+		$tmp = array();
+		$result = array();
+		foreach($account_movements as $account_movement) {
+			$querymovement = $this->db->select('*, dishes.name as dishname, account_log.price as dishprice, account_log.quantity as dishqty')
+									   ->from('account_log')
+									   ->join('dishes','dishes.id = account_log.dish','inner')
+									   ->where('payment =',$account_movement['accid']);
+			$querymovement = $this->db->get();
+			$tmp = $account_movement;
+			foreach($querymovement->result_array() as $row ) {
+				$tmp['dish'][] = $row;
+			}
+			$result[] = $tmp;
+		}
+		
+		return $result;		
 	}
 	
 	function sector_movement($from, $to) {

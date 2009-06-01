@@ -34,6 +34,11 @@ $( function(){
 	$("table.zebra tr:even").addClass("even");
 	$("table.zebra tr:odd").addClass("odd");
 });
+
+function hideThis(obj) { 
+        $('#obj'+obj).slideToggle("slow");
+        return false;
+}
 </script>	
 <div id="Container">
 	<div class="Full">
@@ -66,14 +71,14 @@ $( function(){
 				</tr>
 			</table>
 			<br /><br />
-			<table width="100%" class="zebra">
+			<table width="100%">
 				<colgroup>
 					<col style='width:15%;' />
 					<col style='width:20%;' />
 					<col style='width:20%;' />
 					<col style='width:10%;' />
 					<col style='width:10%;' />
-					<col style='width:10%;' />
+					<col style='width:8%;' />
 				</colgroup>			
 				<thead>
 					<tr>
@@ -88,21 +93,57 @@ $( function(){
 				<?php
 				$total_in = 0;
 				$total_out = 0;
-				foreach($account_movements  as $account_movement) : 
-					if($account_movement['cash_amount'] > 0 )
-						$total_in += $account_movement['cash_amount'];
-					else
-						$total_out += $account_movement['cash_amount'];
+				$billid = -1;
+				$accid = -1;
+				foreach($account_movements as $am => $account_movement ) {
+					foreach($account_movement as $ai => $account_item ) {
+						if($billid != $account_movement['accid']) {
+							$billid = $account_movement['accid'];
+							if($account_movement['cash_amount'] > 0 )
+								$total_in += $account_movement['cash_amount'];
+							else
+								$total_out += $account_movement['cash_amount'];
+							?>
+							<tr onClick="hideThis('<?=$billid;?>')" id="hide<?=$billid;?>" style="font-weight:bold;border-bottom:0.1em solid #000000;border-top:0.1em solid #000000;">
+								<td align="left"><?=$account_movement['date']?></td>
+								<td align="left"><?=$account_movement['who']?></td>
+								<td align="left"><?=$account_movement['description']?></td>
+								<td align="left"><?=$account_movement['name']?></td>
+								<td align="right"><?=$account_movement['cash_amount'] > '0' ? $account_movement['cash_amount'] : '-'?></td>
+								<td align="right"><?=$account_movement['cash_amount'] < '0' ? $account_movement['cash_amount'] : '-'?></td>
+							</tr>
+							<tr><td colspan="6">
+							<?php 
+							
+						} else {
+							if(is_array($account_item)) {
+								echo '<div id="obj'.$billid.'" style="display:none"><table width="100%" class="zebra">
+										<colgroup>
+											<col style="width:15%;" />
+											<col style="width:20%;" />
+											<col style="width:20%;" />
+											<col style="width:10%;" />
+											<col style="width:10%;" />
+											<col style="width:10%;" />
+										</colgroup>';
+								foreach($account_item as $dish ) {
+								?>
+								<tr>
+									<td align="left"></td>
+									<td align="left"></td>
+									<td align="left"><?=$dish['dishname']?></td>
+									<td align="right"><?=$dish['dishprice']?></td>
+									<td align="right"><?=$dish['dishqty']?></td>
+									<td align="right"><?=$dish['dishprice']*$dish['dishqty']?></td>
+								</tr>
+				<?php 			}
+								echo "</table></div></td></tr>";
+							}
+						}
+					} 
+				} 
 				?>
-				<tr>
-					<td align="left"><?=$account_movement['date']?></td>
-					<td align="left"><?=$account_movement['who']?></td>
-					<td align="left"><?=$account_movement['description']?></td>
-					<td align="left"><?=$account_movement['name']?></td>
-					<td align="right"><?=$account_movement['cash_amount'] > '0' ? $account_movement['cash_amount'] : '-'?></td>
-					<td align="right"><?=$account_movement['cash_amount'] < '0' ? $account_movement['cash_amount'] : '-'?></td>
-				</tr>
-				<?php endforeach; ?>
+				</td></tr>
 				<tr><td colspan="6"></td></tr>
 				<tr>
 					<td colspan="3" align="right"><strong><?=lang('total'); ?> : </strong></td>
