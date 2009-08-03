@@ -26,59 +26,59 @@
  */
 ?>
 <div id="Header">
-<ul class="adxm menu">
+<ul id="topnav">
 	<li><a href="<?=$this->config->site_url();?>">Home</a></li>
 	<li><a href="#"><?=lang('general') ?> +</a>
-		<ul>
-			<li><a href="<?=$this->config->site_url();?>/category"><?=lang('categories') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/dish"><?=lang('dishes') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/ingredient"><?=lang('ingredients') ?></a></li>
-			<li class="separation"></li>
-			<li><a href="<?=$this->config->site_url();?>/table"><?=lang('tables') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/currency"><?=lang('currency') ?></a></li>
-		</ul>
+		<span>
+			<a href="<?=$this->config->site_url();?>/category"><?=lang('categories') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/dish"><?=lang('dishes') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/ingredient"><?=lang('ingredients') ?></a> | 
+			<!--  <li class="separation"></li>  -->
+			<a href="<?=$this->config->site_url();?>/table"><?=lang('tables') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/currency"><?=lang('currency') ?></a>
+		</span>
 	</li>
 	<li><a href="#"><?=lang('system') ?> +</a>
-		<ul>
-			<li><a href="<?=$this->config->site_url();?>/user"><?=lang('users') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/printer"><?=lang('printers') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/configuration"><?=lang('configuration') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/translator"><?=lang('translation') ?></a></li>
-		</ul>
+		<span>
+			<a href="<?=$this->config->site_url();?>/user"><?=lang('users') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/printer"><?=lang('printers') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/configuration"><?=lang('configuration') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/translator"><?=lang('translation') ?></a>
+		</span>
 	</li>
 	<li><a href="#"><?=lang('contacts') ?> +</a>
-		<ul>
-			<li><a href="<?=$this->config->site_url();?>/contacts"><?=lang('contacts') ?></a></li>
-		</ul>
+		<span>
+			<a href="<?=$this->config->site_url();?>/contacts"><?=lang('contacts') ?></a>
+		</span>
 	</li>
 	<li><a href="#"><?=lang('account') ?> +</a>
-		<ul>
-			<li><a href="<?=$this->config->site_url();?>/account/index/ap"><?=lang('ap') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/account/index/ar"><?=lang('ar') ?></a></li>
-			<li class="separation"></li>
-			<li><a href="<?=$this->config->site_url();?>/account/report_actual"><?=lang('actual_state') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/account/report_movement"><?=lang('movements') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/account/report_waiter"><?=lang('waiter_income') ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/account/report_sector"><?=lang('tot_by_sect') ?></a></li>			
-		</ul>
+		<span>
+			<a href="<?=$this->config->site_url();?>/account/index/ap"><?=lang('ap') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/account/index/ar"><?=lang('ar') ?></a> | 
+			<!--  <li class="separation"></li>  -->
+			<a href="<?=$this->config->site_url();?>/account/report_actual"><?=lang('actual_state') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/account/report_movement"><?=lang('movements') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/account/report_waiter"><?=lang('waiter_income') ?></a> | 
+			<a href="<?=$this->config->site_url();?>/account/report_sector"><?=lang('tot_by_sect') ?></a>			
+		</span>
 	</li>
 	<li><a href="#"><?=lang('bank'); ?> +</a>
-		<ul>
-			<li><a href="<?=$this->config->site_url();?>/bankaccount/index/account"><?=lang('bank_account'); ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/bankaccount/index/movement"><?=lang('movements'); ?></a></li>
-			<li class="separation"></li>			
-			<li><a href="<?=$this->config->site_url();?>/bankaccount/report_actual"><?=lang('actual_state'); ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/bankaccount/report_movement"><?=lang('movements'); ?></a></li>
-		</ul>
+		<span>
+			<a href="<?=$this->config->site_url();?>/bankaccount/index/account"><?=lang('bank_account'); ?></a> | 
+			<a href="<?=$this->config->site_url();?>/bankaccount/index/movement"><?=lang('movements'); ?></a> | 
+			<!-- <li class="separation"></li>  -->			
+			<a href="<?=$this->config->site_url();?>/bankaccount/report_actual"><?=lang('actual_state'); ?></a> | 
+			<a href="<?=$this->config->site_url();?>/bankaccount/report_movement"><?=lang('movements'); ?></a>
+		</span>
 	</li>
 	<li><a href="#"><?=lang('stock'); ?> +</a>
-		<ul>
-			<li><a href="<?=$this->config->site_url();?>/stock/index/add"><?=lang('supply'); ?></a></li>	
-			<li class="separation"></li>		
-			<li><a href="<?=$this->config->site_url();?>/stock/report_actual"><?=lang('inventory'); ?></a></li>
-			<li><a href="<?=$this->config->site_url();?>/stock/report_movement"><?=lang('movements'); ?></a></li>
-		</ul>
+		<span>
+			<a href="<?=$this->config->site_url();?>/stock/index/add"><?=lang('supply'); ?></a>	 | 
+			<!--  <li class="separation"></li>  -->		
+			<a href="<?=$this->config->site_url();?>/stock/report_actual"><?=lang('inventory'); ?></a> | 
+			<a href="<?=$this->config->site_url();?>/stock/report_movement"><?=lang('movements'); ?></a>
+		</span>
 	</li>
-	<li><a href="<?=$this->config->site_url();?>/login/doLogout"><?=lang('log_out'); ?></a></li>
+	<li style="float:right;"><a href="<?=$this->config->site_url();?>/login/doLogout"><?=lang('log_out'); ?></a></li>
 </ul>
 </div>

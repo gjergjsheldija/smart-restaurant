@@ -29,9 +29,9 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-
+<link type="text/css" rel="stylesheet" href="<?=base_url(); ?>../min/?g=admincss" />
 <script type="text/javascript" src="<?=base_url(); ?>../min/?g=adminjs"></script>
-<link type="text/css" rel="stylesheet" href="<?=base_url(); ?>../min/?g=admincss" /></head>
+</head>
 <body>
 
 <?=$this->load->view('menu');?>

@@ -8,13 +8,14 @@ return array(
     'admincss' => array(
     	'../css/stylesheet.css', 
     	'../css/ColorPicker.css', 
-    	'../css/menu.css', 
     	'../css/ui.tabs.css', 
     	'../css/ui.datepicker.css', 
-    	'../css/jquery.cluetip.css'
+    	'../css/jquery.cluetip.css',
+    	'../css/menu.css'
 		),
     'adminjs' => array(
     	'../js/jquery.js', 
+		'../js/menu.js',
     	'../js/ColorPicker.js', 
     	'../js/jquery.easing.js', 
     	'../js/jquery.dimensions.js', 
