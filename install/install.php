@@ -965,52 +965,6 @@ function page_footer() {
 <?php
 }
 
-
-// -----------------------------------------
-//  Fetch names of installed languages
-// -----------------------------------------
-	
-function language_pack_names($default) {
-	global $data;
-	
-    $source_dir = './'.trim($data['system_dir']).'/language/';
-
-	$filelist = array();
-
-	if ($fp = @opendir($source_dir)) { 
-		while (false !== ($file = readdir($fp))) { 
-			$filelist[count($filelist)] = $file;
-		} 
-	} 
-
-	closedir($fp); 
-	
-	sort($filelist);
-
-	$r  = "<div class='default'>";
-	$r .= "<select name='deft_lang' class='select'>\n";
-		
-	for ($i =0; $i < sizeof($filelist); $i++) 
-	{
-		if ( ! eregi(".php$",  $filelist[$i]) AND 
-			 ! eregi(".html$",  $filelist[$i]) AND
-			 ! eregi(".DS_Store",  $filelist[$i]) AND
-			 ! eregi("\.",  $filelist[$i])
-		   )
-			{
-				$selected = ($filelist[$i] == $default) ? " selected='selected'" : '';
-				
-				$r .= "<option value='{$filelist[$i]}'{$selected}>".ucfirst($filelist[$i])."</option>\n";
-			}
-	}        
-
-	$r .= "</select>";
-	$r .= "</div>";
-
-	return $r;
-}
-/* END */
-
 function license_agreement() {
 ?>
 <div id='innercontent'>

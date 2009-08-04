@@ -108,13 +108,7 @@ class stock_object extends object {
 			$col++;
 		}
 	}
-	
-	function set_unit_type ($type) {
-		$this -> fetch_data();
-		$out = $this->data;
-		$out['unit_type']=$type;
-		return($this->update($out));
-	}
+
 	
 	function check_values($input_data){
 		$msg="";
@@ -146,26 +140,6 @@ class stock_object extends object {
 		}
 
 		return $input_data;
-	}
-
-	function get_id () {
-		return $this->id;
-	}
-	
-	function get_ref_type () {
-		return $this->data['ref_type'];   
-	}
-	
-	function get_ref_id () {
-		return $this->data['ref_id'];   
-	}
-	
-	function get_value () {
-		return $this->data['value'];   
-	}
-	
-	function get_quantity () {
-		return $this->data['quantity'];   
 	}
 	
 	function find_external ($obj_id, $obj_type) {
@@ -330,32 +304,11 @@ class stock_object extends object {
 
 		return $input_data;
 	}
-	
-	function post_delete ($input_data) {
-		$mov = new stock_movement;
-		$err = $mov->delete_all_from_obj ($this->id);
-		return $err;
-	}
-	
-	function insert_sample ($quantity) {
-		$query="INSERT INTO `stock_samples` (`obj_id`,`quantity`) VALUES ('".$this->id."','".$quantity."')";
 
-		$res = common_query($query,__FILE__,__LINE__);
-		if(!$res) return ERR_MYSQL;
-		
-		return 0;
-	}
-	
 	function post_edit_page ($class) {
 		$this -> admin_list_page($class);
 	}
-	
-	function pre_delete ($input_data) {
-		$this->fetch_data();
-		$this->tmp=$this->data;
-		return $input_data;
-	}
-	
+
 	function post_insert_page ($class) {
 		global  $tpl;
 		$tpl -> set_admin_template_file ('menu');
@@ -367,19 +320,6 @@ class stock_object extends object {
 		$obj = new $type_class ($this->data['ref_id']);
 		$tmp = $obj -> form();
 		$tpl -> assign("content", $tmp);
-	}
-	
-	function post_delete_page ($class) {
-		global  $tpl;
-		$tpl -> set_admin_template_file ('menu');
-		
-		if($this->tmp['ref_type'] == TYPE_DISH) $type_class = 'dish';
-		elseif($this->tmp['ref_type'] == TYPE_INGREDIENT) $type_class = 'ingredient';
-		
-		$obj = new $type_class ($this->tmp['ref_id']);
-		$tmp = $obj -> form();
-		$tpl -> assign("content", $tmp);
-		
 	}
 	
 }

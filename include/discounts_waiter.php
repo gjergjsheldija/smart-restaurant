@@ -160,11 +160,6 @@ function discount_calculate_from_percent($sourceid,$percent){
 	return $amount;
 }
 
-
-function discount_edit($discount_id,$amount){
-	$_SESSION['discount']=$amount;
-}
-
 function discount_form_javascript($sourceid){
 	$output = '';
 	
@@ -222,30 +217,10 @@ function discount_delete($discount_id){
 	unset($_SESSION['discount']);
 }
 
-
-function discount_insert($sourceid,$amount){
-	$_SESSION['discount']=$amount;
-}
-
-
 function discount_find($sourceid){
 	if(isset($_SESSION['discount']))
 		return 1;
 	else return 0;
-}
-
-
-function discount_read_amount($discount_id){
-	return $_SESSION['discount'];
-}
-
-function discount_calculate_percent_from_amount($sourceid,$discount_id){
-	$amount=discount_read_amount($discount_id);
-
-	$total_no_disc=source_total_without_discount($sourceid);
-
-	$percent=round(-1*$amount/$total_no_disc*100);
-	return $percent;
 }
 
 ?>

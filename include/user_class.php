@@ -700,40 +700,6 @@ class user extends object {
 		return $output;
 	}
 	
-	function disconnect_confirm_pos () {
-		global $tpl;
-
-		$tpl -> set_waiter_template_file ('disconnect');
-
-		$tmp = ucfirst(phr('CONNECTED_AS')).": <b>".$this->data['name'];
-		$tmp .= ucfirst(phr('DISCONNECT_ASK'));
-		$tmp .= '<a href="?command=destroy&rndm='.rand(0,100000).'"><h4><div class="preferred_answer"><img src='.IMAGE_OK.' height=64 width=64></div></h4></a>';
-
-		// don't know if this works correctly with any browser.
-		// we should try but go(-1) and back() ways and report success or failures.
-		// please report results here.
-		$tmp .= '<a href="#" onclick="javascript:history.go(-1); return false;"><h2><img src='.IMAGE_NO.' height=64 width=64></h2></a><br>'."\n";
-		$tpl -> assign ('logout',$tmp);
-		return 0;
-	}
-
-	function post_update($input_data) {
-		global $tpl;
-		$this -> get_level ();
-
-		$_SESSION['language']=$this->get('language');
-
-		$lang_file=ROOTDIR."/lang/lang_".$_SESSION['language'].".php";
-		if(is_readable($lang_file)) include($lang_file);
-		else error_msg(__FILE__,__LINE__,'file '.$lang_file.' is not readable');
-
-		$menu = new menu();
-		$tmp = $menu -> main ();
-		$tpl -> assign("menu", $tmp);
-
-		return $input_data;
-	}
-
 	function check_values($input_data){
 		$msg="";
 		$input_data['name']=trim($input_data['name']);

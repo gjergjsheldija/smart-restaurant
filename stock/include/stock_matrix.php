@@ -33,40 +33,7 @@ class stock_matrix extends object {
 	var $matrix;
 	var $size;
 	
-	function calculate_ingredient_quantities () {
-		$this->objects = $this->create_objects_vector('obj_id');
-		$this->dishes = $this->create_objects_vector('dish_id');
-		$this->size = max(count($this->objects),count($this->dishes));
-		$this->matrix = $this->create_ingredient_use_matrix();
-		$this->samples = $this->create_ingredient_samples_vector();
-		
-		$sol=matrix::solve($this->matrix,$this->samples);
-		
-		echo var_dump_table($this->objects);
-		echo var_dump_table($this->dishes);
-		matrix::show_matrix($this->matrix);
-		echo var_dump_table($this->samples);
-		echo 'solution: '.var_dump_table($sol);
-	
-		return 0;
-	}
 
-	function create_objects_vector ($var) {
-		$query = "SELECT DISTINCT `$var` as elem FROM stock_movements";
-		$res = common_query($query,__FILE__,__LINE__);
-		if(!$res) return 0;
-		
-		$i=0;
-		while($arr = mysql_fetch_array ($res)) {
-			if(!$arr['elem']) continue;
-			
-			$objects[$arr['elem']]=$i;
-			$i++;
-		}
-		
-		return $objects;
-	}
-	
 	function create_ingredient_use_matrix () {
 		if(!is_array($this->objects)) return 0;
 		if(!is_array($this->dishes)) return 0;
@@ -114,11 +81,7 @@ class stock_matrix extends object {
 		
 		return $samples;
 	}
-	
-	function save_ingredient_quantities () {
-		
-		return 0;
-	}
+
 }
 
 ?>

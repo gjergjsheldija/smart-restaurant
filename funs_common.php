@@ -68,11 +68,6 @@ function check_db_status () {
 	}
 }
 
-function show_logo () {
-	$ret = '<img src="'.ROOTDIR.'/images/logo2.jpg" alt="Smart Restaurant Logo">'."\n";
-	return $ret;
-}
-
 function eq_to_number ($eq) {
 	if(CONF_DEBUG_DISABLE_FUNCTION_INSERT) return $eq;
 	
@@ -512,69 +507,6 @@ function var_dump_string($var){
 	return $out;
 }
 
-function list_drivers($dir) {
-clearstatcache ();
-	if ($handle = opendir ( $dir )) {
-		while ( false !== ($file = readdir ( $handle )) ) {
-			if (is_file ( $dir . '/' . $file ) && is_readable ( $dir . '/' . $file ) && $file != "." && $file != "..") {
-				$file = str_replace ( '.php', "", $file );
-				$drivers [] = $file;
-			}
-		}
-		closedir ( $handle );
-	}
-	return $drivers;
-}
-
-function list_templates($dir) {
-clearstatcache ();
-	$templates = array ();
-	if ($handle = opendir ( $dir )) {
-		while ( false !== ($file = readdir ( $handle )) ) {
-			if (is_dir ( $dir . '/' . $file ) && is_readable ( $dir . '/' . $file ) && $file != "." && $file != ".." && is_dir ( $dir . '/' . $file . '/prints' )) {
-				
-				if (! in_array ( $file, $templates ))
-					$templates [] = $file;
-			}
-		}
-		closedir ( $handle );
-	}
-	return $templates;
-}
-
-function list_languages($dir) {
-clearstatcache();
-$langs=array();
-$points=array();
-
-if ($handle = opendir($dir)) {
-	while (false !== ($file = readdir($handle))) {
-		if (is_file($dir.'/'.$file) && is_readable($dir.'/'.$file) && $file != "." && $file != "..") {
-			$code = strtolower ($file);
-			
-			$code = str_replace ('lang_',"",$code);
-			$code = str_replace ('.php',"",$code);
-			$code = str_replace ('_waiter',"",$code);
-			
-			if(!isset($points[$code])) $points[$code]=0;
-			
-			if (strlen($file)==11) {				// lang_xx.php file
-				$points[$code]++;
-			} elseif (strlen($file)==18) {			// // lang_xx_waiter.php file
-				$points[$code]++;
-			}
-			
-			// we use >= instead of == to allow having useless lang files (caused by old versions)
-			if(!in_array($code,$langs) && $points[$code]>=LANG_FILES_NUMBER) {	// all the lang files have been found
-				$langs[]=$code;
-			}
-		}
-	}
-	closedir($handle);
-}
-return $langs;
-}
-
 function list_db_languages() {
 	$points = array ();
 	
@@ -642,19 +574,6 @@ function check_output_files() {
 		} elseif (!is_writeable($name))
 			return 3;
 	}
-
-	return 0;
-}
-
-function check_conf_file($name) {
-	clearstatcache();
-
-	if(!file_exists($name)) {
-		$dirname=dirname($name);
-		if(!is_writeable($dirname))
-			return 2;
-	} elseif (!is_writeable($name))
-		return 1;
 
 	return 0;
 }
@@ -777,24 +696,6 @@ function head_line ($title) {
 
 	return $output;
 }
-//mizuko
-function head_line_waiter ($title) {
-	global $tpl;
-	
-	$output='
-	<meta http-equiv="content-type" content="text/html; charset='.phr('CHARSET').'">
-	<META name="HandheldFriendly" content="True">
-	<title>Smart Restaurant - '.$title.'</title>
-	<script type="text/javascript" language="JavaScript" src="'.CONF_JS_URL_WAITER.'"></script>
-
-	<meta http-equiv="Cache-Control" content="no-cache">
-	<meta http-equiv="Expires" content="0">';
-	$tpl -> assign("head", $output);
-
-	$tpl -> append("scripts", $tmp);
-
-	return $output;
-}
 
 function disconnect_line () {
 	if(isset($_SESSION['userid'])) {
@@ -822,20 +723,6 @@ function common_bottom() {
 	</body>
 </html>';
 	return $msg;
-}
-
-function next_free_id($db,$table) {
-	$query="SELECT `id` FROM `$table` ORDER BY `id` DESC";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return 0;
-
-	if(!mysql_num_rows($res)){
-		return 1;
-	}
-
-	$arr=mysql_fetch_array($res);
-	return $arr['id']+1;
-
 }
 
 function request($name){

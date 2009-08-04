@@ -24,7 +24,7 @@
 *
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
-* @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2003-2005, Fabio De Pascale
 */
 
 class country extends object {
@@ -36,31 +36,6 @@ class country extends object {
 		$this -> fetch_data();
 	}
 	
-	function list_all_conf ($varname,$selected) {
-		$query = "SELECT * FROM `".$this->table."`";
-		$res=common_query($query,__FILE__,__LINE__);
-		if(!$res) return ERR_MYSQL;
-
-		if(!mysql_num_rows($res)) return '';
-
-		$output = '
-	<select name="data['.$varname.']">';
-		
-		while ($arr=mysql_fetch_array($res)) {
-			if($selected == $arr['id']) $sel = ' selected';
-			else $sel = '';
-			
-			$htmlcode = $arr['currency_html'];
-			if (empty($htmlcode)) $htmlcode = '';
-			else $htmlcode = ' ('.$htmlcode.')';
-			
-			$output .= '
-		<option value="'.$arr['id'].'"'.$sel.'>'.$arr['name'].' - '.$arr['currency_letter'].$htmlcode.'</option>';
-		}
-		$output .= '
-	</select>'."\n";
-		return $output;
-	}
 }
 
 function country_conf_currency ($html=false) {

@@ -225,69 +225,6 @@ function display_show($id){
 	echo "</tr></table>\n";
 }
 
-function form_insert_type() {
-	$table='mgmt_types';
-	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table WHERE `account_only`=0 ORDER BY `name`");
-
-?>
-<table border="0">
-	<tbody>
-		<tr>
-			<td>
-	<FIELDSET>
-	<LEGEND><?php echo ucfirst(GLOBALMSG_RECORD_INSERT); ?></LEGEND>
-
-	<form action="db.php" method="GET" name="insert_form">
-	<input type="hidden" name="command" value="new">
-	<table border="0">
-	<tbody>
-<?php
-	$i=0;
-	while($row=mysql_fetch_array ($res)) {
-		$mgmt_type = new mgmt_type($row['id']);
-		$type_name=$mgmt_type -> name($_SESSION['language']);
-		unset($mgmt_type);
-
-		if($i%2) {
-			echo "<td>";
-		} else {
-			echo "<tr><td>\n";
-		}
-		if(!$i){
-?>
-			<input type="radio" onClick="document.insert_form.submit()" name="insert_type" value="<?php echo $row['id']; ?>" checked>
-			<a href="#" onclick="JavaScript:type_insert_check('insert_form','insert_type',<?php echo $i; ?>); document.insert_form.submit(); return(false);"><?php echo $type_name; ?></a><br>
-<?php
-		} else {
-?>
-			<input type="radio" onClick="document.insert_form.submit()" name="insert_type" value="<?php echo $row['id']; ?>">
-			<a href="#" onclick="JavaScript:type_insert_check('insert_form','insert_type',<?php echo $i; ?>);document.insert_form.submit();return(false);"><?php echo $type_name; ?></a><br>
-<?php
-		}
-		if($i%2) {
-			echo "</td></tr>\n";
-		} else {
-			echo "</td>\n";
-		}
-		$i++;
-	}
-	if($i%2) {
-		echo "</tr>";
-	}
-?>
-	</tbody></table>
-	</td></tr>
-	<tr><td align="center">
-	<table border="0"><tr><td align="center">
-	</form>
-	</td></tr></table>
-	</FIELDSET>
-	</td></tr></table>
-
-</form>
-<?php
-}
-
 function input_standard($id,$editing){
 	if ($editing) {
 		$table='account_mgmt_main';
