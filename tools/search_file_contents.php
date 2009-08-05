@@ -8,15 +8,15 @@ class functionDuplicate{
 	var $functionDeclarationList = array();
 	var $functionUsedList = ''; 						// array with the not used functions
     var $myfiles;
-/*    var $forbiddenDirs = array (".",
+    var $forbiddenDirs = array (".",
 							    "..",
     							".svn",
     							"system",
     							"administrator",
     							"lang",
     							"xtemplate"
-							    );*/
-    var $forbiddenDirs = array (".",
+							    );
+/*    var $forbiddenDirs = array (".",
 							    "..",
     							".svn",
     							"system",
@@ -28,7 +28,7 @@ class functionDuplicate{
     							"js",
 								"logs"      							
 							    );							    
-    
+  */  
     function search($directory){
         $this->dir_name = $directory;
         
