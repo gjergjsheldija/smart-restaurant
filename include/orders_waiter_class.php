@@ -484,6 +484,7 @@ class order {
 		return $err;
 	}
 	
+
 	function table_row($arr){
 		$output = '';
 		$tbl = new table ($arr['sourceid']);
@@ -761,6 +762,8 @@ class order {
 		return $output;
 	}
 
+	
+	
 	function table_row_pos($arr){
 		$output = '';
 		$tbl = new table ($arr['sourceid']);

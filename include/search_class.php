@@ -40,12 +40,7 @@ class search extends object {
 		$this->disable_mass_delete=true;
 	}
 	
-	function list_form_start () {
-		$obj = new stock_dish;
- 		$tmp = '<form name="list_form_'.get_class($obj).'" action="'.$obj->file.'?" method="post">'."\n";
-		return $tmp;
-	}
-	
+
 	function list_buttons () {
 		$obj = new stock_dish;
 		$tmp .= '<table width="100%"><tr>'."\n";

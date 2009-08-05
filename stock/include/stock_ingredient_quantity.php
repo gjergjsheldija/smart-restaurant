@@ -54,42 +54,5 @@ class stock_ingredient_quantity extends object {
 		return 0;
 	}
 	
-	function get_all () {
-		$this->fetch_data();
-		
-		$query = "SELECT `quantity` FROM `stock_ingredient_samples`
-				WHERE `obj_id`='".$this->data['obj_id']."'
-				AND `dish_id`='".$this->data['dish_id']."'";
-		
-		if($this->db=='common') $res = common_query($query,__FILE__,__LINE__);
-		else $res = accounting_query($query,__FILE__,__LINE__);
-		if(!$res) return 0;
-		
-		while($arr=mysql_fetch_assoc ($res)) {
-			$out[] = $arr['quantity'];
-		}
-		
-		return $out;
-	}
-	
-	function average ($arr) {
-		$num = count($arr);
-		$sum = 0;
-		foreach($arr as $val) $sum = $sum+$val;
-		
-		$avg = $sum/$num;
-		return $avg;
-	}
-	
-	function recalc () {
-		$arr=$this->get_all();
-		$input_data=$this->data;
-		unset($input_data['timestamp']);
-		
-		$input_data['quantity']=$this->average($arr);
-		
-		if($ret=$this->update($input_data)) return $ret;
-		return 0;
-	}
 }
 ?>

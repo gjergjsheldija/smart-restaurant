@@ -427,57 +427,6 @@ class user extends object {
 		return $output;
 	}
 
-	function html_select_tables( $kamerieri, $who=SHOW_ALL_USERS ) {
-		$output = '';
-
-		switch($who) {
-			case SHOW_ALL_USERS:
-				$waiter_only=false;
-				$admin_only=false;
-				break;
-			case SHOW_WAITER_ONLY:
-				$waiter_only=true;
-				$admin_only=false;
-				break;
-			case SHOW_ADMIN_ONLY:
-				$waiter_only=false;
-				$admin_only=true;
-				break;
-			default:
-				$waiter_only=false;
-				$admin_only=false;
-				break;
-		}
-
-
-		$query="SELECT `id`,`name` FROM `users` WHERE `disabled`='0' AND `deleted`='0'";
-		$query.=" ORDER BY name ASC";
-
-		$res=common_query($query,__FILE__,__LINE__);
-		if(!$res) return $output;
-
-		$output .= '			<select name="data[locktouser]" size="1">'."\n";
-		$i=0;
-		while ($arr=mysql_fetch_array ($res)) {
-			$user=new user($arr['id']);
-
-			$write_line=false;
-			if($waiter_only && $user->is_waiter()) $write_line=true;
-			elseif ($admin_only && $user->is_admin()) $write_line=true;
-			elseif (!$admin_only && !$waiter_only) $write_line=true;
-
-			if($i==0 && $write_line && ($kamerieri == $arr['id']) ) {
-				$selected=' selected';
-				$i++;
-			} else $selected='';
-
-			if($write_line) $output .= '				<option value="'.$arr['id'].'">'.$arr['name'].'</option>'."\n";
-		}
-		$output .= '			</select>'."\n";
-
-		return $output;
-	}
-
 	function html_button_login_pos($who=SHOW_ALL_USERS) {
 		$output = '';
 

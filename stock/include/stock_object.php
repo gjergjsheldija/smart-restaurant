@@ -241,19 +241,7 @@ class stock_object extends object {
 		return 0;
 	}
 	
-	function get_user_quantity () {
-		$unit_type = $this->data['unit_type'];
-				
-		$user_unit = get_user_unit ( $unit_type);
-		$system_unit = get_default_unit ( $unit_type);
-			
-		$quantity = $this->data['quantity'];
-		$quantity = convert_units ($quantity.' '.$system_unit, $user_unit);
 
-		$res=$quantity.' '.$user_unit;
-		return $res;
-	}
-	
 	function get_ingredient_quantity ($dish_id) {
 		$obj_id = $this->id;
 		

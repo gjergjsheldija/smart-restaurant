@@ -416,55 +416,6 @@ function navbar_separatebills_pos($form,$show_abort='') {
 	';
 	return $msg;
 }
-function command_bar_table_horizontal(){
-	$output = '
-	<table>
-		<tr>
-			<td width=35>
-				<strong><a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="10" height="10"></a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-				<strong><a href="orders.php?command=close_confirm"><img src="'.IMAGE_CLOSE.'" alt="'.ucfirst(phr('CLOSE_TABLE')).'" border=0 width="32" height="32"></a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-				<strong><a href="orders.php?command=printing_choose"><img src="'.IMAGE_PRINT.'" alt="'.ucfirst(phr('PRINT')).'" border=0 width="32" height="32"></a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
-			</td>
-		</tr>
-	</table>
-	';
-	return $output;
-}
-
-function command_bar_table_horizontal_pos(){
-	$output = '
-	<table>
-		<tr>
-			<td width=35>
-				<a href="tables.php"><img src="'.IMAGE_MENU.'" alt="'.ucfirst(phr('BACK_TO_TABLES')).'" border=0 width="64" height="64"></a>
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-				<a href="orders.php?command=close_confirm"><img src="'.IMAGE_CLOSE.'" alt="'.ucfirst(phr('CLOSE_TABLE')).'" border=0 width="64" height="64"></a>
-			</td>
-			<td width=35>
-			</td>
-			<td width=35>
-				<a href="orders.php?command=printing_choose"><img src="'.IMAGE_PRINT.'" alt="'.ucfirst(phr('PRINT')).'" border=0 width="64" height="64"></a>
-			</td>
-		</tr>
-	</table>
-	';
-	return $output;
-}
 
 function command_bar_table_vertical(){
 	$output = '

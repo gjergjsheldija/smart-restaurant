@@ -93,29 +93,6 @@ function order_last_modified_links () {
 	return $ret;
 }
 
-function order_last_modified_decrease () {
-	$query="SELECT * FROM `orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return ERR_MYSQL;
-	$arr = mysql_fetch_array($res);
-
-	if((!$arr['printed'] && $arr['dishid']!=MOD_ID) || $arr['dishid']==SERVICE_ID){
-		if($arr['quantity']>1){
-			$newquantity=$arr['quantity']-1;
-			$link = 'orders.php?command=update&data[quantity]='.$newquantity.'&data[id]='.$arr['id'];
-			if($arr['suspend']) $link .= '&data[suspend]=1';
-			if($arr['extra_care']) $link .= '&data[extra_care]=1';
-		} elseif($arr['quantity']==1 && CONF_ALLOW_EASY_DELETE){
-			$newquantity=0;
-			$link = 'orders.php?command=ask_delete&data[id]='.$arr['id'];
-			if($arr['suspend']) $link .= '&data[suspend]=1';
-			if($arr['extra_care']) $link .= '&data[extra_care]=1';
-		}
-		return $link;
-	}
-	return '';
-}
-
 function order_get_last_modified() {
 	$query="SELECT `id` FROM `orders`WHERE `sourceid`='".$_SESSION['sourceid']."' AND `id`=`associated_id` ORDER BY `timestamp` DESC LIMIT 1";
 	$res=common_query($query,__FILE__,__LINE__);
@@ -546,32 +523,7 @@ function orders_ask_delete ($start_data) {
 	$tpl -> assign ('question',$tmp);
 }
 
-function orders_ask_delete_pos ($start_data) {
-	global $tpl;
 
-	$tpl -> set_waiter_template_file ('question');
-
-	$tmp = navbar_form_pos('form1','orders.php?command=list');
-	$tpl -> assign ('navbar',$tmp);
-
-	$ord = new order ((int) $start_data['id']);
-
-	if ($ord -> data['dishid'] == SERVICE_ID) $dishname = ucfirst(phr('SERVICE_FEE'));
-	else {
-		$dish = new dish ($ord -> data['dishid']);
-		$dishname = $dish -> name ($_SESSION ['language']);
-	}
-
-	$tmp = '
-	<form action="orders.php" method="post" name="form1">
-	<input type="hidden" name="command" value="delete">
-	<input type="hidden" name="data[id]" value="'.$start_data['id'].'">
-	'.ucfirst(phr('ASK_DELETE_CONFIRMATION')).'<br/>
-	<b>'.$dishname.'</b>
-	
-	</form>';
-	$tpl -> assign ('question',$tmp);
-}
 
 function orders_ask_substitute ($start_data) {
 	global $tpl;
@@ -921,18 +873,6 @@ function orders_delete ($start_data) {
 
 	unset($ord);
 	return $err;
-}
-
-function orders_find_mod_order ($main, $ingredid) {
-	$main = (int) $main;
-
-	$query ="SELECT id FROM `orders` WHERE orders.associated_id = '".$main."' AND orders.id != '".$main."' AND orders.ingredid = '".$ingredid."'";
-	$res=common_query($query,__FILE__,__LINE__);
-	if(!$res) return 0;
-
-	$arr ['id']=0;
-	$arr = mysql_fetch_array ($res);
-	return $arr ['id'];
 }
 
 function orders_service_fee_exists(){
