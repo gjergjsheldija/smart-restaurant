@@ -53,18 +53,6 @@
 
 	$tpl = new template;
 	
-	$dbman = new db_manager ('', '', '', $link);
-	if($dbman->upgrade_available()) {
-		if(CONF_FORCE_UPGRADE && !in_array(basename($_SERVER['SCRIPT_NAME']),$allowed_not_upgraded)) {
-			header('Location: '.ROOTDIR.'/admin/upgrade.php?command=none&data[redirected]=1');
-			echo 'Upgrades available.';
-			die();
-		}
-		$tmp = '<font color="red">'.ucphr('UPGRADES_AVAILABLE').'<br/><a href="'.ROOTDIR.'/admin/upgrade.php?command=none&data[redirected]=1">'.ucphr('CLICK_HERE_TO_UPGRADE').'</a></font><br/>'."\n";
-		$tpl -> append("messages", $tmp);
-		unset($tmp);
-	}
-	
 	/*
 	we almost always use this command var, so we get it here
 	to make it available to other functions whithout other hassle

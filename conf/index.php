@@ -49,11 +49,6 @@ check_db_status();
 start_language ();
 
 $dbman = new db_manager ('', '', '', $link);
-if(!in_array(basename($_SERVER['SCRIPT_NAME']),$allowed_not_upgraded) && $dbman->upgrade_available()) {
-	header('Location: '.ROOTDIR.'/admin/upgrade.php?command=none&data[redirected]=1');
-	echo 'Upgrades available.';
-	die();
-}
 
 header("Content-Language: ".$_SESSION['language']);
 header("Content-type: text/html; charset=".phr('CHARSET'));
