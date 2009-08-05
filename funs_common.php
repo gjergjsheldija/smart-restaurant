@@ -56,11 +56,7 @@ function check_db_status () {
 		$url=ROOTDIR.'/install/install.php';
 		header('Location: '.$url);
 		$error_msg = common_header ('Database tables not found');
-		$error_msg .= redirectJS ($url);			/*RTG: I prefer to get a exception in somewhere in my code I use a not existing lang
-			//(by the way, mysql_list_tables is deprecated)  // K: substituted with show tables query
-			K: I don't agree. we simply call this functions for a lang, then it autonomously decides which table to use,
-			This makes the function call easier.
-			*/
+		$error_msg .= redirectJS ($url);	
 		$error_msg .= 'No table found on the database. Going to installation page.';
 		$error_msg .= common_bottom ();
 		echo $error_msg;
@@ -507,40 +503,6 @@ function var_dump_string($var){
 	return $out;
 }
 
-function list_db_languages() {
-	$points = array ();
-	
-	$res_lang = mysql_list_tables ( $_SESSION ['common_db'] );
-	while ( $arr_lang = mysql_fetch_array ( $res_lang ) ) {
-		if (eregi (  '[^_]*_*.*[^_]*_.?.?$', $arr_lang [0] )) {
-			$lang_now = eregi_replace (  "[^_]*_*.*[^_]*_(.?.?)$", "\\1", $arr_lang [0] );
-			$lang_now = substr ( $lang_now, - 2 ); // this is useless if eregi works correctly, but a check it's better, isn't it?
-			
-
-			if (! isset ( $points [$lang_now] ))
-				$points [$lang_now] = 0;
-			
-			$points [$lang_now] ++;
-			
-			if ($points [$lang_now] == LANG_TABLES_NUMBER) // all the lang tables have been found
-				$lang_array [] = $lang_now;
-		}
-	}
-	$langs = $lang_array;
-	return $langs;
-}
-
-function css_line_admin($i){
-	if($i==-2){
-		return 'admin_table';
-	}elseif($i==-1){
-		return 'admin_table';
-	} elseif(($i%2)){
-		return 'admin_tr_0';
-	} else {
-		return 'admin_tr_1';
-	}
-}
 
 function color($i){
 	if($i==-2){
