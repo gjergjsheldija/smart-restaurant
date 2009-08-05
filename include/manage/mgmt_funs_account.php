@@ -28,7 +28,7 @@
 */
 
 function account_movement_from_manage($mgmt_id){
-	require(ROOTDIR."/manage/mgmt_start.php");
+	require(ROOTDIR."/include/manage/mgmt_start.php");
 
 	$editing=0;
 	$table='account_account_log';
@@ -82,7 +82,7 @@ function account_movement_from_manage($mgmt_id){
 }
 
 function account_select_plugin($id=0){
-	require(ROOTDIR."/manage/mgmt_start.php");
+	require(ROOTDIR."/include/manage/mgmt_start.php");
 	$table='account_accounts';
 	$query="SELECT * FROM $table ORDER BY `bank`";
 	$res=common_query($query,__FILE__,__LINE__);
@@ -104,7 +104,7 @@ function account_select_plugin($id=0){
 }
 
 function account_movement_list($account_id=0,$orderby){
-	require(ROOTDIR."/manage/mgmt_start.php");
+	require(ROOTDIR."/include/manage/mgmt_start.php");
 
 	$table='account_account_log';
 	if($account_id)
@@ -223,7 +223,7 @@ function account_movement_check_values($input_data){
 }
 
 function account_movement_form($id=0){
-	require(ROOTDIR."/manage/mgmt_start.php");
+	require(ROOTDIR."/include/manage/mgmt_start.php");
 	if($id) {
 		$editing=1;
 		$table='account_account_log';

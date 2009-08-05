@@ -48,7 +48,7 @@ class stock_object extends object {
 								'value'=>ucphr('VALUE').' ['.country_conf_currency (true).']');
 		$this->fields_width=array(	'name'=>'75%');
 		$this->hide=array(	'ref_id');
-		$this->file=ROOTDIR.'/stock/index.php';
+		$this->file=ROOTDIR.'/include/stock/index.php';
 		$this -> disable_new = true;
 		$this -> fetch_data();
 	}

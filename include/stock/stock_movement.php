@@ -38,7 +38,7 @@ class stock_movement extends object {
 		$this -> title = ucphr('STOCK_MOVEMENTS');
 		$this -> no_name = true;
 		$this -> disable_new = true;
-		$this->file=ROOTDIR.'/stock/index.php';
+		$this->file=ROOTDIR.'/include/stock/index.php';
 		$this->main_list_item = 'obj_id';
 		$this->hide = array('obj_id','dish_id');
 		$this->default_orderby = 'timestamp';

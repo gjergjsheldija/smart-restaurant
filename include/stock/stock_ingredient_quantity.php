@@ -34,7 +34,7 @@ class stock_ingredient_quantity extends object {
 		$this->id=$id;
 		$this->fields_names=array(	'id'=>ucphr('ID'));
 		$this -> title = ucphr('INGREDIENTS');
-		$this->file=ROOTDIR.'/stock/index.php';
+		$this->file=ROOTDIR.'/include/stock/index.php';
 		$this->fields_width=array(	'name'=>'80%');
 		
 		$this -> disable_mass_delete = true;

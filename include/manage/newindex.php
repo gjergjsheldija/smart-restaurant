@@ -30,41 +30,52 @@
 $inizio=microtime();
 
 define('ROOTDIR','..');
-require(ROOTDIR."/manage/mgmt_funs.php");
-require(ROOTDIR."/conf/config.inc.php");
-require(ROOTDIR."/conf/config.constants.inc.php");
+require(ROOTDIR."/include/manage/mgmt_funs.php");
+require(ROOTDIR."/include/manage/mgmt_start.php");
 
-session_start();
-	
-header ("Expires: " . gmdate("D, d M Y H:i:s", time()) . " GMT");
-header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+unset($_SESSION['who']);
 
-common_set_error_reporting ();
-
-$_SESSION['common_db']=$db_common;
-$link = mysql_pconnect ($cfgserver, $cfguser,$cfgpassword) or die (GLOBALMSG_DB_CONNECTION_ERROR);
-
-start_language ();
-
-if(isset($_SESSION['printable']['table_title'])){
-	$title=$_SESSION['printable']['table_title'];
-}
-if(isset($_SESSION['printable']['query'])){
-	$query=$_SESSION['printable']['query'];
+if(isset($_GET['orderby'])){
+	$orderby=$_GET['orderby'];
+} elseif(isset($_POST['orderby'])){
+	$orderby=$_POST['orderby'];
 }
 
-if(!access_allowed(USER_BIT_ACCOUNTING)) $command='access_denied';
+$tpl -> set_admin_template_file ('standard');
+
+switch($class) {
+	case 'accounting':
+		if(!access_allowed(USER_BIT_ACCOUNTING)) $command='access_denied';
+		$tmp = head_line('Accounting');
+		$tpl -> assign("head", $tmp);
+
+		break;
+	default:
+		$command='access_denied';
+}
 
 switch($command) {
 	case 'access_denied':
-				echo access_denied_admin();
-				break;
+		access_denied_template();
+		break;
 	default:
-		if($data=pdf_generator($query))
-			printable_write_pdf($data,$title);
-		else {
-			die(GLOBALMSG_RECORD_NONE_FOUND_ERROR.'. <a href="#" onclick="javascript:window.close(); return false">'.ucfirst(phr('GO_BACK')).'</a>');
-		}
+		main_header();
+		// next is the general report table creator
+		table_general($orderby,"default");
+		unset($_SESSION["delete"]);
+		break;
 }
 
+// prints page generation time
+$tmp = generating_time($inizio);
+$tpl -> assign ('generating_time',$tmp);
+
+if($err=$tpl->parse()) return $err; 
+
+$tpl -> clean();
+$output = $tpl->getOutput();
+
+// prints everything to screen
+echo $output;
+if(CONF_DEBUG_PRINT_PAGE_SIZE) echo $tpl -> print_size();
 ?>

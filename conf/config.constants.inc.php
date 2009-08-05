@@ -158,8 +158,6 @@ define('UNIT_TYPE_MASS',1);
 define('UNIT_TYPE_VOLUME',2);
 define('UNIT_TYPE_MONEY',3);
 
-$allowed_not_upgraded  = array('upgrade.php','connect.php','export_db.php');
-
 global $convertion_constants;
 $convertion_constants = array (
 	// weight US

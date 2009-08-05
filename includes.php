@@ -28,20 +28,19 @@
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 * @copyright		Copyright 2006-2009, Gjergj Sheldija
 */
-
 require_once(ROOTDIR."/funs_common.php");
 
 // explicitily called to be before other extended classes
 require_once(ROOTDIR."/include/object_class_admin.php");
 
-include_once(ROOTDIR."/manage/mgmt_funs_stats.php");
-include_once(ROOTDIR."/manage/mgmt_funs_other.php");
-include_once(ROOTDIR."/manage/mgmt_funs_database.php");
-include_once(ROOTDIR."/manage/mgmt_funs_receipt.php");
-include_once(ROOTDIR."/manage/mgmt_funs_account.php");
-include_once(ROOTDIR."/manage/mgmt_funs_stock.php");
+include_once(ROOTDIR."/include/manage/mgmt_funs_stats.php");
+include_once(ROOTDIR."/include/manage/mgmt_funs_other.php");
+include_once(ROOTDIR."/include/manage/mgmt_funs_database.php");
+include_once(ROOTDIR."/include/manage/mgmt_funs_receipt.php");
+include_once(ROOTDIR."/include/manage/mgmt_funs_account.php");
+include_once(ROOTDIR."/include/manage/mgmt_funs_stock.php");
 
-include_once(ROOTDIR."/xtemplate/xtemplate.class.php");
+include_once(ROOTDIR."/include/xtemplate/xtemplate.class.php");
 
 // includes all the files in include dir
 clearstatcache();
@@ -57,7 +56,7 @@ if ($handle = opendir($dir_scan)) {
 }
 
 /* Stock scanning */
-$dir_scan=ROOTDIR.'/stock/include';
+$dir_scan=ROOTDIR.'/include/stock';
 if ($handle = opendir($dir_scan)) {
 	while (false !== ($file = readdir($handle))) {
 		if (is_file($dir_scan.'/'.$file) && is_readable($dir_scan.'/'.$file) && strtolower(substr($file,-4))=='.php') {

@@ -30,34 +30,32 @@
 $inizio=microtime();
 
 define('ROOTDIR','..');
-require(ROOTDIR."/manage/mgmt_funs.php");
-require(ROOTDIR."/manage/mgmt_start.php");
+require(ROOTDIR."/include/manage/mgmt_funs.php");
+require(ROOTDIR."/include/manage/mgmt_start.php");
+
+unset($_SESSION['who']);
+
+if(isset($_GET['orderby'])){
+	$orderby=$_GET['orderby'];
+} elseif(isset($_POST['orderby'])){
+	$orderby=$_POST['orderby'];
+}
 
 if(!access_allowed(USER_BIT_ACCOUNTING)) $command='access_denied';
 
 switch($command) {
 	case 'access_denied':
-				echo access_denied_admin();
-				break;
+		echo access_denied_admin();
+		break;
 	default:
-		echo "<meta http-equiv=\"Cache-Control\" content=\"no-cache\" />\n";
-		echo "<meta http-equiv=\"Expires\" content=\"0\" />\n";
-main_header('vat.php');
-?>
-	<div align="center"><h3><?php echo ucfirst(phr('VAT_CALCULATION')); ?></h3></div>
-<?php
-
-
-		if(vat_report())
-			echo GLOBALMSG_RECORD_NONE_FOUND_PERIOD_ERROR.".<br>\n\n";
+		main_header();
+		// next is the general report table creator
+		table_general($orderby,"default");
+		unset($_SESSION["delete"]);
 		break;
 }
 
-if($command!="delete") unset($_SESSION["delete"]);
-
-echo "<br><a href=\"#\" onclick=\"javascript:history.go(-1); return false\">".ucfirst(phr('GO_BACK'))."</a><br>\n";
-echo "<br><a href=\"index.php\">".ucfirst(phr('GO_MAIN_REPORT'))."</a><br>";
-
 echo generating_time($inizio);
+
 
 ?>

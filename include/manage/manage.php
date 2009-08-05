@@ -30,32 +30,29 @@
 $inizio=microtime();
 
 define('ROOTDIR','..');
-require(ROOTDIR."/manage/mgmt_funs.php");
-require(ROOTDIR."/manage/mgmt_start.php");
+require(ROOTDIR."/include/manage/mgmt_funs.php");
+require(ROOTDIR."/include/manage/mgmt_start.php");
 
-unset($_SESSION['who']);
-
-if(isset($_GET['orderby'])){
-	$orderby=$_GET['orderby'];
-} elseif(isset($_POST['orderby'])){
-	$orderby=$_POST['orderby'];
-}
-
-if(!access_allowed(USER_BIT_ACCOUNTING)) $command='access_denied';
+if(!access_allowed(USER_BIT_ACCOUNTING) && !access_allowed(USER_BIT_STOCK)) $command='access_denied';
 
 switch($command) {
 	case 'access_denied':
 		echo access_denied_admin();
 		break;
+	case "show":
+		main_header('manage.php');
+		statistics_show();
+		echo "<br><a href=\"#\" onclick=\"javascript:history.go(-1); return false\">".ucfirst(phr('GO_BACK'))."</a><br>\n";
+		break;
 	default:
-		main_header();
-		// next is the general report table creator
-		table_general($orderby,"default");
-		unset($_SESSION["delete"]);
+		main_header('manage.php');
+		statistics_show();
+		echo "<br><a href=\"#\" onclick=\"javascript:history.go(-1); return false\">".ucfirst(phr('GO_BACK'))."</a><br>\n";
 		break;
 }
 
-echo generating_time($inizio);
+echo "<br><a href=\"index.php\">".ucfirst(phr('GO_MAIN_REPORT'))."</a><br>";
 
+echo generating_time($inizio);
 
 ?>
