@@ -200,8 +200,6 @@ Maybe you didn\&amp;#039;t authenticate yet or you authenticated without a passw
 		<item name="MAIN">Main</item>
 		<item name="MENU">Menu</item>
 		<item name="MENU_EDITING">Menu editing</item>
-		<item name="MHR_ONLINE_HELP">MHR Online Help</item>
-		<item name="MHR_TABLES_ONLY">read only the tables of Smart Restaurant and ignore the others</item>
 		<item name="MINUS">minus</item>
 		<item name="MOBILE">Mobile</item>
 		<item name="MODS_SETTING">mods setting</item>
