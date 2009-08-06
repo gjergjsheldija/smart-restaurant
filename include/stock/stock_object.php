@@ -53,95 +53,6 @@ class stock_object extends object {
 		$this -> fetch_data();
 	}
 
-	function list_query_all () {
-		$table = "stock_objects";
-		$ingred_table = "ingreds";
-		$ingred_lang_table = "ingreds_".$_SESSION['language'];
-
-		$query="SELECT
-				$table.`id`,
-				$ingred_table.`name` as `name`,
-				$table.`ref_id`,
-				$table.`unit_type`,
-				$table.`quantity`,
-				$table.`value`
-				 FROM `$table`
-				 JOIN `$ingred_table`
-				WHERE $table.`deleted`='0'
-				AND $ingred_table.`id`=$table.`ref_id`";
-		return $query;
-	}
-	
-	function list_rows ($arr,$row) {
-		global $tpl;
-		global $display;
-
-		$col=0;
-		if(!$this->disable_mass_delete) {
-			$display->rows[$row][$col]='<input type="checkbox" name="delete[]" value="'.$arr['id'].'">';
-			$display->width[$row][$col]='1%';
-			$col++;
-		}
-		foreach ($arr as $field => $value) {
-			if(isset($this->hide) && in_array($field,$this->hide)) continue;
-			
-			if ($field=='unit_type') {
-				$value = get_user_unit ($value);
-			} elseif ($field=='quantity') {
-				$unit = get_user_unit ($arr['unit_type']);
-				$default_unit = get_default_unit ($arr['unit_type']);
-				$value = convert_units ($value.' '.$default_unit, $unit);
-			}
-			
-			if (isset($this->allow_single_update) && in_array($field,$this->allow_single_update)) {
-				$link = $this->link_base.'&amp;command=update_field&amp;data[id]='.$arr['id'].'&amp;data[field]='.$field;
-				if($this->limit_start) $link .= '&amp;data[limit_start]='.$this->limit_start;
-				if($this->orderby) $link.='&amp;data[orderby]='.$this->orderby;
-				if($this->sort) $link.='&amp;data[sort]='.$this->sort;
-				
-				$display->links[$row][$col]=$link;
-			} else $link = ROOTDIR.'/admin/admin.php?class=ingredient&amp;command=edit&amp;data[id]='.$arr['ref_id'];
-			
-			$display->rows[$row][$col]=$value;
-			if($link && $field=='name') $display->links[$row][$col]=$link;
-			if($link) $display->clicks[$row][$col]='redir(\''.$link.'\');';
-			$col++;
-		}
-	}
-
-	
-	function check_values($input_data){
-		$msg="";
-		if($this->data['ref_id']) {
-			$input_data['ref_id']=$this->data['ref_id'];
-			$input_data['name']=$this->data['name'];
-		}
-		if($this->data['ref_type']) $input_data['ref_type']=$this->data['ref_type'];
-		
-		if(!isset($input_data['value'])) $input_data['value']=$this->data['value'];
-		if(!isset($input_data['unit_type'])) $input_data['unit_type']=$this->data['unit_type'];
-		if(!isset($input_data['deleted'])) $input_data['deleted']=$this->data['deleted'];
-		
-		if(!$input_data['ref_id'] && $input_data['name']=="") {
-			$msg=ucfirst(phr('CHECK_NAME'));
-		}
-
-		$input_data['quantity'] = eq_to_number ($input_data['quantity']);
-		if($input_data['quantity']==="") {
-			$msg=ucphr('CHECK_QUANTITY');
-		}
-		
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				window.history.go(-1);
-			</script>\n";
-			return -2;
-		}
-
-		return $input_data;
-	}
-	
 	function find_external ($obj_id, $obj_type) {
 		$query = "SELECT * FROM stock_objects WHERE `ref_type`='".$obj_type."' AND `ref_id`='".$obj_id."' AND `deleted`='0'";
 		$res = common_query($query,__FILE__,__LINE__);
@@ -291,23 +202,6 @@ class stock_object extends object {
 		if(isset($input_data['from'])) unset($input_data['from']);
 
 		return $input_data;
-	}
-
-	function post_edit_page ($class) {
-		$this -> admin_list_page($class);
-	}
-
-	function post_insert_page ($class) {
-		global  $tpl;
-		$tpl -> set_admin_template_file ('menu');
-		
-		$this->fetch_data();
-		if($this->data['ref_type'] == TYPE_DISH) $type_class = 'dish';
-		elseif($this->data['ref_type'] == TYPE_INGREDIENT) $type_class = 'ingredient';
-		
-		$obj = new $type_class ($this->data['ref_id']);
-		$tmp = $obj -> form();
-		$tpl -> assign("content", $tmp);
 	}
 	
 }

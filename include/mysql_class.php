@@ -39,27 +39,6 @@ class db_manager {
 	var $error;
 	var $host;
 
-	function db_manager ($host, $user, $password, $link=NULL) {
-		if($link){
-			$this->link = $link;
-		}else{
-			$this->link = mysql_pconnect($host, $user, $password);
-			if($errno=mysql_errno()) {
-				$msg="Error in ".__FUNCTION__." - ";
-				$msg.='mysql: '.mysql_errno().' '.mysql_error()."\n";
-				$msg.='connection to db'."\n";
-				echo nl2br($msg)."\n";
-				return $errno;
-			}
-		}
-		$this->host=$host;
-		
-		// default values
-		$this -> db_destination = '';
-		$this -> tables_only = false;
-		return 0;
-	}
-	
 	function select_db ($database) {
 		if(mysql_select_db($database)) {
 			$this -> database = $database;

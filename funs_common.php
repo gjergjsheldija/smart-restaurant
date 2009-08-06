@@ -908,16 +908,4 @@ function array_count_occurr ($arr,$target) {
 	return $i;
 }
 
-function elapsed_time($inizio,$fine){
-	//tells how much time was elapsed between two given microtimes.
-	$inizio = explode (" ", $inizio);
-	$inizio = $inizio[0] + $inizio[1];
-
-	$fine = explode (" ", $fine);
-	$fine = $fine[0] + $fine[1];
-
-	$intervallo=$fine-$inizio;
-	return $intervallo;
-}
-
 ?>

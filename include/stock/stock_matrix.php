@@ -59,29 +59,6 @@ class stock_matrix extends object {
 		}
 		return $matrix;
 	}
-	
-	function create_ingredient_samples_vector () {
-		if(!is_array($this->objects)) return 0;
-		
-		foreach($this->objects as $key=>$row_number) {
-			$query = "SELECT `timestamp`,`quantity` FROM stock_samples WHERE `obj_id`='".$key."' ORDER BY `timestamp` DESC LIMIT 1";
-			$res = common_query($query,__FILE__,__LINE__);
-			if(!$res) return 0;
-			if($arr = mysql_fetch_array ($res)) $quantity_end = $arr['quantity'];
-			else $quantity_end = 0;
-			
-			$query = "SELECT `timestamp`,`quantity` FROM stock_samples WHERE `obj_id`='".$key."' ORDER BY `timestamp` ASC LIMIT 1";
-			$res = common_query($query,__FILE__,__LINE__);
-			if(!$res) return 0;
-			if($arr = mysql_fetch_array ($res)) $quantity_start = $arr['quantity'];
-			else $quantity_start = 0;
-			
-			$samples[$row_number]=$quantity_start-$quantity_end;
-		}
-		
-		return $samples;
-	}
-
 }
 
 ?>

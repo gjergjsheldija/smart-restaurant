@@ -219,23 +219,6 @@ class stock_movement extends object {
 		return 0;
 	}
 	
-	function post_insert_page ($class) {
-		global  $tpl;
-		
-		$this->fetch_data();
-		$stock = new stock_object ($this->data['obj_id']);
-		
-		if($stock->data['ref_type'] == TYPE_DISH) $type_class = 'dish';
-		elseif($stock->data['ref_type'] == TYPE_INGREDIENT) $type_class = 'ingredient';
-		
-		$obj = new $type_class ($stock->data['ref_id']);
-		$tmp = $obj -> form();
-		$tpl -> assign("content", $tmp);
-		
-		if(method_exists($obj,'post_edit_page')) $obj->post_edit_page($class);
-	}
-
-	
 }
 
 ?>

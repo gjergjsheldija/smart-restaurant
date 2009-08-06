@@ -41,19 +41,6 @@ class search extends object {
 	}
 	
 
-	function list_buttons () {
-		$obj = new stock_dish;
-		$tmp .= '<table width="100%"><tr>'."\n";
-		$tmp .= '<td align="left">'."\n";
-		$tmp .= '<input type="hidden" name="command" value="edit">'."\n";
-		$tmp .= '<input type="hidden" name="class" value="'.get_class($obj).'">'."\n";
-		$tmp .= '<a href="#" onClick="list_form_'.get_class($obj).'.submit();return false;">'.ucphr('EDIT_QUANTITIES').'</a>'."\n";
-		$tmp .= '</td><td align="right">'."\n";
-		$tmp .= '&nbsp;'."\n";
-		$tmp .= '</tr></table>'."\n";
-		return $tmp;
-	}
-	
 	function list_query_all () {
 		global $tpl;
 		$tpl -> assign ('title',$this -> title);
@@ -112,49 +99,6 @@ class search extends object {
 		if(!empty($query)) $query=substr($query,0,-11);			// strips out last UNION ALL
 
 		return $query;
-	}
-	
-	function list_head ($arr) {
-		global $tpl;
-		global $display;
-		
-		$col=0;
-		if(!$this->disable_mass_delete) {
-			$display->rows[0][$col]='<input type="checkbox" name="all_checker" onclick="check_all(\''.$this->form_name.'\',\'delete[]\')">';
-			$display->width[0][$col]='1%';
-			$col++;
-		} elseif ($arr['table_id']==TABLE_DISHES) {
-			$display->rows[0][$col]='<input type="checkbox" name="all_checker" onclick="check_all(\''.$this->form_name.'\',\'edit[]\')">';
-			$display->width[0][$col]='1%';
-			$col++;
-		} else {
-			$display->rows[0][$col]='&nbsp;';
-			$display->width[0][$col]='1%';
-			$col++;
-		}
-		
-		foreach ($arr as $field => $val) {
-			if(isset($this->hide) && in_array($field,$this->hide)) continue;
-			
-			if(isset($this->fields_names[$field])) $display->rows[0][$col]=$this->fields_names[$field];
-			else $display->rows[0][$col]=$field;
-			
-			if($field==$this->orderby && strtolower($this->sort)=='asc') {
-				$next_sort='desc';
-				$display->rows[0][$col].= ' (+)';
-			} else {
-				$next_sort='asc';
-				if($field==$this->orderby) $display->rows[0][$col].= ' (-)';
-			}
-			
-			$link = $this->link_base.'&amp;data[orderby]='.$field.'&amp;data[sort]='.$next_sort;
-			
-			$display->links[0][$col]=$link;
-			$display->clicks[0][$col]='redir(\''.$link.'\');';
-			
-			if(isset($this->fields_width[$field])) $display->widths[0][$col]=$this->fields_width[$field];
-			$col++;
-		}
 	}
 	
 	function list_rows ($arr,$row) {

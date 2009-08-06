@@ -33,11 +33,9 @@ require_once(ROOTDIR."/funs_common.php");
 // explicitily called to be before other extended classes
 require_once(ROOTDIR."/include/object_class_admin.php");
 
-include_once(ROOTDIR."/include/manage/mgmt_funs_stats.php");
 include_once(ROOTDIR."/include/manage/mgmt_funs_other.php");
 include_once(ROOTDIR."/include/manage/mgmt_funs_database.php");
 include_once(ROOTDIR."/include/manage/mgmt_funs_receipt.php");
-include_once(ROOTDIR."/include/manage/mgmt_funs_account.php");
 include_once(ROOTDIR."/include/manage/mgmt_funs_stock.php");
 
 include_once(ROOTDIR."/include/xtemplate/xtemplate.class.php");

@@ -80,30 +80,7 @@ class xml_parser {
 			}
 		}
 	}
-	
-	/* Function will attempt to open the xmlloc as a local file, on fail it will attempt to open it as a web link */
-	function xml_to_tree($data, $case_folding = 0) {
-		
-		$parser = xml_parser_create ( 'iso-8859-1' );
-		
-		xml_parser_set_option ( $parser, XML_OPTION_CASE_FOLDING, $case_folding );
-		xml_parser_set_option ( $parser, XML_OPTION_SKIP_WHITE, 1 );
-		xml_parse_into_struct ( $parser, $data, $vals, $index );
-		xml_parser_free ( $parser );
-		
-		$tree = array ();
-		$i = 0;
-		
-		if (isset ( $vals [$i] ['attributes'] )) {
-			$tree [$vals [$i] ['tag']] [] ['ATTRIBUTES'] = $vals [$i] ['attributes'];
-			$index = count ( $tree [$vals [$i] ['tag']] ) - 1;
-			$tree [$vals [$i] ['tag']] [$index] = array_merge ( $tree [$vals [$i] ['tag']] [$index], $this->GetChildren ( $vals, $i ) );
-		} else
-			$tree [$vals [$i] ['tag']] [] = $this->GetChildren ( $vals, $i );
-		
-		return $tree;
-	}
-	
+
 	function even_remover($arr) {
 		$out = array ();
 		
