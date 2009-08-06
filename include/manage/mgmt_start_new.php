@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 require(ROOTDIR."/conf/config.inc.php");
@@ -66,17 +67,6 @@ if(!$header_printed){
 		$error_msg .= 'IP <b>'.sprintf("%u",ip2long($_SERVER['REMOTE_ADDR'])).'</b> is not authorized.'."\n";
 		
 		$error_msg .= common_bottom();
-		die($error_msg);
-	}
-	
-	if(!find_accounting_db()) {
-		$error_msg = common_header('No accounting db has been found');
-		$error_msg .=  navbar_empty();
-
-		$error_msg .= GLOBALMSG_NO_ACCOUNTING_DB_FOUND."<br><br>\n";
-		$error_msg .= GLOBALMSG_CONFIGURE_DATABASES."\n";
-		$error_msg .= common_bottom();
-		error_msg(__FILE__,__LINE__,'No accounting db has been found');
 		die($error_msg);
 	}
 

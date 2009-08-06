@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 function delete_receipt_rows($delete){
@@ -356,8 +357,5 @@ function show_receipt($id){
 	echo "</form>\n";
 
 }
-
-
-
 
 ?>

@@ -25,7 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com> 
 * @author		Gjergj Sheldija <gjergj.sheldija@gmail.com>
 * @package		MyHandyRestaurant
-* @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2003-2005, Fabio De Pascale
 */
 
 function order_last_modified_mods () {
@@ -481,7 +481,6 @@ function orders_create ($dishid,$input_data=array()) {
 		$stock -> silent = true;
 		$stock -> remove_from_waiter($ord->id,$input_data['quantity']);
 	}
-	// set_stock_from_id($ord->id,$input_data['quantity']);
 
 	// end interfaces
 
