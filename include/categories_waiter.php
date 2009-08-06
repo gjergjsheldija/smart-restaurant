@@ -110,8 +110,6 @@ function categories_list_pos($data=''){
 	if(!$res) return '';
 	while ($arr = mysql_fetch_array ($res)) {
 		$catid=$arr['id'];
-		$cat = new category ($catid);
-		$name=strtoupper(ucfirst($cat->name($_SESSION['language'])));
 
 		$catimg = $arr['image'];
 		if(!$catimg) $catimg = IMAGE_CATEGORY_DEFAULT;
@@ -125,7 +123,7 @@ function categories_list_pos($data=''){
 		$output .= '
 			<a class="CategoryElement" href="#" onclick="loadDish(\''.$link.'\');return(false);">
 				<span style="text-indent:64px;display:block;height:100%;background:url(' . $catimg . ') no-repeat 1px 3px;">
-					<strong>'.$name.'</strong>
+					<strong>'.$arr['name'].'</strong>
 				</span>
 			</a>
 		';
