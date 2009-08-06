@@ -183,10 +183,6 @@ function main_header($to_page="index.php"){
 </script>
 
 	
-	
-	
-	
-	
 	<td><?php echo GLOBALMSG_REPORT_ACCOUNT; ?></td>
 	<td align="left">
 <?php
@@ -208,7 +204,7 @@ function main_header($to_page="index.php"){
 <?php
 }
 
-function vat_report(){
+/*function vat_report(){
 	require("./mgmt_start.php");
 
 	$i=0;
@@ -237,7 +233,7 @@ function vat_report(){
 	";
 
 	return 0;
-}
+}*/
 
 
 function check_date($data){
