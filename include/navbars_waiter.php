@@ -26,6 +26,7 @@
 * @author		Gjergj Sheldija <gjergj.sheldija@gmail.com> 
 * @package		MyHandyRestaurant
 * @copyright	Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 function navbar_trash($form='',$show_abort='',$start_data) {

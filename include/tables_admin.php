@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 class table extends object {
@@ -490,45 +491,6 @@ class table extends object {
 		if(!$res) return mysql_errno();
 	
 		return 0;
-	}
-
-	function check_values($input_data){
-		$msg="";
-
-		if($input_data['order']==='') {
-			$msg=ucphr('CHECK_ORDER');
-		}
-		
-		if($input_data['name']=="") {
-			$msg=ucphr('CHECK_NUMBER');
-		}
-		
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				window.history.go(-1);
-			</script>\n";
-			return -2;
-		}
-
-		if(!$input_data['visible'])
-			$input_data['visible']=0;
-		if(!$input_data['takeaway'])
-			$input_data['takeaway']=0;
-		
-
-		if($input_data['locktouser']) {
-			for($i = 0; $i < $input_data['max_waiter']; $i++)
-				if(($input_data['locktouser'][$i]) != false)
-					$temp .= $input_data['locktouser'][$i] . ",";	
-					
-			$temp = substr($temp,0,strlen($temp)-1);
-			unset($input_data['locktouser']);
-			unset( $input_data['max_waiter']);
-			$input_data['locktouser'] = $temp;
-		}
-
-		return $input_data;
 	}
 	
 }

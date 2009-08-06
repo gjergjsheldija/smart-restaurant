@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 class dish extends object {
@@ -399,87 +400,6 @@ class dish extends object {
 		return $poss;
 	}
 
-	function post_edit_page ($class) {
-		return 0;
-	}
-	
-	function check_values($input_data){
-		global $tpl;
-		$msg="";
-		
-		$name_found=false;
-		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
-			if(stristr($key,'dishes') && trim($value)!='') {
-				$name_found=$key;
-			}
-		}
-		if($input_data['name']=="" && !$name_found) {
-			$msg=ucfirst(phr('CHECK_NAME'));
-		} elseif ($input_data['name']=="") {
-			$input_data['name']=$input_data[$name_found];
-		}
-		
-		$input_data['price'] = eq_to_number ($input_data['price']);
-		if($input_data['price']==="") {
-			$msg=ucphr('CHECK_PRICE');
-		}
-	
-		if($msg){
-			$tmp = "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				history.go(-1);
-			</script>\n";
-			$tpl -> append ('scripts',$tmp);
-
-			return -2;
-		}
-	
-		if(is_array($input_data['ingreds']))
-			$input_data['ingreds']=implode (" ", $input_data['ingreds']);
-		else
-			$input_data['ingreds']="";
-		if(is_array($input_data['dispingreds']))
-			$input_data['dispingreds']=implode (" ", $input_data['dispingreds']);
-		else
-			$input_data['dispingreds']="";
-	
-		$input_data['price']=str_replace (",", ".", $input_data['price']);
-		$input_data['price']=round ($input_data['price'],2);
-	
-	
-		if(!$input_data['autocalc'])
-			$input_data['autocalc']=0;
-		if(!$input_data['stock_is_on'])
-			$input_data['stock_is_on']=0;
-		if(!$input_data['generic'])
-			$input_data['generic']=0;
-		if(!$input_data['visible'])
-			$input_data['visible']=0;
-	
-	
-		return $input_data;
-	}
-
-function admin_dishes_get_name_array($array) {
-	if(!is_array($array)) return 0;
-	$out=array();
-	
-	foreach($array as $local_id) {
-		$ingred = new ingredient ($local_id);
-		$name = $ingred->name($_SESSION['language']);
-		$name = ucfirst($name);
-		
-		if($ingred->data['category']==0) $catname = ucphr('ALL');
-		else {
-			$cat = new category ($ingred->data['category']);
-			$catname = $cat -> name($_SESSION['language']);
-		}
-		
-		$out[$local_id]=$name.' ('.$catname.')';
-		asort($out);
-	}
-	return $out;
-}
 }
 
 ?>

@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 class printer extends object {
@@ -84,39 +85,6 @@ class printer extends object {
 		
 		return $query;
 	}
-	
-	function check_values($input_data){
-
-		$msg="";
-		if($input_data['name']=="") {
-			$msg=ucfirst(phr('CHECK_NAME'));
-		}
-
-		if($input_data['template']=="") {
-			$msg=ucfirst(phr('CHECK_TEMPLATE'));
-		}
-		
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				window.history.go(-1);
-			</script>\n";
-			return 2;
-		}
-
-	if(!$input_data['bill'])
-		$input_data['bill']=0;
-
-	if(!$input_data['invoice'])
-		$input_data['invoice']=0;
-
-	if(!$input_data['receipt'])
-		$input_data['receipt']=0;
-
-
-		return $input_data;
-	}
-
 
 }
 

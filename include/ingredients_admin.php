@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 class ingredient extends object {
@@ -217,134 +218,6 @@ class ingredient extends object {
 
 		return $output;
 	}
-
-	function pre_insert($input_data) {
-		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
-			if(stristr($key,'ingreds_')) {
-				$this->temp_lang[$key]=$value;
-				unset ($input_data[$key]);
-			}
-		}
-
-		return $input_data;
-	}
-
-	function post_insert($input_data) {
-		if(is_array($this->temp_lang)) {
-			for (reset ($this->temp_lang); list ($key, $value) = each ($this->temp_lang); ) {
-				$input_data[$key]=$this->temp_lang[$key];
-			}
-		}
-
-		$input_data['id']=$this->id;
-		
-		if($err=$this->translations_set($input_data)) return $err;
-		
-		return $input_data;
-	}
-	
-	function post_edit_page ($class) {
-		if(class_exists('stock_object')) {
-			$stock = new stock_object;
-			if ($stock_id=$stock->find_external($this->id, TYPE_INGREDIENT)) {
-				$mov = new stock_movement();
-				$mov -> only_obj = $stock_id;
-				$mov -> admin_list_page('stock_movement');
-			}
-		}
-		return 0;
-	}
-	
-	function pre_delete($input_data) {
-		if(!$this->id) return 1;
-		if(!$this->exists()) return 2;
-
-		if($lang_del=$this->translations_delete($this->id)) return $lang_del;
-
-		$connected = $this -> find_connected_dishes (true);
-		
-		if(is_array($connected['included'])) {
-		foreach ($connected['included'] as $key => $value) {
-			$dish = new dish ($key);
-			if($err=$dish -> ingredient_remove($this->id)) return $err;
-		}
-		}
-		if(is_array($connected['available'])) {
-		foreach ($connected['available'] as $key => $value) {
-			$dish = new dish ($key);
-			if($err=$dish -> ingredient_remove($this->id)) return $err;
-		}
-		}
-		
-		$stock = new stock_object;
-		if ($stock_id=$stock->find_external($this->id, TYPE_INGREDIENT)) {
-			$stock = new stock_object($stock_id);
-			$stock->silent=true;
-			if($err=$stock->delete()) return $err;
-		}
-		
-		return $input_data;
-	}
-	
-	function pre_update($input_data) {
-		if(!$this->id) return 1;
-
-		if($err=$this->translations_set($input_data)) return $err;
-
-		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
-			if(stristr($key,'ingreds_')) {
-				unset ($input_data[$key]);
-			}
-		}
-		
-		return $input_data;
-	}
-	
-	function check_values($input_data){
-		$msg="";
-		
-		$name_found=false;
-		for (reset ($input_data); list ($key, $value) = each ($input_data); ) {
-			if(stristr($key,'ingreds_') && trim($value)!='') {
-				$name_found=$key;
-			}
-		}
-		if($input_data['name']=="" && !$name_found) {
-			$msg=ucfirst(phr('CHECK_NAME'));
-		} elseif ($input_data['name']=="") {
-			$input_data['name']=$input_data[$name_found];
-		}
-		
-		$input_data['price'] = eq_to_number ($input_data['price']);
-		if($input_data['price']==="") {
-			$msg=ucfirst(phr('CHECK_PRICE'));
-		}
-		
-		$input_data['sell_price'] = eq_to_number ($input_data['sell_price']);
-		if($input_data['sell_price']==="") {
-			$msg=ucfirst(phr('CHECK_PRICE'));
-		}
-	
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				history.go(-1);
-			</script>\n";
-			return -2;
-		}
-
-		if(!$input_data['override_autocalc'])
-			$input_data['override_autocalc']=0;
-		if(!$input_data['visible'])
-			$input_data['visible']=0;
-
-		$input_data['price']=str_replace (",", ".", $input_data['price']);
-		$input_data['price']=round ($input_data['price'],2);		
-		$input_data['sell_price']=str_replace (",", ".", $input_data['sell_price']);
-		$input_data['sell_price']=round ($input_data['sell_price'],2);
-		return $input_data;
-	}
-
 }
 
 ?>

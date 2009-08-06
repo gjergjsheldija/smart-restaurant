@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 class currencies extends object {
@@ -116,43 +117,6 @@ class currencies extends object {
 		return $ret;
 	}
 	
-	function check_values($input_data){
-		$msg="";
-		if($input_data['name']=="") {
-			$msg=ucfirst(phr('CHECK_NAME'));
-		}
-
-		$input_data['rate'] = eq_to_number ($input_data['rate']);
-
-		if($input_data['rate']!=0 && empty($input_data['rate'])) {
-			$msg=ucfirst(phr('CHECK_KAMBIO'));
-		}
-		$input_data['rate']=str_replace (",", ".", $input_data['rate']);
-
-		if($input_data['rate']<0) {
-			$msg=ucfirst(phr('CHECK_KAMBIO'));
-		}
-		if(!is_numeric($input_data['rate'])) {
-			$msg=ucfirst(phr('CHECK_KAMBIO'));
-		}
-		
-		if($input_data['active'] == true)
-			$input_data['active'] = 1;
-		else
-			$input_data['active'] = 0;
-			
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				window.history.go(-1);
-			</script>\n";
-			return -2;
-		}
-
-		return $input_data;
-	}
-
-
 }
 
 ?>

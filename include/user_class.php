@@ -25,6 +25,7 @@
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
 * @package		MyHandyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
+* @copyright	Copyright 2006-2009, Gjergj Sheldija
 */
 
 class user extends object {
@@ -225,84 +226,6 @@ class user extends object {
 				$link = $link_update_field.'&amp;data[subfield]='.USER_BIT_MONEY;
 				if($link) $display->links[$row][$col] = $link;
 				if($link) $display->clicks[$row][$col]='redir(\''.$link.'\');';
-			}
-
-			$col++;
-		}
-	}
-
-	function list_head ($arr) {
-		global $tpl;
-		global $display;
-
-		$col=0;
-		if(!$this->disable_mass_delete) {
-			$display->rows[0][$col]='<input type="checkbox" name="all_checker" onclick="check_all(\''.$this->form_name.'\',\'delete[]\')">';
-			$display->width[0][$col]='1%';
-			$col++;
-		}
-		foreach ($arr as $field => $val) {
-			if(isset($this->fields_names[$field])) $display->rows[0][$col]=$this->fields_names[$field];
-			else $display->rows[0][$col]=$field;
-
-			if($field==$this->orderby && strtolower($this->sort)=='asc') {
-				$next_sort='desc';
-				$display->rows[0][$col].= ' (+)';
-			} else {
-				$next_sort='asc';
-				if($field==$this->orderby) $display->rows[0][$col].= ' (-)';
-			}
-
-			$link = $this->link_base.'&amp;data[orderby]='.$field.'&amp;data[sort]='.$next_sort;
-			if($this->category) $link.='&amp;data[category]='.$this->category;
-			if($this->search) $link.='&amp;data[search]='.$this->search;
-
-			$display->links[0][$col]=$link;
-			$display->clicks[0][$col]='redir(\''.$link.'\');';
-			if(isset($this->fields_width[$field])) $display->widths[0][$col]=$this->fields_width[$field];
-
-			if($field=='level') {
-				$letters_per_label = 6;
-
-				$display->rows[0][$col] = substr(ucphr('WAITER'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('CASHIER'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('STOCK'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('CONTACTS'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('MENU'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('USERS'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('ACCOUNTING'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('TRANSLATION'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('CONFIG'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
-				$col++;
-				$display->rows[0][$col] = substr(ucphr('MONEY'),0,$letters_per_label);
-				$display->links[0][$col] = '';
-				$display->clicks[0][$col] = '';
 			}
 
 			$col++;
@@ -647,65 +570,6 @@ class user extends object {
 			'.ucfirst(phr('CONNECTED_AS')) . ' ' . $userName .'<strong>'. $totali.'  LEK</strong>';
 		}
 		return $output;
-	}
-	
-	function check_values($input_data){
-		$msg="";
-		$input_data['name']=trim($input_data['name']);
-
-		if($input_data['name']=="") {
-			$msg=ucfirst(phr('CHECK_NAME'));
-		}
-
-		$query="SELECT * FROM `users` WHERE `name`='".$input_data['name']."' AND `deleted`='0'";
-		$res=common_query($query,__FILE__,__LINE__);
-		if(!$res) return 0;
-		while($arr=mysql_fetch_array($res)) {
-			if($arr['id']!=$input_data['id']) $msg=ucfirst(phr('CHECK_NAME_ALREADY_TAKEN'));
-		}
-
-		if($input_data['password1'] != $input_data['password2'])
-		$msg=ucfirst(phr('CHECK_PASSWORD_COMPARE'));
-
-		if(!empty($input_data['password1']) && strlen($input_data['password1'])<6)
-		$msg=ucfirst(phr('CHECK_PASSWORD_LENGHT'));
-
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				history.go(-1);
-			</script>\n";
-			return -2;
-		}
-
-		$lev=array();
-		for($i=0;$i<=USER_BIT_LAST;$i++)
-		if($input_data['level'][$i]) $lev[$i]='1'; else $lev[$i]='0';
-
-		krsort($lev);
-		foreach($lev as $val) $levinv.=$val;
-
-		$levinv=bindec($levinv);
-		$input_data['level']=$levinv;
-
-		if($input_data['disabled']) $input_data['disabled']=1; else $input_data['disabled']=0;
-
-		if($input_data['language']=="") $input_data['language']=$_SESSION['language'];
-
-		if(!empty($input_data['password1']) && $input_data['password1'] == $input_data['password2']) {
-			$input_data['password'] = trim($input_data['password1']);
-			$input_data['password'] = $this -> password_cover ($input_data['password']);
-		}
-		unset($input_data['password1']);
-		unset($input_data['password2']);
-
-		if($input_data['password_remove']) $input_data['password']='';
-		unset($input_data['password_remove']);
-
-		if(strlen($input_data['language'])!=2) $input_data['language']=$_SESSION['language'];
-		$input_data['language']=strtolower($input_data['language']);
-
-		return $input_data;
 	}
 
 	function get_level () {

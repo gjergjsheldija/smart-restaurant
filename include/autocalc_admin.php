@@ -45,52 +45,6 @@ class autocalc extends object {
 		$this -> fetch_data();
 	}
 
-	function list_query_all () {
-		$table = $this->table;
-		
-		$query="SELECT
-				$table.`id`,
-				IF($table.`name`=0,'".ucphr('DEFAULT')."',$table.`name`) as `name`,
-				IF($table.`quantity`=0,'".ucphr('DEFAULT')."',$table.`quantity`) as `quantity`,
-				$table.`price`
-				 FROM `$table`
-				";
-		
-		return $query;
-	}
-	
-	function check_values($input_data){
-
-		$msg="";
-		if($input_data['quantity']=="") {
-			$msg=ucfirst(phr('CHECK_QUANTITY'));
-		}
-
-		$input_data['quantity']=(int) $input_data['quantity'];
-		
-		$input_data['price'] = eq_to_number ($input_data['price']);
-		
-		if($input_data['price']=="") {
-			$msg=ucfirst(phr('CHECK_PRICE'));
-		}
-
-		$input_data['price']=(float) $input_data['price'];
-		if($input_data['price']<0) {
-			$msg=ucfirst(phr('CHECK_PRICE'));
-		}
-		
-		$input_data['name']=$input_data['quantity'];
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				window.history.go(-1);
-			</script>\n";
-			return -2;
-		}
-
-		return $input_data;
-	}
-	
 	function max_quantity () {
 		$query="SELECT * FROM `autocalc`";
 		$res=common_query($query,__FILE__,__LINE__);
