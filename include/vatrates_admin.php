@@ -84,44 +84,6 @@ class vat_rate extends object {
 		return $ret;
 	}
 	
-	function check_values($input_data){
-
-		$msg="";
-		if($input_data['name']=="") {
-			$msg=ucfirst(phr('CHECK_NAME'));
-		}
-
-		$input_data['rate'] = eq_to_number ($input_data['rate']);
-		
-		if($input_data['rate']<100 && $input_data['rate']>1) $input_data['rate']=$input_data['rate']/100;
-
-		if($input_data['rate']!=0 && empty($input_data['rate'])) {
-			$msg=ucfirst(phr('CHECK_VAT_RATE'));
-		}
-		$input_data['rate']=str_replace (",", ".", $input_data['rate']);
-
-		if($input_data['rate']>1) {
-			$msg=ucfirst(phr('CHECK_VAT_RATE'));
-		}
-		if($input_data['rate']<0) {
-			$msg=ucfirst(phr('CHECK_VAT_RATE'));
-		}
-		if(!is_numeric($input_data['rate'])) {
-			$msg=ucfirst(phr('CHECK_VAT_RATE'));
-		}
-		
-		
-		if($msg){
-			echo "<script language=\"javascript\">
-				window.alert(\"".$msg."\");
-				window.history.go(-1);
-			</script>\n";
-			return -2;
-		}
-
-		return $input_data;
-	}
-
 }
 
 ?>

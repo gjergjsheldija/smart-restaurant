@@ -204,38 +204,6 @@ function main_header($to_page="index.php"){
 <?php
 }
 
-/*function vat_report(){
-	require("./mgmt_start.php");
-
-	$i=0;
-	$table='account_mgmt_main';
-	$query="SELECT * FROM $table";
-	$query.=" WHERE `date`>=$timestamp_start AND `date`<=$timestamp_end";
-	$query.=" order by `id`";
-
-	$res=mysql_db_query($_SESSION['common_db'],$query);
-	if(!mysql_num_rows($res)) return 1;
-
-	while($row=mysql_fetch_array($res)){
-		$vat_total+=$row['cash_vat_amount'];
-		$vat_total+=$row['bank_vat_amount'];
-
-		$vat_total_with_debit+=$row['cash_vat_amount'];
-		$vat_total_with_debit+=$row['bank_vat_amount'];
-		$vat_total_with_debit+=$row['debit_vat_amount'];
-	}
-
-	echo "
-	".ucfirst(phr('TAX_TO_PAY')).":<br><b>".country_conf_currencies(true)." ".$vat_total."</b>
-	 (".phr('EXCLUDING_NOT_PAID_INVOICES').")<br>
-	".phr('OR')."<br>
-	<b>".country_conf_currencies(true)." ".$vat_total_with_debit."</b>  (".phr('INCLUDING_NOT_PAID_INVOICES').")<br><br>
-	";
-
-	return 0;
-}*/
-
-
 function check_date($data){
 	if($data["date"]["day"]=="") return 1;
 	if($data["date"]["month"]=="") return 2;

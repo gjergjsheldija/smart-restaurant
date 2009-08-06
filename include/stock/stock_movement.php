@@ -159,18 +159,16 @@ class stock_movement extends object {
 		
 		$stock = new stock_object ($input_data['obj_id']);
 		if((($stock->data['quantity']+$input_data['quantity'])<0) && $stock->data['quantity']>=0) {
-			$msg=ucphr('CHECK_QUANTITY');
+			$msg= ucphr('CHECK_QUANTITY');
 		}
 
 		$input_data['user'] = $_SESSION['userid'];
 		if ($msg) {
 			echo "<script language=\"javascript\">
 				window.alert(\"".$msg."\");
-				window.history.go(-1);
 			</script>\n";
 			return -2;
 		}
-		//end : mizuko
 		return $input_data;
 	}
 
