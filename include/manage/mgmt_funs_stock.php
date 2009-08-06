@@ -164,24 +164,6 @@ function movement_update($data,$id){
 	return 0;
 }
 
-function movement_invoice_delete($invoice_id){
-	$table='account_stock_log';
-	$query="SELECT * FROM $table WHERE `invoice_id`='$invoice_id'";
-	$res = mysql_db_query ($_SESSION['common_db'],$query);
-	while($row=mysql_fetch_array($res)){
-
-		$oldstock=$row['name'];
-		$oldquantity=$row['quantity'];
-		$diffquantity=0-$oldquantity;
-
-		set_stock($oldstock,$diffquantity);
-	}
-	$table='account_stock_log';
-	$query="DELETE FROM $table WHERE `invoice_id`='$invoice_id'";
-	$res = mysql_db_query ($_SESSION['common_db'],$query);
-	return 0;
-}
-
 /**
  *  updates the sqock quantity
  *  change also the buing proce

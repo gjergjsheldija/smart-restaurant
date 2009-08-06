@@ -219,31 +219,6 @@ function check_date($data){
 
 }
 
-function check_compulsory_fields($data){
-	$table='mgmt_types';
-	$res=mysql_db_query($_SESSION['common_db'],"SELECT * FROM $table WHERE `id`='".$data['type']."'");
-	$row=mysql_fetch_array($res);
-	$type=strtolower($row['name']);
-	if(strtolower($type)=="fattura")
-		$invoice=1;
-	else
-		$invoice=0;
-
-	if(!isset($data["date"]) || !is_array($data["date"])){
-		return 1;
-	} elseif(!isset($data["description"])){
-		return 3;
-	} elseif(isset($data["description"]) && $data["description"]==""){
-		return 3;
-	} elseif(!isset($data["type"])) {
-		return 4;
-	} elseif(isset($data["type"]) && $data["type"]=="") {
-		return 4;
-	}
-	return 0;
-
-}
-
 function format_date($data) {
 	require(ROOTDIR."/conf/config.constants.inc.php");
 
@@ -281,45 +256,6 @@ function format_date($data) {
 		}
 	}
 	return 1;
-}
-
-function format_currency($data) {
-	$table='account_mgmt_main';
-	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table");
-
-	$fieldnum=mysql_num_fields($res);
-	for($i=0;$i<$fieldnum;$i++){
-		$fieldname=mysql_field_name($res, $i);
-		$fieldtype[$fieldname]=mysql_field_type($res, $i);
-	}
-
-	for (reset ($data); list ($key, $value) = each ($data); ) {
-		if($fieldtype[$key]=="real") {
-			$data[$key]= str_replace (",", ".", $data[$key]);
-		}
-	}
-	return $data;
-}
-
-function format_checkbox($data) {
-	$table='account_mgmt_main';
-	$res = mysql_db_query ($_SESSION['common_db'],"SELECT * FROM $table");
-
-	for (reset ($data); list ($key, $value) = each ($data); ) {
-		if($key=="paid" && $value==1) {
-			$data["paid"]= 1;
-		} elseif ($data["paid"]!=1) {
-			$data["paid"]= 0;
-		}
-	}
-	return $data;
-}
-
-function calculate_amount($data){
-	$data["cash_amount"]=$data["cash_taxable_amount"]+$data["cash_vat_amount"];
-	$data["bank_amount"]=$data["bank_taxable_amount"]+$data["bank_vat_amount"];
-	$data["debit_amount"]=$data["debit_taxable_amount"]+$data["debit_vat_amount"];
-	return $data;
 }
 
 function timestamp_is_between($date_read,$date_start,$date_end){

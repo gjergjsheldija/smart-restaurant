@@ -227,26 +227,6 @@ function access_denied_admin () {
 	return $tmp;
 }
 
-function access_denied_template () {
-	global $tpl;
-	
-	$link = ''.ROOTDIR.'/admin/connect.php?command=disconnect';
-	$link .= '&url='.urlencode($_SERVER['REQUEST_URI']);
-	
-	$tmp='<div id="tip">
-		    <table width="450" cellpadding="0" cellspacing="12">
-		      <tr>
-		        <td width="52"><div align="center"><img src="'.IMAGE_ERROR.'" alt="negative" width="18" height="18" /></div></td>
-		        <td width="388" >'.ucfirst(phr('ACCESS_DENIED')).'<br/>'.ucfirst(phr('ACCESS_DENIED_EXPLAIN')).'<br/><a href="'.$link.'">'.ucfirst(phr('CONNECT')).'</a></td> 
-		      </tr>
-		    </table>
-		  </div>
-		';	
-	$tpl -> append ('messages',$tmp);
-	
-	return 0;
-}
-
 function access_allowed ($level) {
 	$query="SELECT `value` FROM `system` WHERE `name`='upgrade_last_key'";
 	$res = common_query($query,__FILE__,__LINE__);
