@@ -57,7 +57,7 @@ require(APPPATH.'config/constants'.EXT);
  * ------------------------------------------------------
  */
 set_error_handler('_exception_handler');
-set_magic_quotes_runtime(0); // Kill magic quotes
+if(!phpversion()=='5.3.0') set_magic_quotes_runtime(0); // Kill magic quotes		
 
 /*
  * ------------------------------------------------------
