@@ -110,8 +110,8 @@ $( function(){
 								<td align="right"><?php echo $row->value < '0' ? $row->value : '-'?></td>
 							</tr>
 					<?php 									
-						$kot = $stock_actual->next_row();
-						$tmp = $kot->article;
+						$temporary = $stock_actual->next_row();
+						$tmp = $temporary->article;
 						if($tmp != $row->article) {
 							$tmp = $row->article;
 							echo "<tr><td colspan='5' align='right'></td></tr>";

@@ -69,8 +69,8 @@ $( function(){
 									<td><?php echo anchor_image('bankaccount/edit/'.$row->bankid, '../images/administrator/edit.png');?> :: <?php echo anchor_image('bankaccount/delete/'.$row->bankid , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
-							$kot = $query->next_row();
-							$tmp = $kot->bankname;
+							$temporary = $query->next_row();
+							$tmp = $temporary->bankname;
 							if($tmp != $row->bankname) {
 								$tmp = $row->bankname;
 								echo "</table>";

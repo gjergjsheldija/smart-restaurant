@@ -146,8 +146,8 @@ foreach($bankaccount_actual->result() as $row) {
 			<td align="right"><?php echo $row->amount < '0' ? $row->amount : '-'?></td>
 		</tr>
 <?php 									
-	$kot = $bankaccount_actual->next_row();
-	$tmp = $kot->bankname;
+	$temporary = $bankaccount_actual->next_row();
+	$tmp = $temporary->bankname;
 	if($tmp != $row->bankname) {
 		$tmp = $row->bankname;
 		echo "<tr><td colspan='5' align='right'></td></tr>";

@@ -78,8 +78,8 @@ $( function(){
 									<td align="right"><?php echo anchor_image('dish/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('dish/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
-							$kot = $query->next_row();
-							$tmp = $kot->catname;
+							$temporary = $query->next_row();
+							$tmp = $temporary->catname;
 							if($tmp != $row->catname) {
 								$tmp = $row->catname;
 								echo "</table>";

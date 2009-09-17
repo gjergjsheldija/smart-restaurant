@@ -67,8 +67,8 @@
 									<td align="right"><?php echo $row->amount ?></td>
 								</tr>
 						<?php 
-							$kot = $query->next_row();
-							$tmp = $kot->bankname;
+							$temporary = $query->next_row();
+							$tmp = $temporary->bankname;
 							if($tmp != $row->bankname) {
 								$tmp = $row->bankname;
 								echo "</table>";

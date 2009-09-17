@@ -84,8 +84,8 @@ $( function(){
 									<td align="right"><?php echo $row->paid == 1 ? lang('yes') : lang('no')?></td>									
 								</tr>
 						<?php 
-							$kot = $query->next_row();
-							$tmp = $kot->who;
+							$temporary = $query->next_row();
+							$tmp = $temporary->who;
 							if($tmp != $row->who) {
 								$tmp = $row->who;
 								echo "</table>";

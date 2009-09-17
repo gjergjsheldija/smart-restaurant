@@ -95,8 +95,8 @@ $( function(){
 									$totalSector[$row->name] = $row->shuma;
 								else	
 									$totalSector[$row->name] += $row->shuma;
-								$kot = $sector_movements->next_row();
-								$tmp = $kot->waiter;
+								$temporary = $sector_movements->next_row();
+								$tmp = $temporary->waiter;
 								if($tmp != $row->waiter) {
 									$tmp = $row->waiter;
 									echo "</table>";

@@ -114,8 +114,8 @@ $( function(){
 								<td align="right"><?php echo $row->debit == '1' ? lang('yes') : lang('no')?></td>
 							</tr>
 					<?php 									
-						$kot = $account_movements->next_row();
-						$tmp = $kot->who;
+						$temporary = $account_movements->next_row();
+						$tmp = $temporary->who;
 						if($tmp != $row->who) {
 							$tmp = $row->who;
 							echo "<tr><td colspan='6' align='right'></td></tr>";
