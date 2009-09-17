@@ -50,10 +50,10 @@ jQuery().ready(function(){
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td align="left" title="<?php echo lang('hint_' . $row->name); ?>" id="helphint<?php echo $row->id ?>"><?php echo lang('desc_' . $row->name); ?></td>
+							<td style="cursor:pointer;" align="left" title="<?php echo lang('hint_' . $row->name); ?>" id="helphint<?php echo $row->id ?>"><?php echo lang('desc_' . $row->name); ?></td>
 							<script type="text/javascript">
 							   	$('#helphint<?php echo $row->id; ?>').
-							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?php echo img('../images/administrator/cross.png');?>', positionBy: 'Top'});
+							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?php echo img('../images/administrator/cross.png');?>', positionBy: 'Top',activation: 'click'});
 							</script>
 							<td align="right">
 								<div id="value_<?php echo $row->id; ?>"><?php if ($row->bool) echo $row->value == '1' ? lang('yes') : lang('no'); else echo $row->value;?>
