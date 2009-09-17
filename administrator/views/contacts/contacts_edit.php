@@ -26,22 +26,22 @@
  */
 ?>
 <?php if( isset($edit) ) { ?>
-<?=form_open('contacts/save');?>
+<?php echo form_open('contacts/save');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('contact_info'); ?></h2>
+			<h2><?php echo lang('contact_info'); ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id',$edit[0]->id) ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name',$edit[0]->name); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('address'));?> :</td>
+			<td><?php echo form_label(lang('address'));?> :</td>
 			<?php
 				$address = array(
 					'rows' => '5',
@@ -50,34 +50,34 @@
 					'name' => 'address'
 				);
 			?>
-			<td><?=form_textarea($address); ?></td>
+			<td><?php echo form_textarea($address); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('tel'));?> :</td>
-			<td><?=form_input('telephone',$edit[0]->telephone); ?></td>
+			<td><?php echo form_label(lang('tel'));?> :</td>
+			<td><?php echo form_input('telephone',$edit[0]->telephone); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('fax'));?> :</td>
-			<td><?=form_input('fax',$edit[0]->fax); ?></td>
+			<td><?php echo form_label(lang('fax'));?> :</td>
+			<td><?php echo form_input('fax',$edit[0]->fax); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('bank_account'));?> :</td>
-			<td><?=form_input('bank_account',$edit[0]->bank_account); ?></td>
+			<td><?php echo form_label(lang('bank_account'));?> :</td>
+			<td><?php echo form_input('bank_account',$edit[0]->bank_account); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('abi'));?> :</td>
-			<td><?=form_input('abi',$edit[0]->abi); ?></td>
+			<td><?php echo form_label(lang('abi'));?> :</td>
+			<td><?php echo form_input('abi',$edit[0]->abi); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('cab'));?> :</td>
-			<td><?=form_input('cab',$edit[0]->cab); ?></td>
+			<td><?php echo form_label(lang('cab'));?> :</td>
+			<td><?php echo form_input('cab',$edit[0]->cab); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('type'));?> :</td>
-			<td><?=form_dropdown('type',$conttype,$edit[0]->type); ?></td>
+			<td><?php echo form_label(lang('type'));?> :</td>
+			<td><?php echo form_dropdown('type',$conttype,$edit[0]->type); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('note'));?> :</td>
+			<td><?php echo form_label(lang('note'));?> :</td>
 			<?php
 				$note = array(
 					'rows' => '5',
@@ -86,40 +86,40 @@
 					'name' => 'note'
 				);
 			?>
-			<td><?=form_textarea($note); ?></td>
+			<td><?php echo form_textarea($note); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('email'));?> :</td>
-			<td><?=form_input('email',$edit[0]->email); ?></td>
+			<td><?php echo form_label(lang('email'));?> :</td>
+			<td><?php echo form_input('email',$edit[0]->email); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('web'));?> :</td>
-			<td><?=form_input('web',$edit[0]->web); ?></td>
+			<td><?php echo form_label(lang('web'));?> :</td>
+			<td><?php echo form_input('web',$edit[0]->web); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save') ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } elseif( isset($newcontact) ) {?>
-<?=form_open('contacts/addnew');?>
+<?php echo form_open('contacts/addnew');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('new_contact'); ?></h2>
+			<h2><?php echo lang('new_contact'); ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name'); ?></td>
+			<td><?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('address'));?> :</td>
+			<td><?php echo form_label(lang('address'));?> :</td>
 			<?php
 				$address = array(
 					'rows' => '5',
@@ -127,34 +127,34 @@
 					'name' => 'address'
 				);
 			?>
-			<td><?=form_textarea($address); ?></td>
+			<td><?php echo form_textarea($address); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('tel'));?> :</td>
-			<td><?=form_input('telephone'); ?></td>
+			<td><?php echo form_label(lang('tel'));?> :</td>
+			<td><?php echo form_input('telephone'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('fax'));?> :</td>
-			<td><?=form_input('fax'); ?></td>
+			<td><?php echo form_label(lang('fax'));?> :</td>
+			<td><?php echo form_input('fax'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('bank_account'));?> :</td>
-			<td><?=form_input('bank_account'); ?></td>
+			<td><?php echo form_label(lang('bank_account'));?> :</td>
+			<td><?php echo form_input('bank_account'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('abi'));?> :</td>
-			<td><?=form_input('abi'); ?></td>
+			<td><?php echo form_label(lang('abi'));?> :</td>
+			<td><?php echo form_input('abi'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('cab'));?> :</td>
-			<td><?=form_input('cab'); ?></td>
+			<td><?php echo form_label(lang('cab'));?> :</td>
+			<td><?php echo form_input('cab'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('type'));?> :</td>
-			<td><?=form_dropdown('type',$conttype); ?></td>
+			<td><?php echo form_label(lang('type'));?> :</td>
+			<td><?php echo form_dropdown('type',$conttype); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('note'));?> :</td>
+			<td><?php echo form_label(lang('note'));?> :</td>
 			<?php
 				$note = array(
 					'rows' => '5',
@@ -162,18 +162,18 @@
 					'name' => 'note'
 				);
 			?>
-			<td><?=form_textarea($note); ?></td>
+			<td><?php echo form_textarea($note); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('email'));?> :</td>
-			<td><?=form_input('email'); ?></td>
+			<td><?php echo form_label(lang('email'));?> :</td>
+			<td><?php echo form_input('email'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('web'));?> :</td>
-			<td><?=form_input('web'); ?></td>
+			<td><?php echo form_label(lang('web'));?> :</td>
+			<td><?php echo form_input('web'); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save'); ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>

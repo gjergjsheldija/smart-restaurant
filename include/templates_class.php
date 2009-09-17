@@ -182,8 +182,8 @@ class template {
 			return 0;
 		}
 		
-		$pattern="{[^}]*}";
-		$this->output = eregi_replace($pattern, "", $this->output);
+		$pattern="/{[^}]*}/";
+		$this->output = preg_replace($pattern, "", $this->output);
 		
 		$this->output=str_replace('[[[curlyl]]]','{',$this->output);
 		$this->output=str_replace('[[[curlyr]]]','}',$this->output);

@@ -42,7 +42,7 @@ function driver_apply($driver,$msg) {
 
 	if (!CONF_DEBUG_PRINT_MARKUP) {
 		// cleans all not used markups
-		$msg = eregi_replace ("{[^}]*}", "", $msg);
+		$msg = preg_replace ("/{[^}]*}/", "", $msg);
 	}
 
 	return $msg;

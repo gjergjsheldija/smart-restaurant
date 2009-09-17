@@ -44,7 +44,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('dishes'); ?> :: <?=anchor('dish/newDish',lang('new_dish')) ?></h2>
+				<h2><?php echo lang('dishes'); ?> :: <?php echo anchor('dish/newDish',lang('new_dish')) ?></h2>
 				<div class="basic" style="float:left;"  id="tabelapare">
 						<?php 
 						$tmp = "";
@@ -61,21 +61,21 @@ $( function(){
 								</colgroup>
 								<thead>
 									<tr>
-										<th><?=lang('name'); ?></th>
-										<th><?=lang('price'); ?></th>
-										<th><?=lang('printer'); ?></th>
-										<th><?=lang('image'); ?></th>
-										<th><?=lang('action'); ?></th>
+										<th><?php echo lang('name'); ?></th>
+										<th><?php echo lang('price'); ?></th>
+										<th><?php echo lang('printer'); ?></th>
+										<th><?php echo lang('image'); ?></th>
+										<th><?php echo lang('action'); ?></th>
 									</tr>
 								</thead>	
 						<?php		
 							}						
 						?>		<tr>
-									<td><?=$row->name ?></td>
-									<td align="right"><?=$row->price ?></td>
-									<td align="right"><?=$row->destname ?></td>
+									<td><?php echo $row->name ?></td>
+									<td align="right"><?php echo $row->price ?></td>
+									<td align="right"><?php echo $row->destname ?></td>
 									<td align="center"><?php echo isset($row->image) ? img('../'.$row->image) : lang('no_info'); ?></td>
-									<td align="right"><?=anchor_image('dish/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('dish/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+									<td align="right"><?php echo anchor_image('dish/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('dish/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
 							$kot = $query->next_row();

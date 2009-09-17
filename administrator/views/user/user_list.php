@@ -37,7 +37,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('users'); ?> :: <?=anchor('user/newUser',lang('new_user')) ?></h2>
+				<h2><?php echo lang('users'); ?> :: <?php echo anchor('user/newUser',lang('new_user')) ?></h2>
 					<table id="userTable" class="zebra">
 					<colgroup>
 						<col style='width:5%;' />
@@ -47,21 +47,21 @@ $( function(){
 					</colgroup>
 					<thead>
 					<tr>
-						<th><?=lang('name'); ?></th>
-						<th><?=lang('role'); ?></th>
-						<th><?=lang('access'); ?></th>
-						<th><?=lang('action'); ?></th>
+						<th><?php echo lang('name'); ?></th>
+						<th><?php echo lang('role'); ?></th>
+						<th><?php echo lang('access'); ?></th>
+						<th><?php echo lang('action'); ?></th>
 					</tr>
 					</thead>					
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td><?=$row->name ?></td>
-							<td align="right"><?=($row->level  == 515)  ? lang('waiter') : lang('administrator')?></td>
-							<td align="right"><?=$row->dest_type ?></td>
-							<td align="right"><?=anchor_image('user/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('user/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td><?php echo $row->name ?></td>
+							<td align="right"><?php echo ($row->level  == 515)  ? lang('waiter') : lang('administrator')?></td>
+							<td align="right"><?php echo $row->dest_type ?></td>
+							<td align="right"><?php echo anchor_image('user/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('user/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>

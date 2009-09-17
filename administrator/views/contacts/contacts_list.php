@@ -44,7 +44,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('contacts'); ?> :: <?=anchor('contacts/newContact',lang('new_contact')) ?></h2>
+				<h2><?php echo lang('contacts'); ?> :: <?php echo anchor('contacts/newContact',lang('new_contact')) ?></h2>
 				<div class="basic" style="float:left;"  id="tabelapare">
 						<?php 
 						$tmp = "";
@@ -58,15 +58,15 @@ $( function(){
 								</colgroup>
 								<thead>
 									<tr>
-										<th><?=lang('name'); ?></th>
-										<th><?=lang('action'); ?>&nbsp;&nbsp;</th>
+										<th><?php echo lang('name'); ?></th>
+										<th><?php echo lang('action'); ?>&nbsp;&nbsp;</th>
 									</tr>
 								</thead>	
 						<?php		
 							}						
 						?>		<tr>
-									<td><?=$row->name ?></td>
-									<td><?=anchor_image('contacts/edit/'.$row->contact_id, '../images/administrator/edit.png');?> :: <?=anchor_image('contacts/delete/'.$row->contact_id , '../images/administrator/edit_remove.png');?></td>
+									<td><?php echo $row->name ?></td>
+									<td><?php echo anchor_image('contacts/edit/'.$row->contact_id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('contacts/delete/'.$row->contact_id , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
 							$temp = $query->next_row();

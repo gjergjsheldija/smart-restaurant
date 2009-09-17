@@ -106,8 +106,8 @@ tfoot th em {
 </style>
 </head>
 <body>
-<h2><?=lang('movements'); ?></h2>
-<h5><?=lang('from'); ?> : <?=$dt_from; ?> <?=lang('to'); ?> : <?=$dt_to; ?></h5>
+<h2><?php echo lang('movements'); ?></h2>
+<h5><?php echo lang('from'); ?> : <?php echo $dt_from; ?> <?php echo lang('to'); ?> : <?php echo $dt_to; ?></h5>
 <?php 
 $tmp = "";
 $total_in = 0;
@@ -136,23 +136,23 @@ foreach($account_movements->result() as $row) {
 		</colgroup>
 		<thead>
 			<tr>
-				<th><?=lang('date'); ?></th>
-				<th><?=lang('reason'); ?></th>
-				<th><?=lang('type'); ?></th>
-				<th><?=lang('in'); ?></th>
-				<th><?=lang('out'); ?></th>
-				<th><?=lang('paid'); ?></th>
+				<th><?php echo lang('date'); ?></th>
+				<th><?php echo lang('reason'); ?></th>
+				<th><?php echo lang('type'); ?></th>
+				<th><?php echo lang('in'); ?></th>
+				<th><?php echo lang('out'); ?></th>
+				<th><?php echo lang('paid'); ?></th>
 			</tr>
 		</thead>	
 <?php		
 	}						
 ?>		<tr>
-			<td align="left"><?=$row->date?></td>
-			<td align="left"><?=$row->description?></td>
-			<td align="left"><?=$row->name?></td>
-			<td align="right"><?=$row->cash_amount > '0' ? $row->cash_amount : '-'?></td>
-			<td align="right"><?=$row->cash_amount < '0' ? $row->cash_amount : '-'?></td>
-			<td align="right"><?=$row->debit == '1' ? 'Yes' : 'No'?></td>
+			<td align="left"><?php echo $row->date?></td>
+			<td align="left"><?php echo $row->description?></td>
+			<td align="left"><?php echo $row->name?></td>
+			<td align="right"><?php echo $row->cash_amount > '0' ? $row->cash_amount : '-'?></td>
+			<td align="right"><?php echo $row->cash_amount < '0' ? $row->cash_amount : '-'?></td>
+			<td align="right"><?php echo $row->debit == '1' ? 'Yes' : 'No'?></td>
 		</tr>
 <?php 									
 	$kot = $account_movements->next_row();
@@ -169,12 +169,12 @@ foreach($account_movements->result() as $row) {
 	
 <table width="100%">
 	<tr><td colspan="6"></td></tr>
-	<tr><td colspan="3"></td><td align="right"><?=lang('in'); ?></td><td align="right"><?=lang('out'); ?></td><td align="right"><?=lang('diff'); ?></td></tr>
+	<tr><td colspan="3"></td><td align="right"><?php echo lang('in'); ?></td><td align="right"><?php echo lang('out'); ?></td><td align="right"><?php echo lang('diff'); ?></td></tr>
 	<tr>
-		<td colspan="3" align="right"><strong><?=lang('total'); ?> : </strong></td>
-		<td align="right"><strong><?=$total_in ?></strong></td>
-		<td align="right"><strong><?=$total_out ?></strong></td>
-		<td align="right"><strong><?=$total_in -(-$total_out)?></strong></td>
+		<td colspan="3" align="right"><strong><?php echo lang('total'); ?> : </strong></td>
+		<td align="right"><strong><?php echo $total_in ?></strong></td>
+		<td align="right"><strong><?php echo $total_out ?></strong></td>
+		<td align="right"><strong><?php echo $total_in -(-$total_out)?></strong></td>
 	</tr>	
 </table>			
 <script type="text/php">

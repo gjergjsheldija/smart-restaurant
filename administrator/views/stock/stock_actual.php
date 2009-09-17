@@ -37,8 +37,8 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?=anchor_image(site_url()."/stock/report_actual_pdf/",'images/administrator/save-pdf.png') ?></h2>
-				<?=form_open('stock/report_actual');?>
+				<h2><?php echo lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?php echo anchor_image(site_url()."/stock/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h2>
+				<?php echo form_open('stock/report_actual');?>
 				<br /><br />
 				<table class="zebra">
 					<colgroup>
@@ -54,15 +54,15 @@ $( function(){
 					</colgroup>				
 					<thead>
 						<tr>
-							<th><?=lang('name'); ?></th>
-							<th align="right"><?=lang('uom'); ?></th>
-							<th align="right"><?=lang('quantity'); ?></th>
-							<th align="right"><?=lang('sell_price'); ?></th>
-							<th align="right"><?=lang('buy_price'); ?></th>
-							<th align="right"><?=lang('value_price_sell'); ?></th>
-							<th align="right"><?=lang('value_price_buy'); ?></th>
-							<th align="right"><?=lang('total'); ?></th>
-							<th align="right"><?=lang('destid'); ?></th>
+							<th><?php echo lang('name'); ?></th>
+							<th align="right"><?php echo lang('uom'); ?></th>
+							<th align="right"><?php echo lang('quantity'); ?></th>
+							<th align="right"><?php echo lang('sell_price'); ?></th>
+							<th align="right"><?php echo lang('buy_price'); ?></th>
+							<th align="right"><?php echo lang('value_price_sell'); ?></th>
+							<th align="right"><?php echo lang('value_price_buy'); ?></th>
+							<th align="right"><?php echo lang('total'); ?></th>
+							<th align="right"><?php echo lang('destid'); ?></th>
 						</tr>
 					</thead>
 				<?php 
@@ -72,20 +72,20 @@ $( function(){
 					$value_price_buy += $row->value_price_buy;
 				?>
 					<tr>
-						<td><?=$row->name;?></td>
-						<td align="right"><?=$uom[$row->uom];?></td>
-						<td align="right"><?=$row->quantity;?></td>
-						<td align="right"><?=$row->sell_price;?></td>
-						<td align="right"><?=$row->buy_price;?></td>
-						<td align="right"><?=$row->value_price_sell;?></td>
-						<td align="right"><?=$row->value_price_buy;?></td>
-						<td align="right"><?=$row->total;?></td>
-						<td align="right"><?=$warehouse[$row->destid];?></td>
+						<td><?php echo $row->name;?></td>
+						<td align="right"><?php echo $uom[$row->uom];?></td>
+						<td align="right"><?php echo $row->quantity;?></td>
+						<td align="right"><?php echo $row->sell_price;?></td>
+						<td align="right"><?php echo $row->buy_price;?></td>
+						<td align="right"><?php echo $row->value_price_sell;?></td>
+						<td align="right"><?php echo $row->value_price_buy;?></td>
+						<td align="right"><?php echo $row->total;?></td>
+						<td align="right"><?php echo $warehouse[$row->destid];?></td>
 					</tr>
 				<?php }?>	
 				<tr><td colspan="9"></td></tr>
-				<tr><td colspan="9" align="right"><strong><?=lang('total_value_sell'); ?> : <?=$value_price_sell; ?></strong></td></tr>
-				<tr><td colspan="9" align="right"><strong><?=lang('total_value_buy'); ?> : <?=$value_price_buy; ?></strong></td></tr>
+				<tr><td colspan="9" align="right"><strong><?php echo lang('total_value_sell'); ?> : <?php echo $value_price_sell; ?></strong></td></tr>
+				<tr><td colspan="9" align="right"><strong><?php echo lang('total_value_buy'); ?> : <?php echo $value_price_buy; ?></strong></td></tr>
 				</table>
 				</form>
 			</div>	

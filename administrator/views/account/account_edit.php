@@ -57,10 +57,10 @@ jQuery().ready(function() {
 			}
 		},
 		messages: {
-			number: "<?=lang('nr_missing'); ?>",
-			date: "<?=lang('date_missing'); ?>",
-			description: "<?=lang('desc_missing'); ?>",
-			amount: "<?=lang('amount_missing'); ?>",
+			number: "<?php echo lang('nr_missing'); ?>",
+			date: "<?php echo lang('date_missing'); ?>",
+			description: "<?php echo lang('desc_missing'); ?>",
+			amount: "<?php echo lang('amount_missing'); ?>",
 		}
 	});
 });
@@ -95,7 +95,7 @@ div.error { display: none; }
 		</thead>
 		<tbody>
 			<tr>
-				<td><?=form_label('Nr');?> :</td>
+				<td><?php echo form_label('Nr');?> :</td>
 				<?php
 				$number = array(
 			              'name'        => 'number',
@@ -104,8 +104,8 @@ div.error { display: none; }
 			              'size'        => '10',
 						  'for'			=> 'number');
 				?>
-				<td><?=form_input($number); ?></td>
-				<td><?=form_label(lang('date'));?> :</td>
+				<td><?php echo form_input($number); ?></td>
+				<td><?php echo form_label(lang('date'));?> :</td>
 				<?php
 				$date = array(
 			              'name'        => 'date',
@@ -114,14 +114,14 @@ div.error { display: none; }
 			              'size'        => '10',
 						  'for'			=> 'date');
 				?>
-				<td><?=form_input($date); ?></td>
+				<td><?php echo form_input($date); ?></td>
 			</tr>
 			<tr>
-				<td><?=form_label(lang('customer'));?> :</td>
-				<td><?=form_dropdown('who',$person); ?></td>
+				<td><?php echo form_label(lang('customer'));?> :</td>
+				<td><?php echo form_dropdown('who',$person); ?></td>
 			</tr>
 			<tr>
-				<td><?=form_label(lang('description'));?> :</td>
+				<td><?php echo form_label(lang('description'));?> :</td>
 				<?php
 				$description = array(
 						'rows' => '5',
@@ -130,7 +130,7 @@ div.error { display: none; }
 						'name' => 'description',
 						'for'  => 'number');
 						?>
-				<td colspan="3"><?=form_textarea($description); ?></td>
+				<td colspan="3"><?php echo form_textarea($description); ?></td>
 			</tr>
 			<tr>
 			<?php
@@ -141,13 +141,13 @@ div.error { display: none; }
 		              'size'        => '10',
 					  'for'			=> 'amount');
 			?>
-				<td><?=form_label(lang('amount'));?> :</td>
-				<td colspan="3"><?=form_input($amount); ?></td>
+				<td><?php echo form_label(lang('amount'));?> :</td>
+				<td colspan="3"><?php echo form_input($amount); ?></td>
 			</tr>
 			<tr>
-				<td><?=lang('paid'); ?></td>
-				<td><?=form_checkbox('paid','paid'); ?></td>
-				<td><?=lang('payment_date'); ?></td>
+				<td><?php echo lang('paid'); ?></td>
+				<td><?php echo form_checkbox('paid','paid'); ?></td>
+				<td><?php echo lang('payment_date'); ?></td>
 				<?php
 				$payment_date = array(
 		              'name'        => 'payment_date',
@@ -155,16 +155,16 @@ div.error { display: none; }
 		              'maxlength'   => '50',
 		              'size'        => '10');
 				?>
-				<td colspan="2"><?=form_input($payment_date); ?></td>
+				<td colspan="2"><?php echo form_input($payment_date); ?></td>
 			</tr>
 			<tr>
-				<td><?=lang('payment_type'); ?></td>
-				<td id="payment_type"><?=form_dropdown('payment_type',$payment_type); ?></td>
-				<td id="bank_label"><?=lang('bank_account') ?> :</td>
-				<td id="bank_account"><?=form_dropdown('bank_account',$bank_account); ?></td>
+				<td><?php echo lang('payment_type'); ?></td>
+				<td id="payment_type"><?php echo form_dropdown('payment_type',$payment_type); ?></td>
+				<td id="bank_label"><?php echo lang('bank_account') ?> :</td>
+				<td id="bank_account"><?php echo form_dropdown('bank_account',$bank_account); ?></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="<?=lang('save'); ?>"></td>
+				<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 				<td></td>
 			</tr>
 		</tbody>

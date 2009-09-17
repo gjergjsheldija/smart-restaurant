@@ -30,73 +30,72 @@
         jQuery(function($)
         {
             $("#picker1").attachColorPicker();
-           // $("#picker1").change(function() {$(document.body).css("background-color",$("#picker1").getValue())});
         });
 	//-->
 </script>
 <?php if( isset($edit) ) { ?>
-<?=form_open_multipart('category/save');?>
+<?php echo form_open_multipart('category/save');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('category_info'); ?></h2>
+			<h2><?php echo lang('category_info'); ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id',$edit[0]->id) ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name',$edit[0]->name); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('color'));?> :</td>
-			<td><?=form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7','value'=>$edit[0]->htmlcolor));?></td>
+			<td><?php echo form_label(lang('color'));?> :</td>
+			<td><?php echo form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7','value'=>$edit[0]->htmlcolor));?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('image'));?> :</td>
-			<td><?=form_upload('image',$edit[0]->image); ?></td>
+			<td><?php echo form_label(lang('image'));?> :</td>
+			<td><?php echo form_upload('image',$edit[0]->image); ?></td>
 		</tr>
 		<tr>
-			<td><?=isset($edit[0]->image) ? img('../'.$edit[0]->image) : 'nuk ka'; ?></td>
+			<td><?php echo isset($edit[0]->image) ? img('../'.$edit[0]->image) : 'nuk ka'; ?></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save'); ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } elseif( isset($newcat) ) {?>
-<?=form_open_multipart('category/addnew');?>
+<?php echo form_open_multipart('category/addnew');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('new_category'); ?></h2>
+			<h2><?php echo lang('new_category'); ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id') ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name'); ?></td>
+			<td><?php echo form_hidden('id') ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('color'));?> :</td>
-			<td><?=form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7'));?></td>
+			<td><?php echo form_label(lang('color'));?> :</td>
+			<td><?php echo form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7'));?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('image'));?> :</td>
-			<td><?=form_upload('image'); ?></td>
+			<td><?php echo form_label(lang('image'));?> :</td>
+			<td><?php echo form_upload('image'); ?></td>
 		</tr>
 		<tr>
-			<td><?=lang('no_info'); ?></td>
+			<td><?php echo lang('no_info'); ?></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save'); ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>

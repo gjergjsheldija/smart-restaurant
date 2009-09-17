@@ -35,7 +35,7 @@ jQuery().ready(function(){
 		<div class="contentRight">
 		<div class="contentLeft">
 		<div class="col">
-				<h2><?=lang('configuration'); ?></h2>
+				<h2><?php echo lang('configuration'); ?></h2>
 					<table cellpadding="2" class="zebra">
 					<colgroup>
 						<col style='width:99%;' />
@@ -43,59 +43,71 @@ jQuery().ready(function(){
 					</colgroup>
 					<thead>
 					<tr>
-						<th><?=lang('name') ?></th>
-						<th align="right"><?=lang('value') ?></th>
+						<th><?php echo lang('name') ?></th>
+						<th align="right"><?php echo lang('value') ?></th>
 					</tr>
 					</thead>					
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td align="left" title="<?=lang('hint_' . $row->name); ?>" id="helphint<?=$row->id ?>"><?=lang('desc_' . $row->name); ?></td>
+							<td align="left" title="<?php echo lang('hint_' . $row->name); ?>" id="helphint<?php echo $row->id ?>"><?php echo lang('desc_' . $row->name); ?></td>
 							<script type="text/javascript">
-							   	$('#helphint<?=$row->id; ?>').
-							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?=img('../images/administrator/cross.png');?>', positionBy: 'Top'});
+							   	$('#helphint<?php echo $row->id; ?>').
+							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?php echo img('../images/administrator/cross.png');?>', positionBy: 'Top'});
 							</script>
 							<td align="right">
-								<div id="value_<?=$row->id; ?>"><?php if ($row->bool) echo $row->value == '1' ? lang('yes') : lang('no'); else echo $row->value;?>
+								<div id="value_<?php echo $row->id; ?>"><?php if ($row->bool) echo $row->value == '1' ? lang('yes') : lang('no'); else echo $row->value;?>
 								</div>
-								<?=form_hidden('value_'.$row->id,$row->id); ?><?=form_hidden('bool_'.$row->id,$row->bool); ?>	
+								<?php echo form_hidden('value_'.$row->id,$row->id); ?><?php echo form_hidden('bool_'.$row->id,$row->bool); ?>	
 							</td>
 						</tr>
 						<?php if($row->bool && $row->name != "printing_system") { ?>
 						<script type="text/javascript">
 							jQuery().ready(function() {
-							    $("#value_<?=$row->id; ?>").editable("<?=base_url() . '?c=configuration&m=updateValue';?>", { 
-							    	data	  : "{'1':'<?=lang('yes');?>','0':'<?=lang('no');?>'}",
+							    $("#value_<?php echo $row->id; ?>").editable("<?php echo base_url() . '?c=configuration&m=updateValue';?>", { 
+							    	data	  : "{'1':'<?php echo lang('yes');?>','0':'<?php echo lang('no');?>'}",
 							    	type      : 'select',
-							        indicator : '<?=lang('saving');?>',
+							        indicator : '<?php echo lang('saving');?>',
 							        submit    : 'OK',
-							        submitdata: { value_id: $('input[@name=value_<?=$row->id ?>]').val() , bool: $('input[@name=bool_<?=$row->id ?>]').val() }
+							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() , bool: $('input[@name=bool_<?php echo $row->id ?>]').val() }
 							    });
 							});
 							</script>	
-						<? } elseif($row->name == "printing_system") { ?>
+						<?php } elseif($row->name == "printing_system") { ?>
 						<script type="text/javascript">
 							jQuery().ready(function() {
-							    $("#value_<?=$row->id; ?>").editable("<?=base_url() . '?c=configuration&m=updateValue';?>", { 
+							    $("#value_<?php echo $row->id; ?>").editable("<?php echo base_url() . '?c=configuration&m=updateValue';?>", { 
 							    	data	  : "{'win':'Windows','lp':'Linux'}",
 							    	type      : 'select',
-							        indicator : '<?=lang('saving');?>',
+							        indicator : '<?php echo lang('saving');?>',
 							        submit    : 'OK',
-							        submitdata: { value_id: $('input[@name=value_<?=$row->id ?>]').val() , bool: $('input[@name=bool_<?=$row->id ?>]').val() }
+							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() , bool: $('input[@name=bool_<?php echo $row->id ?>]').val() }
+							    });
+							});
+							</script>					
+						<?php } elseif($row->name == "default_timezone") { ?>
+						<script type="text/javascript">
+							jQuery().ready(function() {
+							    $("#value_<?php echo $row->id; ?>").editable("<?php echo base_url() . '?c=configuration&m=updateValue';?>", { 
+							    	loadurl   : '<?php echo base_url() . '?c=configuration&m=timezoneList';?>',
+							    	type      : 'select',
+							        indicator : '<?php echo lang('saving');?>',
+							        submit    : 'OK',
+							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() , bool: $('input[@name=bool_<?php echo $row->id ?>]').val() }
 							    });
 							});
 							</script>					
 						<?php } else { ?>
 							<script type="text/javascript">
 							jQuery().ready(function() {
-							    $("#value_<?=$row->id; ?>").editable("<?=base_url() . '?c=configuration&m=updateValue';?>", { 
-							        indicator : '<?=lang('saving');?>',
-							        submitdata: { value_id: $('input[@name=value_<?=$row->id ?>]').val() }
+							    $("#value_<?php echo $row->id; ?>").editable("<?php echo base_url() . '?c=configuration&m=updateValue';?>", { 
+							        indicator : '<?php echo lang('saving');?>',
+							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() }
 							    });
 							});
 							</script>							
 						<?php } ?>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
         </div>

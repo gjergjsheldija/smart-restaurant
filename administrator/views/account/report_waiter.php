@@ -107,17 +107,17 @@ tfoot th em {
 </style>
 </head>
 <body>
-<h2><?=lang('waiter_income'); ?></h2>
-<h5><?=lang('from'); ?> : <?=$dt_from; ?> <?=lang('to'); ?> : <?=$dt_to; ?></h5>
+<h2><?php echo lang('waiter_income'); ?></h2>
+<h5><?php echo lang('from'); ?> : <?php echo $dt_from; ?> <?php echo lang('to'); ?> : <?php echo $dt_to; ?></h5>
 <table width="100%">		
 	<thead>
 		<tr>
-			<th><?=lang('date'); ?></th>
-			<th><?=lang('who'); ?></th>
-			<th><?=lang('reason'); ?></th>
-			<th><?=lang('type'); ?></th>
-			<th><?=lang('in'); ?></th>
-			<th><?=lang('out'); ?></th>
+			<th><?php echo lang('date'); ?></th>
+			<th><?php echo lang('who'); ?></th>
+			<th><?php echo lang('reason'); ?></th>
+			<th><?php echo lang('type'); ?></th>
+			<th><?php echo lang('in'); ?></th>
+			<th><?php echo lang('out'); ?></th>
 		</tr>
 	</thead>
 	<?php
@@ -130,20 +130,20 @@ tfoot th em {
 			$total_out += $account_movement['cash_amount'];
 	?>
 	<tr>
-		<td align="left"><?=$account_movement['date']?></td>
-		<td align="left"><?=$account_movement['who']?></td>
-		<td align="left"><?=$account_movement['description']?></td>
-		<td align="left"><?=$account_movement['name']?></td>
-		<td align="right"><?=$account_movement['cash_amount'] > '0' ? $account_movement['cash_amount'] : '-'?></td>
-		<td align="right"><?=$account_movement['cash_amount'] < '0' ? $account_movement['cash_amount'] : '-'?></td>
+		<td align="left"><?php echo $account_movement['date']?></td>
+		<td align="left"><?php echo $account_movement['who']?></td>
+		<td align="left"><?php echo $account_movement['description']?></td>
+		<td align="left"><?php echo $account_movement['name']?></td>
+		<td align="right"><?php echo $account_movement['cash_amount'] > '0' ? $account_movement['cash_amount'] : '-'?></td>
+		<td align="right"><?php echo $account_movement['cash_amount'] < '0' ? $account_movement['cash_amount'] : '-'?></td>
 	</tr>
 	<?php endforeach; ?>
 	<tr><td colspan="6"></td></tr>
 	<tr>
-		<td colspan="3" align="right"><strong><?=lang('total'); ?> : </strong></td>
-		<td align="right"><strong><?=$total_in ?></strong></td>
-		<td align="right"><strong><?=$total_out ?></strong></td>
-		<td align="right"><strong><?=$total_in -(-$total_out)?></strong></td>
+		<td colspan="3" align="right"><strong><?php echo lang('total'); ?> : </strong></td>
+		<td align="right"><strong><?php echo $total_in ?></strong></td>
+		<td align="right"><strong><?php echo $total_out ?></strong></td>
+		<td align="right"><strong><?php echo $total_in -(-$total_out)?></strong></td>
 	</tr>	
 </table>		
 <script type="text/php">

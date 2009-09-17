@@ -39,7 +39,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('category'); ?> :: <?=anchor('category/newCat',lang('new_category')) ?></h2>
+				<h2><?php echo lang('category'); ?> :: <?php echo anchor('category/newCat',lang('new_category')); ?></h2>
 					<table id="categoriesTable" class="zebra">
 					<colgroup>
 						<col style='width:40%;' />
@@ -48,19 +48,19 @@ $( function(){
 					</colgroup>
 					<thead>
 						<tr>
-							<th><?=lang('name'); ?></th>
-							<th><?=lang('image'); ?></th>
-							<th><?=lang('action'); ?>&nbsp;&nbsp;&nbsp;</th>
+							<th><?php echo lang('name'); ?></th>
+							<th><?php echo lang('image'); ?></th>
+							<th><?php echo lang('action'); ?>&nbsp;&nbsp;&nbsp;</th>
 						</tr>
 					</thead>
 					<tbody>
-					<?php foreach($query as $row): ?>
+					<?php foreach($query as $row) : ?>
 						<tr>
-							<td><?=$row->name ?></td>
+							<td><?php echo $row->name; ?></td>
 							<td><?php echo isset($row->image) ? img('..'.$row->image) : lang('no_info'); ?></td>
-							<td><?=anchor_image('category/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('category/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td><?php echo anchor_image('category/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('category/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 					</tbody>
 				</table>			
 			</div>

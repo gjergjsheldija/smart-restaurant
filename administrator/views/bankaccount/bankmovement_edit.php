@@ -43,9 +43,9 @@ jQuery().ready(function() {
 			}
 		},
 		messages: {
-			timestamp: "<?=lang('date_missing'); ?>",
-			description: "<?=lang('desc_missing'); ?>",
-			amount: "<?=lang('amount_missing'); ?>",
+			timestamp: "<?php echo lang('date_missing'); ?>",
+			description: "<?php echo lang('desc_missing'); ?>",
+			amount: "<?php echo lang('amount_missing'); ?>",
 		}
 	});
 });
@@ -58,18 +58,18 @@ div.error { display: none; }
 </style>
 
 <?php if( isset($newbankmovement) ) { ?>
-<?=form_open('bankaccount/addnewMovement',array('id' => 'accountsForm'));?>
+<?php echo form_open('bankaccount/addnewMovement',array('id' => 'accountsForm'));?>
 	<table>
 		<thead>
 			<tr>
 				<th colspan="2">
-				<h2><?=lang('movements'); ?></h2>
+				<h2><?php echo lang('movements'); ?></h2>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td><?=form_label(lang('date'));?> :</td>
+				<td><?php echo form_label(lang('date'));?> :</td>
 				<?php
 				$date = array(
 			              'name'        => 'timestamp',
@@ -78,10 +78,10 @@ div.error { display: none; }
 			              'size'        => '10',
 						  'for'			=> 'date');
 				?>
-				<td><?=form_input($date); ?></td>
+				<td><?php echo form_input($date); ?></td>
 			</tr>
 			<tr>
-				<td><?=form_label(lang('description'));?> :</td>
+				<td><?php echo form_label(lang('description'));?> :</td>
 				<?php
 				$description = array(
 						'rows' => '5',
@@ -90,7 +90,7 @@ div.error { display: none; }
 						'name' => 'description',
 						'for'  => 'number');
 						?>
-				<td colspan="3"><?=form_textarea($description); ?></td>
+				<td colspan="3"><?php echo form_textarea($description); ?></td>
 			</tr>
 			<tr>
 			<?php
@@ -101,17 +101,17 @@ div.error { display: none; }
 		              'size'        => '10',
 					  'for'			=> 'amount');
 			?>
-				<td><?=form_label(lang('amount'));?> :</td>
-				<td colspan="3"><?=form_input($amount); ?>(<?=lang('negative_value') ?>)</td>
+				<td><?php echo form_label(lang('amount'));?> :</td>
+				<td colspan="3"><?php echo form_input($amount); ?>(<?php echo lang('negative_value') ?>)</td>
 			</tr>
 			<tr>
-				<td><?=lang('payment_type'); ?> :</td>
-				<td id="type"><?=form_dropdown('type',$payment_type); ?></td>
-				<td id="bank_label"><?=lang('account'); ?> :</td>
-				<td id="account_id"><?=form_dropdown('account_id',$bank_account); ?></td>
+				<td><?php echo lang('payment_type'); ?> :</td>
+				<td id="type"><?php echo form_dropdown('type',$payment_type); ?></td>
+				<td id="bank_label"><?php echo lang('account'); ?> :</td>
+				<td id="account_id"><?php echo form_dropdown('account_id',$bank_account); ?></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="<?=lang('save'); ?>"></td>
+				<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 				<td></td>
 			</tr>
 		</tbody>

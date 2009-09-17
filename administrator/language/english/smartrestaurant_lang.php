@@ -149,13 +149,13 @@ $lang['total_in']			= "Total In";
 $lang['total_out']			= "Total Out";
 $lang['total']				= "Total";
 $lang['diff']				= "Difference";
-$lang['date']				= "Date";
-$lang['payment_date']		= "Payment Date";
+$lang['date']				= "Dt";
+$lang['payment_date']		= "Pymt Date";
 $lang['customer']			= "Customer";
 $lang['description']		= "Description";
 $lang['amount']				= "Amount";
 $lang['paid']				= "Paid";
-$lang['payment_type']		= "Payment Type";
+$lang['payment_type']		= "Pymt Type";
 $lang['cash']				= "Cash";
 $lang['nr_missing']			= "Nr is missing.";
 $lang['date_missing']		= "Date is missing.";
@@ -275,5 +275,6 @@ $lang['hint_rows_per_page']	   					= "Sets the maximum number of table rows to 
 $lang['desc_rows_per_page']	   					= "Rows per page.";
 $lang['hint_default_priority']	   				= "Priority to be used by default when no category default priority has been set or when using the alphabetical dish list.";
 $lang['desc_default_priority']	   				= "Default priority.";
-
+$lang['desc_default_timezone']					= "System Timezone";
+$lang['hint_default_timezone']					= "Specifies the system Timezone";
 ?>

@@ -39,8 +39,8 @@ jQuery().ready(function() {
 			}
 		},
 		messages: {
-			timestamp: "<?=lang('date_missing'); ?>",
-			invoice_id: "<?=lang('nr_missing'); ?>"
+			timestamp: "<?php echo lang('date_missing'); ?>",
+			invoice_id: "<?php echo lang('nr_missing'); ?>"
 		}
 	});
 });
@@ -48,13 +48,13 @@ jQuery().ready(function() {
 function addFormField() {
 	
 	var id = document.getElementById("id").value;	
-	var image = '   <?=img('images/administrator/edit_remove.png') ?>';
+	var image = '   <?php echo img('images/administrator/edit_remove.png') ?>';
 	$.ajax({
 		type : "POST",
-		url : "<?=base_url() . '?c=stock&m=ingredientList' ?>",
+		url : "<?php echo base_url() . '?c=stock&m=ingredientList' ?>",
 		success : function(data) {
 			$("#loaderimg").remove();
-			$("#divInvoice").append("<div id='row" + id + "'><td><label for='txt" + id + "'><?=lang('article'); ?></label>:</td><td><select name='ingredient[]' id='ingredient" + id + "'>" + data +"</select></td><td><label for='txt" + id + "'><?=lang('quantity'); ?></label>:</td><td><input type='text' name='quantity[]' value='' maxlength='50' size='10' id='quantity" + id + "' for='number'  /></td><td><label for='txt" + id + "'><?=lang('price'); ?></label>:</td><td><input type='text' name='price[]' value='' maxlength='50' size='10' id='price" + id + "' for='number'  /></td><a href='#' onClick='removeFormField(\"#row" + id + "\"); return false;'>" + image + "</a><br><br></div>");
+			$("#divInvoice").append("<div id='row" + id + "'><td><label for='txt" + id + "'><?php echo lang('article'); ?></label>:</td><td><select name='ingredient[]' id='ingredient" + id + "'>" + data +"</select></td><td><label for='txt" + id + "'><?php echo lang('quantity'); ?></label>:</td><td><input type='text' name='quantity[]' value='' maxlength='50' size='10' id='quantity" + id + "' for='number'  /></td><td><label for='txt" + id + "'><?php echo lang('price'); ?></label>:</td><td><input type='text' name='price[]' value='' maxlength='50' size='10' id='price" + id + "' for='number'  /></td><a href='#' onClick='removeFormField(\"#row" + id + "\"); return false;'>" + image + "</a><br><br></div>");
 		},
 		cache: false,
 		async: false
@@ -85,18 +85,18 @@ div.error { display: none; }
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<?=form_open('stock/addnew',array('id' => 'stockForm'));?>
+				<?php echo form_open('stock/addnew',array('id' => 'stockForm'));?>
 					<table>
 						<thead>
 							<tr>
 								<th colspan="6">
-								<h2><?=lang('supply'); ?></h2>
+								<h2><?php echo lang('supply'); ?></h2>
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td><?=form_label(lang('date'));?> :</td>
+								<td><?php echo form_label(lang('date'));?> :</td>
 								<?php
 									$date = array(
 							              'name'        => 'timestamp',
@@ -105,8 +105,8 @@ div.error { display: none; }
 							              'size'        => '10',
 										  'for'			=> 'timestamp');
 								?>
-								<td><?=form_input($date); ?></td>
-								<td><?=form_label('Nr');?> :</td>
+								<td><?php echo form_input($date); ?></td>
+								<td><?php echo form_label('Nr');?> :</td>
 								<?php
 									$invoice_id = array(
 										'id'   		  => 'invoice_id',
@@ -115,13 +115,13 @@ div.error { display: none; }
 										'name' 		  => 'invoice_id',
 										'for'  		  => 'invoice_id');
 										?>
-								<td><?=form_input($invoice_id); ?></td>
-								<td><?=form_label(lang('supplier'));?> :</td>
-								<td><?=form_dropdown('supplier',$supplier); ?></td>				
+								<td><?php echo form_input($invoice_id); ?></td>
+								<td><?php echo form_label(lang('supplier'));?> :</td>
+								<td><?php echo form_dropdown('supplier',$supplier); ?></td>				
 							</tr>
 							<tr>
 								<td colspan="6">
-									<a href="#" onClick="addFormField(); return false;"><?=img('../images/administrator/edit_add.png') ?></a>
+									<a href="#" onClick="addFormField(); return false;"><?php echo img('../images/administrator/edit_add.png') ?></a>
 								</td>
 							</tr>
 							<tr>
@@ -133,15 +133,15 @@ div.error { display: none; }
 								</td>
 							</tr>
 							<tr>
-								<td><?=form_label(lang('paid')); ?></td>
-								<td><?=form_checkbox('paid','paid', TRUE); ?></td>
-								<td><?=lang('payment_type'); ?> :</td>
-								<td id="type"><?=form_dropdown('type',$payment_type); ?></td>
-								<td id="bank_label"><?=lang('bank_account'); ?> :</td>
-								<td id="account_id"><?=form_dropdown('account_id',$bank_account); ?></td>
+								<td><?php echo form_label(lang('paid')); ?></td>
+								<td><?php echo form_checkbox('paid','paid', TRUE); ?></td>
+								<td><?php echo lang('payment_type'); ?> :</td>
+								<td id="type"><?php echo form_dropdown('type',$payment_type); ?></td>
+								<td id="bank_label"><?php echo lang('bank_account'); ?> :</td>
+								<td id="account_id"><?php echo form_dropdown('account_id',$bank_account); ?></td>
 							</tr>
 							<tr>
-								<td colspan="6"><input type="submit" value="<?=lang('save'); ?>"></td>
+								<td colspan="6"><input type="submit" value="<?php echo lang('save'); ?>"></td>
 							</tr>
 						</tbody>
 					</table>

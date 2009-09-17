@@ -31,6 +31,7 @@ class Configuration extends Controller {
 		$this->load->helper('html');
 		$this->load->helper('MY_url_helper');	
 		$this->load->helper('language');	
+		$this->load->helper('date');
 		if($this->config->item('enable_app_debug'))
 			$this->output->enable_profiler(TRUE);
 	}
@@ -54,6 +55,19 @@ class Configuration extends Controller {
 			print $_POST['value'] == '1' ? lang('yes') : lang('no');
 		else
 			print $_POST['value'];			
+	}
+	
+	function timezoneList() {
+		
+		$zones = DateTimeZone::listIdentifiers();
+		$zoneArray = array();
+		foreach ($zones as $zone) {
+			$zoneArray[$zone]= $zone;
+		}		
+		
+		print json_encode($zoneArray);
+		die();
+			
 	}
 }
 ?>

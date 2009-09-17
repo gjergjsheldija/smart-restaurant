@@ -26,60 +26,60 @@
  */
 ?>
 <?php if( isset($edit) ) { ?>
-<?=form_open('currency/save');?>
+<?php echo form_open('currency/save');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('currency_info'); ?></h2>
+			<h2><?php echo lang('currency_info'); ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id',$edit[0]->id) ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name',$edit[0]->name); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('currency_rate'));?> :</td>
-			<td><?=form_input('rate',$edit[0]->rate);?></td>
+			<td><?php echo form_label(lang('currency_rate'));?> :</td>
+			<td><?php echo form_input('rate',$edit[0]->rate);?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('active'));?> :</td>
-			<td><?=form_checkbox('active',1,$edit[0]->active); ?></td>
+			<td><?php echo form_label(lang('active'));?> :</td>
+			<td><?php echo form_checkbox('active',1,$edit[0]->active); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save'); ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } elseif( isset($newcurrency) ) {?>
-<?=form_open('currency/addnew');?>
+<?php echo form_open('currency/addnew');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('new_currency'); ?></h2>
+			<h2><?php echo lang('new_currency'); ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id') ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name'); ?></td>
+			<td><?php echo form_hidden('id') ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('currency_rate'));?> :</td>
-			<td><?=form_input('rate');?></td>
+			<td><?php echo form_label(lang('currency_rate'));?> :</td>
+			<td><?php echo form_input('rate');?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('active'));?> :</td>
-			<td><?=form_checkbox('active',1); ?></td>
+			<td><?php echo form_label(lang('active'));?> :</td>
+			<td><?php echo form_checkbox('active',1); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save'); ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>

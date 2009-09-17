@@ -45,8 +45,8 @@ function hideThis(obj) {
 		<div class="contentRight">
 		<div class="contentLeft">
 		<div class="col">
-			<h2><?=lang('waiter_income'); ?></h2>
-			<?=form_open('account/report_waiter');?>
+			<h2><?php echo lang('waiter_income'); ?></h2>
+			<?php echo form_open('account/report_waiter');?>
 			<?php
 			$tmp_from = isset($dt_from) ? $dt_from : date('Y-m-d');
 			$tmp_to = isset($dt_to) ? $dt_to : date('Y-m-d');
@@ -64,10 +64,10 @@ function hideThis(obj) {
 			?>
 			<table>
 				<tr>
-					<td><?=lang('from'); ?> : <?=form_input($date_from) ?></td>
-					<td><?=lang('to'); ?> : <?=form_input($date_to) ?></td>
-					<td><input type="submit" value="<?=lang('show'); ?>"></td>
-					<td align="right"><?=anchor_image(site_url()."/account/report_waiter_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
+					<td><?php echo lang('from'); ?> : <?php echo form_input($date_from) ?></td>
+					<td><?php echo lang('to'); ?> : <?php echo form_input($date_to) ?></td>
+					<td><input type="submit" value="<?php echo lang('show'); ?>"></td>
+					<td align="right"><?php echo anchor_image(site_url()."/account/report_waiter_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
 				</tr>
 			</table>
 			<br /><br />
@@ -82,12 +82,12 @@ function hideThis(obj) {
 				</colgroup>			
 				<thead>
 					<tr>
-						<th><?=lang('date'); ?></th>
-						<th><?=lang('who'); ?></th>
-						<th><?=lang('reason'); ?></th>
-						<th><?=lang('type'); ?></th>
-						<th><?=lang('in'); ?></th>
-						<th><?=lang('out'); ?></th>
+						<th><?php echo lang('date'); ?></th>
+						<th><?php echo lang('who'); ?></th>
+						<th><?php echo lang('reason'); ?></th>
+						<th><?php echo lang('type'); ?></th>
+						<th><?php echo lang('in'); ?></th>
+						<th><?php echo lang('out'); ?></th>
 					</tr>
 				</thead>
 				<?php
@@ -104,13 +104,13 @@ function hideThis(obj) {
 							else
 								$total_out += $account_movement['cash_amount'];
 							?>
-							<tr onClick="hideThis('<?=$billid;?>')" id="hide<?=$billid;?>" style="font-weight:bold;border-bottom:0.1em solid #000000;border-top:0.1em solid #000000;">
-								<td align="left"><?=$account_movement['date']?></td>
-								<td align="left"><?=$account_movement['who']?></td>
-								<td align="left"><?=$account_movement['description']?></td>
-								<td align="left"><?=$account_movement['name']?></td>
-								<td align="right"><?=$account_movement['cash_amount'] > '0' ? $account_movement['cash_amount'] : '-'?></td>
-								<td align="right"><?=$account_movement['cash_amount'] < '0' ? $account_movement['cash_amount'] : '-'?></td>
+							<tr onClick="hideThis('<?php echo $billid;?>')" id="hide<?php echo $billid;?>" style="font-weight:bold;border-bottom:0.1em solid #000000;border-top:0.1em solid #000000;">
+								<td align="left"><?php echo $account_movement['date']?></td>
+								<td align="left"><?php echo $account_movement['who']?></td>
+								<td align="left"><?php echo $account_movement['description']?></td>
+								<td align="left"><?php echo $account_movement['name']?></td>
+								<td align="right"><?php echo $account_movement['cash_amount'] > '0' ? $account_movement['cash_amount'] : '-'?></td>
+								<td align="right"><?php echo $account_movement['cash_amount'] < '0' ? $account_movement['cash_amount'] : '-'?></td>
 							</tr>
 							<tr><td colspan="6">
 							<?php 
@@ -131,10 +131,10 @@ function hideThis(obj) {
 								<tr>
 									<td align="left"></td>
 									<td align="left"></td>
-									<td align="left"><?=$dish['dishname']?></td>
-									<td align="right"><?=$dish['dishprice']?></td>
-									<td align="right"><?=$dish['dishqty']?></td>
-									<td align="right"><?=$dish['dishprice']*$dish['dishqty']?></td>
+									<td align="left"><?php echo $dish['dishname']?></td>
+									<td align="right"><?php echo $dish['dishprice']?></td>
+									<td align="right"><?php echo $dish['dishqty']?></td>
+									<td align="right"><?php echo $dish['dishprice']*$dish['dishqty']?></td>
 								</tr>
 				<?php 			}
 								echo "</table></div></td></tr>";
@@ -146,10 +146,10 @@ function hideThis(obj) {
 				</td></tr>
 				<tr><td colspan="6"></td></tr>
 				<tr>
-					<td colspan="3" align="right"><strong><?=lang('total'); ?> : </strong></td>
-					<td align="right"><strong><?=$total_in ?></strong></td>
-					<td align="right"><strong><?=$total_out ?></strong></td>
-					<td align="right"><strong><?=$total_in -(-$total_out)?></strong></td>
+					<td colspan="3" align="right"><strong><?php echo lang('total'); ?> : </strong></td>
+					<td align="right"><strong><?php echo $total_in ?></strong></td>
+					<td align="right"><strong><?php echo $total_out ?></strong></td>
+					<td align="right"><strong><?php echo $total_in -(-$total_out)?></strong></td>
 				</tr>	
 			</table>
 			</form>

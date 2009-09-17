@@ -44,7 +44,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('bank_account'); ?> :: <?=anchor('bankaccount/newBankAccount',lang('new_bank_account')) ?></h2>
+				<h2><?php echo lang('bank_account'); ?> :: <?php echo anchor('bankaccount/newBankAccount',lang('new_bank_account')) ?></h2>
 				<div class="basic" style="float:left;"  id="tabelapare">
 						<?php 
 						$tmp = "";
@@ -58,15 +58,15 @@ $( function(){
 								</colgroup>
 								<thead>
 									<tr>
-										<th><?=lang('name'); ?></th>
-										<th><?=lang('action'); ?>&nbsp;&nbsp;</th>
+										<th><?php echo lang('name'); ?></th>
+										<th><?php echo lang('action'); ?>&nbsp;&nbsp;</th>
 									</tr>
 								</thead>	
 						<?php		
 							}						
 						?>		<tr>
-									<td><?=$row->accname ?></td>
-									<td><?=anchor_image('bankaccount/edit/'.$row->bankid, '../images/administrator/edit.png');?> :: <?=anchor_image('bankaccount/delete/'.$row->bankid , '../images/administrator/edit_remove.png');?></td>
+									<td><?php echo $row->accname ?></td>
+									<td><?php echo anchor_image('bankaccount/edit/'.$row->bankid, '../images/administrator/edit.png');?> :: <?php echo anchor_image('bankaccount/delete/'.$row->bankid , '../images/administrator/edit_remove.png');?></td>
 								</tr>
 						<?php 
 							$kot = $query->next_row();

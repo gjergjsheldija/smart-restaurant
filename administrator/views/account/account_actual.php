@@ -37,22 +37,22 @@ jQuery().ready(function() {
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('actual') ?></h2>
-				<?=form_open('account/report_actual');?>
+				<h2><?php echo lang('actual') ?></h2>
+				<?php echo form_open('account/report_actual');?>
 				<br /><br />
 				<table>
 					<tr>
-						<td><?=lang('total_in') ?></td>
-						<td align="right"><?=$ar[0]['total_ar']; ?></td>
+						<td><?php echo lang('total_in') ?></td>
+						<td align="right"><?php echo $ar[0]['total_ar']; ?></td>
 					</tr>
 					<tr>
-						<td><?=lang('total_out') ?></td>
-						<td align="right"><?=$ap[0]['total_ap']; ?></td>
+						<td><?php echo lang('total_out') ?></td>
+						<td align="right"><?php echo $ap[0]['total_ap']; ?></td>
 					</tr>
 					<tr><td colspan="2"><hr></td></tr>	
 					<tr>
-						<td><?=lang('diff') ?></td>
-						<td align="right"><?=$ar[0]['total_ar'] - (-$ap[0]['total_ap']); ?></td>
+						<td><?php echo lang('diff') ?></td>
+						<td align="right"><?php echo $ar[0]['total_ar'] - (-$ap[0]['total_ap']); ?></td>
 					</tr>	
 				</table>
 				</form>

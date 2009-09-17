@@ -37,7 +37,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('currency'); ?> :: <?=anchor('currency/newCurrency',lang('new_currency')) ?></h2>
+				<h2><?php echo lang('currency'); ?> :: <?php echo anchor('currency/newCurrency',lang('new_currency')) ?></h2>
 					<table id="currencyTable" class="zebra">
 					<colgroup>
 						<col style='width:3%;' />
@@ -47,21 +47,21 @@ $( function(){
 					</colgroup>
 					<thead>
 					<tr>
-						<th><?=lang('name'); ?></th>
-						<th><?=lang('currency_rate'); ?></th>
-						<th><?=lang('active'); ?></th>
-						<th><?=lang('action'); ?></th>
+						<th><?php echo lang('name'); ?></th>
+						<th><?php echo lang('currency_rate'); ?></th>
+						<th><?php echo lang('active'); ?></th>
+						<th><?php echo lang('action'); ?></th>
 					</tr>
 					</thead>					
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td><?=$row->name ?></td>
-							<td align="right"><?=$row->rate ?></td>
+							<td><?php echo $row->name ?></td>
+							<td align="right"><?php echo $row->rate ?></td>
 							<td align="right"><?php echo ($row->active == 1) ? lang('yes') : lang('no'); ?></td>
-							<td align="right"><?=anchor_image('currency/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('currency/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td align="right"><?php echo anchor_image('currency/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('currency/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>

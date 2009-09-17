@@ -459,8 +459,8 @@ function print_line($destid,$msg){
 		$destname=get_db_data(__FILE__,__LINE__,$_SESSION['common_db'],'dests','name',$destid);
 		$dest_msg.="destid: $destid";
 		$dest_msg.="\ndestname: $destname";
-		$msg = eregi_replace ("{[^}]*destination[^}]*}", "$dest_msg", $msg);
-		$msg=preg_replace("/\{.*?".'destination'.".*?\}/",$dest_msg,$msg);
+		$msg = preg_replace ("/{[^}]*destination[^}]*}/", "$dest_msg", $msg);
+		$msg = preg_replace("/\{.*?".'destination'.".*?\}/",$dest_msg,$msg);
 	}
 
 

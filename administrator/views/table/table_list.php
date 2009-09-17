@@ -37,7 +37,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('tables'); ?> :: <?=anchor('table/newTable',lang('new_table')) ?></h2>
+				<h2><?php echo lang('tables'); ?> :: <?php echo anchor('table/newTable',lang('new_table')) ?></h2>
 					<table id="tablesTable" class="zebra">
 					<colgroup>
 						<col style='width:10%;' />
@@ -46,19 +46,19 @@ $( function(){
 					</colgroup>
 					<thead>
 					<tr>
-						<th><?=lang('name') ;?></th>
-						<th><?=lang('user') ;?></th>
-						<th><?=lang('action') ;?></th>
+						<th><?php echo lang('name') ;?></th>
+						<th><?php echo lang('user') ;?></th>
+						<th><?php echo lang('action') ;?></th>
 					</tr>
 					</thead>					
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td><?=$row->name ?></td>
-							<td align="right"><?=$row->locktouser ?></td>
-							<td align="right"><?=anchor_image('table/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('table/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td><?php echo $row->name ?></td>
+							<td align="right"><?php echo $row->locktouser ?></td>
+							<td align="right"><?php echo anchor_image('table/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('table/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>

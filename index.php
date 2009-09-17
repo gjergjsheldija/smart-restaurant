@@ -36,9 +36,6 @@ require_once(ROOTDIR."/includes.php");
 require(ROOTDIR."/conf/config.inc.php");
 require(ROOTDIR."/conf/config.constants.inc.php");
 
-header ("Expires: " . gmdate("D, d M Y H:i:s", time()) . " GMT");
-header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-
 common_set_error_reporting ();
 
 if(isset($_SESSION['section']) && $_SESSION['section']!="admin"){
@@ -46,9 +43,14 @@ if(isset($_SESSION['section']) && $_SESSION['section']!="admin"){
 	$_SESSION['section']="admin";
 }
 
+header ("Expires: " . gmdate("D, d M Y H:i:s", time()) . " GMT");
+header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+
 if(!$link = @mysql_pconnect ($cfgserver, $cfguser, $cfgpassword)) {
 	die('Error connecting to the db');
 }
+
+date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));
 
 $_SESSION['common_db']=$db_common;
 
@@ -59,7 +61,6 @@ start_language ();
 if (floor(phpversion()) < 5) {
 	die ('Smart Restaurant requires PHP version 5 or higher.  After you have satisfied this, you can try re-installing.');
 }
-
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>

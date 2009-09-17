@@ -37,8 +37,8 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?=anchor_image(site_url()."/bankaccount/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h2>
-				<?=form_open('bankaccount/report_actual');?>
+				<h2><?php echo lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?php echo anchor_image(site_url()."/bankaccount/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h2>
+				<?php echo form_open('bankaccount/report_actual');?>
 				<br /><br />
 				<table class="zebra">
 					<colgroup>
@@ -49,10 +49,10 @@ $( function(){
 					</colgroup>				
 					<thead>
 						<tr>
-							<th><?=lang('bank'); ?></th>
-							<th><?=lang('account'); ?></th>
-							<th><?=lang('account_nr'); ?></th>
-							<th align="right"><?=lang('amount'); ?></th>
+							<th><?php echo lang('bank'); ?></th>
+							<th><?php echo lang('account'); ?></th>
+							<th><?php echo lang('account_nr'); ?></th>
+							<th align="right"><?php echo lang('amount'); ?></th>
 						</tr>
 					</thead>
 				<?php 
@@ -61,14 +61,14 @@ $( function(){
 					$total += $row->amount;
 				?>
 					<tr>
-						<td><?=$row->bank;?></td>
-						<td><?=$row->name;?></td>
-						<td><?=$row->number;?></td>
-						<td align="right"><?=$row->amount;?></td>
+						<td><?php echo $row->bank;?></td>
+						<td><?php echo $row->name;?></td>
+						<td><?php echo $row->number;?></td>
+						<td align="right"><?php echo $row->amount;?></td>
 					</tr>
 				<?php } ?>	
 				<tr><td colspan="4"></td></tr>
-				<tr><td colspan="4" align="right"><strong><?=lang('total'); ?> : <?=$total; ?></strong></td></tr>
+				<tr><td colspan="4" align="right"><strong><?php echo lang('total'); ?> : <?php echo $total; ?></strong></td></tr>
 				</table>
 				</form>
 			</div>	

@@ -65,14 +65,15 @@ function check_db_status () {
 }
 
 function eq_to_number ($eq) {
+	
 	if(CONF_DEBUG_DISABLE_FUNCTION_INSERT) return $eq;
 	
 	$eq=trim($eq);
-	
+	echo $eq . "------------------------";
 	if ($eq==='') return 0;
 	
 	$eq=ereg_replace(',','.',$eq);
-	$eq=ereg_replace('[^-|(|)|0-9|+|*|/|.]','',$eq);
+	$eq=preg_replace('/[^-|(|)|0-9|+|*|/|.]/','',$eq);
 	
 	while(ereg('^[^0-9|(|.|-]',$eq)) $eq = substr($eq,1);
 	while(ereg('[^0-9|)]$',$eq)) $eq = substr($eq,0,-1);
@@ -749,7 +750,7 @@ function debug_msg($file,$line,$msg){
 	if(!CONF_DEBUG) return 0;
 	
 	$filename = DEBUG_FILE;
-	
+	date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));	
 	$tmp=date("j/n/Y G:i:s",time());
 	
 	$tmp.=" Table: ".$_SESSION['tablenum'];

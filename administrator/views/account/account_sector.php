@@ -41,8 +41,8 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('tot_by_sect'); ?></h2>
-				<?=form_open('account/report_sector');?>
+				<h2><?php echo lang('tot_by_sect'); ?></h2>
+				<?php echo form_open('account/report_sector');?>
 				<?php
 				$tmp_from = isset($dt_from) ? $dt_from : date('Y-m-d');
 				$tmp_to = isset($dt_to) ? $dt_to : date('Y-m-d');
@@ -60,10 +60,10 @@ $( function(){
 				?>
 				<table>
 					<tr>
-						<td><?=lang('from'); ?> : <?=form_input($date_from) ?></td>
-						<td><?=lang('to'); ?> : <?=form_input($date_to) ?></td>
-						<td><input type="submit" value="<?=lang('show'); ?>"></td>
-						<td align="right"><?=anchor_image(site_url()."/account/report_sector_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
+						<td><?php echo lang('from'); ?> : <?php echo form_input($date_from) ?></td>
+						<td><?php echo lang('to'); ?> : <?php echo form_input($date_to) ?></td>
+						<td><input type="submit" value="<?php echo lang('show'); ?>"></td>
+						<td align="right"><?php echo anchor_image(site_url()."/account/report_sector_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
 					</tr>
 				</table>
 				<br /><br />		
@@ -80,15 +80,15 @@ $( function(){
 									</colgroup>
 									<thead>
 										<tr>
-											<th  align="left"><?=lang('sector'); ?></th>
-											<th  align="right"><?=lang('amount'); ?></th>
+											<th  align="left"><?php echo lang('sector'); ?></th>
+											<th  align="right"><?php echo lang('amount'); ?></th>
 										</tr>
 									</thead>	
 							<?php		
 								}						
 							?>		<tr>
-										<td align="left"><?=$row->name ?></td>
-										<td align="right"><?=$row->shuma ?></td>
+										<td align="left"><?php echo $row->name ?></td>
+										<td align="right"><?php echo $row->shuma ?></td>
 									</tr>
 							<?php 
 								if(!isset($totalSector[$row->name]))
@@ -104,7 +104,7 @@ $( function(){
 							}; ?>
 						</table>
 						<br>
-						<div align="left"><strong><?=lang('tot_by_sect'); ?></strong><hr width="300">
+						<div align="left"><strong><?php echo lang('tot_by_sect'); ?></strong><hr width="300">
 						<table width="300">
 						<?php foreach($totalSector as $sector => $value) {
 							echo '<tr><td align="left">' . $sector . '</td><td align="right">' . $value . '</td></tr>';
@@ -117,7 +117,7 @@ $( function(){
 			</div>
 			<div class="Right">	
 				<br><br><br><br><br><br>
-				<div align="left"><strong><?=lang('tot_dish'); ?></strong><hr width="300">
+				<div align="left"><strong><?php echo lang('tot_dish'); ?></strong><hr width="300">
 				<table width="300" class="zebra">
 				<?php 
 				foreach( $sector_numdish as $dish ) {

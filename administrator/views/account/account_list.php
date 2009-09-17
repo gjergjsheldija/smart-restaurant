@@ -47,9 +47,9 @@ $( function(){
 		<div class="col">
 			<div class="Left">
 			<?php if($acctype == 'ap') { ?>
-				<h2><?=lang('ap'); ?> :: <?=anchor('account/newAccount/ap',lang('new_ap')) ?></h2>
+				<h2><?php echo lang('ap'); ?> :: <?php echo anchor('account/newAccount/ap',lang('new_ap')) ?></h2>
 			<?php } elseif($acctype == 'ar') { ?>
-				<h2><?=lang('ar'); ?> :: <?=anchor('account/newAccount/ar',lang('new_ar')) ?></h2>
+				<h2><?php echo lang('ar'); ?> :: <?php echo anchor('account/newAccount/ar',lang('new_ar')) ?></h2>
 			<?php } ?>
 				<div class="basic" style="float:left;"  id="tabelapare">
 						<?php 
@@ -69,19 +69,19 @@ $( function(){
 								</colgroup>
 								<thead>
 									<tr>
-										<th><?=lang('date'); ?></th>
-										<th><?=lang('cash'); ?></th>
-										<th><?=lang('bank'); ?></th>
-										<th><?=lang('paid'); ?></th>
+										<th><?php echo lang('date'); ?></th>
+										<th><?php echo lang('cash'); ?></th>
+										<th><?php echo lang('bank'); ?></th>
+										<th><?php echo lang('paid'); ?></th>
 									</tr>
 								</thead>	
 						<?php		
 							}						
 						?>		<tr>
-									<td><?=$row->date ?></td>
-									<td align="right"><?=$row->cash_amount ?></td>									
-									<td align="right"><?=$row->bank_amount ?></td>									
-									<td align="right"><?=$row->paid == 1 ? lang('yes') : lang('no')?></td>									
+									<td><?php echo $row->date ?></td>
+									<td align="right"><?php echo $row->cash_amount ?></td>									
+									<td align="right"><?php echo $row->bank_amount ?></td>									
+									<td align="right"><?php echo $row->paid == 1 ? lang('yes') : lang('no')?></td>									
 								</tr>
 						<?php 
 							$kot = $query->next_row();
@@ -94,7 +94,7 @@ $( function(){
 						?>
 					</table>
 					<hr>
-				<div align="right"><strong><?=lang('total')?> : <?=$total ?></strong></div>					
+				<div align="right"><strong><?php echo lang('total')?> : <?php echo $total ?></strong></div>					
 			</div>	
 			</div>
 			<div class="Right">				

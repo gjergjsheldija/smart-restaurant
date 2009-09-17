@@ -26,27 +26,27 @@
  */
 ?>
 <?php if( isset($edit) ) { ?>
-<?=form_open('table/save');?>
+<?php echo form_open('table/save');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('info_table') ;?></h2>
+			<h2><?php echo lang('info_table') ;?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id',$edit[0]->id) ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name',$edit[0]->name); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('order_nr'));?> :</td>
-			<td><?=form_input('ordernum',$edit[0]->ordernum);?></td>
+			<td><?php echo form_label(lang('order_nr'));?> :</td>
+			<td><?php echo form_input('ordernum',$edit[0]->ordernum);?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('visible'));?> :</td>
-			<td><?=form_checkbox('visible',1,$edit[0]->visible); ?></td>
+			<td><?php echo form_label(lang('visible'));?> :</td>
+			<td><?php echo form_checkbox('visible',1,$edit[0]->visible); ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -65,34 +65,34 @@
 			</td>
 		</tr>		
 		<tr>
-			<td><input type="submit" value="<?=lang('save') ;?>"></td>
+			<td><input type="submit" value="<?php echo lang('save') ;?>"></td>
 			<td></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } elseif( isset($newtable) ) {?>
-<?=form_open('table/addnew');?>
+<?php echo form_open('table/addnew');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('new_table') ;?></h2>
+			<h2><?php echo lang('new_table') ;?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id') ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name'); ?></td>
+			<td><?php echo form_hidden('id') ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('order_nr'));?> :</td>
-			<td><?=form_input('ordernum');?></td>
+			<td><?php echo form_label(lang('order_nr'));?> :</td>
+			<td><?php echo form_input('ordernum');?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('visible'));?> :</td>
-			<td><?=form_checkbox('visible',1); ?></td>
+			<td><?php echo form_label(lang('visible'));?> :</td>
+			<td><?php echo form_checkbox('visible',1); ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">
@@ -108,7 +108,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save') ;?>"></td>
+			<td><input type="submit" value="<?php echo lang('save') ;?>"></td>
 			<td></td>
 		</tr>
 	</tbody>

@@ -40,7 +40,7 @@
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('bank_account'); ?> :: <?=anchor('bankaccount/newBankMovement',lang('new_movement')) ?></h2>
+				<h2><?php echo lang('bank_account'); ?> :: <?php echo anchor('bankaccount/newBankMovement',lang('new_movement')) ?></h2>
 				<div class="basic" style="float:left;"  id="tabelapare">
 						<?php 
 						$tmp = "";
@@ -56,15 +56,15 @@
 								</colgroup>
 								<thead>
 									<tr>
-										<th class="sortable"><?=lang('description'); ?></th>
-										<th class="sortable"><?=lang('amount'); ?></th>
+										<th class="sortable"><?php echo lang('description'); ?></th>
+										<th class="sortable"><?php echo lang('amount'); ?></th>
 									</tr>
 								</thead>	
 						<?php		
 							}						
 						?>		<tr>
-									<td><?=$row->description ?></td>
-									<td align="right"><?=$row->amount ?></td>
+									<td><?php echo $row->description ?></td>
+									<td align="right"><?php echo $row->amount ?></td>
 								</tr>
 						<?php 
 							$kot = $query->next_row();
@@ -77,7 +77,7 @@
 						?>
 					</table>
 					<hr>
-				<div align="right"><strong><?=lang('total'); ?> : <?=$total ?></strong></div>						
+				<div align="right"><strong><?php echo lang('total'); ?> : <?php echo $total ?></strong></div>						
 			</div>	
 			</div>
 			<div class="Right">				

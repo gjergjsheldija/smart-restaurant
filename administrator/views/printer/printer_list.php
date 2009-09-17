@@ -37,7 +37,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('printers') ?> :: <?=anchor('printer/newPrinter',lang('new_printer')) ?></h2>
+				<h2><?php echo lang('printers') ?> :: <?php echo anchor('printer/newPrinter',lang('new_printer')) ?></h2>
 					<table id="printerTable" class="zebra">
 					<colgroup>
 						<col style='width:5%;' />
@@ -47,21 +47,21 @@ $( function(){
 					</colgroup>
 					<thead>
 					<tr>
-						<th><?=lang('name') ?></th>
-						<th><?=lang('system_name') ?></th>
-						<th><?=lang('driver') ?></th>
-						<th><?=lang('action') ?></th>
+						<th><?php echo lang('name') ?></th>
+						<th><?php echo lang('system_name') ?></th>
+						<th><?php echo lang('driver') ?></th>
+						<th><?php echo lang('action') ?></th>
 					</tr>
 					</thead>					
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td><?=$row->name ?></td>
-							<td align="right"><?=$row->dest ?></td>
-							<td align="right"><?=$row->driver ?></td>
-							<td align="right"><?=anchor_image('printer/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('printer/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td><?php echo $row->name ?></td>
+							<td align="right"><?php echo $row->dest ?></td>
+							<td align="right"><?php echo $row->driver ?></td>
+							<td align="right"><?php echo anchor_image('printer/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('printer/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>

@@ -26,7 +26,7 @@
  */
 ?>
 <?php if(isset($dish_list)) { ?>
-	<h2><?=lang('dishes') ?></h2>
+	<h2><?php echo lang('dishes') ?></h2>
 	<div class="basic" style="float:left;"  id="secondtable">
 		<table class="zebra">
 			<colgroup>
@@ -36,18 +36,18 @@
 			</colgroup>
 			<thead>
 				<tr>
-					<th><?=lang('name'); ?></th>
-					<th><?=lang('quantity'); ?></th>
-					<th><?=lang('uom'); ?></th>
+					<th><?php echo lang('name'); ?></th>
+					<th><?php echo lang('quantity'); ?></th>
+					<th><?php echo lang('uom'); ?></th>
 				</tr>
 			</thead>
 	<?php 
 	$tmp = "";
 	foreach($dish_list->result() as $row) {	?>
 			<tr>
-				<td><?=anchor('dish/edit/'.$row->id,$row->name); ?></td>					
-				<td align="right"><?=$row->quantity; ?></td>
-				<td align="right"><?=$row->unit_type == '2' ? 'lt' : 'kg' ;; ?></td>
+				<td><?php echo anchor('dish/edit/'.$row->id,$row->name); ?></td>					
+				<td align="right"><?php echo $row->quantity; ?></td>
+				<td align="right"><?php echo $row->unit_type == '2' ? 'lt' : 'kg' ;; ?></td>
 			</tr>
 	<?php 
 		$row = $query->next_row();

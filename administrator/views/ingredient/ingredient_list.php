@@ -49,7 +49,7 @@ $( function(){
 		<div class="contentLeft">
 		<div class="col">
 			<div class="Left">
-				<h2><?=lang('ingredients') ?> :: <?=anchor('ingredient/newIngredient',lang('new_ingredient')) ?></h2>
+				<h2><?php echo lang('ingredients') ?> :: <?php echo anchor('ingredient/newIngredient',lang('new_ingredient')) ?></h2>
 				<div class="basic" style="float:left;"  id="firsttable">
 				<?php 
 				$tmp = "";
@@ -65,20 +65,20 @@ $( function(){
 						</colgroup>
 						<thead>
 							<tr>
-								<th><?=lang('name'); ?></th>
-								<th><?=lang('price'); ?></th>							
-								<th><?=lang('sell_price'); ?></th>
-								<th><?=lang('action'); ?></th>
+								<th><?php echo lang('name'); ?></th>
+								<th><?php echo lang('price'); ?></th>							
+								<th><?php echo lang('sell_price'); ?></th>
+								<th><?php echo lang('action'); ?></th>
 							</tr>
 						</thead>
 					<?php		
 					}						
 					?>	
 						<tr>
-							<td><?=$row->name ?></td>					
-							<td align="right"><?=$row->price ?></td>
-							<td align="right"><?=$row->sell_price?></td>
-							<td align="right"><?=anchor_image('ingredient/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?=anchor_image('ingredient/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td><?php echo $row->name ?></td>					
+							<td align="right"><?php echo $row->price ?></td>
+							<td align="right"><?php echo $row->sell_price?></td>
+							<td align="right"><?php echo anchor_image('ingredient/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('ingredient/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
 						</tr>
 				<?php 
 					$rowtmp = $query->next_row();

@@ -29,15 +29,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<link type="text/css" rel="stylesheet" href="<?=base_url(); ?>../min/?g=admincss" />
-<script type="text/javascript" src="<?=base_url(); ?>../min/?g=adminjs"></script>
+<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>../min/?g=admincss" />
+<script type="text/javascript" src="<?php echo base_url(); ?>../min/?g=adminjs"></script>
 </head>
 <body>
 
-<?=$this->load->view('menu');?>
+<?php echo $this->load->view('menu');?>
 <?php if(isset($body)) echo $body; else echo '';?>
     <div id="footer"><hr>
-      <a id="smartpowered" href="http://smartres.sourceforge.net/"><img src="<?=$this->config->site_url();?>/../../images/administrator/logo_menu.png" alt="logo" height="35" width="60"></a>
+      <a id="smartpowered" href="http://smartres.sourceforge.net/"><img src="<?php echo $this->config->site_url();?>/../../images/administrator/logo_menu.png" alt="logo" height="35" width="60"></a>
       <p class="left">
       <br />
         Powered by <a href="http://smartres.sourceforge.net/"><strong>Smart Restaurant</strong></a>.

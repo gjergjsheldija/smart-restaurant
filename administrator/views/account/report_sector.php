@@ -107,8 +107,8 @@ tfoot th em {
 </style>
 </head>
 <body>
-<h2><?=lang('tot_by_sect'); ?></h2>
-<h5><?=lang('from'); ?> : <?=$dt_from; ?>  <?=lang('to'); ?> : <?=$dt_to; ?></h5>
+<h2><?php echo lang('tot_by_sect'); ?></h2>
+<h5><?php echo lang('from'); ?> : <?php echo $dt_from; ?>  <?php echo lang('to'); ?> : <?php echo $dt_to; ?></h5>
 <?php 
 $tmp = "";
 $totalSector = array();
@@ -118,15 +118,15 @@ foreach($sector_movements->result() as $row) {
 	<table width="100%">
 		<thead>
 			<tr>
-				<th align="left"><?=lang('sector'); ?></th>
-				<th align="right"><?=lang('amount'); ?></th>
+				<th align="left"><?php echo lang('sector'); ?></th>
+				<th align="right"><?php echo lang('amount'); ?></th>
 			</tr>
 		</thead>	
 <?php		
 	}						
 ?>		<tr>
-			<td align="left"><?=$row->name ?></td>
-			<td align="right"><?=$row->shuma ?></td>
+			<td align="left"><?php echo $row->name ?></td>
+			<td align="right"><?php echo $row->shuma ?></td>
 		</tr>
 <?php 
 	if(!isset($totalSector[$row->name]))
@@ -153,8 +153,8 @@ foreach($sector_movements->result() as $row) {
 <table style="PAGE-BREAK-BEFORE: always; WIDTH: 100%;border:0px" align="center">
 <tr><td></td></tr>
 </table>
-	<h2><?=lang('tot_dish'); ?></h2>
-	<h5><?=lang('from'); ?> : <?=$dt_from; ?> <?=lang('to'); ?> : <?=$dt_to; ?></h5>
+	<h2><?php echo lang('tot_dish'); ?></h2>
+	<h5><?php echo lang('from'); ?> : <?php echo $dt_from; ?> <?php echo lang('to'); ?> : <?php echo $dt_to; ?></h5>
 	<table width="100%">
 		<?php 
 		foreach( $sector_numdish as $dish ) {

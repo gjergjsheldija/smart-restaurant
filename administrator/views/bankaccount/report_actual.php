@@ -107,7 +107,7 @@ tfoot th em {
 </style>
 </head>
 <body>
-<h2><?=lang('actual'); ?></h2>
+<h2><?php echo lang('actual'); ?></h2>
 <br /><br />
 <table>
 	<colgroup>
@@ -118,10 +118,10 @@ tfoot th em {
 	</colgroup>				
 	<thead>
 		<tr>
-			<th><?=lang('bank'); ?></th>
-			<th><?=lang('account'); ?></th>
-			<th><?=lang('account_nr'); ?></th>
-			<th align="right"><?=lang('amount'); ?></th>
+			<th><?php echo lang('bank'); ?></th>
+			<th><?php echo lang('account'); ?></th>
+			<th><?php echo lang('account_nr'); ?></th>
+			<th align="right"><?php echo lang('amount'); ?></th>
 		</tr>
 	</thead>
 <?php 
@@ -130,14 +130,14 @@ tfoot th em {
 	$total += $row->amount;
 ?>
 	<tr>
-		<td><?=$row->bank;?></td>
-		<td><?=$row->name;?></td>
-		<td><?=$row->number;?></td>
-		<td align="right"><?=$row->amount;?></td>
+		<td><?php echo $row->bank;?></td>
+		<td><?php echo $row->name;?></td>
+		<td><?php echo $row->number;?></td>
+		<td align="right"><?php echo $row->amount;?></td>
 	</tr>
 <?php } ?>	
 <tr><td colspan="4"></td></tr>
-<tr><td colspan="4" align="right"><strong><?=lang('total'); ?> : <?=$total; ?></strong></td></tr>
+<tr><td colspan="4" align="right"><strong><?php echo lang('total'); ?> : <?php echo $total; ?></strong></td></tr>
 </table>
 <script type="text/php">
   if ( isset($pdf) ) {

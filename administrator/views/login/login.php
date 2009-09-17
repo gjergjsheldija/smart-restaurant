@@ -29,22 +29,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Smart Restaurant</title>
-<?=link_tag('../css/login.css') ?>
+<?php echo link_tag('../css/login.css') ?>
 <meta name="language" content="<?php echo $this->lang->line('setting_short_language');?>" />
 </head>
 <body class="login">
 <div class="Container">
 <div id="Dialog">
 <h1>Login</h1>
-<?=form_open('login/dologin');?>
+<?php echo form_open('login/dologin');?>
 	<?php
 	if(isset($message)) 
 		echo '<p align="center"><strong><font color="#990000">Error, please try again!</font></strong></p>';
 	?>
 	<dl>
-		<dt><?=lang('username') ;?>:</dt>
+		<dt><?php echo lang('username') ;?>:</dt>
 		<dd><input name="username" type="text" id="username" value="" /></dd>
-		<dt><?=lang('password') ;?>:</dt>
+		<dt><?php echo lang('password') ;?>:</dt>
 		<dd><input name="password" type="password" id="password" value="" /></dd>
 		<dd> <input type="submit" value="login" /></dd>
 	</dl>

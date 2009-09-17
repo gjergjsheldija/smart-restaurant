@@ -26,100 +26,100 @@
  */
 ?>
 <?php if( isset($edit) ) { ?>
-<?=form_open('printer/save');?>
+<?php echo form_open('printer/save');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('info_printer'); ?></h2>
+			<h2><?php echo lang('info_printer'); ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id',$edit[0]->id) ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name',$edit[0]->name); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('system_name'));?> :</td>
-			<td><?=form_input('dest',$edit[0]->dest); ?></td>
+			<td><?php echo form_label(lang('system_name'));?> :</td>
+			<td><?php echo form_input('dest',$edit[0]->dest); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('driver'));?> :</td>
-			<td><?=form_dropdown('driver',$driver,$edit[0]->driver); ?></td>
+			<td><?php echo form_label(lang('driver'));?> :</td>
+			<td><?php echo form_dropdown('driver',$driver,$edit[0]->driver); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('template'));?> :</td>
-			<td><?=form_dropdown('template',$template,$edit[0]->template); ?></td>
+			<td><?php echo form_label(lang('template'));?> :</td>
+			<td><?php echo form_dropdown('template',$template,$edit[0]->template); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('destination'));?> :</td>
-			<td><?=form_input('dest_ip',$edit[0]->dest_ip); ?></td>
+			<td><?php echo form_label(lang('destination'));?> :</td>
+			<td><?php echo form_input('dest_ip',$edit[0]->dest_ip); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('print_bill'));?> :</td>
-			<td><?=form_checkbox('bill',1,$edit[0]->bill); ?></td>
+			<td><?php echo form_label(lang('print_bill'));?> :</td>
+			<td><?php echo form_checkbox('bill',1,$edit[0]->bill); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('print_invoice'));?> :</td>
-			<td><?=form_checkbox('invoice',1,$edit[0]->invoice); ?></td>
+			<td><?php echo form_label(lang('print_invoice'));?> :</td>
+			<td><?php echo form_checkbox('invoice',1,$edit[0]->invoice); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('print_receipt'));?> :</td>
-			<td><?=form_checkbox('receipt',1,$edit[0]->receipt); ?></td>
+			<td><?php echo form_label(lang('print_receipt'));?> :</td>
+			<td><?php echo form_checkbox('receipt',1,$edit[0]->receipt); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save') ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>
 </table>
 </form>
 <?php } elseif( isset($newprinter) ) {?>
-<?=form_open('printer/addnew');?>
+<?php echo form_open('printer/addnew');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('new_printer') ?></h2>
+			<h2><?php echo lang('new_printer') ?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name'); ?></td>
+			<td><?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('system_name'));?> :</td>
-			<td><?=form_input('dest'); ?></td>
+			<td><?php echo form_label(lang('system_name'));?> :</td>
+			<td><?php echo form_input('dest'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('driver'));?> :</td>
-			<td><?=form_dropdown('driver', $driver); ?></td>
+			<td><?php echo form_label(lang('driver'));?> :</td>
+			<td><?php echo form_dropdown('driver', $driver); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('template'));?> :</td>
-			<td><?=form_dropdown('template', $template); ?></td>
+			<td><?php echo form_label(lang('template'));?> :</td>
+			<td><?php echo form_dropdown('template', $template); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('destination'));?> :</td>
-			<td><?=form_input('dest_ip'); ?></td>
+			<td><?php echo form_label(lang('destination'));?> :</td>
+			<td><?php echo form_input('dest_ip'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('print_bill'));?> :</td>
-			<td><?=form_checkbox('bill',1); ?></td>
+			<td><?php echo form_label(lang('print_bill'));?> :</td>
+			<td><?php echo form_checkbox('bill',1); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('print_invoice'));?> :</td>
-			<td><?=form_checkbox('invoice',1); ?></td>
+			<td><?php echo form_label(lang('print_invoice'));?> :</td>
+			<td><?php echo form_checkbox('invoice',1); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('print_receipt'));?> :</td>
-			<td><?=form_checkbox('receipt',1); ?></td>
+			<td><?php echo form_label(lang('print_receipt'));?> :</td>
+			<td><?php echo form_checkbox('receipt',1); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save') ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>

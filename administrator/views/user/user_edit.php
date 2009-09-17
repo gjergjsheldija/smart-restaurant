@@ -26,86 +26,86 @@
  */
 ?>
 <?php if( isset($edit) ) { ?>
-<?=form_open('user/save');?>
+<?php echo form_open('user/save');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('user_info');?></h2>
+			<h2><?php echo lang('user_info');?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_hidden('id',$edit[0]->id) ?> <?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name',$edit[0]->name); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('password'));?> <?=form_hidden('oldpass',$edit[0]->password) ?>:</td>
-			<td><?=form_password('password'); ?></td>
+			<td><?php echo form_label(lang('password'));?> <?php echo form_hidden('oldpass',$edit[0]->password) ?>:</td>
+			<td><?php echo form_password('password'); ?></td>
 		</tr>		
 		<tr>
-			<td><?=form_label(lang('administrator'));?> :</td>
+			<td><?php echo form_label(lang('administrator'));?> :</td>
 			<?php $admin = $edit[0]->level == '1022' ? TRUE : FALSE ?>
-			<td><?=form_checkbox('administrator','admin', $admin); ?></td>
+			<td><?php echo form_checkbox('administrator','admin', $admin); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('waiter'));?> :</td>
+			<td><?php echo form_label(lang('waiter'));?> :</td>
 			<?php $waiter = $edit[0]->level == '515' ? TRUE : FALSE ?>
-			<td><?=form_checkbox('waiter','waiter', $waiter); ?></td>
+			<td><?php echo form_checkbox('waiter','waiter', $waiter); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('access'));?> :</td>
-			<td><?=form_dropdown('dest_type',$dest_type,$edit[0]->dest_type); ?></td>
+			<td><?php echo form_label(lang('access'));?> :</td>
+			<td><?php echo form_dropdown('dest_type',$dest_type,$edit[0]->dest_type); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('template'));?> :</td>
-			<td><?=form_dropdown('template',$template,$edit[0]->template); ?></td>
+			<td><?php echo form_label(lang('template'));?> :</td>
+			<td><?php echo form_dropdown('template',$template,$edit[0]->template); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save');?>"></td>
+			<td><input type="submit" value="<?php echo lang('save');?>"></td>
 			<td></td>
 		</tr>
 	</tbody>
 </table>
 </form>
 <?php } elseif( isset($newuser) ) {?>
-<?=form_open('user/addnew');?>
+<?php echo form_open('user/addnew');?>
 <table>
 	<thead>
 		<tr>
 			<th colspan="2">
-			<h2><?=lang('new_user');?></h2>
+			<h2><?php echo lang('new_user');?></h2>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><?=form_label(lang('name'));?> :</td>
-			<td><?=form_input('name'); ?></td>
+			<td><?php echo form_label(lang('name'));?> :</td>
+			<td><?php echo form_input('name'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('password'));?>:</td>
-			<td><?=form_password('password'); ?></td>
+			<td><?php echo form_label(lang('password'));?>:</td>
+			<td><?php echo form_password('password'); ?></td>
 		</tr>		
 		<tr>
-			<td><?=form_label(lang('administrator'));?> :</td>
-			<td><?=form_checkbox('administrator','admin'); ?></td>
+			<td><?php echo form_label(lang('administrator'));?> :</td>
+			<td><?php echo form_checkbox('administrator','admin'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('waiter'));?> :</td>
-			<td><?=form_checkbox('waiter','waiter'); ?></td>
+			<td><?php echo form_label(lang('waiter'));?> :</td>
+			<td><?php echo form_checkbox('waiter','waiter'); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('access'));?> :</td>
-			<td><?=form_dropdown('dest_type',$dest_type); ?></td>
+			<td><?php echo form_label(lang('access'));?> :</td>
+			<td><?php echo form_dropdown('dest_type',$dest_type); ?></td>
 		</tr>
 		<tr>
-			<td><?=form_label(lang('template'));?> :</td>
-			<td><?=form_dropdown('template',$template); ?></td>
+			<td><?php echo form_label(lang('template'));?> :</td>
+			<td><?php echo form_dropdown('template',$template); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?=lang('save') ?>"></td>
+			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
 		</tr>
 	</tbody>

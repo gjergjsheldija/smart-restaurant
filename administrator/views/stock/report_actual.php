@@ -107,8 +107,8 @@ tfoot th em {
 </style>
 </head>
 <body>
-<h2><?=lang('actual_state'); ?></h2>
-<?=form_open('stock/report_actual');?>
+<h2><?php echo lang('actual_state'); ?></h2>
+<?php echo form_open('stock/report_actual');?>
 <br /><br />
 <table>
 	<colgroup>
@@ -119,10 +119,10 @@ tfoot th em {
 	</colgroup>				
 	<thead>
 		<tr>
-			<th><?=lang('name'); ?></th>
-			<th align="right"><?=lang('quantity'); ?></th>
-			<th align="right"><?=lang('uom'); ?></th>
-			<th align="right"><?=lang('amount'); ?></th>
+			<th><?php echo lang('name'); ?></th>
+			<th align="right"><?php echo lang('quantity'); ?></th>
+			<th align="right"><?php echo lang('uom'); ?></th>
+			<th align="right"><?php echo lang('amount'); ?></th>
 		</tr>
 	</thead>
 <?php 
@@ -131,8 +131,8 @@ tfoot th em {
 	$total += $row->value;
 ?>
 	<tr>
-		<td><?=$row->name;?></td>
-		<td align="right"><?=$row->quantity;?></td>
+		<td><?php echo $row->name;?></td>
+		<td align="right"><?php echo $row->quantity;?></td>
 		<td align="right"><?php 
 		switch( $row->unit_type ) {
 			case 0;
@@ -146,11 +146,11 @@ tfoot th em {
 				break;
 		}
 		?></td>
-		<td align="right"><?=$row->value;?></td>
+		<td align="right"><?php echo $row->value;?></td>
 	</tr>
 <?php } ?>	
 <tr><td colspan="4"></td></tr>
-<tr><td colspan="4" align="right"><strong><?=lang('total'); ?> : <?=$total; ?></strong></td></tr>
+<tr><td colspan="4" align="right"><strong><?php echo lang('total'); ?> : <?php echo $total; ?></strong></td></tr>
 </table>
 <script type="text/php">
   if ( isset($pdf) ) {
