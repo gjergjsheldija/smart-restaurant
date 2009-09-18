@@ -47,6 +47,7 @@ $lang['pieces']				= "pc";
 //login
 $lang['username']			= "Username";
 $lang['password']			= "Password";
+$lang['language']			= "Language";
 
 //menu
 $lang['general']			= "General";

@@ -57,7 +57,7 @@
 			<td><?php echo form_upload('image',$edit[0]->image); ?></td>
 		</tr>
 		<tr>
-			<td><?php echo isset($edit[0]->image) ? img('../'.$edit[0]->image) : 'nuk ka'; ?></td>
+			<td><?php echo isset($edit[0]->image) ? img('../'.$edit[0]->image) : lang('no_info'); ?></td>
 			<td></td>
 		</tr>
 		<tr>

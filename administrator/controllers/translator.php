@@ -173,6 +173,11 @@ class Translator extends Controller {
 		$this->load->helper(array('form', 'url', 'file', 'html','language' ));
 		$this->langDirs = array( BASEPATH . 'language', APPPATH . 'language' );
 		$this->data[ 'postUniquifier' ] = $this->postUniquifier;
+		
+		$language = $this->session->userdata('language');
+		if($language == '' ) $language = 'english';
+		$this->lang->load('smartrestaurant', $language);		
+		
 		$this->_configure();
 		if($this->config->item('enable_app_debug'))
 			$this->output->enable_profiler(TRUE);

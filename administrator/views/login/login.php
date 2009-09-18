@@ -46,7 +46,9 @@
 		<dd><input name="username" type="text" id="username" value="" /></dd>
 		<dt><?php echo lang('password') ;?>:</dt>
 		<dd><input name="password" type="password" id="password" value="" /></dd>
-		<dd> <input type="submit" value="login" /></dd>
+		<dt><?php echo lang('language') ;?>:</dt>
+		<dd><select name="language"><?php echo $langDropDown;?></select></dd>	
+		<dd><input type="submit" value="login" /></dd>
 	</dl>
 </form>
 </div>

@@ -32,6 +32,10 @@ class Main extends Controller {
 		$this->load->helper('html');
 		$this->load->helper('MY_url_helper');
 		$this->load->helper('language');	
+		
+		$language = $this->session->userdata('language');
+		if($language == '' ) $language = 'english';
+		$this->lang->load('smartrestaurant', $language);
 	}
 
 	function index() {

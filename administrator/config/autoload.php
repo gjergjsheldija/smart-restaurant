@@ -63,7 +63,7 @@ $autoload['helper'] = array('url', 'file', 'form');
 |	$autoload['plugin'] = array('captcha', 'js_calendar');
 */
 
-$autoload['plugin'] = array('js_calendar');
+//$autoload['plugin'] = array('js_calendar');
 
 
 /*
@@ -95,7 +95,7 @@ $autoload['config'] = array();
 |
 */
 
-$autoload['language'] = array('smartrestaurant');
+//$autoload['language'] = array('smartrestaurant');
 
 
 /*

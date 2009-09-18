@@ -30,31 +30,59 @@ class Login extends Controller {
 		parent::Controller();
 		$this->load->helper('html'); 
 		$this->load->helper('MY_url_helper');
+		$this->load->helper('directory');
 		$this->load->helper('language');
+		
+		$language = $this->session->userdata('language');
+		if($language == '' ) $language = 'english';
+		$this->lang->load('smartrestaurant', $language);
+		
 		if($this->config->item('enable_app_debug'))
 			$this->output->enable_profiler(TRUE);
 	}
 
 	function index() {
+		$data['langDropDown'] = $this->doLanguageDropDown();
+		
 		if ($this->site_sentry->is_logged_in()) {
 			$this->load->view('main');
 		} else {
-			$this->load->view('login/login');
+			$this->load->view('login/login',$data);
 		}
 	}
 	
 	function doLogin() {
+		if(isset($_POST['language']))
+			$this->session->set_userdata('language' , $_POST['language']);
+
 		if($this->site_sentry->login_routine()) {
 			redirect('main');
 		} else {
-			$login['message'] = "Login ka deshtuar";
+			$login['message'] = "Login Failed";
 			$this->load->view('login/login', $login);
 		}
 	}
 	
 	function doLogout() {
+		if(isset($_POST['language']))
+			$this->session->set_userdata('language' , $_POST['language']);
+		
+		$data['langDropDown'] = $this->doLanguageDropDown();
+		
 		$this->session->sess_destroy();
-		$this->load->view('login/login');
+		$this->load->view('login/login',$data);
+	}
+	
+	function doLanguageDropDown() {
+		$map = directory_map(APPPATH .'language', TRUE);
+
+		$dropDown = ''; 
+		foreach($map as $id => $langName) {
+			if($langName != 'index.html')
+				$dropDown .= '<option value="' . $langName . '">' . $langName . '</option>';
+		}
+		
+		return $dropDown;
 	}
 }
 ?>
