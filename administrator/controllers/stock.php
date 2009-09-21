@@ -28,10 +28,7 @@ class Stock extends Controller {
 
 	function __construct() {
 		parent::Controller();
-		$this->load->helper('html');
-		$this->load->helper('url');
-		$this->load->helper('MY_url_helper');
-		$this->load->helper('language');
+		$this->load->helper(array('html','url','MY_url_helper','language'));	
 		
 		$language = $this->session->userdata('language');
 		if($language == '' ) $language = 'english';

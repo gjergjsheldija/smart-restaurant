@@ -28,10 +28,7 @@ class Account extends Controller {
 
 	function __construct() {
 		parent::Controller();
-		$this->load->helper('html'); 
-		$this->load->helper('date' );
-		$this->load->helper('MY_url_helper');
-		$this->load->helper('language');
+		$this->load->helper(array('html','date','MY_url_helper','language')); 
 		
 		$language = $this->session->userdata('language');
 		if($language == '' ) $language = 'english';

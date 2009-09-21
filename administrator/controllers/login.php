@@ -28,10 +28,7 @@ class Login extends Controller {
 
 	function __construct() {
 		parent::Controller();
-		$this->load->helper('html'); 
-		$this->load->helper('MY_url_helper');
-		$this->load->helper('directory');
-		$this->load->helper('language');
+		$this->load->helper(array('html','directory','MY_url_helper','language'));		
 		
 		$language = $this->session->userdata('language');
 		if($language == '' ) $language = 'english';
