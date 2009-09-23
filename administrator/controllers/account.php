@@ -33,7 +33,7 @@ class Account extends Controller {
 		$language = $this->session->userdata('language');
 		if($language == '' ) $language = 'english';
 		$this->lang->load('smartrestaurant', $language);
-				
+
 		if($this->config->item('enable_app_debug'))
 			$this->output->enable_profiler(TRUE);
 	}
@@ -105,6 +105,8 @@ class Account extends Controller {
 	}
 
 	function report_actual() {
+		date_default_timezone_set($this->config->item('default_timezone'));
+		
 		$date_from = $this->input->post('date_from');
 		$date_to = $this->input->post('date_to');
 		
@@ -123,6 +125,8 @@ class Account extends Controller {
 	}
 	
 	function report_movement() {
+		date_default_timezone_set($this->config->item('default_timezone'));
+		
 		$date_from = $this->input->post('date_from');
 		$date_to = $this->input->post('date_to');
 		
@@ -140,6 +144,8 @@ class Account extends Controller {
 	}
 	
 	function report_movement_pdf() {
+		date_default_timezone_set($this->config->item('default_timezone'));		
+		
 		$this->load->plugin('to_pdf');
 		$this->load->helper('file'); 
 				
@@ -160,6 +166,9 @@ class Account extends Controller {
 	}
 	
 	function report_waiter() {
+
+		date_default_timezone_set($this->config->item('default_timezone'));
+		
 		$date_from = $this->input->post('date_from');
 		$date_to = $this->input->post('date_to');
 		
@@ -177,6 +186,8 @@ class Account extends Controller {
 	}
 	
 	function report_waiter_pdf() {
+		date_default_timezone_set($this->config->item('default_timezone'));		
+		
 		$this->load->plugin('to_pdf');
 		$this->load->helper('file'); 
 				
@@ -197,6 +208,8 @@ class Account extends Controller {
 	}
 	
 	function report_sector() {
+		date_default_timezone_set($this->config->item('default_timezone'));
+		
 		$date_from = $this->input->post('date_from');
 		$date_to = $this->input->post('date_to');
 		

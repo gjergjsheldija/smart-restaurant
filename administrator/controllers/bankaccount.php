@@ -119,6 +119,8 @@ class BankAccount extends Controller {
 	}
 
 	function report_movement() {
+		date_default_timezone_set($this->config->item('default_timezone'));
+		
 		$date_from = $this->input->post('date_from');
 		$date_to = $this->input->post('date_to');
 		

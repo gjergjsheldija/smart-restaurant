@@ -339,7 +339,7 @@ class DB {
                 
         foreach ($qtypes as $type)
         {
-            if (eregi("^$type", $sql))
+            if (preg_match("^$type^", $sql))
             {  
                 $this->affected_rows = mysql_affected_rows($this->conn_id);
                 

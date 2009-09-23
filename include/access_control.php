@@ -76,6 +76,8 @@ function access_connect_form ($url='') {
 //TODO : translate here
 //mizuko : mod for pass waiter
 function access_connect_form_waiter_pos ( $err, $url='') {
+	date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));
+	
 	switch ($err) {
 		case ERR_USER_NOT_FOUND:
 		case ERR_WRONG_PASSWORD:

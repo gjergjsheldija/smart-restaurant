@@ -595,7 +595,8 @@ INSERT INTO `conf` (`id`, `name`, `value`, `bool`, `defaultval`) VALUES
 (42, 'country', '2', 0, '90'),
 (43, 'creation_back_to_category', '0', 1, '1'),
 (44, 'rows_per_page', '60', 0, '15'),
-(45, 'default_priority', '2', 0, '0');
+(45, 'default_priority', '2', 0, '0'),
+(46, 'default_timezone', 'Europe/Rome', 0, '0');
 
 -- --------------------------------------------------------
 

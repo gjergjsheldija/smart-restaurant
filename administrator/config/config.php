@@ -324,4 +324,14 @@ $config['rewrite_short_tags'] = FALSE;
 |
 */
 $config['enable_app_debug'] = TRUE;
+
+/*
+|--------------------------------------------------------------------------
+| Enable timezone definition
+|--------------------------------------------------------------------------
+|
+| As for php 5.3 the timezone has to be defined explicitly
+|
+*/
+$config['default_timezone'] = "Pacific/Saipan";
 ?>

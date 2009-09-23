@@ -26,7 +26,7 @@
  * @package		MyHandyRestaurant
  * @copyright		Copyright 2003-2005, Fabio De Pascale
  */
-define('CONF_DEBUG',						1);	// prints all debug info in the relative file and some debug data on screen
+define('CONF_DEBUG',						0);	// prints all debug info in the relative file and some debug data on screen
 define('CONF_DEBUG_PRINT_GENERATING_TIME',			0);	// allows printing of the generating time
 define('CONF_DEBUG_REPORT_NOTICES',				0);	// uses E_ALL php error reporting
 define('CONF_DEBUG_LANG_DISABLED',				0);	// disables the language functions (both db and xml)

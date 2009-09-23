@@ -34,6 +34,7 @@ class Main extends Controller {
 		$language = $this->session->userdata('language');
 		if($language == '' ) $language = 'english';
 		$this->lang->load('smartrestaurant', $language);
+
 	}
 
 	function index() {

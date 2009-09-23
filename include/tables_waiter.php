@@ -204,6 +204,7 @@ function table_closed_interface() {
 
 function table_closed_interface_pos() {
 	global $tpl;
+	date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));
 
 	if(bill_orders_to_print ($_SESSION['sourceid'])) {
 		$_SESSION['select_all']=1;
@@ -917,7 +918,8 @@ function table_lock_remaining_time($sourceid) {
 * @return integer 0 if table is not locked, other on locke table or on mysql error
 */
 function table_lock_check($sourceid) {
-
+	date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));
+	
 	$timestamp_now=date("YmdHis",time());
 	$lock_time=get_conf(__FILE__,__LINE__,"lock_time");
 	
@@ -1147,7 +1149,7 @@ function tables_list_all_pos($cols=1,$show=0,$quiet=true){
 }
 
 function waiter_income_pos() {
-	
+	date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));	
 
 		
 	$queryUser = "SELECT `users`.name FROM `users` ";

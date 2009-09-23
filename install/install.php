@@ -1,7 +1,6 @@
 <?php
 
 error_reporting(E_ALL);
-set_magic_quotes_runtime(0);
 
 if (isset($_GET) AND count($_GET) > 0) {
 	if ( !isset($_GET['page']) OR ! is_numeric($_GET['page']) OR count($_GET) > 1) {
@@ -29,7 +28,8 @@ $data = array(
 				'username'				=> '',
 				'password'				=> '',
 				'deft_lang'				=> 'english',
-				'redirect_method'		=> 'redirect'
+				'redirect_method'		=> 'redirect',
+				'default_timezone'		=> 'Europe/Rome'
 			);
 
 foreach ($_POST as $key => $val) {
@@ -41,7 +41,7 @@ foreach ($_POST as $key => $val) {
 	}
 }
 
-if ( !ereg("/$", $data['site_url'])) {
+if ( !preg_match("/$/", $data['site_url'])) {
 	$data['site_url'] .= '/';
 }
 
@@ -289,6 +289,7 @@ elseif ($page == 5) {
                     'system_folder'         		=>  $data['system_dir'],
                     'cp_url'	            		=>  $data['cp_url'],
                     'site_url'              		=>  $data['site_url'],
+    				'default_timezone'				=>  $data['default_timezone']
                   );
 
 	
@@ -580,6 +581,20 @@ if ($errors != '') {
 <p>The name of the database where you want Smart Restaurant installed.</p>
 <p class="red">Note: The installation wizard will not create the database for you so you must specify the name of a database that exists.</p>
 <p><input type='text' name='db_name' value='<?php echo $db_name; ?>' size='40' maxlength='60' class='input' /></p>
+
+</div>
+
+<div class="shade">
+<div class="settingHead">Timezone Settings</div>
+
+<h5>Timezone Selection</h5>
+<p>Select the timezone in which you are located </p>
+
+<p>
+<select name='default_timezone' class='input'>
+<?php echo timezoneList();?>
+</select>
+</p>
 
 </div>
 
@@ -1711,6 +1726,7 @@ function mainConfig($config) {
 	$configFile .= '$config[\'compress_output\'] = FALSE;'."\n";
 	$configFile .= '$config[\'time_reference\'] = \'local\';'."\n";
 	$configFile .= '$config[\'rewrite_short_tags\'] = FALSE;'."\n";
+	$configFile .= '$config[\'default_timezone\'] = "' . $config['default_timezone'] . '";' ."\n";
 	$configFile .= "?>\n";
 			 
 	if ( ! $fp = @fopen('../administrator/config/config.php', 'wb')) {
@@ -1784,7 +1800,8 @@ $posConfig = <<<POSCFG
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
-* @package		MyHandyRestaurant
+* @package		MyHan
+dyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
 
@@ -1807,4 +1824,14 @@ POSCFG;
 	@chmod('../conf/config.inc.php', 0644);
 }
 
+function timezoneList() {
+	
+	$zones = DateTimeZone::listIdentifiers();
+	$zoneList = '';
+	foreach ($zones as $zone) {
+		$zoneList .= '<option value="' . $zone . '">' . $zone . '<option>';
+	}		
+	
+	return $zoneList;
+}
 ?>

@@ -23,11 +23,12 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 *
 * @author		Fabio 'Kilyerd' De Pascale <public@fabiolinux.com>
-* @package		MyHandyRestaurant
+* @package		MyHan
+dyRestaurant
 * @copyright		Copyright 2003-2005, Fabio De Pascale
 */
 $cfgserver='localhost';
 $cfguser='root';
 $cfgpassword='root';
-$db_common='smartrestaurant';
+$db_common='hahahahahaha';
 ?>

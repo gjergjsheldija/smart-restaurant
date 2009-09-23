@@ -169,6 +169,8 @@ class Stock extends Controller {
 	}
 
 	function report_movement() {
+		date_default_timezone_set($this->config->item('default_timezone'));
+		
 		$date_from = $this->input->post('date_from');
 		$date_to = $this->input->post('date_to');
 		
@@ -186,6 +188,8 @@ class Stock extends Controller {
 	}	
 	
 	function report_movement_pdf() {
+		date_default_timezone_set($this->config->item('default_timezone'));
+		
 		$this->load->plugin('to_pdf');
 		$this->load->helper('file'); 
 

@@ -39,5 +39,10 @@ class Configuration_Model extends Model {
 		$query = $this->db->get();		
 		return $query->result();
 	}
+	
+	function configuration_value( $configName ) {
+		$query = $this->db->get_where('conf', array('name' => $configName ));	
+		return $query->row();		
+	}
 }
 ?>
