@@ -50,9 +50,9 @@ if(!$link = @mysql_pconnect ($cfgserver, $cfguser, $cfgpassword)) {
 	die('Error connecting to the db');
 }
 
-date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));
-
 $_SESSION['common_db']=$db_common;
+
+date_default_timezone_set(get_conf(__FILE__,__LINE__,"default_timezone"));
 
 check_db_status(true);
 
