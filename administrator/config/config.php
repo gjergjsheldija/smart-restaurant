@@ -12,7 +12,11 @@
 |
 */
 //$config['base_url']	= "http://127.0.0.1/resplus/branches/resplus_ci/administrator/";
-$config['base_url']	= "http://localhost/smartres/trunk/administrator/";
+//$config['base_url']	= "http://localhost/smartres/trunk/administrator/";
+$root  = "http://".$_SERVER['HTTP_HOST'];
+$root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+
+$config['base_url'] = "$root"; 
 
 /*
 |--------------------------------------------------------------------------
