@@ -25,12 +25,6 @@
  * 
  */
 ?>
-<script type="text/javascript">
-$( function(){
-	$("table.zebra tr:even").addClass("even");
-	$("table.zebra tr:odd").addClass("odd");
-});
-</script>
 <div id="Container">
 	<div class="Full">
 		<div class="contentRight">

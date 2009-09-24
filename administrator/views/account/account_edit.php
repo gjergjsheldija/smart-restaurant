@@ -26,11 +26,12 @@
  */
 ?>
 <script type="text/javascript">
-jQuery().ready(function() {
-	$('input[@name=date]').datepicker({formatDate:'yyyy-mm-dd'});
-	$('input[@name=payment_date]').datepicker({formatDate:'yyyy-mm-dd'});
-});
-jQuery().ready(function() {
+$( function(){
+	//date and stuff
+	$('input[name=date_from]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+
+	//hide show the bank account depending on the payment type	
 	$('#payment_type > select')
 		.change( function() { 
 			if($(this).val() == 3) {
@@ -40,9 +41,9 @@ jQuery().ready(function() {
 				$('#bank_label').show();
 				$('#bank_account').show();			
 			}
-		});		
-});		
-jQuery().ready(function() {
+	});		
+
+	//final form filling check
     $("#accountsForm").validate({
 		rules: {
 			number: "required",
@@ -63,7 +64,7 @@ jQuery().ready(function() {
 			amount: "<?php echo lang('amount_missing'); ?>",
 		}
 	});
-});
+});		
 </script>	
 <style type="text/css">
 input.error { border: 1px dotted red; }

@@ -26,12 +26,11 @@
  */
 ?>
 <script type="text/javascript">
-	jQuery().ready(function(){
-		jQuery('#tabelapare').accordion({
-				header: 'div.mytitle',
-			    active: false, 
-			    alwaysOpen: false
-		});
+$( function(){
+	$('#accordion-table').accordion({
+		collapsible: true,
+		active: false
+	});
 });
 </script>
 <div id="Container">
@@ -41,7 +40,7 @@
 		<div class="col">
 			<div class="Left">
 				<h2><?php echo lang('bank_account'); ?> :: <?php echo anchor('bankaccount/newBankMovement',lang('new_movement')) ?></h2>
-				<div class="basic" style="float:left;"  id="tabelapare">
+				<div class="basic" style="float:left;"  id="accordion-table">
 						<?php 
 						$tmp = "";
 						$total = 0;

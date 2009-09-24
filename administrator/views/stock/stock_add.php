@@ -26,11 +26,10 @@
  */
 ?>
 <script type="text/javascript">
-jQuery().ready(function() {
-	$('input[@name=timestamp]').datepicker({formatDate:'yyyy-mm-dd'});
-});	
-jQuery().ready(function() {
-    $("#stockForm").validate({
+$( function(){
+	$('input[name=timestamp]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+
+	$("#stockForm").validate({
 		rules: {
 			timestamp: "required",
 			invoice_id: {
@@ -48,13 +47,13 @@ jQuery().ready(function() {
 function addFormField() {
 	
 	var id = document.getElementById("id").value;	
-	var image = '   <?php echo img('images/administrator/edit_remove.png') ?>';
+	var image = '<?php echo img('../images/administrator/edit_remove.png') ?>';
 	$.ajax({
 		type : "POST",
 		url : "<?php echo base_url() . '?c=stock&m=ingredientList' ?>",
 		success : function(data) {
 			$("#loaderimg").remove();
-			$("#divInvoice").append("<div id='row" + id + "'><td><label for='txt" + id + "'><?php echo lang('article'); ?></label>:</td><td><select name='ingredient[]' id='ingredient" + id + "'>" + data +"</select></td><td><label for='txt" + id + "'><?php echo lang('quantity'); ?></label>:</td><td><input type='text' name='quantity[]' value='' maxlength='50' size='10' id='quantity" + id + "' for='number'  /></td><td><label for='txt" + id + "'><?php echo lang('price'); ?></label>:</td><td><input type='text' name='price[]' value='' maxlength='50' size='10' id='price" + id + "' for='number'  /></td><a href='#' onClick='removeFormField(\"#row" + id + "\"); return false;'>" + image + "</a><br><br></div>");
+			$("#divInvoice").append("<div id='row" + id + "'><td><select name='ingredient[]' id='ingredient" + id + "'>" + data +"</select></td><td><input type='text' name='quantity[]' value='' maxlength='50' size='10' id='quantity" + id + "' for='number'  /></td><td><input type='text' name='price[]' value='' maxlength='50' size='10' id='price" + id + "' for='number'  /></td><a href='#' onClick='removeFormField(\"#row" + id + "\"); return false;'>" + image + "</a></div>");
 		},
 		cache: false,
 		async: false
@@ -121,15 +120,31 @@ div.error { display: none; }
 							</tr>
 							<tr>
 								<td colspan="6">
-									<a href="#" onClick="addFormField(); return false;"><?php echo img('../images/administrator/edit_add.png') ?></a>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="6">
-								<input type="hidden" id="id" value="1">
-								<br />
-								<div id="divInvoice"></div>
-									<br /><br /><br />
+									<table>
+										<colgroup>
+											<col style='width:5%;' />
+											<col style='width:45%;' />
+											<col style='width:25%;' />
+											<col style='width:25%;' />
+										</colgroup>
+										<thead>
+											<tr>
+												<th></th>
+												<th><?php echo lang('article'); ?></th>
+												<th><?php echo lang('quantity'); ?></th>
+												<th><?php echo lang('price'); ?></th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+											<td valign="bottom"><a href="#" onClick="addFormField(); return false;"><?php echo img('../images/administrator/edit_add.png') ?></a></td>
+											<td colspan="3">
+												<input type="hidden" id="id" value="1">
+												<div id="divInvoice"></div>
+											</td>
+											</tr>
+										</tbody>
+									</table>
 								</td>
 							</tr>
 							<tr>

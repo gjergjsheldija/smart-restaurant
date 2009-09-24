@@ -101,14 +101,14 @@
 		    $("#quantity_<?php echo $ingredient->object_id; ?>").editable("<?php echo base_url() . '?c=dish&m=updateIngredientQuantity';?>", { 
 		        indicator : '<?php echo lang('saving') ?>',
 		        submit    : 'OK',
-		        submitdata: { object_id: $('input[@name=object_id_<?php echo $ingredient->object_id ?>]').val() }
+		        submitdata: { object_id: $('input[name=object_id_<?php echo $ingredient->object_id ?>]').val() }
 		    });
 		    $("#unit_type_<?php echo $ingredient->stock_id; ?>").editable("<?php echo base_url() . '?c=dish&m=updateIngredientUnitType';?>", { 
 		    	data	  : "{'1':'kg','2':'lt','0':'pc'}",
 		        indicator : '<?php echo lang('saving') ?>',
 		        type      : 'select',
 		        submit    : 'OK',
-		        submitdata: { stock_id: $('input[@name=stock_id_<?php echo $ingredient->stock_id ?>]').val() }
+		        submitdata: { stock_id: $('input[name=stock_id_<?php echo $ingredient->stock_id ?>]').val() }
 		    });
 		});
 		</script>		

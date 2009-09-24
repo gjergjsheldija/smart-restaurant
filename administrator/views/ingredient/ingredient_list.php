@@ -26,21 +26,11 @@
  */
 ?>
 <script type="text/javascript">
-	jQuery().ready(function(){
-		jQuery('#firsttable').accordion({
-				header: 'div.mytitle',
-			    active: false, 
-			    alwaysOpen: false
-		});
-		jQuery('#secondtable').accordion({
-			header: 'div.mytitle',
-		    active: false, 
-		    alwaysOpen: false
-		});		
-});
 $( function(){
-	$("table.zebra tr:even").addClass("even");
-	$("table.zebra tr:odd").addClass("odd");
+	$('#accordion-table').accordion({
+		collapsible: true,
+		active: false
+	});
 });
 </script>
 <div id="Container">
@@ -50,7 +40,7 @@ $( function(){
 		<div class="col">
 			<div class="Left">
 				<h2><?php echo lang('ingredients') ?> :: <?php echo anchor('ingredient/newIngredient',lang('new_ingredient')) ?></h2>
-				<div class="basic" style="float:left;"  id="firsttable">
+				<div class="basic" style="float:left;"  id="accordion-table">
 				<?php 
 				$tmp = "";
 				foreach($query->result() as $row) {	

@@ -26,16 +26,11 @@
  */
 ?>
 <script type="text/javascript">
-	jQuery().ready(function(){
-		jQuery('#tabelapare').accordion({
-				header: 'div.mytitle',
-			    active: false, 
-			    alwaysOpen: false
-		});
-});
 $( function(){
-	$("table.zebra tr:even").addClass("even");
-	$("table.zebra tr:odd").addClass("odd");
+	$('#accordion-table').accordion({
+		collapsible: true,
+		active: false
+	});
 });
 </script>
 <div id="Container">
@@ -45,7 +40,7 @@ $( function(){
 		<div class="col">
 			<div class="Left">
 				<h2><?php echo lang('contacts'); ?> :: <?php echo anchor('contacts/newContact',lang('new_contact')) ?></h2>
-				<div class="basic" style="float:left;"  id="tabelapare">
+				<div class="basic" style="float:left;"  id="accordion-table">
 						<?php 
 						$tmp = "";
 						foreach($query->result() as $row) {	

@@ -26,10 +26,11 @@
  */
 ?>
 <script type="text/javascript">
-jQuery().ready(function() {
-	$('input[@name=timestamp]').datepicker({formatDate:'yyyy-mm-dd'});
-});	
-jQuery().ready(function() {
+$( function(){
+	//date and stuff
+	$('input[name=timestamp]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+
+	//final form filling check
     $("#accountsForm").validate({
 		rules: {
 			timestamp: "required",

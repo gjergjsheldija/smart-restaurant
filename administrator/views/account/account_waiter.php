@@ -26,14 +26,10 @@
  */
 ?>
 <script type="text/javascript">
-jQuery().ready(function() {
-	$('input[@name=date_from]').datepicker({formatDate:'yyyy-mm-dd'});
-	$('input[@name=date_to]').datepicker({formatDate:'yyyy-mm-dd'});
-});	
 $( function(){
-	$("table.zebra tr:even").addClass("even");
-	$("table.zebra tr:odd").addClass("odd");
-});
+	$('input[name=date_from]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+});	
 
 function hideThis(obj) { 
         $('#obj'+obj).slideToggle("slow");

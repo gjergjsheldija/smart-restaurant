@@ -26,7 +26,7 @@
  */
 ?>
 <script type="text/javascript">
-jQuery().ready(function(){
+$( function(){
    	$("tr:odd").css("background","#F4F7FB");
 });
 </script>
@@ -69,7 +69,7 @@ jQuery().ready(function(){
 							    	type      : 'select',
 							        indicator : '<?php echo lang('saving');?>',
 							        submit    : 'OK',
-							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() , bool: $('input[@name=bool_<?php echo $row->id ?>]').val() }
+							        submitdata: { value_id: $('input[name=value_<?php echo $row->id ?>]').val() , bool: $('input[name=bool_<?php echo $row->id ?>]').val() }
 							    });
 							});
 							</script>	
@@ -81,7 +81,7 @@ jQuery().ready(function(){
 							    	type      : 'select',
 							        indicator : '<?php echo lang('saving');?>',
 							        submit    : 'OK',
-							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() , bool: $('input[@name=bool_<?php echo $row->id ?>]').val() }
+							        submitdata: { value_id: $('input[name=value_<?php echo $row->id ?>]').val() , bool: $('input[name=bool_<?php echo $row->id ?>]').val() }
 							    });
 							});
 							</script>					
@@ -93,7 +93,7 @@ jQuery().ready(function(){
 							    	type      : 'select',
 							        indicator : '<?php echo lang('saving');?>',
 							        submit    : 'OK',
-							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() , bool: $('input[@name=bool_<?php echo $row->id ?>]').val() }
+							        submitdata: { value_id: $('input[name=value_<?php echo $row->id ?>]').val() , bool: $('input[name=bool_<?php echo $row->id ?>]').val() }
 							    });
 							});
 							</script>					
@@ -102,7 +102,7 @@ jQuery().ready(function(){
 							jQuery().ready(function() {
 							    $("#value_<?php echo $row->id; ?>").editable("<?php echo base_url() . '?c=configuration&m=updateValue';?>", { 
 							        indicator : '<?php echo lang('saving');?>',
-							        submitdata: { value_id: $('input[@name=value_<?php echo $row->id ?>]').val() }
+							        submitdata: { value_id: $('input[name=value_<?php echo $row->id ?>]').val() }
 							    });
 							});
 							</script>							

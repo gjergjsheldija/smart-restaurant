@@ -1,0 +1,4 @@
+http://www.appelsiini.net/projects/jeditable
+http://jquery.com/
+http://jqueryui.com/
+http://bassistance.de/jquery-plugins/jquery-plugin-validation/

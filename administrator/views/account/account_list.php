@@ -26,18 +26,11 @@
  */
 ?>
 <script type="text/javascript">
-	jQuery().ready(function(){
-		jQuery('#tabelapare').accordion({
-				header: 'div.mytitle',
-			    active: false, 
-			    autoheight: true,
-			    fillSpace: true,  
-			    alwaysOpen: false
-		});
-});
 $( function(){
-	$("table.zebra tr:even").addClass("even");
-	$("table.zebra tr:odd").addClass("odd");
+	$('#accordion-table').accordion({
+		collapsible: true,
+		active: false
+	});
 });
 </script>
 <div id="Container">
@@ -51,7 +44,7 @@ $( function(){
 			<?php } elseif($acctype == 'ar') { ?>
 				<h2><?php echo lang('ar'); ?> :: <?php echo anchor('account/newAccount/ar',lang('new_ar')) ?></h2>
 			<?php } ?>
-				<div class="basic" style="float:left;"  id="tabelapare">
+				<div class="basic" style="float:left;"  id="accordion-table">
 						<?php 
 						$tmp = "";
 						$total = 0;

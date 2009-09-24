@@ -26,12 +26,9 @@
  */
 ?>
 <script type="text/javascript" charset="utf-8">
-	<!--
-        jQuery(function($)
-        {
-            $("#picker1").attachColorPicker();
-        });
-	//-->
+jQuery(function($) {
+	$("#picker1").attachColorPicker();
+});
 </script>
 <?php if( isset($edit) ) { ?>
 <?php echo form_open_multipart('category/save');?>
