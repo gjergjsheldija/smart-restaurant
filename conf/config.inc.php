@@ -30,5 +30,5 @@ dyRestaurant
 $cfgserver='localhost';
 $cfguser='root';
 $cfgpassword='root';
-$db_common='hahahahahaha';
+$db_common='smartrestaurant';
 ?>
