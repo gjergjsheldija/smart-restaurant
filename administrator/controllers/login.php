@@ -56,6 +56,7 @@ class Login extends Controller {
 			redirect('main');
 		} else {
 			$login['message'] = "Login Failed";
+			$login['langDropDown'] = $this->doLanguageDropDown();
 			$this->load->view('login/login', $login);
 		}
 	}
