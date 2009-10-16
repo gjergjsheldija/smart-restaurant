@@ -30,19 +30,34 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>../min/?g=admincss" />
+<!--  <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>../css/stylesheet.css" /> -->
+<link href="" rel="stylesheet" title="style" media="all" />
 <script type="text/javascript" src="<?php echo base_url(); ?>../min/?g=adminjs"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>../js/styles.js.php"></script>
+<!--[if IE 6]>
+<link href="<?php echo base_url(); ?>../css/ie6.css" rel="stylesheet" media="all" />
+
+<script src="<?php echo base_url(); ?>../js/pngfix.js"></script>
+<script>
+  /* EXAMPLE */
+  DD_belatedPNG.fix('.logo, .other ul#dashboard-buttons li a');
+
+</script>
+<![endif]-->
+<!--[if IE 7]>
+<link href="<?php echo base_url(); ?>../css/ie7.css" rel="stylesheet" media="all" />
+<![endif]-->
 </head>
 <body>
-
 <?php echo $this->load->view('menu');?>
 <?php if(isset($body)) echo $body; else echo '';?>
-    <div id="footer"><hr>
-      <a id="smartpowered" href="http://smartres.sourceforge.net/"><img src="<?php echo $this->config->site_url();?>/../../images/administrator/logo_menu.png" alt="logo" height="35" width="60"></a>
-      <p class="left">
+    <div id="footer">
+      <a href="http://smartres.sourceforge.net/"><img src="<?php echo $this->config->site_url();?>/../../images/administrator/logo_menu.png" alt="logo" height="35" width="60"></a>
+      <p class="float-left">
       <br />
-        Powered by <a href="http://smartres.sourceforge.net/"><strong>Smart Restaurant</strong></a>.
+      Powered by <a href="http://smartres.sourceforge.net/"><strong>Smart Restaurant</strong></a>.
       </p>
-      <p class="right"></p>
+      <p class="float-left"></p>
     </div>
 </body>
 </html>

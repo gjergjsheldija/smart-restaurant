@@ -1,0 +1,78 @@
+@CHARSET "UTF-8";
+
+	/* Tables */
+
+.hastable table {
+	margin:0 0 70px 0;
+	background:#fff;
+	width:100%;
+	border:1px solid #dedede;
+	border-bottom:none;
+}
+
+.hastable thead td, .hastable thead th {
+	background-color:#e6e6e6;
+}
+
+.hastable tr td, .hastable thead th {
+	border-left:1px solid #ccc;
+	text-align:left;
+	padding:8px;
+	color:#616161;
+	vertical-align:middle;
+}
+
+.hastable thead td, .hastable thead th {
+	font-weight:bold;
+	padding:10px 6px;
+	text-align:center;
+}
+
+.hastable th, .hastable td {
+	border-bottom:1px solid #dedede;
+}
+.hastable tbody th {
+	padding:8px 8px;
+	text-align:left;
+}
+
+.hastable tbody tr.alt td, .hastable tbody tr.odd td {
+	color:#464646;
+}
+
+.hastable tbody tr.alt td, .hastable tbody tr.alt th, .hastable tbody tr.odd {
+	background-color:#f5f5f5;
+}
+.hastable tbody tr:hover td, .hastable tbody tr:hover th {
+	background-color:#FFFFCF;
+}
+
+.headerSortDown, .headerSortUp {
+	background-repeat:no-repeat;
+	background-color:#dcdcdc!important;
+	color:#404040!important;
+}
+
+.header span {
+	float:right;
+}
+
+.hastable tr .center {
+	padding:15px;
+	width:5px;
+}
+
+.hastable table a.btn span.ui-icon {
+	left:0.1em;
+}
+
+	/* Tables Pagination */
+
+#pager {
+	padding:15px;
+}
+
+#pager input, #pager .pagesize {
+	margin:5px;
+	float: left;
+}

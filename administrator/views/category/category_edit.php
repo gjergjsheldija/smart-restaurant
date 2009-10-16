@@ -25,41 +25,30 @@
  * 
  */
 ?>
-<script type="text/javascript" charset="utf-8">
-jQuery(function($) {
-	$("#picker1").attachColorPicker();
-});
-</script>
-<?php if( isset($edit) ) { ?>
-<?php echo form_open_multipart('category/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) { 
+echo form_open_multipart('category/save');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('category_info'); ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name' => 'name','value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('color'));?> :</td>
-			<td><?php echo form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7','value'=>$edit[0]->htmlcolor));?></td>
+			<td><?php echo form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7','value'=>$edit[0]->htmlcolor,'class' => 'field text small'));?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('image'));?> :</td>
-			<td><?php echo form_upload('image',$edit[0]->image); ?></td>
+			<td><?php echo form_upload(array('name' => 'image','value' => $edit[0]->image,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
+			<td></td>
 			<td><?php echo isset($edit[0]->image) ? img('../'.$edit[0]->image) : lang('no_info'); ?></td>
-			<td></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
@@ -77,25 +66,22 @@ jQuery(function($) {
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id') ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name'); ?></td>
+			<td><?php echo form_input(array('name' => 'name','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('color'));?> :</td>
-			<td><?php echo form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7'));?></td>
+			<td><?php echo form_input(array('name'=>'htmlcolor', 'id'=>'picker1','size'=>'7','class' => 'field text small'));?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('image'));?> :</td>
-			<td><?php echo form_upload('image'); ?></td>
+			<td><?php echo form_upload(array('name' => 'image','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
-			<td><?php echo lang('no_info'); ?></td>
 			<td></td>
-		</tr>
-		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
-			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } ?>
+</div>

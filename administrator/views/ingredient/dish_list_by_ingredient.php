@@ -26,14 +26,8 @@
  */
 ?>
 <?php if(isset($dish_list)) { ?>
-	<h2><?php echo lang('dishes') ?></h2>
-	<div class="basic" style="float:left;"  id="secondtable">
-		<table class="zebra">
-			<colgroup>
-				<col style='width:600%;' />
-				<col style='width:20%;' />
-				<col style='width:20%;' />
-			</colgroup>
+	<div class="title title-spacing"><h3><?php echo lang('dishes'); ?></h3></div>
+		<table>
 			<thead>
 				<tr>
 					<th><?php echo lang('name'); ?></th>

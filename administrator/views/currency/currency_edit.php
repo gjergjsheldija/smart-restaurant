@@ -25,64 +25,52 @@
  * 
  */
 ?>
-<?php if( isset($edit) ) { ?>
-<?php echo form_open('currency/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) { 
+	echo form_open('currency/save');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('currency_info'); ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name'=>'name','value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('currency_rate'));?> :</td>
-			<td><?php echo form_input('rate',$edit[0]->rate);?></td>
+			<td><?php echo form_input(array('name' => 'rate','value' => $edit[0]->rate,'class' => 'field text small'));?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('active'));?> :</td>
 			<td><?php echo form_checkbox('active',1,$edit[0]->active); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
-<?php } elseif( isset($newcurrency) ) {?>
-<?php echo form_open('currency/addnew');?>
+<?php } elseif( isset($newcurrency) ) {
+	echo form_open('currency/addnew');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('new_currency'); ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id') ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name'); ?></td>
+			<td><?php echo form_input(array('name' => 'name','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('currency_rate'));?> :</td>
-			<td><?php echo form_input('rate');?></td>
+			<td><?php echo form_input(array('name' => 'rate','class' => 'field text medium'));?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('active'));?> :</td>
 			<td><?php echo form_checkbox('active',1); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } ?>
+</div>

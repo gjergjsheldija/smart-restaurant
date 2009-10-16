@@ -8,22 +8,29 @@ return array(
     'admincss' => array(
     	'../css/stylesheet.css', 
     	'../css/ColorPicker.css', 
-    	'../css/jquery-ui-1.7.2.custom.css', 
-    	'../css/jquery.cluetip.css',
-    	'../css/menu.css'
+    	//'../css/jquery-ui-1.7.2.custom.css', 
+    	//'../css/jquery.cluetip.css',
+    	//'../css/menu.css'
 		),
     'adminjs' => array(
-    	'../js/jquery-1.3.2.min.js', 
-    	'../js/jquery-ui-1.7.2.custom.min.js', 
-		'../js/menu.js',
+    	'../js/jquery-1.3.2.min.js',
+		'../js/superfish.js', 
+//    	'../js/jquery-ui-1.7.2.custom.min.js', 
+    	'../js/jquery-ui-1.7.2.js', 
+//		'../js/menu.js',
+		'../js/tooltip.js',
+		'../js/tablesorter.js',
+		'../js/tablesorter-pager.js',
+		'../js/cookie.js',
     	'../js/ColorPicker.js', 
     	'../js/jquery.jeditable.js',
-    	'../js/jquery.cluetip.js',
+//    	'../js/jquery.cluetip.js',
     	'../js/jquery.validate.min.js',
     	'../js/jquery.jeditable.mini.js',
     	'../js/jquery.metadata.js',
     	'../js/jquery.form.js',
-    	'../js/jquery.highlightFade.js'
+    	'../js/jquery.highlightFade.js',
+    	'../js/custom.js'
 		),
 	'waiterjs' => array (
 		'../js/jquery-1.3.2.min.js', 	

@@ -29,30 +29,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Smart Restaurant</title>
-<?php echo link_tag('../css/login.css') ?>
+<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>../min/?g=admincss" />
+<link href="" rel="stylesheet" title="style" media="all" />
+<script type="text/javascript" src="<?php echo base_url(); ?>../min/?g=adminjs"></script>
+<?php // echo link_tag('../css/login.css') ?>
 <meta name="language" content="<?php echo $this->lang->line('setting_short_language');?>" />
 </head>
-<body class="login">
-<div class="Container">
-<div id="Dialog">
-<h1>Login</h1>
-<?php echo form_open('login/dologin');?>
-	<?php
-	if(isset($message)) 
-		echo '<p align="center"><strong><font color="#990000">Error, please try again!</font></strong></p>';
-	?>
-	<dl>
-		<dt><?php echo lang('username') ;?>:</dt>
-		<dd><input name="username" type="text" id="username" value="" /></dd>
-		<dt><?php echo lang('password') ;?>:</dt>
-		<dd><input name="password" type="password" id="password" value="" /></dd>
-		<dt><?php echo lang('language') ;?>:</dt>
-		<dd><select name="language"><?php echo $langDropDown;?></select></dd>	
-		<dd><input type="submit" value="login" /></dd>
-	</dl>
-</form>
-</div>
-<dd>Powered by <a href="http://smartres.sourceforge.net/">Smart Restaurant</a></dd>
+<body>
+<div id="welcome_login" title="Administration Login">
+	<p>Login to Smart Restaurant</p>
+	<?php echo form_open('login/dologin',array('class' => 'forms'));?>
+		<?php
+		if(isset($message)) 
+			echo '
+			<div class="response-msg error ui-corner-all">
+				<span>Error</span>
+				please try again!
+			</div>
+			';
+		?>
+		<ul>
+			<li>
+				<label for="username" class="desc"><?php echo lang('username') ;?>:</label>
+				<div><input name="username" type="text" id="username" value="" class="field text full" /></div>
+			</li>
+			<li>
+				<label for="password" class="desc"><?php echo lang('password') ;?>:</label>
+				<div><input name="password" type="password" id="password" value=""  class="field text full" /><div>
+			</li>
+			<li>
+				<label for="language" class="desc"><?php echo lang('language') ;?>:</label>
+				<div><select name="language" class="field select large"><?php echo $langDropDown;?></select></div>	
+			</li>
+		</ul>
+	</form>
 </div>
 </body>
 </html>

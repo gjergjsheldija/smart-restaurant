@@ -25,40 +25,34 @@
  * 
  */
 ?>
-<?php if( isset($edit) ) { ?>
-<?php echo form_open_multipart('ingredient/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) {
+echo form_open_multipart('ingredient/save');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('ingredient_info'); ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name' => 'name', 'value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('category'));?> :</td>
-			<td><?php echo form_dropdown('category',$category,$edit[0]->catid); ?></td>
+			<td><?php echo form_dropdown('category',$category,$edit[0]->catid,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('price'));?> :</td>
-			<td><?php echo form_input('price',$edit[0]->price); ?></td>
+			<td><?php echo form_input(array('name' => 'price','value' => $edit[0]->price,'class' => 'field text small')); ?></td>
 		</tr>		
 		<tr>
 			<td><?php echo form_label(lang('sell_price'));?> :</td>
-			<td><?php echo form_input('sell_price',$edit[0]->sell_price); ?></td>
+			<td><?php echo form_input(array('name' => 'sell_price','value' => $edit[0]->sell_price,'class' => 'field text small')); ?></td>			
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('helper'));?> :</td>
-			<td><?php echo form_dropdown('stock_is_on',$stockison,$edit[0]->stock_is_on); ?></td>
+			<td><?php echo form_dropdown('stock_is_on',$stockison,$edit[0]->stock_is_on,'class="field text small"'); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
@@ -76,29 +70,30 @@
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id') ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name'); ?></td>
+			<td><?php echo form_input(array('name' => 'name','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('category'));?> :</td>
-			<td><?php echo form_dropdown('category',$category); ?></td>
+			<td><?php echo form_dropdown('category',$category,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('price'));?> :</td>
-			<td><?php echo form_input('price'); ?></td>
+			<td><?php echo form_input(array('name' => 'price','class' => 'field text small')); ?></td>
 		</tr>		
 		<tr>
 			<td><?php echo form_label(lang('sell_price'));?> :</td>
-			<td><?php echo form_input('sell_price'); ?></td>
+			<td><?php echo form_input(array('name' => 'sell_price','class' => 'field text small')); ?></td>			
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('helper'));?> :</td>
-			<td><?php echo form_dropdown('stock_is_on',$stockison); ?></td>
+			<td><?php echo form_dropdown('stock_is_on',$stockison,'class="field text small"'); ?></td>
 		</tr>		
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
+</div>
 <?php } ?>

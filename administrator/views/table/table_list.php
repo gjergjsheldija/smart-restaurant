@@ -25,19 +25,16 @@
  * 
  */
 ?>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
-				<h2><?php echo lang('tables'); ?> :: <?php echo anchor('table/newTable',lang('new_table')) ?></h2>
-					<table id="tablesTable" class="zebra">
-					<colgroup>
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-					</colgroup>
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+		<div class="title title-spacing">
+			<h2><?php echo lang('tables'); ?> :: <?php echo anchor('table/newTable',lang('new_table')) ?></h2>
+		</div>
+		<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">
+				<table cellspacing="0">
 					<thead>
 					<tr>
 						<th><?php echo lang('name') ;?></th>
@@ -55,13 +52,13 @@
 					<?php endforeach; ?>
 					</tbody>
 				</table>
-			</div>
-			<div class="Right">				
+				</div>			
+        	</div>
+        	<div class="column-right">		
 				<?php $this->load->view('table/table_edit') ?>
 			</div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>

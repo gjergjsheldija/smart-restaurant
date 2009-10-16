@@ -25,60 +25,52 @@
  * 
  */
 ?>
-<?php if( isset($edit) ) { ?>
-
-<?php echo form_open_multipart('dish/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) { 
+echo form_open_multipart('dish/save');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('dish_info'); ?></h2><br />
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name' => 'name', 'value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('price'));?> :</td>
-			<td><?php echo form_input('price',$edit[0]->price); ?></td>
+			<td><?php echo form_input(array('name' => 'price','value' => $edit[0]->price,'class' => 'field text small')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('category'));?> :</td>
-			<td><?php echo form_dropdown('category',$category,$edit[0]->catid); ?></td>
+			<td><?php echo form_dropdown('category', $category,$edit[0]->catid,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('printer'));?> :</td>
-			<td><?php echo form_dropdown('destid',$printer,$edit[0]->destid); ?></td>
+			<td><?php echo form_dropdown('destid',$printer,$edit[0]->destid,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('image'));?> :</td>
-			<td><?php echo form_upload('image',$edit[0]->image); ?></td>
+			<td><?php echo form_upload(array('name' => 'image','value' => $edit[0]->image,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
+			<td></td>
 			<td><?php echo isset($edit[0]->image) ? img('../'.$edit[0]->image) : lang('no_info'); ?></td>
-			<td></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>
-</form><hr>
-<br /><h2><?php echo lang('ingredients'); ?></h2><br />
-<!-- perberesit -->
+</form>
+<div class="title title-spacing"><h3><?php echo lang('ingredients'); ?></h3></div>
+<!-- ingredients -->
 <?php echo form_open_multipart('dish/insertIngredient');?>
 <table>
 <tr>
 	<td><?php echo form_label(lang('ingredients'));?> :</td>
 	<td><?php echo form_dropdown('ingredient_id',$ingredients); ?></td>
-	<td><?php echo form_hidden('dish_id',$edit[0]->id); ?><input type="submit" value="<?php echo lang('add'); ?>"></td>
+	<td><?php echo form_hidden('dish_id',$edit[0]->id); ?><input type="submit" value="<?php echo lang('add'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 </tr>
 </table>
-<hr>
 <table cellpadding="5">
 <thead>
 	<tr>
@@ -97,17 +89,20 @@
 			<td align="right"><?php echo anchor_image('dish/deleteIngredient/'.$ingredient->object_id . "-" . $edit[0]->id . "-" . $ingredient->id, '../images/administrator/edit_remove.png');?></td>
 		</tr>
 		<script type="text/javascript">
-		jQuery().ready(function() {
+		$(document).ready(function() {
 		    $("#quantity_<?php echo $ingredient->object_id; ?>").editable("<?php echo base_url() . '?c=dish&m=updateIngredientQuantity';?>", { 
 		        indicator : '<?php echo lang('saving') ?>',
-		        submit    : 'OK',
+		        submit    : '<input type="submit" value="OK" class="ui-state-default ui-corner-all float-right">',
+				type	  : 'text',
+				width	  : '13',
+		        cssclass  : 'forms',
 		        submitdata: { object_id: $('input[name=object_id_<?php echo $ingredient->object_id ?>]').val() }
 		    });
 		    $("#unit_type_<?php echo $ingredient->stock_id; ?>").editable("<?php echo base_url() . '?c=dish&m=updateIngredientUnitType';?>", { 
 		    	data	  : "{'1':'kg','2':'lt','0':'pc'}",
 		        indicator : '<?php echo lang('saving') ?>',
 		        type      : 'select',
-		        submit    : 'OK',
+		        submit    : '<input type="submit" value="OK" class="ui-state-default ui-corner-all float-right">',
 		        submitdata: { stock_id: $('input[name=stock_id_<?php echo $ingredient->stock_id ?>]').val() }
 		    });
 		});
@@ -160,4 +155,5 @@
 	</tbody>
 </table>	
 </form>
+</div>
 <?php } ?>

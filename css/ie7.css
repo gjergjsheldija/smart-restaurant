@@ -1,0 +1,31 @@
+#navigation .ui-icon {
+	position:absolute;
+	top:0;
+	right:4px!important;
+}
+
+
+#navigation li li .ui-icon {
+	position:absolute;
+	top:0;
+	right:8px!important;
+}
+
+#navigation a {
+	padding-right:22px!important;
+}
+
+.ui-widget-header {
+	height:25px;
+	line-height:25px;
+	padding:0 8px!important;
+}
+
+.portlet-header .ui-icon {
+	margin-top:5px;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+	padding-bottom:0!important;
+	padding-top:0!important;
+}

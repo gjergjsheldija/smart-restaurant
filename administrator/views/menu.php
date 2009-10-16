@@ -25,60 +25,75 @@
  * 
  */
 ?>
-<div id="Header">
-<ul id="topnav">
-	<li><a href="<?php echo $this->config->site_url();?>">Home</a></li>
-	<li><a href="#"><?php echo lang('general') ?> +</a>
+<div id="header">
+	<div id="top-menu">
+		<a class="set_theme" id="default" href="javascript:void(0);" style="font-weight: bold;" title="Default Theme">Default</a> 
+		| <a class="set_theme" id="light_blue" href="javascript:void(0);" title="Light Blue Theme">Light Blue</a>
 		<span>
-			<a href="<?php echo $this->config->site_url();?>/category"><?php echo lang('categories') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/dish"><?php echo lang('dishes') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/ingredient"><?php echo lang('ingredients') ?></a> | 
-			<!--  <li class="separation"></li>  -->
-			<a href="<?php echo $this->config->site_url();?>/table"><?php echo lang('tables') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/currency"><?php echo lang('currency') ?></a>
+			<a href="javascript:void(0);" title="Fluid Layout" id="fluid_layout"><b>Fluid Layout</b></a>
+			<a href="javascript:void(0);" title="Fixed Layout" id="fixed_layout"><b>Fixed Layout</b></a>
 		</span>
-	</li>
-	<li><a href="#"><?php echo lang('system') ?> +</a>
-		<span>
-			<a href="<?php echo $this->config->site_url();?>/user"><?php echo lang('users') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/printer"><?php echo lang('printers') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/configuration"><?php echo lang('configuration') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/translator"><?php echo lang('translation') ?></a>
-		</span>
-	</li>
-	<li><a href="#"><?php echo lang('contacts') ?> +</a>
-		<span>
-			<a href="<?php echo $this->config->site_url();?>/contacts"><?php echo lang('contacts') ?></a>
-		</span>
-	</li>
-	<li><a href="#"><?php echo lang('account') ?> +</a>
-		<span>
-			<a href="<?php echo $this->config->site_url();?>/account/index/ap"><?php echo lang('ap') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/account/index/ar"><?php echo lang('ar') ?></a> | 
-			<!--  <li class="separation"></li>  -->
-			<a href="<?php echo $this->config->site_url();?>/account/report_actual"><?php echo lang('actual_state') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/account/report_movement"><?php echo lang('movements') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/account/report_waiter"><?php echo lang('waiter_income') ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/account/report_sector"><?php echo lang('tot_by_sect') ?></a>			
-		</span>
-	</li>
-	<li><a href="#"><?php echo lang('bank'); ?> +</a>
-		<span>
-			<a href="<?php echo $this->config->site_url();?>/bankaccount/index/account"><?php echo lang('bank_account'); ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/bankaccount/index/movement"><?php echo lang('movements'); ?></a> | 
-			<!-- <li class="separation"></li>  -->			
-			<a href="<?php echo $this->config->site_url();?>/bankaccount/report_actual"><?php echo lang('actual_state'); ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/bankaccount/report_movement"><?php echo lang('movements'); ?></a>
-		</span>
-	</li>
-	<li><a href="#"><?php echo lang('stock'); ?> +</a>
-		<span>
-			<a href="<?php echo $this->config->site_url();?>/stock/index/add"><?php echo lang('supply'); ?></a>	 | 
-			<!--  <li class="separation"></li>  -->		
-			<a href="<?php echo $this->config->site_url();?>/stock/report_actual"><?php echo lang('inventory'); ?></a> | 
-			<a href="<?php echo $this->config->site_url();?>/stock/report_movement"><?php echo lang('movements'); ?></a>
-		</span>
-	</li>
-	<li style="float:right;"><a href="<?php echo $this->config->site_url();?>/login/doLogout"><?php echo lang('log_out'); ?></a></li>
-</ul>
+		<span>Logged in as <a href="#" title="Logged in as admin">admin</a></span>
+		| <a class="tooltip" href="<?php echo $this->config->site_url();?>/login/doLogout" title="<?php echo lang('log_out'); ?>"><?php echo lang('log_out'); ?></a>
+	</div>
+	<div id="sitename">
+		<a href="index.php" class="logo float-left" title="Administration">Administration</a>
+		<!-- <div class="button float-right">
+			<a href="<?php echo $this->config->site_url();?>/login/doLogout" id="login_dialog" class="btn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-image"></span><?php echo lang('log_out'); ?></a>
+		</div> -->
+	</div>
+	<ul id="navigation" class="sf-navbar">
+		<li><a href="<?php echo $this->config->site_url();?>">Home</a></li>
+		<li><a href="#"><?php echo lang('general') ?></a>
+			<ul>
+				<li><a href="<?php echo $this->config->site_url();?>/category"><?php echo lang('categories') ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/dish"><?php echo lang('dishes') ?></a></li> 
+				<li><a href="<?php echo $this->config->site_url();?>/ingredient"><?php echo lang('ingredients') ?></a></li> 
+				<!--  <li class="separation"></li>  -->
+				<li><a href="<?php echo $this->config->site_url();?>/table"><?php echo lang('tables') ?></a></li> 
+				<li><a href="<?php echo $this->config->site_url();?>/currency"><?php echo lang('currency') ?></a></li>
+			</ul>
+		</li>
+		<li><a href="#"><?php echo lang('system') ?></a>
+			<ul>
+				<li><a href="<?php echo $this->config->site_url();?>/user"><?php echo lang('users') ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/printer"><?php echo lang('printers') ?></a></li> 
+				<li><a href="<?php echo $this->config->site_url();?>/configuration"><?php echo lang('configuration') ?></a></li> 
+				<li><a href="<?php echo $this->config->site_url();?>/translator"><?php echo lang('translation') ?></a></li>
+			</ul>
+		</li>
+		<li><a href="#"><?php echo lang('contacts') ?></a>
+			<ul>
+				<li><a href="<?php echo $this->config->site_url();?>/contacts"><?php echo lang('contacts') ?></a></li>
+			</ul>
+		</li>
+		<li><a href="#"><?php echo lang('account') ?></a>
+			<ul>
+				<li><a href="<?php echo $this->config->site_url();?>/account/index/ap"><?php echo lang('ap') ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/account/index/ar"><?php echo lang('ar') ?></a></li>
+				<!--  <li class="separation"></li>  -->
+				<li><a href="<?php echo $this->config->site_url();?>/account/report_actual"><?php echo lang('actual_state') ?></a></li> 
+				<li><a href="<?php echo $this->config->site_url();?>/account/report_movement"><?php echo lang('movements') ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/account/report_waiter"><?php echo lang('waiter_income') ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/account/report_sector"><?php echo lang('tot_by_sect') ?></a></li>			
+			</ul>
+		</li>
+		<li><a href="#"><?php echo lang('bank'); ?></a>
+			<ul>
+				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/index/account"><?php echo lang('bank_account'); ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/index/movement"><?php echo lang('movements'); ?></a></li> 
+				<!-- <li class="separation"></li>  -->			
+				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/report_actual"><?php echo lang('actual_state'); ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/report_movement"><?php echo lang('movements'); ?></a></li>
+			</ul>
+		</li>
+		<li><a href="#"><?php echo lang('stock'); ?></a>
+			<ul>
+				<li><a href="<?php echo $this->config->site_url();?>/stock/index/add"><?php echo lang('supply'); ?></a></li>
+				<!--  <li class="separation"></li>  -->		
+				<li><a href="<?php echo $this->config->site_url();?>/stock/report_actual"><?php echo lang('inventory'); ?></a></li>
+				<li><a href="<?php echo $this->config->site_url();?>/stock/report_movement"><?php echo lang('movements'); ?></a></li>
+			</ul>
+		</li>
+	</ul>
 </div>

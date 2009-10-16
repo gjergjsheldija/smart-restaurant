@@ -1,0 +1,37 @@
+#navigation li, #navigation li a {
+	float:left;
+	width:auto;
+}
+
+#navigation .ui-icon {
+	position:absolute;
+	top:0;
+	right:4px!important;
+}
+
+
+#navigation li li .ui-icon {
+	position:absolute;
+	top:0;
+	right:8px!important;
+}
+
+#navigation a {
+	padding-right:22px!important;
+}
+
+#navigation li ul li a {
+	float:none;
+}
+
+#navigation li ul {
+	top:38px!important;
+}
+
+#navigation li ul li ul {
+	top:0!important;
+}
+
+#sidebar {
+	margin:0 0 0 -243px;
+}

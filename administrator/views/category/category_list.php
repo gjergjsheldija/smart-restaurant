@@ -25,19 +25,16 @@
  * 
  */
 ?>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
-				<h2><?php echo lang('category'); ?> :: <?php echo anchor('category/newCat',lang('new_category')); ?></h2>
-					<table id="categoriesTable" class="zebra">
-					<colgroup>
-						<col style='width:40%;' />
-						<col style='width:40%;' />
-						<col style='width:20%;' />
-					</colgroup>
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+		<div class="title title-spacing">
+			<h2><?php echo lang('category'); ?> :: <?php echo anchor('category/newCat',lang('new_category')); ?></h2>
+		</div>
+		<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">
+				<table cellspacing="0">
 					<thead>
 						<tr>
 							<th><?php echo lang('name'); ?></th>
@@ -54,14 +51,14 @@
 						</tr>
 					<?php endforeach; ?>
 					</tbody>
-				</table>			
-			</div>
-			<div class="Right">				
+				</table>
+				</div>			
+        	</div>
+        	<div class="column-right">				
 				<?php $this->load->view('category/category_edit') ?>
 			</div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>
