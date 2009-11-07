@@ -25,20 +25,14 @@
  * 
  */
 ?>
-<?php if( isset($edit) ) { ?>
-<?php echo form_open('contacts/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) { 
+	echo form_open('contacts/save');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('contact_info'); ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name' => 'name','value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('address'));?> :</td>
@@ -47,30 +41,31 @@
 					'rows' => '5',
 					'cols' => '38',
 					'value'=> $edit[0]->address,
-					'name' => 'address'
+					'name' => 'address',
+					'class' => 'field textarea small'
 				);
 			?>
 			<td><?php echo form_textarea($address); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('tel'));?> :</td>
-			<td><?php echo form_input('telephone',$edit[0]->telephone); ?></td>
+			<td><?php echo form_input(array('name'=>'telephone','value' => $edit[0]->telephone,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('fax'));?> :</td>
-			<td><?php echo form_input('fax',$edit[0]->fax); ?></td>
+			<td><?php echo form_input(array('name'=>'fax','value' => $edit[0]->fax,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('bank_account'));?> :</td>
-			<td><?php echo form_input('bank_account',$edit[0]->bank_account); ?></td>
+			<td><?php echo form_input(array('name'=>'bank_account','value'=>$edit[0]->bank_account,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('abi'));?> :</td>
-			<td><?php echo form_input('abi',$edit[0]->abi); ?></td>
+			<td><?php echo form_input(array('name'=>'abi','value' => $edit[0]->abi,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('cab'));?> :</td>
-			<td><?php echo form_input('cab',$edit[0]->cab); ?></td>
+			<td><?php echo form_input(array('name' => 'cab','value' => $edit[0]->cab,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('type'));?> :</td>
@@ -83,40 +78,34 @@
 					'rows' => '5',
 					'cols' => '38',
 					'value'=> $edit[0]->note,
-					'name' => 'note'
+					'name' => 'note',
+					'class' => 'field textarea small'
 				);
 			?>
 			<td><?php echo form_textarea($note); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('email'));?> :</td>
-			<td><?php echo form_input('email',$edit[0]->email); ?></td>
+			<td><?php echo form_input(array('name' => 'email','value' => $edit[0]->email,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('web'));?> :</td>
-			<td><?php echo form_input('web',$edit[0]->web); ?></td>
+			<td><?php echo form_input(array('name' => 'web','value' => $edit[0]->web,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
-<?php } elseif( isset($newcontact) ) {?>
-<?php echo form_open('contacts/addnew');?>
+<?php } elseif( isset($newcontact) ) {
+	echo form_open('contacts/addnew');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('new_contact'); ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name'); ?></td>
+			<td><?php echo form_input(array('name' => 'name','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('address'));?> :</td>
@@ -124,30 +113,31 @@
 				$address = array(
 					'rows' => '5',
 					'cols' => '38',
-					'name' => 'address'
+					'name' => 'address',
+					'class' => 'field textarea small'
 				);
 			?>
 			<td><?php echo form_textarea($address); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('tel'));?> :</td>
-			<td><?php echo form_input('telephone'); ?></td>
+			<td><?php echo form_input(array('name' => 'telephone','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('fax'));?> :</td>
-			<td><?php echo form_input('fax'); ?></td>
+			<td><?php echo form_input(array('name' => 'fax','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('bank_account'));?> :</td>
-			<td><?php echo form_input('bank_account'); ?></td>
+			<td><?php echo form_input(array('name' => 'bank_account','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('abi'));?> :</td>
-			<td><?php echo form_input('abi'); ?></td>
+			<td><?php echo form_input(array('name' => 'abi','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('cab'));?> :</td>
-			<td><?php echo form_input('cab'); ?></td>
+			<td><?php echo form_input(array( 'name' => 'cab','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('type'));?> :</td>
@@ -159,24 +149,26 @@
 				$note = array(
 					'rows' => '5',
 					'cols' => '38',
-					'name' => 'note'
+					'name' => 'note',
+					'class' => 'field textarea small'
 				);
 			?>
 			<td><?php echo form_textarea($note); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('email'));?> :</td>
-			<td><?php echo form_input('email'); ?></td>
+			<td><?php echo form_input(array('name' => 'email','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('web'));?> :</td>
-			<td><?php echo form_input('web'); ?></td>
+			<td><?php echo form_input(array('name' => 'web','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } ?>
+</div>

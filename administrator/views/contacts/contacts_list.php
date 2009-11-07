@@ -25,32 +25,23 @@
  * 
  */
 ?>
-<script type="text/javascript">
-$( function(){
-	$('#accordion-table').accordion({
-		collapsible: true,
-		active: false
-	});
-});
-</script>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+		<div class="title title-spacing">
 				<h2><?php echo lang('contacts'); ?> :: <?php echo anchor('contacts/newContact',lang('new_contact')) ?></h2>
-				<div class="basic" style="float:left;"  id="accordion-table">
+			</div>
+			<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">			
 						<?php 
 						$tmp = "";
 						foreach($query->result() as $row) {	
 							if($tmp != $row->contacttype) {
-								echo '<div class="mytitle">'.lang($row->contacttype).'</div>';?>
-							<table class="zebra">
-								<colgroup>
-									<col style='width:90%;' />
-									<col style='width:10%;' />
-								</colgroup>
+								echo '<div class="portlet">
+								<div class="portlet-header">'.lang($row->contacttype).'</div>
+								<div class="portlet-content">';?>
+							<table cellspacing="0">
 								<thead>
 									<tr>
 										<th><?php echo lang('name'); ?></th>
@@ -68,19 +59,18 @@ $( function(){
 							$tmp = $temp->contacttype;
 							if($tmp != $row->contacttype) {
 								$tmp = $row->contacttype;
-								echo "</table>";
+								echo "</table></div></div>";
 							}
 						}; 
 						?>
-					</table>
-			</div>	
+					</table></div></div>
+				</div>
 			</div>
-			<div class="Right">				
+			<div class="column-right">				
 				<?php $this->load->view('contacts/contacts_edit') ?>
 			</div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>

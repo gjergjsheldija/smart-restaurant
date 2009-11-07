@@ -31,12 +31,14 @@ $( function(){
 	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
 });
 </script>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+			<div class="title title-spacing">
 			<h2><?php echo lang('movements'); ?></h2>
+			</div>
+			<div class="two-column">
+			<div class="hastable">
 			<?php echo form_open('account/report_movement');?>
 			<?php
 			$tmp_from = isset($dt_from) ? $dt_from : date('Y-m-d');
@@ -45,23 +47,24 @@ $( function(){
 			              'name'        => 'date_from',
 			              'id'          => 'date_from',
 			              'size'        => '8',
-						  'value'		=> $tmp_from);
+						  'value'		=> $tmp_from,
+						  'class' 		=> 'field text small');
 			
 			$date_to = array(
 			              'name'        => 'date_to',
 			              'id'          => 'date_to',
 			              'size'        => '8',
-						  'value'		=> $tmp_to);
+						  'value'		=> $tmp_to,
+						  'class' 		=> 'field text small');
 			?>
-				<table>
+				<table cellspacing="0">
 					<tr>
 						<td><?php echo lang('from'); ?> : <?php echo form_input($date_from) ?></td>
 						<td><?php echo lang('to'); ?> : <?php echo form_input($date_to) ?></td>
-						<td><input type="submit" value="<?php echo lang('show'); ?>"></td>
+						<td><input type="submit" value="<?php echo lang('show'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 						<td align="right"><?php echo anchor_image(site_url()."/account/report_movement_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
 					</tr>
 				</table>
-				<br /><br />
 					<?php 
 					$tmp = "";
 					$total_in = 0;
@@ -78,16 +81,10 @@ $( function(){
 						}
 						
 						if($tmp != $row->who) {
-							echo '<br><div align="left"><h3><strong>' . $row->who.'</strong></h3></div>';?>
-						<table width="100%" class="zebra">
-							<colgroup>
-								<col style='width:15%;' />
-								<col style='width:20%;' />
-								<col style='width:10%;' />
-								<col style='width:10%;' />
-								<col style='width:10%;' />
-								<col style='width:5%;' />
-							</colgroup>
+							echo '<div class="portlet">
+								<div class="portlet-header">' . $row->who.'</div>
+								<div class="portlet-content">';?>
+						<table cellspacing="0">
 							<thead>
 								<tr>
 									<th><?php echo lang('date'); ?></th>
@@ -113,29 +110,38 @@ $( function(){
 						$tmp = $temporary->who;
 						if($tmp != $row->who) {
 							$tmp = $row->who;
-							echo "<tr><td colspan='6' align='right'></td></tr>";
-							echo "<tr><td colspan='6' align='right'><strong>" . lang('total'). " : " . ($partial_in -(-$partial_out)) . "</strong></td></tr>";
+							echo "<tr><td colspan='6' align='right'><div class='page-title'><h1>" . lang('total'). " : " . ($partial_in -(-$partial_out)) . "</h1></div></td></tr>";
 							$partial_in = 0;
 							$partial_out = 0;
-							echo "</table>";
+							echo "</table></div></div>";
 						}
 					}; ?>
-					<tr><td colspan="6" align="right"><strong><?php echo lang('total'); ?> : <?php echo ($partial_in -(-$partial_out)) ?></strong></td></tr>							
-				</table>			
-				<table width="100%">
-					<tr><td colspan="6"><hr></td></tr>
-					<tr><td colspan="3"></td><td align="right"><?php echo lang('in'); ?></td><td align="right"><?php echo lang('out'); ?></td><td align="right"><?php echo lang('diff'); ?></td></tr>
+					<tr><td colspan="6" align="right"><div class="page-title"><h1><?php echo lang('total'); ?> : <?php echo ($partial_in -(-$partial_out)) ?></h1></div></td></tr>							
+				</table></div></div>
+				<div class="hastable">			
+				<table cellspacing="0">
+					<thead>
 					<tr>
-						<td colspan="3" align="right"><strong><?php echo lang('total'); ?> : </strong></td>
-						<td align="right"><strong><?php echo $total_in ?></strong></td>
-						<td align="right"><strong><?php echo $total_out ?></strong></td>
-						<td align="right"><strong><?php echo $total_in -(-$total_out)?></strong></td>
+						<th></th>
+						<th align="right"><?php echo lang('in'); ?></th>
+						<th align="right"><?php echo lang('out'); ?></th>
+						<th align="right"><?php echo lang('diff'); ?></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td align="right"><div class="title"><h2><?php echo lang('total'); ?> : </h2></div></td>
+						<td align="right"><div class="title"><h2><?php echo $total_in ?></h2></div></td>
+						<td align="right"><div class="title"><h2><?php echo $total_out ?></h2></div></td>
+						<td align="right"><div class="title"><h2><?php echo $total_in -(-$total_out)?></h2></div></td>
 					</tr>	
-				</table>		
+					</tbody>
+				</table>
+				</div>		
 			</form>
+			</div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>

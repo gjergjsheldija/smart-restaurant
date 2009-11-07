@@ -25,24 +25,18 @@
  * 
  */
 ?>
-<?php if( isset($edit) ) { ?>
-<?php echo form_open('user/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) { 
+	echo form_open('user/save');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('user_info');?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name'=>'name','value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('password'));?> <?php echo form_hidden('oldpass',$edit[0]->password) ?>:</td>
-			<td><?php echo form_password('password'); ?></td>
+			<td><?php echo form_password(array('name'=>'password','class' => 'field text medium')); ?></td>
 		</tr>		
 		<tr>
 			<td><?php echo form_label(lang('administrator'));?> :</td>
@@ -56,37 +50,30 @@
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('access'));?> :</td>
-			<td><?php echo form_dropdown('dest_type',$dest_type,$edit[0]->dest_type); ?></td>
+			<td><?php echo form_dropdown('dest_type',$dest_type,$edit[0]->dest_type,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('template'));?> :</td>
-			<td><?php echo form_dropdown('template',$template,$edit[0]->template); ?></td>
+			<td><?php echo form_dropdown('template',$template,$edit[0]->template,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save');?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>
 </form>
-<?php } elseif( isset($newuser) ) {?>
-<?php echo form_open('user/addnew');?>
+<?php } elseif( isset($newuser) ) {
+	echo form_open('user/addnew');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('new_user');?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name'); ?></td>
+			<td><?php echo form_input(array('name' => 'name','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('password'));?>:</td>
-			<td><?php echo form_password('password'); ?></td>
+			<td><?php echo form_password(array('name' => 'password','class' => 'field text medium')); ?></td>
 		</tr>		
 		<tr>
 			<td><?php echo form_label(lang('administrator'));?> :</td>
@@ -98,17 +85,18 @@
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('access'));?> :</td>
-			<td><?php echo form_dropdown('dest_type',$dest_type); ?></td>
+			<td><?php echo form_dropdown('dest_type',$dest_type,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('template'));?> :</td>
-			<td><?php echo form_dropdown('template',$template); ?></td>
+			<td><?php echo form_dropdown('template',$template,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } ?>
+</div>

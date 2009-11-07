@@ -31,13 +31,15 @@ $( function(){
 	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
 });	
 </script>	
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+			<div class="title title-spacing">
 				<h2><?php echo lang('tot_by_sect'); ?></h2>
+			</div>
+			<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">			
 				<?php echo form_open('account/report_sector');?>
 				<?php
 				$tmp_from = isset($dt_from) ? $dt_from : date('Y-m-d');
@@ -46,34 +48,31 @@ $( function(){
 				              'name'        => 'date_from',
 				              'id'          => 'date_from',
 				              'size'        => '8',
-							  'value'		=> $tmp_from);
+							  'value'		=> $tmp_from,
+						  	  'class' 		=> 'field text small');
 				
 				$date_to = array(
 				              'name'        => 'date_to',
 				              'id'          => 'date_to',
 				              'size'        => '8',
-							  'value'		=> $tmp_to);
+							  'value'		=> $tmp_to,
+						  	  'class' 		=> 'field text small');
 				?>
-				<table>
+				<table cellspacing="0">
 					<tr>
 						<td><?php echo lang('from'); ?> : <?php echo form_input($date_from) ?></td>
 						<td><?php echo lang('to'); ?> : <?php echo form_input($date_to) ?></td>
-						<td><input type="submit" value="<?php echo lang('show'); ?>"></td>
+						<td><input type="submit" value="<?php echo lang('show'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 						<td align="right"><?php echo anchor_image(site_url()."/account/report_sector_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
 					</tr>
 				</table>
-				<br /><br />		
 							<?php 
 							$tmp = "";
 							$totalSector = array();
 							foreach($sector_movements->result() as $row) {	
 								if($tmp != $row->waiter) {
-									echo '<br><div align="left"><h3>' . $row->waiter.'</h3></div>';?>
-								<table width="300" class="zebra">
-									<colgroup>
-										<col style='width:15%;' />
-										<col style='width:10%;' />
-									</colgroup>
+									echo '<div class="title title-spacing"><h3>' . $row->waiter.'</h3></div>';?>
+								<table cellspacing="0">
 									<thead>
 										<tr>
 											<th  align="left"><?php echo lang('sector'); ?></th>
@@ -100,8 +99,14 @@ $( function(){
 							}; ?>
 						</table>
 						<br>
-						<div align="left"><strong><?php echo lang('tot_by_sect'); ?></strong><hr width="300">
-						<table width="300">
+						<div align="left"><div class="title title-spacing"><h3><?php echo lang('tot_by_sect'); ?></h3></div>
+						<table cellspacing="0">
+						<thead>
+							<tr>
+								<th  align="left"><?php echo lang('sector'); ?></th>
+								<th  align="right"><?php echo lang('amount'); ?></th>
+							</tr>
+						</thead>	
 						<?php foreach($totalSector as $sector => $value) {
 							echo '<tr><td align="left">' . $sector . '</td><td align="right">' . $value . '</td></tr>';
 						}
@@ -109,22 +114,22 @@ $( function(){
 						?>
 						</table>
 				</form>
-			</div>	
-			</div>
-			<div class="Right">	
-				<br><br><br><br><br><br>
-				<div align="left"><strong><?php echo lang('tot_dish'); ?></strong><hr width="300">
-				<table width="300" class="zebra">
+				</div></div>
+				</div>
+			<div class="column-right">	
+				<div class="title title-spacing"><h3><?php echo lang('tot_dish'); ?></h3></div>
+				<div class="hastable">	
+				<table cellspacing="0">
 				<?php 
 				foreach( $sector_numdish as $dish ) {
 					echo '<tr><td align="left">' . $dish['name'] . '</td><td align="right">' . $dish['numdish'] . '</td></tr>';
 				}
 				?>
 				</table>
+				</div>
 			</div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>

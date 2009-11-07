@@ -28,8 +28,8 @@
 <script type="text/javascript">
 $( function(){
 	//date and stuff
-	$('input[name=date_from]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
-	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+	$('input[name=date]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+	$('input[name=payment_date]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
 
 	//hide show the bank account depending on the payment type	
 	$('#payment_type > select')
@@ -67,12 +67,9 @@ $( function(){
 });		
 </script>	
 <style type="text/css">
-input.error { border: 1px dotted red; }
-textarea.error { border: 1px dotted red; }
-div.error { display: none; }
-#accountsForm label.error { width: auto; display: block; color: red;font-style: italic }
+ label.error { width: auto; display: block; color: red;font-style: italic }
 </style>
-
+<div class="hastable">
 <?php if( isset($newaccount) ) { 
 	if($acctype == 'ap') {
 		echo form_open('account/addnew/ap',array('id' => 'accountsForm'));
@@ -83,15 +80,15 @@ div.error { display: none; }
 	<table>
 		<thead>
 			<tr>
-				<th colspan="2">
+				<td colspan="4">
 				<h2>
-					<? if($acctype == 'ap')
+					<?php if($acctype == 'ap')
 					   	echo lang('ap');
 					   elseif($acctype == 'ar')
 					   	echo lang('ar');
 					?>
 				</h2>
-				</th>
+				</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -105,7 +102,7 @@ div.error { display: none; }
 			              'size'        => '10',
 						  'for'			=> 'number');
 				?>
-				<td><?php echo form_input($number); ?></td>
+				<td><?php echo form_input(array('name' => 'number','class' => 'field text medium')); ?></td>
 				<td><?php echo form_label(lang('date'));?> :</td>
 				<?php
 				$date = array(
@@ -115,11 +112,11 @@ div.error { display: none; }
 			              'size'        => '10',
 						  'for'			=> 'date');
 				?>
-				<td><?php echo form_input($date); ?></td>
+				<td><?php echo form_input(array('name' => 'date','class' => 'field text medium')); ?></td>
 			</tr>
 			<tr>
 				<td><?php echo form_label(lang('customer'));?> :</td>
-				<td><?php echo form_dropdown('who',$person); ?></td>
+				<td colspan="3"><?php echo form_dropdown('who',$person,'class="field text medium"'); ?></td>
 			</tr>
 			<tr>
 				<td><?php echo form_label(lang('description'));?> :</td>
@@ -129,7 +126,8 @@ div.error { display: none; }
 						'id'   => 'description',
 						'cols' => '30',
 						'name' => 'description',
-						'for'  => 'number');
+						'for'  => 'number',
+						'class'=> 'field textarea small'	);
 						?>
 				<td colspan="3"><?php echo form_textarea($description); ?></td>
 			</tr>
@@ -143,32 +141,33 @@ div.error { display: none; }
 					  'for'			=> 'amount');
 			?>
 				<td><?php echo form_label(lang('amount'));?> :</td>
-				<td colspan="3"><?php echo form_input($amount); ?></td>
+				<td colspan="3"><?php echo form_input(array('name' => 'amount','class' => 'field text small')); ?></td>
 			</tr>
 			<tr>
 				<td><?php echo lang('paid'); ?></td>
-				<td><?php echo form_checkbox('paid','paid'); ?></td>
+				<td><?php echo form_checkbox(array('name' => 'paid', 'value' => 'paid','class' => 'field checkbox')); ?></td>
 				<td><?php echo lang('payment_date'); ?></td>
 				<?php
 				$payment_date = array(
 		              'name'        => 'payment_date',
 		              'id'          => 'payment_date',
 		              'maxlength'   => '50',
-		              'size'        => '10');
+		              'size'        => '10',
+					  'class' => 'field text medium');
 				?>
 				<td colspan="2"><?php echo form_input($payment_date); ?></td>
 			</tr>
 			<tr>
 				<td><?php echo lang('payment_type'); ?></td>
-				<td id="payment_type"><?php echo form_dropdown('payment_type',$payment_type); ?></td>
+				<td id="payment_type"><?php echo form_dropdown('payment_type',$payment_type,'class="field text medium"'); ?></td>
 				<td id="bank_label"><?php echo lang('bank_account') ?> :</td>
-				<td id="bank_account"><?php echo form_dropdown('bank_account',$bank_account); ?></td>
+				<td id="bank_account"><?php echo form_dropdown('bank_account',$bank_account,'class="field text medium"'); ?></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
-				<td></td>
+				<td colspan="4"><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 			</tr>
 		</tbody>
 	</table>
 </form>
+<div class="hastable">
 <?php } ?>

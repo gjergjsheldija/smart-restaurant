@@ -25,22 +25,15 @@
  * 
  */
 ?>
-<script type="text/javascript">
-$( function(){
-   	$("tr:odd").css("background","#F4F7FB");
-});
-</script>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-				<h2><?php echo lang('configuration'); ?></h2>
-					<table cellpadding="2" class="zebra">
-					<colgroup>
-						<col style='width:99%;' />
-						<col style='width:1%;' />
-					</colgroup>
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+		<div class="title title-spacing">
+			<h2><?php echo lang('configuration'); ?></h2>
+		</div>
+		<div class="two-column">
+				<div class="hastable">
+				<table cellspacing="0">
 					<thead>
 					<tr>
 						<th><?php echo lang('name') ?></th>
@@ -50,7 +43,7 @@ $( function(){
 					<tbody>
 					<?php foreach($query as $row): ?>
 						<tr>
-							<td style="cursor:pointer;" align="left" title="<?php echo lang('hint_' . $row->name); ?>" id="helphint<?php echo $row->id ?>"><?php echo lang('desc_' . $row->name); ?></td>
+							<td style="cursor:pointer;" class="cont tooltip ui-corner-all" align="left" title="<?php echo lang('desc_' . $row->name) ." - " . wordwrap(lang('hint_' . $row->name),30, " - "); ?>"><?php echo lang('desc_' . $row->name); ?></td>
 							<script type="text/javascript">
 							   	$('#helphint<?php echo $row->id; ?>').
 							   		cluetip({attribute: 'id', hoverClass: 'highlight', local:'true',arrows: true, cursor:'pointer',sticky: true, closePosition: 'body',closeText: '<?php echo img('../images/administrator/cross.png');?>', positionBy: 'Top',activation: 'click'});
@@ -110,9 +103,9 @@ $( function(){
 					<?php endforeach; ?>
 					</tbody>
 				</table>
+				</div>			
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>

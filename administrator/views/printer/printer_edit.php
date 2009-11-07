@@ -25,36 +25,30 @@
  * 
  */
 ?>
-<?php if( isset($edit) ) { ?>
-<?php echo form_open('printer/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) { 
+	echo form_open('printer/save');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('info_printer'); ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name'=>'name','value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('system_name'));?> :</td>
-			<td><?php echo form_input('dest',$edit[0]->dest); ?></td>
+			<td><?php echo form_input(array('name' =>'dest','value' => $edit[0]->dest,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('driver'));?> :</td>
-			<td><?php echo form_dropdown('driver',$driver,$edit[0]->driver); ?></td>
+			<td><?php echo form_dropdown('driver',$driver,$edit[0]->driver,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('template'));?> :</td>
-			<td><?php echo form_dropdown('template',$template,$edit[0]->template); ?></td>
+			<td><?php echo form_dropdown('template',$template,$edit[0]->template,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('destination'));?> :</td>
-			<td><?php echo form_input('dest_ip',$edit[0]->dest_ip); ?></td>
+			<td><?php echo form_input(array('name'=>'dest_ip','value' => $edit[0]->dest_ip,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('print_bill'));?> :</td>
@@ -69,8 +63,8 @@
 			<td><?php echo form_checkbox('receipt',1,$edit[0]->receipt); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>
@@ -78,33 +72,26 @@
 <?php } elseif( isset($newprinter) ) {?>
 <?php echo form_open('printer/addnew');?>
 <table>
-	<thead>
-		<tr>
-			<th colspan="2">
-			<h2><?php echo lang('new_printer') ?></h2>
-			</th>
-		</tr>
-	</thead>
 	<tbody>
 		<tr>
 			<td><?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name'); ?></td>
+			<td><?php echo form_input(array('name' => 'name','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('system_name'));?> :</td>
-			<td><?php echo form_input('dest'); ?></td>
+			<td><?php echo form_input(array('name' => 'dest','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('driver'));?> :</td>
-			<td><?php echo form_dropdown('driver', $driver); ?></td>
+			<td><?php echo form_dropdown('driver', $driver,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('template'));?> :</td>
-			<td><?php echo form_dropdown('template', $template); ?></td>
+			<td><?php echo form_dropdown('template', $template,'class="field text medium"'); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('destination'));?> :</td>
-			<td><?php echo form_input('dest_ip'); ?></td>
+			<td><?php echo form_input(array('name' => 'dest_ip','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('print_bill'));?> :</td>
@@ -119,10 +106,11 @@
 			<td><?php echo form_checkbox('receipt',1); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
 			<td></td>
+			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
 <?php } ?>
+</div>

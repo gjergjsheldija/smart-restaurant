@@ -25,26 +25,19 @@
  * 
  */
 ?>
-<script type="text/javascript">
-$( function(){
-	$('#accordion-table').accordion({
-		collapsible: true,
-		active: false
-	});
-});
-</script>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+			<div class="title title-spacing">
 			<?php if($acctype == 'ap') { ?>
 				<h2><?php echo lang('ap'); ?> :: <?php echo anchor('account/newAccount/ap',lang('new_ap')) ?></h2>
 			<?php } elseif($acctype == 'ar') { ?>
 				<h2><?php echo lang('ar'); ?> :: <?php echo anchor('account/newAccount/ar',lang('new_ar')) ?></h2>
 			<?php } ?>
-				<div class="basic" style="float:left;"  id="accordion-table">
+			</div>
+			<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">
 						<?php 
 						$tmp = "";
 						$total = 0;
@@ -52,14 +45,10 @@ $( function(){
 							$total += $row->cash_amount;
 							$total += $row->bank_amount;
 							if($tmp != $row->who) {
-								echo '<div class="mytitle">'.$row->who.'</div>';?>
-							<table class="zebra">
-								<colgroup>
-									<col style='width:65%;' />
-									<col style='width:15%;' />
-									<col style='width:10%;' />
-									<col style='width:10%;' />
-								</colgroup>
+								echo '<div class="portlet">
+								<div class="portlet-header">'.$row->who.'</div>
+								<div class="portlet-content">';?>
+							<table cellspacing="0">
 								<thead>
 									<tr>
 										<th><?php echo lang('date'); ?></th>
@@ -81,21 +70,18 @@ $( function(){
 							$tmp = $temporary->who;
 							if($tmp != $row->who) {
 								$tmp = $row->who;
-								echo "</table>";
+								echo "</table></div></div>";
 							}
 						}; 
 						?>
-					</table>
-					<hr>
-				<div align="right"><strong><?php echo lang('total')?> : <?php echo $total ?></strong></div>					
+					</table><hr><div class="title" align="right"><h2><?php echo lang('total')?> : <?php echo $total ?></h2></div>	</div></div>
 			</div>	
 			</div>
-			<div class="Right">				
+			<div class="column-right">				
 				<?php $this->load->view('account/account_edit') ?>
 			</div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>

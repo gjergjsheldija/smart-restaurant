@@ -25,22 +25,16 @@
  * 
  */
 ?>
-<script type="text/javascript">
-$( function(){
-	$('input[name=date_from]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
-	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
-});	
-</script>	
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
-				<h2><?php echo lang('actual') ?></h2>
-				<?php echo form_open('account/report_actual');?>
-				<br /><br />
-				<table>
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+			<div class="title title-spacing">
+				<h2><?php echo lang('actual_state') ?></h2>
+			</div>
+			<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">
+				<table cellspacing="0">
 					<tr>
 						<td><?php echo lang('total_in') ?></td>
 						<td align="right"><?php echo $ar[0]['total_ar']; ?></td>
@@ -55,13 +49,10 @@ $( function(){
 						<td align="right"><?php echo $ar[0]['total_ar'] - (-$ap[0]['total_ap']); ?></td>
 					</tr>	
 				</table>
-				</form>
 			</div>	
 			</div>
-			<div class="Right"></div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>
