@@ -25,34 +25,25 @@
  * 
  */
 ?>
-<script type="text/javascript">
-$( function(){
-	$('#accordion-table').accordion({
-		collapsible: true,
-		active: false
-	});
-});
-</script>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+		<div class="title title-spacing">
 				<h2><?php echo lang('bank_account'); ?> :: <?php echo anchor('bankaccount/newBankMovement',lang('new_movement')) ?></h2>
-				<div class="basic" style="float:left;"  id="accordion-table">
+			</div>
+			<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">
 						<?php 
 						$tmp = "";
 						$total = 0;
 						foreach($query->result() as $row) {	
 							$total += $row->amount;
 							if($tmp != $row->bankname) {
-								echo '<div class="mytitle">'.$row->bankname.'</div>';?>
-							<table>
-								<colgroup>
-									<col style='width:90%;' />
-									<col style='width:10%;' />
-								</colgroup>
+								echo '<div class="portlet">
+								<div class="portlet-header">'.$row->bankname.'</div>
+								<div class="portlet-content">';?>
+							<table cellspacing="0">
 								<thead>
 									<tr>
 										<th class="sortable"><?php echo lang('description'); ?></th>
@@ -70,21 +61,21 @@ $( function(){
 							$tmp = $temporary->bankname;
 							if($tmp != $row->bankname) {
 								$tmp = $row->bankname;
-								echo "</table>";
+								echo "</table></div></div>";
 							}
 						}; 
 						?>
 					</table>
-					<hr>
-				<div align="right"><strong><?php echo lang('total'); ?> : <?php echo $total ?></strong></div>						
-			</div>	
+						<div class="title" align="right"><h2><?php echo lang('total'); ?> : <?php echo $total ?></h2></div>
+					</div></div>
+				
+				</div>
 			</div>
-			<div class="Right">				
+			<div class="column-right">				
 				<?php $this->load->view('bankaccount/bankmovement_edit') ?>
 			</div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>

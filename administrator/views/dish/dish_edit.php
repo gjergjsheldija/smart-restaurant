@@ -55,8 +55,7 @@ echo form_open_multipart('dish/save');?>
 			<td><?php echo isset($edit[0]->image) ? img('../'.$edit[0]->image) : lang('no_info'); ?></td>
 		</tr>
 		<tr>
-			<td></td>
-			<td><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
+			<td colspan="2"><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>
@@ -149,8 +148,7 @@ echo form_open_multipart('dish/save');?>
 			<td></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
-			<td></td>
+			<td colspan="2"><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	

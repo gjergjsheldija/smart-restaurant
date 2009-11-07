@@ -25,8 +25,9 @@
  * 
  */
 ?>
-<?php if( isset($edit) ) { ?>
-<?php echo form_open('bankaccount/save');?>
+<div class="hastable">
+<?php if( isset($edit) ) { 
+echo form_open('bankaccount/save');?>
 <table>
 	<thead>
 		<tr>
@@ -38,43 +39,42 @@
 	<tbody>
 		<tr>
 			<td><?php echo form_hidden('id',$edit[0]->id) ?> <?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name',$edit[0]->name); ?></td>
+			<td><?php echo form_input(array('name'=>'name','value' => $edit[0]->name,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('bank'));?> :</td>
-			<td><?php echo form_dropdown('bank',$bankname,$edit[0]->bank); ?></td>
+			<td><?php echo form_dropdown('bank',$bankname,$edit[0]->bank,'class="field text medium"'); ?></td>
 		</tr>		
 		<tr>
 			<td><?php echo form_label(lang('account'));?> :</td>
-			<td><?php echo form_input('number',$edit[0]->number); ?></td>
+			<td><?php echo form_input(array('name' => 'number','value' => $edit[0]->number,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('abi'));?> :</td>
-			<td><?php echo form_input('abi',$edit[0]->abi); ?></td>
+			<td><?php echo form_input(array('name' => 'abi','value' => $edit[0]->abi,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('cab'));?> :</td>
-			<td><?php echo form_input('cab',$edit[0]->cab); ?></td>
+			<td><?php echo form_input(array('name' => 'cab','value' => $edit[0]->cab,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('cin'));?> :</td>
-			<td><?php echo form_input('cin',$edit[0]->cin); ?></td>
+			<td><?php echo form_input(array('name' => 'cin','value' => $edit[0]->cin,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('iban'));?> :</td>
-			<td><?php echo form_input('iban',$edit[0]->iban); ?></td>
+			<td><?php echo form_input(array('name' => 'iban','value' => $edit[0]->iban,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('amount'));?> :</td>
-			<td><?php echo form_input('amount',$edit[0]->amount); ?></td>
+			<td><?php echo form_input(array('name' => 'amount','value' => $edit[0]->amount,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('currency'));?> :</td>
-			<td><?php echo form_input('currency',$edit[0]->currency); ?></td>
+			<td><?php echo form_input(array('name' => 'currency','value' => $edit[0]->currency,'class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save') ?>"></td>
-			<td></td>
+			<td colspan="2"><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
@@ -92,45 +92,45 @@
 	<tbody>
 		<tr>
 			<td><?php echo form_label(lang('name'));?> :</td>
-			<td><?php echo form_input('name'); ?></td>
+			<td><?php echo form_input(array('name'=>'name','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('bank'));?> :</td>
-			<td><?php echo form_dropdown('bank',$bankname); ?></td>
+			<td><?php echo form_dropdown('bank',$bankname,'class="field text medium"'); ?></td>
 		</tr>		
 		<tr>
 			<td><?php echo form_label(lang('account'));?> :</td>
-			<td><?php echo form_input('number'); ?></td>
+			<td><?php echo form_input(array('name' => 'number','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('abi'));?> :</td>
-			<td><?php echo form_input('abi'); ?></td>
+			<td><?php echo form_input(array('name' => 'abi','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('cab'));?> :</td>
-			<td><?php echo form_input('cab'); ?></td>
+			<td><?php echo form_input(array('name' => 'cab','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('cin'));?> :</td>
-			<td><?php echo form_input('cin'); ?></td>
+			<td><?php echo form_input(array('name' => 'cin','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('iban'));?> :</td>
-			<td><?php echo form_input('iban'); ?></td>
+			<td><?php echo form_input(array('name' => 'iban','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('amount'));?> :</td>
-			<td><?php echo form_input('amount'); ?></td>
+			<td><?php echo form_input(array('name' => 'amount','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
 			<td><?php echo form_label(lang('currency'));?> :</td>
-			<td><?php echo form_input('currency'); ?></td>
+			<td><?php echo form_input(array('name' => 'currency','class' => 'field text medium')); ?></td>
 		</tr>
 		<tr>
-			<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
-			<td></td>
+			<td colspan="2"><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 		</tr>
 	</tbody>
 </table>	
 </form>
+</div>
 <?php } ?>

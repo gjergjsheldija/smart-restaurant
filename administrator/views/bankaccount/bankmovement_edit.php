@@ -51,22 +51,16 @@ $( function(){
 	});
 });
 </script>	
-<style type="text/css">
-input.error { border: 1px dotted red; }
-textarea.error { border: 1px dotted red; }
-div.error { display: none; }
-#accountsForm label.error { width: auto; display: block; color: red;font-style: italic }
-</style>
-
+<div class="hastable">
 <?php if( isset($newbankmovement) ) { ?>
 <?php echo form_open('bankaccount/addnewMovement',array('id' => 'accountsForm'));?>
 	<table>
 		<thead>
-			<tr>
-				<th colspan="2">
-				<h2><?php echo lang('movements'); ?></h2>
-				</th>
-			</tr>
+		<tr>
+			<th colspan="4">
+			<h2><?php echo lang('new_movement'); ?></h2>
+			</th>
+		</tr>
 		</thead>
 		<tbody>
 			<tr>
@@ -77,9 +71,10 @@ div.error { display: none; }
 			              'id'          => 'date',
 			              'maxlength'   => '50',
 			              'size'        => '10',
-						  'for'			=> 'date');
+						  'for'			=> 'date',
+						  'class' 		=> 'field text small');
 				?>
-				<td><?php echo form_input($date); ?></td>
+				<td colspan="3"><?php echo form_input($date); ?></td>
 			</tr>
 			<tr>
 				<td><?php echo form_label(lang('description'));?> :</td>
@@ -89,7 +84,8 @@ div.error { display: none; }
 						'id'   => 'description',
 						'cols' => '30',
 						'name' => 'description',
-						'for'  => 'number');
+						'for'  => 'number',
+						'class'=> 'field textarea small');
 						?>
 				<td colspan="3"><?php echo form_textarea($description); ?></td>
 			</tr>
@@ -100,22 +96,23 @@ div.error { display: none; }
 		              'id'          => 'amount',
 		              'maxlength'   => '50',
 		              'size'        => '10',
-					  'for'			=> 'amount');
+					  'for'			=> 'amount',
+					  'class' 		=> 'field text small');
 			?>
 				<td><?php echo form_label(lang('amount'));?> :</td>
-				<td colspan="3"><?php echo form_input($amount); ?>(<?php echo lang('negative_value') ?>)</td>
+				<td colspan="3"><?php echo form_input($amount); ?> (<?php echo lang('negative_value') ?>)</td>
 			</tr>
 			<tr>
 				<td><?php echo lang('payment_type'); ?> :</td>
-				<td id="type"><?php echo form_dropdown('type',$payment_type); ?></td>
+				<td id="type"><?php echo form_dropdown('type',$payment_type,'class="field text medium"'); ?></td>
 				<td id="bank_label"><?php echo lang('account'); ?> :</td>
-				<td id="account_id"><?php echo form_dropdown('account_id',$bank_account); ?></td>
+				<td id="account_id"><?php echo form_dropdown('account_id',$bank_account,'class="field text medium"'); ?></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="<?php echo lang('save'); ?>"></td>
-				<td></td>
+				<td colspan="4"><input type="submit" value="<?php echo lang('save'); ?>" class="ui-state-default ui-corner-all float-right"></td>
 			</tr>
 		</tbody>
 	</table>
 </form>
+</div>
 <?php } ?>

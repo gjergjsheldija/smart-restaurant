@@ -25,22 +25,16 @@
  * 
  */
 ?>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
+			<div class="title title-spacing">
 				<h2><?php echo lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?php echo anchor_image(site_url()."/bankaccount/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h2>
-				<?php echo form_open('bankaccount/report_actual');?>
-				<br /><br />
-				<table class="zebra">
-					<colgroup>
-						<col style='width:15%;' />
-						<col style='width:20%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-					</colgroup>				
+			</div>
+			<div class="two-column">
+			<div class="column-left">
+				<div class="hastable">
+				<table cellspacing="0">
 					<thead>
 						<tr>
 							<th><?php echo lang('bank'); ?></th>
@@ -55,22 +49,17 @@
 					$total += $row->amount;
 				?>
 					<tr>
-						<td><?php echo $row->bank;?></td>
 						<td><?php echo $row->name;?></td>
 						<td><?php echo $row->number;?></td>
 						<td align="right"><?php echo $row->amount;?></td>
 					</tr>
 				<?php } ?>	
-				<tr><td colspan="4"></td></tr>
-				<tr><td colspan="4" align="right"><strong><?php echo lang('total'); ?> : <?php echo $total; ?></strong></td></tr>
+				<tr><td colspan="4" align="right"><div class="title title-spacing"><h3><?php echo lang('total'); ?> : <?php echo $total; ?></h3></div></td></tr>
 				</table>
-				</form>
 			</div>	
 			</div>
-			<div class="Right"></div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>
