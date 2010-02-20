@@ -30,9 +30,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Smart Restaurant</title>
 <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>../min/?g=admincss" />
-<link href="" rel="stylesheet" title="style" media="all" />
 <script type="text/javascript" src="<?php echo base_url(); ?>../min/?g=adminjs"></script>
-<?php // echo link_tag('../css/login.css') ?>
 <meta name="language" content="<?php echo $this->lang->line('setting_short_language');?>" />
 </head>
 <body>

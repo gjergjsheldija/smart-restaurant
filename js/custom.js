@@ -91,11 +91,17 @@ $(document).ready(function() {
 		height: 390,
 		bgiframe: true,
 		modal: true ,
+		closeOnEscape: false,
+		closeText: 'hide',
 		buttons: {
 			"Login": function() {
 				$("form:first").submit();
 			}
-		}
+		},
+		//removes the X button on the login dialog
+		open:function() {
+			$(this).parents(".ui-dialog:first").find(".ui-dialog-titlebar-close").remove();
+		} 
 	});
 
 	// Datepicker
