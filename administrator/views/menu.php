@@ -37,10 +37,7 @@
 		| <a class="tooltip" href="<?php echo $this->config->site_url();?>/login/doLogout" title="<?php echo lang('log_out'); ?>"><?php echo lang('log_out'); ?></a>
 	</div>
 	<div id="sitename">
-		<a href="index.php" class="logo float-left" title="Administration">Administration</a>
-		<!-- <div class="button float-right">
-			<a href="<?php echo $this->config->site_url();?>/login/doLogout" id="login_dialog" class="btn ui-state-default ui-corner-all"><span class="ui-icon ui-icon-image"></span><?php echo lang('log_out'); ?></a>
-		</div> -->
+		<a href="<?php echo $this->config->site_url();?>" class="logo float-left" title="Administration">Administration</a>
 	</div>
 	<ul id="navigation" class="sf-navbar">
 		<li><a href="<?php echo $this->config->site_url();?>">Home</a></li>
@@ -49,7 +46,6 @@
 				<li><a href="<?php echo $this->config->site_url();?>/category"><?php echo lang('categories') ?></a></li>
 				<li><a href="<?php echo $this->config->site_url();?>/dish"><?php echo lang('dishes') ?></a></li> 
 				<li><a href="<?php echo $this->config->site_url();?>/ingredient"><?php echo lang('ingredients') ?></a></li> 
-				<!--  <li class="separation"></li>  -->
 				<li><a href="<?php echo $this->config->site_url();?>/table"><?php echo lang('tables') ?></a></li> 
 				<li><a href="<?php echo $this->config->site_url();?>/currency"><?php echo lang('currency') ?></a></li>
 			</ul>
@@ -71,7 +67,6 @@
 			<ul>
 				<li><a href="<?php echo $this->config->site_url();?>/account/index/ap"><?php echo lang('ap') ?></a></li>
 				<li><a href="<?php echo $this->config->site_url();?>/account/index/ar"><?php echo lang('ar') ?></a></li>
-				<!--  <li class="separation"></li>  -->
 				<li><a href="<?php echo $this->config->site_url();?>/account/report_actual"><?php echo lang('actual_state') ?></a></li> 
 				<li><a href="<?php echo $this->config->site_url();?>/account/report_movement"><?php echo lang('movements') ?></a></li>
 				<li><a href="<?php echo $this->config->site_url();?>/account/report_waiter"><?php echo lang('waiter_income') ?></a></li>
@@ -82,7 +77,6 @@
 			<ul>
 				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/index/account"><?php echo lang('bank_account'); ?></a></li>
 				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/index/movement"><?php echo lang('movements'); ?></a></li> 
-				<!-- <li class="separation"></li>  -->			
 				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/report_actual"><?php echo lang('actual_state'); ?></a></li>
 				<li><a href="<?php echo $this->config->site_url();?>/bankaccount/report_movement"><?php echo lang('movements'); ?></a></li>
 			</ul>
@@ -90,7 +84,6 @@
 		<li><a href="#"><?php echo lang('stock'); ?></a>
 			<ul>
 				<li><a href="<?php echo $this->config->site_url();?>/stock/index/add"><?php echo lang('supply'); ?></a></li>
-				<!--  <li class="separation"></li>  -->		
 				<li><a href="<?php echo $this->config->site_url();?>/stock/report_actual"><?php echo lang('inventory'); ?></a></li>
 				<li><a href="<?php echo $this->config->site_url();?>/stock/report_movement"><?php echo lang('movements'); ?></a></li>
 			</ul>

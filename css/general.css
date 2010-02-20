@@ -774,9 +774,28 @@ button { float: right; margin: .5em .4em .5em 0; cursor: pointer; padding: .2em 
 /* Footer */
 
 #footer {
-	padding:30px 0 50px;
-	text-align:center;
-	font-size:0.9em;
+	position: absolute;
+	bottom:0px;
+	left:0px;
+	width: 100%;
+	color:#666666;
+	font-size: 9px;
+	font-family: Verdana, Geneva, Arial, sans-serif;
+	background-color: #eeeeee;
+	padding-top:15px; 
+	height:25px;
+}
+
+#footer-left {
+	float:left;
+	text-align: left;
+	margin-left:10px;
+}
+
+#footer-right {
+	float: right;
+	text-align: right;
+	margin-right:10px;
 }
 
 #footer #menu {

@@ -1,7 +1,9 @@
 $(document).ready(function() { 
 
+	//footer positioning
+	$("#footer").fixedPosition({vpos: "bottom"});
+	
 	// Navigation menu
-
 	$('ul#navigation').superfish({ 
 		delay:       1000,
 		animation:   {opacity:'show',height:'show'},

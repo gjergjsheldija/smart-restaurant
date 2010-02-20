@@ -25,26 +25,11 @@
  * 
  */
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>../min/?g=admincss" />
-<script type="text/javascript" src="<?php echo base_url(); ?>../min/?g=adminjs"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>../js/styles.js.php"></script>
-<!--[if IE 6]>
-	<link href="<?php echo base_url(); ?>../css/ie6.css" rel="stylesheet" media="all" />
-	<script src="<?php echo base_url(); ?>../js/pngfix.js"></script>
-<![endif]-->
-<!--[if IE 7]>
-	<link href="<?php echo base_url(); ?>../css/ie7.css" rel="stylesheet" media="all" />
-<![endif]-->
-</head>
-<body>
-<?php echo $this->load->view('menu');?>
-
-<?php if(isset($body)) echo $body; else echo '';?>
-
-<?php echo $this->load->view('footer');?>
-</body>
-</html>
+<div id="footer">
+	<div id="footer-left">
+		Powered by <a href="http://smartres.sourceforge.net/"><strong>Smart Restaurant</strong></a> &copy; 2008-2010 Gjergj Sheldija 
+	</div>
+	<div id="footer-right">
+		Generated in {elapsed_time}s - Memory Used {memory_usage}
+	</div>
+</div>

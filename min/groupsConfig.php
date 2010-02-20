@@ -30,6 +30,7 @@ return array(
     	'../js/jquery.metadata.js',
     	'../js/jquery.form.js',
     	'../js/jquery.highlightFade.js',
+    	'../js/jquery.fixedposition.js',
     	'../js/custom.js'
 		),
 	'waiterjs' => array (

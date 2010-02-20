@@ -313,11 +313,6 @@ i.note {
 
 	/* Footer */
 
-#footer {
-	border-top:#e3e3e3 solid 6px;
-	background:#4c4c4c;
-	color:#c1c1c1;
-}
 #footer #menu a {
 	color:#fff;
 }
