@@ -49,7 +49,7 @@
 							<td><?php echo $row->name ?></td>
 							<td align="right"><?php echo $row->rate ?></td>
 							<td align="right"><?php echo ($row->active == 1) ? lang('yes') : lang('no'); ?></td>
-							<td align="right"><?php echo anchor_image('currency/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('currency/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td align="right"><?php echo anchor_image('currency/edit/'.$row->id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('currency/delete/'.$row->id , '../images/administrator/cross.png');?></td>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>

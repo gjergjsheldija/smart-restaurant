@@ -29,7 +29,7 @@
 	<div id="main-wrapper">
 		<div id="main-content">
 			<div class="title title-spacing">
-				<h2><?php echo lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?php echo anchor_image(site_url()."/bankaccount/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h2>
+				<h2><?php echo lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?php echo anchor_image(site_url()."/bankaccount/report_actual_pdf/",'../images/administrator/pdf.png') ?></h2>
 			</div>
 			<div class="two-column">
 			<div class="column-left">

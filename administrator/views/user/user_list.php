@@ -49,7 +49,7 @@
 							<td><?php echo $row->name ?></td>
 							<td align="right"><?php echo ($row->level  == 515)  ? lang('waiter') : lang('administrator')?></td>
 							<td align="right"><?php echo $row->dest_type ?></td>
-							<td align="right"><?php echo anchor_image('user/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('user/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td align="right"><?php echo anchor_image('user/edit/'.$row->id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('user/delete/'.$row->id , '../images/administrator/cross.png');?></td>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>

@@ -47,7 +47,7 @@
 						<tr>
 							<td><?php echo $row->name ?></td>
 							<td align="right"><?php echo $row->locktouser ?></td>
-							<td align="right"><?php echo anchor_image('table/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('table/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td align="right"><?php echo anchor_image('table/edit/'.$row->id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('table/delete/'.$row->id , '../images/administrator/cross.png');?></td>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>

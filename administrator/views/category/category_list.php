@@ -47,7 +47,7 @@
 						<tr>
 							<td><?php echo $row->name; ?></td>
 							<td><?php echo isset($row->image) ? img('..'.$row->image) : lang('no_info'); ?></td>
-							<td><?php echo anchor_image('category/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('category/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td><?php echo anchor_image('category/edit/'.$row->id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('category/delete/'.$row->id , '../images/administrator/cross.png');?></td>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>

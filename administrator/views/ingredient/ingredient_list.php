@@ -57,7 +57,7 @@
 							<td><?php echo $row->name ?></td>					
 							<td align="right"><?php echo $row->price ?></td>
 							<td align="right"><?php echo $row->sell_price?></td>
-							<td align="right"><?php echo anchor_image('ingredient/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('ingredient/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td align="right"><?php echo anchor_image('ingredient/edit/'.$row->id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('ingredient/delete/'.$row->id , '../images/administrator/cross.png');?></td>
 						</tr>
 				<?php 
 					$rowtmp = $query->next_row();

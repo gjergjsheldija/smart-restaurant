@@ -30,7 +30,7 @@
 function addFormField() {
 	
 	var id = document.getElementById("id").value;	
-	var image = '<?php echo img("../images/administrator/edit_remove.png") ?>';
+	var image = '<?php echo img("../images/administrator/cross.png") ?>';
 	$.ajax({
 		type : "POST",
 		url : "<?php echo base_url() . '?c=stock&m=ingredientList' ?>",
@@ -115,7 +115,7 @@ div.error { display: none; }
 								<td id="account_id"><?php echo form_dropdown('account_id',$bank_account); ?></td>
 							</tr>
 							<tr>
-								<td><a href="#" onClick="addFormField(); return false;"><?php echo img('../images/administrator/edit_add.png') ?></a></td>
+								<td><a href="#" onClick="addFormField(); return false;"><?php echo img('../images/administrator/add.png') ?></a></td>
 								<td><?php echo lang('article'); ?></td>
 								<td colspan="2"><?php echo lang('quantity'); ?></td>
 								<td colspan="2"><?php echo lang('price'); ?></td>

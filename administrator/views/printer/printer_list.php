@@ -49,7 +49,7 @@
 							<td><?php echo $row->name ?></td>
 							<td align="right"><?php echo $row->dest ?></td>
 							<td align="right"><?php echo $row->driver ?></td>
-							<td align="right"><?php echo anchor_image('printer/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('printer/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+							<td align="right"><?php echo anchor_image('printer/edit/'.$row->id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('printer/delete/'.$row->id , '../images/administrator/cross.png');?></td>
 						</tr>
 					<?php endforeach; ?>
 					</tbody>

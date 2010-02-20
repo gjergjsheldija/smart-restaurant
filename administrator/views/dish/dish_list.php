@@ -59,7 +59,7 @@
 									<td align="right"><?php echo $row->price ?></td>
 									<td align="right"><?php echo $row->destname ?></td>
 									<td align="center"><?php echo isset($row->image) ? img('../'.$row->image) : lang('no_info'); ?></td>
-									<td align="right"><?php echo anchor_image('dish/edit/'.$row->id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('dish/delete/'.$row->id , '../images/administrator/edit_remove.png');?></td>
+									<td align="right"><?php echo anchor_image('dish/edit/'.$row->id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('dish/delete/'.$row->id , '../images/administrator/cross.png');?></td>
 								</tr>
 						<?php 
 							$temporary = $query->next_row();

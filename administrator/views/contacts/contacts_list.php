@@ -52,7 +52,7 @@
 							}						
 						?>		<tr>
 									<td><?php echo $row->name ?></td>
-									<td><?php echo anchor_image('contacts/edit/'.$row->contact_id, '../images/administrator/edit.png');?> :: <?php echo anchor_image('contacts/delete/'.$row->contact_id , '../images/administrator/edit_remove.png');?></td>
+									<td><?php echo anchor_image('contacts/edit/'.$row->contact_id, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('contacts/delete/'.$row->contact_id , '../images/administrator/cross.png');?></td>
 								</tr>
 						<?php 
 							$temp = $query->next_row();

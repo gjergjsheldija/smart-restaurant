@@ -52,7 +52,7 @@
 							}						
 						?>		<tr>
 									<td><?php echo $row->accname ?></td>
-									<td><?php echo anchor_image('bankaccount/edit/'.$row->bankid, '../images/administrator/edit.png');?> :: <?php echo anchor_image('bankaccount/delete/'.$row->bankid , '../images/administrator/edit_remove.png');?></td>
+									<td><?php echo anchor_image('bankaccount/edit/'.$row->bankid, '../images/administrator/application_edit.png');?> :: <?php echo anchor_image('bankaccount/delete/'.$row->bankid , '../images/administrator/cross.png');?></td>
 								</tr>
 						<?php 
 							$temporary = $query->next_row();

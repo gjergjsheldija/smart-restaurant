@@ -85,7 +85,7 @@ echo form_open_multipart('dish/save');?>
 			<td><?php echo anchor('ingredient/edit/'.$ingredient->id,$ingredient->name); ?></td>
 			<td align="right"><div id="quantity_<?php echo $ingredient->object_id; ?>"><?php echo $ingredient->quantity; ?></div><?php echo form_hidden('object_id_'.$ingredient->object_id ,$ingredient->object_id); ?></td>
 			<td align="right"><div id="unit_type_<?php echo $ingredient->stock_id; ?>"><?php echo $uom[$ingredient->unit_type] ;?></div><?php echo form_hidden('stock_id_'.$ingredient->stock_id,$ingredient->stock_id); ?></td>
-			<td align="right"><?php echo anchor_image('dish/deleteIngredient/'.$ingredient->object_id . "-" . $edit[0]->id . "-" . $ingredient->id, '../images/administrator/edit_remove.png');?></td>
+			<td align="right"><?php echo anchor_image('dish/deleteIngredient/'.$ingredient->object_id . "-" . $edit[0]->id . "-" . $ingredient->id, '../images/administrator/cross.png');?></td>
 		</tr>
 		<script type="text/javascript">
 		$(document).ready(function() {

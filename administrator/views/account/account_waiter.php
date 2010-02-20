@@ -67,7 +67,7 @@ function hideThis(obj) {
 					<td><?php echo lang('from'); ?> : <?php echo form_input($date_from) ?></td>
 					<td><?php echo lang('to'); ?> : <?php echo form_input($date_to) ?></td>
 					<td><input type="submit" value="<?php echo lang('show'); ?>" class="ui-state-default ui-corner-all float-right"></td>
-					<td align="right"><?php echo anchor_image(site_url()."/account/report_waiter_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/save-pdf.png') ?></td>
+					<td align="right"><?php echo anchor_image(site_url()."/account/report_waiter_pdf/" . $tmp_from . "_" . $tmp_to,'../images/administrator/pdf.png') ?></td>
 				</tr>
 			</table>
 			<table cellspacing="0">
