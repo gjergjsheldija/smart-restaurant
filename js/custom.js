@@ -100,6 +100,10 @@ $(document).ready(function() {
 	$('#datepicker').datepicker({
 		inline: true
 	});
+
+	//datepickers
+	$('input[name=date_from]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });	
+	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });	
 	
 	//Hover states on the static widgets
 	$('#dialog_link, ul#icons li').hover(
@@ -108,7 +112,6 @@ $(document).ready(function() {
 	);
 	
 	//Sortable
-
 	$(".column").sortable({
 		connectWith: '.column'
 	});
@@ -156,6 +159,24 @@ $(document).ready(function() {
 
 	$(".header").append('<span class="ui-icon ui-icon-carat-2-n-s"></span>');
 
+	//stock supply specific js
+	$( function(){
+		$('input[name=timestamp]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });
+
+		$("#stockForm").validate({
+			rules: {
+				timestamp: "required",
+				invoice_id: {
+				      required: true,
+				      number: true
+				}
+			},
+			messages: {
+				timestamp: "<?php echo lang('date_missing'); ?>",
+				invoice_id: "<?php echo lang('nr_missing'); ?>"
+			}
+		});
+	});
 	
 });
 

@@ -25,12 +25,6 @@
  * 
  */
 ?>
-<script type="text/javascript">
-$( function(){
-	$('input[name=date_from]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });	
-	$('input[name=date_to]').datepicker({dateFormat:'yy-mm-dd',changeMonth: true, changeYear: true });	
-});
-</script>	
 <div id="page-wrapper">
 	<div id="main-wrapper">
 		<div id="main-content">

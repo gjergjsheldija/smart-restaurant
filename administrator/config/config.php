@@ -323,7 +323,7 @@ $config['rewrite_short_tags'] = FALSE;
 | Enable or disable the debug on the administration interface
 |
 */
-$config['enable_app_debug'] = TRUE;
+$config['enable_app_debug'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
