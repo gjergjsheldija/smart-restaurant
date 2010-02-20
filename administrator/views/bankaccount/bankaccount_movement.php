@@ -111,7 +111,7 @@ $( function(){
 							echo "<tr><td colspan='5' align='right'><div class='page-title'><h1>" .lang('total'). " : " . ($partial_in + $partial_out) . "</h1></div></td></tr>";
 							$partial_in = 0;
 							$partial_out = 0;
-							echo "</table>";
+							echo "</table></div></div>";
 						}
 					}; ?>
 					<tr><td colspan="5" align="right"><div class="page-title"><h1><?php echo lang('total'); ?> : <?php echo $partial_in + $partial_out ?></h1></div></td></tr>							

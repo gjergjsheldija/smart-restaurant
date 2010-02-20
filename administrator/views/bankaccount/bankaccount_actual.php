@@ -49,6 +49,7 @@
 					$total += $row->amount;
 				?>
 					<tr>
+						<td><?php echo $row->bank;?></td>
 						<td><?php echo $row->name;?></td>
 						<td><?php echo $row->number;?></td>
 						<td align="right"><?php echo $row->amount;?></td>

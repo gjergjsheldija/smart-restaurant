@@ -25,41 +25,28 @@
  * 
  */
 ?>
-<div id="Container">
-	<div class="Full">
-		<div class="contentRight">
-		<div class="contentLeft">
-		<div class="col">
-			<div class="Left">
+<div id="page-wrapper">
+	<div id="main-wrapper">
+		<div id="main-content">
 			<div class="title title-spacing">
-				<h3><?php echo lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?php echo anchor_image(site_url()."/stock/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h3>
+				<h2><?php echo lang('actual_state'); ?>&nbsp;&nbsp;&nbsp;<?php echo anchor_image(site_url()."/stock/report_actual_pdf/",'../images/administrator/save-pdf.png') ?></h2>
 			</div>
 				<?php echo form_open('stock/report_actual');?>
-				<br /><br />
+			<div class="two-column">
+			<div class="column-left">
 				<div class="hastable">
 				<table cellspacing="0">
-					<colgroup>
-						<col style='width:20%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-						<col style='width:10%;' />
-					</colgroup>				
 					<thead>
 						<tr>
 							<td><?php echo lang('name'); ?></th>
-							<td align="right"><?php echo lang('total'); ?></td>
-							<td align="right"><?php echo lang('uom'); ?></td>
-							<td align="right"><?php echo lang('quantity'); ?></td>
-							<td align="right"><?php echo lang('sell_price'); ?></td>
-							<td align="right"><?php echo lang('buy_price'); ?></td>
-							<td align="right"><?php echo lang('value_price_sell'); ?></td>
-							<td align="right"><?php echo lang('value_price_buy'); ?></td>
-							<td align="right"><?php echo lang('destid'); ?></td>
+							<td><?php echo lang('total'); ?></td>
+							<td><?php echo lang('uom'); ?></td>
+							<td><?php echo lang('quantity'); ?></td>
+							<td><?php echo lang('sell_price'); ?></td>
+							<td><?php echo lang('buy_price'); ?></td>
+							<td><?php echo lang('value_price_sell'); ?></td>
+							<td><?php echo lang('value_price_buy'); ?></td>
+							<td><?php echo lang('destid'); ?></td>
 						</tr>
 					</thead>
 				<?php 
@@ -70,28 +57,29 @@
 				?>
 					<tr>
 						<td><?php echo $row->name;?></td>
-						<td align="right"><?php echo $row->total;?></td>
-						<td align="right"><?php echo $uom[$row->uom];?></td>
-						<td align="right"><?php echo $row->quantity;?></td>
-						<td align="right"><?php echo $row->sell_price;?></td>
-						<td align="right"><?php echo $row->buy_price;?></td>
-						<td align="right"><?php echo $row->value_price_sell;?></td>
-						<td align="right"><?php echo $row->value_price_buy;?></td>
-						<td align="right"><?php echo $warehouse[$row->destid];?></td>
+						<td><?php echo $row->total;?></td>
+						<td><?php echo $uom[$row->uom];?></td>
+						<td><?php echo $row->quantity;?></td>
+						<td><?php echo $row->sell_price;?></td>
+						<td><?php echo $row->buy_price;?></td>
+						<td><?php echo $row->value_price_sell;?></td>
+						<td><?php echo $row->value_price_buy;?></td>
+						<td><?php echo $warehouse[$row->destid];?></td>
 					</tr>
 				<?php }?>	
-				<tr><td colspan="9"></td></tr>
-				<tr><td colspan="9" align="right"><strong><?php echo lang('total_value_sell'); ?> : <?php echo $value_price_sell; ?></strong></td></tr>
-				<tr><td colspan="9" align="right"><strong><?php echo lang('total_value_buy'); ?> : <?php echo $value_price_buy; ?></strong></td></tr>
+				<tr>
+					<td colspan="9">
+						<div class="title" align="right">
+							<h2><?php echo lang('total_value_sell'); ?> : <?php echo $value_price_sell; ?></h2><br />
+							<h2><?php echo lang('total_value_buy'); ?> : <?php echo $value_price_buy; ?></h2>
+						</div>
+					</td>
+				</tr>
 				</table>
-				</div>
-				</form>
 			</div>	
 			</div>
-			<div class="Right"></div>
         </div>
         </div>
-		</div>
 	</div>
 </div>
-<div class="ClearAll"></div>
+<div class="clearfix"></div>
