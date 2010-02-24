@@ -142,7 +142,7 @@ foreach($sector_movements->result() as $row) {
 }; ?>
 </table>
 <br>
-<h2>Totali i Sektoreve</h2>
+<h2><?php echo lang('tot_by_sect'); ?></h2>
 <table width="100%">
 	<?php foreach($totalSector as $sector => $value) {
 		echo '<tr><td align="left">' . $sector . '</td><td align="right">' . $value . ' </td></tr>';

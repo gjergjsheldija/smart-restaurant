@@ -158,7 +158,7 @@ tfoot th em {
 
   	$width = Font_Metrics::get_text_width("Page 1 of 2", $font, $size);
 	$width2= Font_Metrics::get_text_width("Smart Restaurant (c) 2008 - 2009 Gjergj Sheldija                                ", $font, $size);
-  	$pdf->page_text($w / 2 - $width / 2, $y, "Page {PAGE_NUM of {PAGE_COUNT}", $font, $size, $color);
+  	$pdf->page_text($w / 2 - $width / 2, $y, "Page {PAGE_NUM} of {PAGE_COUNT}", $font, $size, $color);
   	$pdf->page_text($w - $width2, $y, "Smart Restaurant (c) 2008 - 2009 Gjergj Sheldija", $font, $size, $color);
 
 }
