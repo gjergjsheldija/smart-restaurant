@@ -67,31 +67,28 @@ if (floor(phpversion()) < 5) {
 <head>
 <script type="text/javascript" language="JavaScript" src="./generic.js"></script>
 <link rel="stylesheet" href="./css/styles.css" type="text/css">
-<title>SmartRes - (c) 2006 - 2008-2009 Smart Restaurant</title>
-<META name="HandheldFriendly" content="True">
+<title>SmartRes - (c) 2006 - 2008-2010 Smart Restaurant</title>
+<meta name="HandheldFriendly" content="True">
 </head>
 <body class="login">
 <div class="Container">
 <div id="Dialog">
   <table>
     <tr>
-      <td rowspan="3"><img src="./images/home_menu/intro_logo.png" width="132" height="271" /></td>
+      <td rowspan="3" valign="bottom"><img src="./images/home_menu/new-logo.png" width="300" height="200" /></td>
       <td valign="bottom"><a href="waiter/"><img src="./images/home_menu/pda_alt.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
       <td valign="bottom"><a href="waiter/">waiter</a>
-      <br />
-      <p>palm access point of sale</p></td>
+      <br />palm access point of sale</td>
     </tr>
     <tr>
       <td valign="bottom"><a href="pos/"><img src="./images/home_menu/setup_assistant.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
       <td valign="bottom"><a href="pos/">pos</a>      
-      <br />
-      <p>touch screen pos</p></td>
+      <br />touch screen pos</td>
     </tr>
     <tr>
       <td valign="bottom"><a href="administrator"><img src="./images/home_menu/blockdevice.png" width="64" height="64" style="text-decoration: none;border-style: none;"/></a></td>
       <td valign="bottom"><a href="administrator">administrator</a>
-      <br />
-      <p>stock, account, bank management</p></td>
+      <br />stock, account, bank management</td>
     </tr>
   </table>
 </div>
