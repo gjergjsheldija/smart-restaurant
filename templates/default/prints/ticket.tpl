@@ -1,6 +1,12 @@
-{size_double}{table} {people}{/size_double} {highlight}{size_double}{warning}{/size_double}{/highlight}{waiter}
-{size_triple}{priority} {highlight}{gonow}{/highlight}{/size_triple}
-{orders}
-{barcode}{highlight}{size_double}{warning}{/size_double}{/highlight}{date}
+{size_double} {table} - {people} {/size_double} 
+{size_double} {warning} {/size_double}
+{waiter} {size_triple} -- {priority} - {gonow} {/size_triple}
+{orders} 
+{barcode} 
+{size_double} {warning} {/size_double}
+{date}
 {destination}
+
+
+
 {page_cut}
