@@ -38,18 +38,18 @@ function driver_tm($msg) {
 	$msg = stri_replace ('{feed_reverse}','',$msg);
 	$msg = stri_replace ('{feed_reverse2}','',$msg);
 	$msg = stri_replace ('{init}','',$msg);
-	$msg = stri_replace ('{height_double}','',$msg);
-	$msg = stri_replace ('{/height_double}','',$msg);
+	$msg = stri_replace ('{height_double}',chr(0x1B) . chr(33) . chr(8),$msg);
+	$msg = stri_replace ('{/height_double}',chr(0x1B) . chr(33) . chr(8),$msg);
 	$msg = stri_replace ('{highlight}','',$msg);
 	$msg = stri_replace ('{/highlight}','',$msg);
 	$msg = stri_replace ('{no_paper_print_disabler}','',$msg);
-	$msg = stri_replace ('{page_cut}','',$msg);
+	$msg = stri_replace ('{page_cut}',chr(0x1D) . chr(0x56) . chr(0x31) ,$msg);
 	$msg = stri_replace ('{paper_release}','',$msg);
-	$msg = stri_replace ('{size_double}','',$msg);
-	$msg = stri_replace ('{/size_double}','',$msg);
+	$msg = stri_replace ('{size_double}',chr(0x1D) . chr(0x21) . chr(0x01),$msg);
+	$msg = stri_replace ('{/size_double}',chr(0x1B) . chr(0x21) . chr(0),$msg);
 	$msg = stri_replace ('{size_normal}','',$msg);
-	$msg = stri_replace ('{size_triple}','',$msg);
-	$msg = stri_replace ('{/size_triple}','',$msg);
+	$msg = stri_replace ('{size_triple}',chr(0x1D) . chr(0x21) . chr(0x30),$msg);
+	$msg = stri_replace ('{/size_triple}',chr(0x1D) . chr(0x21) . chr(0),$msg);
 	$msg = stri_replace ('{tab_define}','',$msg);
 	$msg = stri_replace ('{unknown}','',$msg);
 
