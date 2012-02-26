@@ -6,7 +6,7 @@
  *
  * @package		SmartRestaurant
  * @author		Gjergj Sheldija
- * @copyright	Copyright (c) 2008-2009, Gjergj Sheldija
+ * @copyright	Copyright (c) 2008-2012, Gjergj Sheldija
  * @license		http://www.gnu.org/licenses/gpl.txt
  * @since		Version 1.0
  * @filesource
@@ -170,9 +170,9 @@ tfoot th em {
   	$pdf->line(16, $y, $w - 16, $y, $color, 1);
 
   	$width = Font_Metrics::get_text_width("Page 1 of 2", $font, $size);
-	$width2= Font_Metrics::get_text_width("Smart Restaurant (c) 2008 - 2009 Gjergj Sheldija                                ", $font, $size);
+	$width2= Font_Metrics::get_text_width("Smart Restaurant (c) 2008 - 2012 Gjergj Sheldija                                ", $font, $size);
   	$pdf->page_text($w / 2 - $width / 2, $y, "Page {PAGE_NUM} of {PAGE_COUNT}", $font, $size, $color);
-  	$pdf->page_text($w - $width2, $y, "Smart Restaurant (c) 2008 - 2009 Gjergj Sheldija", $font, $size, $color);
+  	$pdf->page_text($w - $width2, $y, "Smart Restaurant (c) 2008 - 2012 Gjergj Sheldija", $font, $size, $color);
 
 }
 </script>

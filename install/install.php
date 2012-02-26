@@ -971,7 +971,7 @@ function page_footer() {
 	global $data;
 ?>
 
-<div class='copyright'>Smart Restaurant  <?php echo $data['app_full_version']; ?> - &#169; Copyright 2008 - 2009 Gjergj Sheldija - All Rights Reserved</div>
+<div class='copyright'>Smart Restaurant  <?php echo $data['app_full_version']; ?> - &#169; Copyright 2008 - 2012 Gjergj Sheldija - All Rights Reserved</div>
 
 </div>
 
